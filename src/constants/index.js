@@ -249,7 +249,7 @@ import {
       category: "AI & ML",
     },
     {
-      name: "Anthropic",
+      name: "Anthropic Claude",
       icon: Anthropic,
       category: "AI & ML",
     },

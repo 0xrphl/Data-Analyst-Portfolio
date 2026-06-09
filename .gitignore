@@ -1,3 +1,5 @@
 node_modules/
 dist/
+.vs/
+.vscode/
 CV_Raphael_Rueda.md

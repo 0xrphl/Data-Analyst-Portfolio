@@ -20,19 +20,52 @@ const ServiceCard = ({ index, title, icon }) => (
           scale: 1,
           speed: 450,
         }}
-        className='bg-tertiary rounded-[20px] py-5 px-12 min-h-[280px] flex justify-evenly items-center flex-col'
+        className='feedback-card rounded-[20px] py-5 px-12 min-h-[280px] flex justify-evenly items-center flex-col'
       >
-        {icon && (
-          <img
-            src={icon}
-            alt={title || 'service-icon'}
-            className='w-16 h-16 object-contain'
+        {/* Noise overlay */}
+        <svg
+          viewBox="0 0 100% 100%"
+          xmlns="http://www.w3.org/2000/svg"
+          className="fb-card-noise"
+          preserveAspectRatio="xMidYMid meet"
+        >
+          <filter id={`aboutCardNoise-${index}`}>
+            <feTurbulence
+              type="fractalNoise"
+              baseFrequency="0.85"
+              numOctaves="6"
+              stitchTiles="stitch"
+            />
+          </filter>
+          <rect
+            width="100%"
+            height="100%"
+            filter={`url(#aboutCardNoise-${index})`}
           />
-        )}
+        </svg>
 
-        <h3 className='text-white text-[20px] font-bold text-center'>
-          {title || ''}
-        </h3>
+        {/* Animated orbs */}
+        <div className="fb-card-orbs">
+          <span className="fb-card-orb"></span>
+          <span className="fb-card-orb"></span>
+          <span className="fb-card-orb"></span>
+          <span className="fb-card-orb"></span>
+        </div>
+
+        {/* Card content */}
+        <div className="fb-card-content flex justify-evenly items-center flex-col min-h-[240px]">
+          {icon && (
+            <img
+              src={icon}
+              alt={title || 'service-icon'}
+              className='w-16 h-16 object-contain'
+            />
+          )}
+
+          <h3 className='text-white text-[20px] font-bold text-center'>
+            {title || ''}
+          </h3>
+        </div>
       </div>
     </motion.div>
   </Tilt>

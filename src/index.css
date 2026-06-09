@@ -260,6 +260,323 @@
   box-shadow: 0 0 15px rgba(120, 86, 255, 0.15);
 }
 
+/* ============================================
+   FEEDBACK SECTION - Interactive Gradient BG
+   ============================================ */
+
+/* Keyframe animations for gradient blobs */
+@keyframes feedbackMoveInCircle {
+  0% { transform: rotate(0deg); }
+  50% { transform: rotate(180deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes feedbackMoveVertical {
+  0% { transform: translateY(-50%); }
+  50% { transform: translateY(50%); }
+  100% { transform: translateY(-50%); }
+}
+
+@keyframes feedbackMoveHorizontal {
+  0% { transform: translateX(-50%) translateY(-10%); }
+  50% { transform: translateX(50%) translateY(10%); }
+  100% { transform: translateX(-50%) translateY(-10%); }
+}
+
+/* Card orb animations */
+@keyframes feedbackOrbFloat1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(30px, -20px) scale(1.1); }
+  50% { transform: translate(-20px, 20px) scale(0.9); }
+  75% { transform: translate(10px, 10px) scale(1.05); }
+}
+
+@keyframes feedbackOrbFloat2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(-25px, 15px) scale(1.15); }
+  50% { transform: translate(15px, -25px) scale(0.85); }
+  75% { transform: translate(-10px, -15px) scale(1.1); }
+}
+
+@keyframes feedbackOrbFloat3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(20px, 25px) scale(1.2); }
+  66% { transform: translate(-30px, -10px) scale(0.9); }
+}
+
+@keyframes feedbackOrbFloat4 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  20% { transform: translate(-15px, -20px) scale(1.1); }
+  40% { transform: translate(25px, 10px) scale(0.95); }
+  60% { transform: translate(-10px, 30px) scale(1.05); }
+  80% { transform: translate(20px, -15px) scale(1); }
+}
+
+/* Main section gradient background */
+.feedback-gradient-bg {
+  --fb-color-bg1: rgb(2, 3, 8);
+  --fb-color-bg2: rgb(5, 5, 20);
+  --fb-color1: 15, 5, 50;
+  --fb-color2: 40, 20, 80;
+  --fb-color3: 20, 10, 60;
+  --fb-color4: 10, 30, 60;
+  --fb-color5: 30, 10, 50;
+  --fb-color-interactive: 60, 30, 100;
+  --fb-circle-size: 80%;
+  --fb-blending: hard-light;
+
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(40deg, var(--fb-color-bg1), var(--fb-color-bg2));
+}
+
+.feedback-gradient-bg .fb-svg-blur {
+  display: none;
+}
+
+.feedback-gradient-bg .fb-noise-bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  mix-blend-mode: soft-light;
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.feedback-gradient-bg .fb-gradients-container {
+  filter: url(#fbGoo) blur(40px);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.feedback-gradient-bg .fb-g1 {
+  position: absolute;
+  background: radial-gradient(circle at center, rgba(var(--fb-color1), 0.8) 0, rgba(var(--fb-color1), 0) 50%) no-repeat;
+  mix-blend-mode: var(--fb-blending);
+  width: var(--fb-circle-size);
+  height: var(--fb-circle-size);
+  top: calc(50% - var(--fb-circle-size) / 2);
+  left: calc(50% - var(--fb-circle-size) / 2);
+  transform-origin: center center;
+  animation: feedbackMoveVertical 30s ease infinite;
+  opacity: 1;
+}
+
+.feedback-gradient-bg .fb-g2 {
+  position: absolute;
+  background: radial-gradient(circle at center, rgba(var(--fb-color2), 0.8) 0, rgba(var(--fb-color2), 0) 50%) no-repeat;
+  mix-blend-mode: var(--fb-blending);
+  width: var(--fb-circle-size);
+  height: var(--fb-circle-size);
+  top: calc(50% - var(--fb-circle-size) / 2);
+  left: calc(50% - var(--fb-circle-size) / 2);
+  transform-origin: calc(50% - 400px);
+  animation: feedbackMoveInCircle 20s reverse infinite;
+  opacity: 1;
+}
+
+.feedback-gradient-bg .fb-g3 {
+  position: absolute;
+  background: radial-gradient(circle at center, rgba(var(--fb-color3), 0.8) 0, rgba(var(--fb-color3), 0) 50%) no-repeat;
+  mix-blend-mode: var(--fb-blending);
+  width: var(--fb-circle-size);
+  height: var(--fb-circle-size);
+  top: calc(50% - var(--fb-circle-size) / 2 + 200px);
+  left: calc(50% - var(--fb-circle-size) / 2 - 500px);
+  transform-origin: calc(50% + 400px);
+  animation: feedbackMoveInCircle 40s linear infinite;
+  opacity: 1;
+}
+
+.feedback-gradient-bg .fb-g4 {
+  position: absolute;
+  background: radial-gradient(circle at center, rgba(var(--fb-color4), 0.8) 0, rgba(var(--fb-color4), 0) 50%) no-repeat;
+  mix-blend-mode: var(--fb-blending);
+  width: var(--fb-circle-size);
+  height: var(--fb-circle-size);
+  top: calc(50% - var(--fb-circle-size) / 2);
+  left: calc(50% - var(--fb-circle-size) / 2);
+  transform-origin: calc(50% - 200px);
+  animation: feedbackMoveHorizontal 40s ease infinite;
+  opacity: 0.7;
+}
+
+.feedback-gradient-bg .fb-g5 {
+  position: absolute;
+  background: radial-gradient(circle at center, rgba(var(--fb-color5), 0.8) 0, rgba(var(--fb-color5), 0) 50%) no-repeat;
+  mix-blend-mode: var(--fb-blending);
+  width: calc(var(--fb-circle-size) * 2);
+  height: calc(var(--fb-circle-size) * 2);
+  top: calc(50% - var(--fb-circle-size));
+  left: calc(50% - var(--fb-circle-size));
+  transform-origin: calc(50% - 800px) calc(50% + 200px);
+  animation: feedbackMoveInCircle 20s ease infinite;
+  opacity: 1;
+}
+
+.feedback-gradient-bg .fb-interactive {
+  position: absolute;
+  background: radial-gradient(circle at center, rgba(var(--fb-color-interactive), 0.8) 0, rgba(var(--fb-color-interactive), 0) 50%) no-repeat;
+  mix-blend-mode: var(--fb-blending);
+  width: 100%;
+  height: 100%;
+  top: -50%;
+  left: -50%;
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+/* Feedback section content z-index */
+.feedback-gradient-bg .fb-content {
+  position: relative;
+  z-index: 2;
+}
+
+/* ============================================
+   FEEDBACK CARDS - Orb Animation + Glassmorphism
+   ============================================ */
+
+.feedback-card {
+  position: relative;
+  overflow: hidden;
+  background: rgba(5, 3, 15, 0.6) !important;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(80, 40, 140, 0.15);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  transition: border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.feedback-card:hover {
+  border-color: rgba(100, 60, 180, 0.3);
+  box-shadow:
+    0 8px 40px rgba(40, 20, 80, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* Top light reflection line */
+.feedback-card::before {
+  content: "";
+  position: absolute;
+  z-index: 3;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(140, 100, 255, 0.4) 34%,
+    rgba(100, 60, 200, 0.3) 89%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  opacity: 0.5;
+  filter: blur(0.5px);
+  mix-blend-mode: hard-light;
+}
+
+/* Card noise overlay */
+.feedback-card .fb-card-noise {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+  opacity: 0.08;
+  pointer-events: none;
+}
+
+/* Card orbs container */
+.feedback-card .fb-card-orbs {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  filter: url(#fbCardGoo) blur(40px);
+  pointer-events: none;
+  opacity: 1;
+}
+
+.feedback-card .fb-card-orb {
+  position: absolute;
+  border-radius: 50%;
+  mix-blend-mode: screen;
+}
+
+.feedback-card .fb-card-orb:nth-child(1) {
+  width: 280px;
+  height: 280px;
+  background: radial-gradient(circle, rgba(100, 40, 180, 1) 0%, rgba(80, 20, 160, 0.6) 30%, transparent 70%);
+  top: -30%;
+  left: -20%;
+  animation: feedbackOrbFloat1 12s ease-in-out infinite;
+}
+
+.feedback-card .fb-card-orb:nth-child(2) {
+  width: 240px;
+  height: 240px;
+  background: radial-gradient(circle, rgba(60, 20, 140, 0.9) 0%, rgba(40, 10, 120, 0.5) 30%, transparent 70%);
+  top: 50%;
+  right: -25%;
+  animation: feedbackOrbFloat2 15s ease-in-out infinite;
+}
+
+.feedback-card .fb-card-orb:nth-child(3) {
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(30, 60, 160, 0.85) 0%, rgba(20, 40, 130, 0.4) 30%, transparent 70%);
+  bottom: -20%;
+  left: 20%;
+  animation: feedbackOrbFloat3 18s ease-in-out infinite;
+}
+
+.feedback-card .fb-card-orb:nth-child(4) {
+  width: 180px;
+  height: 180px;
+  background: radial-gradient(circle, rgba(120, 50, 200, 0.85) 0%, rgba(90, 30, 170, 0.4) 30%, transparent 70%);
+  top: 20%;
+  left: 55%;
+  animation: feedbackOrbFloat4 14s ease-in-out infinite;
+}
+
+/* Card content z-index */
+.feedback-card .fb-card-content {
+  position: relative;
+  z-index: 2;
+}
+
+/* ============================================
+   FEEDBACK HEADER - Glassmorphism overlay
+   ============================================ */
+
+.feedback-header {
+  position: relative;
+  z-index: 2;
+  background: rgba(10, 5, 25, 0.4) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(80, 40, 140, 0.1);
+}
+
+/* Cards area must sit above the header for the -mt-20 overlap */
+.feedback-cards-area {
+  position: relative;
+  z-index: 3;
+}
+
 /* canvas- styles */
 .canvas-loader {
   font-size: 10px;

@@ -59,21 +59,50 @@ const Tech = () => {
   }, [activeCategory]);
 
   // Dynamic grid calculations based on filtered count and screen size
-  const cols = isMobile ? 5: isMobile1 ? 6: isMobile2 ? 8: 9
+  const isFiltered = activeCategory !== "All";
+  const cols = isFiltered
+    ? 4
+    : (isMobile ? 5 : isMobile1 ? 6 : isMobile2 ? 8 : 9);
   const rows = Math.ceil(filteredTechnologies.length / cols);
 
   // Dynamic canvas height - scale generously with the number of rows
-  const rowHeight = isMobile ? 100 : 145;
+  const rowHeight = isMobile ? 100 : (isFiltered ? 160 : 145);
   const canvasHeight = Math.max(rows * rowHeight + 50, 500);
 
   // Dynamic camera - center on grid, adjust FOV based on grid width and height
   const getCameraConfig = () => {
     const totalItems = filteredTechnologies.length;
-    // Max items in any row (for width calculation)
     const maxItemsInRow = Math.min(totalItems, cols);
-    // Width-based FOV factor: more items in a row = wider FOV needed
-    const widthFactor = maxItemsInRow / cols;
-    
+
+    // When filtered to a category: 4 cols, bigger balls, lower FOV
+    if (isFiltered) {
+      if (isMobile) {
+        if (rows <= 1) return { position: [0, 0, 30], fov: 18 };
+        if (rows <= 2) return { position: [0, 0, 30], fov: 24 };
+        if (rows <= 3) return { position: [0, 0, 30], fov: 30 };
+        return { position: [0, 0, 30], fov: Math.min(24 + rows * 4, 55) };
+      }
+      if (isMobile1) {
+        if (rows <= 1) return { position: [0, 0, 30], fov: 14 };
+        if (rows <= 2) return { position: [0, 0, 30], fov: 18 };
+        if (rows <= 3) return { position: [0, 0, 30], fov: 24 };
+        return { position: [0, 0, 30], fov: Math.min(20 + rows * 3, 45) };
+      }
+      if (isMobile2) {
+        if (rows <= 1) return { position: [0, 0, 17], fov: 14 };
+        if (rows <= 2) return { position: [0, 0, 17], fov: 18 };
+        if (rows <= 3) return { position: [0, 0, 17], fov: 22 };
+        return { position: [0, 0, 17], fov: Math.min(18 + rows * 3, 40) };
+      }
+      // Desktop filtered
+      if (rows <= 1) return { position: [0, 0, 17], fov: 16 };
+      if (rows <= 2) return { position: [0, 0, 17], fov: 22 };
+      if (rows <= 3) return { position: [0, 0, 17], fov: 28 };
+      if (rows <= 5) return { position: [0, 0, 17], fov: 34 };
+      return { position: [0, 0, 17], fov: Math.min(26 + rows * 4, 60) };
+    }
+
+    // "All" category - original logic
     if (isMobile) {
       if (rows <= 1) return { position: [0, 0, 30], fov: Math.max(8 + maxItemsInRow * 3, 15) };
       if (rows <= 2) return { position: [0, 0, 30], fov: 25 };

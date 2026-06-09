@@ -122,6 +122,14 @@ import {
       title: "About",
     },
     {
+      id: "tech",
+      title: "Technologies",
+    },
+    {
+      id: "projects",
+      title: "Projects",
+    },
+    {
       id: "work",
       title: "Work",
     },
@@ -134,6 +142,14 @@ import {
       {
         id: "about",
         title: "Sobre mí",
+      },
+      {
+        id: "tech",
+        title: "Tecnologías",
+      },
+      {
+        id: "projects",
+        title: "Proyectos",
       },
       {
         id: "work",

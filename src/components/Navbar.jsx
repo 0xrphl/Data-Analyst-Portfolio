@@ -29,7 +29,7 @@ const { currentLanguage, toggleLanguage, t } = useLanguage();
       </Link>
 
       {/* Show language toggle only on desktop */}
-      <div className="hidden sm:block">
+      <div className="hidden lg:block">
         <button
           onClick={toggleLanguage}
           className="px-4 py-2 text-white bg-tertiary rounded-xl mx-4"
@@ -38,7 +38,7 @@ const { currentLanguage, toggleLanguage, t } = useLanguage();
         </button>
       </div>
 
-      <ul className="list-none hidden sm:flex flex-row gap-10">
+      <ul className="list-none hidden lg:flex flex-row gap-6">
         {navLinks[currentLanguage].map((link) => (
           <li
           key={link.id}
@@ -53,7 +53,7 @@ const { currentLanguage, toggleLanguage, t } = useLanguage();
           </li>
         ))}
       </ul>
-      <div className="sm:hidden flex flex-1 justify-end items-center">
+      <div className="lg:hidden flex flex-1 justify-end items-center">
           <img
             src={toggle ? close : menu}
             alt='menu'

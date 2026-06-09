@@ -3,7 +3,7 @@ import { Float, Preload, useTexture } from "@react-three/drei";
 import CanvasLoader from "../Loader";
 import IcosahedronComponent from "./Icosahedron";
 
-const BallCanvas = ({ icon, index, rows, cols, title, onPointerOver, onPointerOut, onTouchStart }) => {
+const BallCanvas = ({ icon, index, rows, cols, totalItems, title, category, categoryColor, onPointerOver, onPointerOut, onTouchStart }) => {
   const [decal] = useTexture([icon]);
   const ballRef = useRef();
   const [isMobile, setIsMobile] = useState(false);
@@ -21,13 +21,18 @@ const BallCanvas = ({ icon, index, rows, cols, title, onPointerOver, onPointerOu
     };
   }, []);
 
-  const x = ((index % cols) * 2.3 - (cols * 2.3) / 2);
-  const y = (Math.floor(index / cols) * 2.3 - (rows * 2.3) / 2);
+  // Calculate how many items are in this row for proper centering
+  const currentRow = Math.floor(index / cols);
+  const isLastRow = currentRow === rows - 1;
+  const itemsInThisRow = isLastRow ? totalItems - currentRow * cols : cols;
+  
+  const x = ((index % cols) * 2.3 - (itemsInThisRow * 2.3) / 2 + 2.3 / 2);
+  const y = (currentRow * 2.3 - (rows * 2.3) / 2 + 2.3 / 2);
 
   const floatConfig = {
-    speed: isMobile ? 0.5 : 1.6,
-    rotationIntensity: isMobile ? 0.05 : 0.5,
-    floatIntensity: isMobile ? 0.5 : 1
+    speed: isMobile ? 0.8 : 1.6,
+    rotationIntensity: isMobile ? 0.1 : 0.5,
+    floatIntensity: isMobile ? 0.6 : 1
   };
 
   const handleTouchStart = (event) => {
@@ -43,12 +48,11 @@ const BallCanvas = ({ icon, index, rows, cols, title, onPointerOver, onPointerOu
     <>
       <Suspense fallback={<CanvasLoader />}>
         <Float {...floatConfig}>
-          <ambientLight intensity={0.00001} />
-          <directionalLight position={[1, 1, 5]} intensity={0.12} />
           <IcosahedronComponent
             ref={ballRef}
             decal={decal}
-            position={[1.1 + x, -y, 0]}
+            position={[x, -y, 0]}
+            categoryColor={categoryColor}
             onPointerOver={() => onPointerOver({ title, position: { x: 1 + x, y: -y } })}
             onPointerOut={onPointerOut}
             onTouchStart={handleTouchStart}

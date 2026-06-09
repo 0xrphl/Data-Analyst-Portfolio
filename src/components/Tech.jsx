@@ -1,8 +1,8 @@
-import React, { useEffect, useState, useRef, Suspense } from "react";
+import React, { useEffect, useState, useRef, Suspense, useMemo } from "react";
 import { Canvas } from "@react-three/fiber";
 import { Html } from "@react-three/drei";
 import { SectionWrapper } from "../hoc";
-import { technologies } from "../constants";
+import { technologies, TECH_CATEGORIES } from "../constants";
 import BallCanvas from "./canvas/Ball";
 import Tooltip from "./common/Tooltip";
 import { styles } from "../styles";
@@ -26,57 +26,80 @@ const Tech = () => {
   const [touchedTitle, setTouchedTitle] = useState(null);
   const [touchPosition, setTouchPosition] = useState({ x: 0, y: 0 });
   const [showTooltip, setShowTooltip] = useState(false);
+  const [activeCategory, setActiveCategory] = useState("All");
   const techRef = useRef(null);
 
   useEffect(() => {
-    const updateViewportWidth = () => {
-    };
-
-    // Print the initial viewport width
-    updateViewportWidth();
-
-    // Set up an interval to print the viewport width every 2 seconds
-    const intervalId = setInterval(updateViewportWidth, 2000);
-
     const mediaQuery = window.matchMedia("(max-width: 499px)");
     setIsMobile(mediaQuery.matches);
-
-    const handleMediaQueryChange = (event) => {
-      setIsMobile(event.matches);
-    };
-
+    const handleMediaQueryChange = (event) => setIsMobile(event.matches);
     mediaQuery.addEventListener("change", handleMediaQueryChange);
 
     const mediaQuery1 = window.matchMedia("(min-width: 500px) and (max-width: 900px)");
     setIsMobile1(mediaQuery1.matches);
-
-    const handleMediaQueryChange1 = (event) => {
-      setIsMobile1(event.matches);
-    };
-
+    const handleMediaQueryChange1 = (event) => setIsMobile1(event.matches);
     mediaQuery1.addEventListener("change", handleMediaQueryChange1);
 
     const mediaQuery2 = window.matchMedia("(min-width: 901px) and (max-width: 1300px)");
     setIsMobile2(mediaQuery2.matches);
-
-    const handleMediaQueryChange2 = (event) => {
-      setIsMobile2(event.matches);
-    };
-
+    const handleMediaQueryChange2 = (event) => setIsMobile2(event.matches);
     mediaQuery2.addEventListener("change", handleMediaQueryChange2);
 
-    // Clean up the interval on component unmount
     return () => {
-      clearInterval(intervalId);
       mediaQuery.removeEventListener("change", handleMediaQueryChange);
       mediaQuery1.removeEventListener("change", handleMediaQueryChange1);
       mediaQuery2.removeEventListener("change", handleMediaQueryChange2);
     };
-  }, [isMobile, isMobile1, isMobile2]);
+  }, []);
 
-  const cols = isMobile ? 4 : isMobile1 ? 5 : isMobile2 ? 7 : 8;
-  const rows = 6;
-  const fox = isMobile ? 25 : 30;
+  // Filter technologies based on active category
+  const filteredTechnologies = useMemo(() => {
+    if (activeCategory === "All") return technologies;
+    return technologies.filter((tech) => tech.category === activeCategory);
+  }, [activeCategory]);
+
+  // Dynamic grid calculations based on filtered count and screen size
+  const cols = isMobile ? 5: isMobile1 ? 6: isMobile2 ? 8: 9
+  const rows = Math.ceil(filteredTechnologies.length / cols);
+
+  // Dynamic canvas height - scale generously with the number of rows
+  const rowHeight = isMobile ? 100 : 145;
+  const canvasHeight = Math.max(rows * rowHeight + 50, 500);
+
+  // Dynamic camera - center on grid, adjust FOV based on grid width and height
+  const getCameraConfig = () => {
+    const totalItems = filteredTechnologies.length;
+    // Max items in any row (for width calculation)
+    const maxItemsInRow = Math.min(totalItems, cols);
+    // Width-based FOV factor: more items in a row = wider FOV needed
+    const widthFactor = maxItemsInRow / cols;
+    
+    if (isMobile) {
+      if (rows <= 1) return { position: [0, 0, 30], fov: Math.max(8 + maxItemsInRow * 3, 15) };
+      if (rows <= 2) return { position: [0, 0, 30], fov: 25 };
+      if (rows <= 3) return { position: [0, 0, 30], fov: 32 };
+      return { position: [0, 0, 30], fov: Math.min(28 + rows * 4, 65) };
+    }
+    if (isMobile1) {
+      if (rows <= 1) return { position: [0, 0, 30], fov: Math.max(6 + maxItemsInRow * 2.5, 12) };
+      if (rows <= 2) return { position: [0, 0, 30], fov: 20 };
+      if (rows <= 3) return { position: [0, 0, 30], fov: 26 };
+      return { position: [0, 0, 30], fov: Math.min(22 + rows * 3.5, 55) };
+    }
+    if (isMobile2) {
+      if (rows <= 1) return { position: [0, 0, 30], fov: Math.max(5 + maxItemsInRow * 2, 10) };
+      if (rows <= 2) return { position: [0, 0, 30], fov: 18 };
+      if (rows <= 3) return { position: [0, 0, 30], fov: 22 };
+      return { position: [0, 0, 30], fov: Math.min(18 + rows * 3, 50) };
+    }
+    // Desktop
+    if (rows <= 1) return { position: [2, 0, 17], fov: Math.max(8 + maxItemsInRow * 5, 20) };
+    if (rows <= 2) return { position: [2, 0, 17], fov: 32 + Math.max(0, (maxItemsInRow - 5) * 2) };
+    if (rows <= 3) return { position: [2, 0, 17], fov: 42 };
+    return { position: [2, 0, 17], fov: Math.min(30 + rows * 5, 90) };
+  };
+
+  const cameraConfig = getCameraConfig();
 
   const handleMouseMove = (event) => {
     if (techRef.current) {
@@ -102,9 +125,7 @@ const Tech = () => {
       setShowTooltip(true);
 
       const tooltipVisibilityDuration = 2000;
-      clearTimeout(timeoutId);
-
-      const timeoutId = setTimeout(() => {
+      setTimeout(() => {
         setTouchedTitle(null);
         setShowTooltip(false);
       }, tooltipVisibilityDuration);
@@ -114,7 +135,7 @@ const Tech = () => {
   const canvasStyle = {
     position: 'relative',
     width: '100vw',
-    height: '100vh',
+    height: `${canvasHeight}px`,
     marginLeft: 'calc(-50vw + 50%)',
     marginRight: 'calc(-50vw + 50%)',
   };
@@ -123,35 +144,86 @@ const Tech = () => {
     return t(`techNames.${title}`) || title;
   };
 
+  const categoryKeys = Object.keys(TECH_CATEGORIES);
+
   return (
     <div ref={techRef} className="flex flex-col items-center w-full" onMouseMove={handleMouseMove}>
       <p className={`${styles.sectionHeadText} text-center`}>
         {t('technologiesWorkedWith')}
       </p>
+
+      {/* Category Filter Pills */}
+      <div className="flex flex-wrap justify-center gap-2 mt-4 mb-6 px-4 max-w-5xl">
+        {categoryKeys.map((catKey) => {
+          const cat = TECH_CATEGORIES[catKey];
+          const isActive = activeCategory === catKey;
+          const count = catKey === "All" 
+            ? technologies.length 
+            : technologies.filter(t => t.category === catKey).length;
+
+          // Brighter colors for the pill buttons (not the 3D objects)
+          const pillColors = {
+            "All": "#2A353C",
+            "AI & ML": "#7B2FBE",
+            "Data Science": "#2563EB",
+            "Databases": "#059669",
+            "Web Dev": "#0891B2",
+            "Cloud & DevOps": "#EA580C",
+            "BI & Spreadsheets": "#10B981",
+            "Automation": "#CA8A04",
+            "Engineering": "#DC2626",
+            "Other": "#6B7280",
+          };
+
+          return (
+            <button
+              key={catKey}
+              onClick={() => setActiveCategory(catKey)}
+              className={`
+                px-3 py-1.5 rounded-full text-xs sm:text-sm font-medium
+                transition-all duration-300 ease-in-out cursor-pointer
+                border-2 whitespace-nowrap
+                ${isActive 
+                  ? 'text-white shadow-lg scale-105' 
+                  : 'text-gray-300 border-gray-600 hover:border-gray-400 hover:text-white bg-transparent'
+                }
+              `}
+              style={isActive ? { 
+                backgroundColor: pillColors[catKey], 
+                borderColor: pillColors[catKey],
+                boxShadow: `0 0 15px ${pillColors[catKey]}40`
+              } : {}}
+            >
+              {cat.label} ({count})
+            </button>
+          );
+        })}
+      </div>
+
       <div style={{ ...canvasStyle }} className="relative">
         <Canvas
+          key={activeCategory}
           style={{ width: '100%', height: '100%' }}
-          frameloop={isMobile ? "demand" : "always"}
-          dpr={[1, isMobile ? 1 : 1.5]}
+          frameloop="always"
+          dpr={[1, isMobile ? 1.5 : 2]}
           gl={{ 
             powerPreference: "high-performance",
-            antialias: false,
-            alpha: false,
+            antialias: !isMobile,
+            alpha: true,
             stencil: false,
             depth: true,
-            precision: "lowp"
+            precision: isMobile ? "mediump" : "highp"
           }}
-          camera={isMobile ? 
-            { position: [5.3, -6.2, 50], fov: 40, rotation: [0, Math.PI / 30, 0] } : 
-            isMobile1 ? 
-              { position: [5.3, -5, 50], fov: 31, rotation: [0, Math.PI / 30, 0] } : 
-            isMobile2 ? 
-              { position: [5.3, -2.6, 50], fov: 29, rotation: [0, Math.PI / 30, 0] } : 
-              { position: [3, -0.5, 20], fov: 47, rotation: [0, Math.PI / 30, 0] }
-          }
+          camera={{
+            ...cameraConfig,
+            rotation: [0, Math.PI / 30, 0]
+          }}
           performance={{ min: 0.5 }}
         >
-          {technologies.map((technology, index) => (
+          <ambientLight intensity={1.2} />
+          <directionalLight position={[2, 3, 5]} intensity={0.8} />
+          <directionalLight position={[-2, -1, 3]} intensity={0.3} />
+          {filteredTechnologies.map((technology, index) => (
             <Suspense 
               key={technology.name} 
               fallback={<LoadingFallback />}
@@ -162,7 +234,10 @@ const Tech = () => {
                 index={index}
                 rows={rows}
                 cols={cols}
+                totalItems={filteredTechnologies.length}
                 title={getTranslatedTitle(technology.name)}
+                category={technology.category}
+                categoryColor={TECH_CATEGORIES[technology.category]?.color || "#2A353C"}
                 onPointerOver={() => setHoveredTitle(getTranslatedTitle(technology.name))}
                 onPointerOut={() => setHoveredTitle(null)}
                 onTouchStart={(title, event) => handlePointerDown(getTranslatedTitle(title), event)}

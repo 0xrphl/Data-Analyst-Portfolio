@@ -55,6 +55,7 @@ import {
     CRM,
     Calendar,
     quiroga,
+    quiroga2,
     CUDA,
     Scikit_image,
     PyTorch,
@@ -69,8 +70,51 @@ import {
     Seaborn,
     Keras,
     ollama,
+    // New imports
+    Anthropic,
+    Gemini,
+    DeepSeek,
+    LangGraph,
+    Gemma,
+    Qwen,
+    Kimi,
+    HuggingFace,
+    Midjourney,
+    MCP,
+    Neo4j,
+    Pinecone,
+    Milvus,
+    Supabase,
+    Qdrant,
+    NeonDB,
+    VueJS,
+    FastAPI,
+    Vite,
+    Route53,
+    ALB,
+    CloudFront,
+    Vercel,
+    AzureAD,
+    N8N,
+    FireCrawler,
+    Zapier,
+    RDS,
   } from "../assets";
   
+  // Category definitions with colors for icosahedron surfaces (darkened for 3D look)
+  export const TECH_CATEGORIES = {
+    "All": { color: "#2A353C", label: "All" },
+    "AI & ML": { color: "#3D1A5E", label: "AI & ML" },
+    "Data Science": { color: "#1A3A6B", label: "Data Science" },
+    "Databases": { color: "#0A3D2E", label: "Databases" },
+    "Web Dev": { color: "#0A4A5A", label: "Web Dev" },
+    "Cloud & DevOps": { color: "#6B2F0A", label: "Cloud & DevOps" },
+    "BI & Spreadsheets": { color: "#0A4D3A", label: "BI, Dashboards & Data Analysis" },
+    "Automation": { color: "#5A3D0A", label: "Automation" },
+    "Engineering": { color: "#6B1515", label: "Engineering" },
+    "Other": { color: "#3A3F47", label: "Other" },
+  };
+
   export const navLinks = {
     en: [
     {
@@ -149,221 +193,432 @@ import {
   ];
   
   const technologies = [
+    // ============ AI & ML (Purple #7B2FBE) ============
     {
-      name: "HTML 5",
-      icon: html,
-    },
-    {
-      name: "CSS 3",
-      icon: css,
-    },
-    {
-      name: "Tailwind CSS",
-      icon: tailwind,
-    },
-    {
-      name: "JavaScript",
-      icon: javascript,
-    },
-    {
-      name: "TypeScript",
-      icon: typescript,
-    },
-    {
-      name: "Node JS",
-      icon: nodejs,
-    },
-    {
-      name: "React JS",
-      icon: reactjs,
-    },
-    {
-      name: "Three JS",
-      icon: threejs,
-    },
-    {
-      name: "C",
-      icon: C,
-    },
-    {
-      name: "MySQL",
-      icon: MySQL,
-    },
-    {
-      name: "PostgreSQL",
-      icon: PostgreSQL,
-    },
-    {
-      name: "Scikit_image",
-      icon: Scikit_image,
-    },
-    {
-      name: "CUDA",
-      icon: CUDA,
+      name: "TensorFlow",
+      icon: TensorFlow,
+      category: "AI & ML",
     },
     {
       name: "PyTorch",
       icon: PyTorch,
-    },
-    {
-      name: "TensorFlow",
-      icon: TensorFlow,
-    },
-    {
-      name: "Flask",
-      icon: Flask,
-    },
-    {
-      name: "Streamlit",
-      icon: Streamlit,
-    },
-    {
-      name: "ECS",
-      icon: ECS,
-    },
-    {
-      name: "ECR",
-      icon: ECR,
-    },
-    {
-      name: "S3",
-      icon: S3,
-    },
-    {
-      name: "EC2",
-      icon: EC2,
-    },
-    {
-      name: "Plotly",
-      icon: Plotly,
-    },
-    {
-      name: "Seaborn",
-      icon: Seaborn,
+      category: "AI & ML",
     },
     {
       name: "Keras",
       icon: Keras,
-    },
-    {
-      name: "Ollama",
-      icon: ollama,
-    },
-    {
-      name: "SQLserver",
-      icon: SQLserver,
-    },
-    {
-      name: "Git",
-      icon: git,
-    },
-    {
-      name: "Github",
-      icon: github,
-    },
-    {
-      name: "Excel",
-      icon: Excel,
-    },
-    {
-      name: "Visual Basic",
-      icon: VisualBasic,
-    },
-    {
-      name: "Tableau",
-      icon: Tableau,
-    },
-    {
-      name: "PowerBI",
-      icon: PowerBI,
-    },
-    {
-      name: "Figma",
-      icon: figma,
-    },
-    {
-      name: "Docker",
-      icon: docker,
-    },
-    {
-      name: "Google Sheets",
-      icon: GoogleSheets,
-    },
-    {
-      name: "Google Apps Script",
-      icon: GoogleAppsScript,
-    },
-    {
-      name: "Looker Studio",
-      icon: LookerStudio,
-    },
-    {
-      name: "Google Analytics",
-      icon: GoogleAnalytics,
-    },
-    {
-      name: "Python",
-      icon: python,
-    },
-    {
-      name: "MATLAB",
-      icon: MATLAB,
-    },
-    {
-      name: "Pandas",
-      icon: Pandas,
-    },
-    {
-      name: "Puppeteer",
-      icon: Puppeteer,
-    },
-    {
-      name: "SOLIDWORKS",
-      icon: SOLIDWORKS,
-    },
-    {
-      name: "Autodesk Inventor",
-      icon: AutodeskInventor,
-    },
-    {
-      name: "ANSYS",
-      icon: ANSYS,
-    },
-    {
-      name: "Solidity",
-      icon: Solidity,
-    },
-    {
-      name: "Matplotlib",
-      icon: Matplotlib,
+      category: "AI & ML",
     },
     {
       name: "ScikitLearn",
       icon: ScikitLearn,
+      category: "AI & ML",
+    },
+    {
+      name: "Scikit_image",
+      icon: Scikit_image,
+      category: "AI & ML",
+    },
+    {
+      name: "CUDA",
+      icon: CUDA,
+      category: "AI & ML",
+    },
+    {
+      name: "Ollama",
+      icon: ollama,
+      category: "AI & ML",
+    },
+    {
+      name: "Anthropic",
+      icon: Anthropic,
+      category: "AI & ML",
+    },
+    {
+      name: "Gemini",
+      icon: Gemini,
+      category: "AI & ML",
+    },
+    {
+      name: "DeepSeek",
+      icon: DeepSeek,
+      category: "AI & ML",
+    },
+    {
+      name: "LangGraph",
+      icon: LangGraph,
+      category: "AI & ML",
+    },
+    {
+      name: "Gemma",
+      icon: Gemma,
+      category: "AI & ML",
+    },
+    {
+      name: "Qwen",
+      icon: Qwen,
+      category: "AI & ML",
+    },
+    {
+      name: "Kimi",
+      icon: Kimi,
+      category: "AI & ML",
+    },
+    {
+      name: "Hugging Face",
+      icon: HuggingFace,
+      category: "AI & ML",
+    },
+    {
+      name: "Midjourney",
+      icon: Midjourney,
+      category: "AI & ML",
+    },
+    {
+      name: "MCP",
+      icon: MCP,
+      category: "AI & ML",
+    },
+
+    // ============ Data Science (Blue #2563EB) ============
+    {
+      name: "Python",
+      icon: python,
+      category: "Data Science",
+    },
+    {
+      name: "Pandas",
+      icon: Pandas,
+      category: "Data Science",
     },
     {
       name: "Numpy",
       icon: Numpy,
+      category: "Data Science",
     },
     {
       name: "Scipy",
       icon: Scipy,
+      category: "Data Science",
+    },
+    {
+      name: "Matplotlib",
+      icon: Matplotlib,
+      category: "Data Science",
+    },
+    {
+      name: "Seaborn",
+      icon: Seaborn,
+      category: "Data Science",
+    },
+    {
+      name: "Plotly",
+      icon: Plotly,
+      category: "Data Science",
+    },
+
+    // ============ Databases (Green #059669) ============
+    {
+      name: "MySQL",
+      icon: MySQL,
+      category: "Databases",
+    },
+    {
+      name: "PostgreSQL",
+      icon: PostgreSQL,
+      category: "Databases",
+    },
+    {
+      name: "SQLserver",
+      icon: SQLserver,
+      category: "Databases",
+    },
+    {
+      name: "Neo4j",
+      icon: Neo4j,
+      category: "Databases",
+    },
+    {
+      name: "Pinecone",
+      icon: Pinecone,
+      category: "Databases",
+    },
+    {
+      name: "Milvus",
+      icon: Milvus,
+      category: "Databases",
+    },
+    {
+      name: "Supabase",
+      icon: Supabase,
+      category: "Databases",
+    },
+    {
+      name: "Qdrant",
+      icon: Qdrant,
+      category: "Databases",
+    },
+    {
+      name: "Neon DB",
+      icon: NeonDB,
+      category: "Databases",
+    },
+
+    // ============ Web Dev (Cyan #0891B2) ============
+    {
+      name: "HTML 5",
+      icon: html,
+      category: "Web Dev",
+    },
+    {
+      name: "CSS 3",
+      icon: css,
+      category: "Web Dev",
+    },
+    {
+      name: "JavaScript",
+      icon: javascript,
+      category: "Web Dev",
+    },
+    {
+      name: "TypeScript",
+      icon: typescript,
+      category: "Web Dev",
+    },
+    {
+      name: "React JS",
+      icon: reactjs,
+      category: "Web Dev",
+    },
+    {
+      name: "Three JS",
+      icon: threejs,
+      category: "Web Dev",
+    },
+    {
+      name: "Node JS",
+      icon: nodejs,
+      category: "Web Dev",
+    },
+    {
+      name: "Tailwind CSS",
+      icon: tailwind,
+      category: "Web Dev",
+    },
+    {
+      name: "Vue.js",
+      icon: VueJS,
+      category: "Web Dev",
+    },
+    {
+      name: "FastAPI",
+      icon: FastAPI,
+      category: "Web Dev",
+    },
+    {
+      name: "Vite",
+      icon: Vite,
+      category: "Web Dev",
+    },
+    {
+      name: "Flask",
+      icon: Flask,
+      category: "Web Dev",
+    },
+    {
+      name: "Streamlit",
+      icon: Streamlit,
+      category: "Web Dev",
+    },
+
+    // ============ Cloud & DevOps (Orange #EA580C) ============
+    {
+      name: "Docker",
+      icon: docker,
+      category: "Cloud & DevOps",
+    },
+    {
+      name: "Git",
+      icon: git,
+      category: "Cloud & DevOps",
+    },
+    {
+      name: "Github",
+      icon: github,
+      category: "Cloud & DevOps",
+    },
+    {
+      name: "ECS",
+      icon: ECS,
+      category: "Cloud & DevOps",
+    },
+    {
+      name: "ECR",
+      icon: ECR,
+      category: "Cloud & DevOps",
+    },
+    {
+      name: "S3",
+      icon: S3,
+      category: "Cloud & DevOps",
+    },
+    {
+      name: "EC2",
+      icon: EC2,
+      category: "Cloud & DevOps",
+    },
+    {
+      name: "Route 53",
+      icon: Route53,
+      category: "Cloud & DevOps",
+    },
+    {
+      name: "ALB",
+      icon: ALB,
+      category: "Cloud & DevOps",
+    },
+    {
+      name: "CloudFront",
+      icon: CloudFront,
+      category: "Cloud & DevOps",
+    },
+    {
+      name: "Vercel",
+      icon: Vercel,
+      category: "Cloud & DevOps",
+    },
+    {
+      name: "Azure AD OAuth 2.0",
+      icon: AzureAD,
+      category: "Cloud & DevOps",
+    },
+    {
+      name: "RDS",
+      icon: RDS,
+      category: "Cloud & DevOps",
+    },
+
+    // ============ BI & Spreadsheets (Teal #10B981) ============
+    {
+      name: "Excel",
+      icon: Excel,
+      category: "BI & Spreadsheets",
+    },
+    {
+      name: "Visual Basic",
+      icon: VisualBasic,
+      category: "BI & Spreadsheets",
+    },
+    {
+      name: "PowerBI",
+      icon: PowerBI,
+      category: "BI & Spreadsheets",
+    },
+    {
+      name: "Tableau",
+      icon: Tableau,
+      category: "BI & Spreadsheets",
+    },
+    {
+      name: "Google Sheets",
+      icon: GoogleSheets,
+      category: "BI & Spreadsheets",
+    },
+    {
+      name: "Google Apps Script",
+      icon: GoogleAppsScript,
+      category: "BI & Spreadsheets",
+    },
+    {
+      name: "Looker Studio",
+      icon: LookerStudio,
+      category: "BI & Spreadsheets",
+    },
+    {
+      name: "Google Analytics",
+      icon: GoogleAnalytics,
+      category: "BI & Spreadsheets",
+    },
+
+    // ============ Automation (Yellow #CA8A04) ============
+    {
+      name: "Puppeteer",
+      icon: Puppeteer,
+      category: "Automation",
+    },
+    {
+      name: "N8N",
+      icon: N8N,
+      category: "Automation",
+    },
+    {
+      name: "FireCrawler",
+      icon: FireCrawler,
+      category: "Automation",
+    },
+    {
+      name: "Zapier",
+      icon: Zapier,
+      category: "Automation",
+    },
+
+    // ============ Engineering (Red #DC2626) ============
+    {
+      name: "SOLIDWORKS",
+      icon: SOLIDWORKS,
+      category: "Engineering",
+    },
+    {
+      name: "Autodesk Inventor",
+      icon: AutodeskInventor,
+      category: "Engineering",
+    },
+    {
+      name: "ANSYS",
+      icon: ANSYS,
+      category: "Engineering",
+    },
+    {
+      name: "MATLAB",
+      icon: MATLAB,
+      category: "Engineering",
+    },
+
+    // ============ Other (Gray #6B7280) ============
+    {
+      name: "C",
+      icon: C,
+      category: "Other",
+    },
+    {
+      name: "Solidity",
+      icon: Solidity,
+      category: "Other",
     },
     {
       name: "Shopify",
       icon: Shopify1,
+      category: "Other",
     },
     {
       name: "Wordpress",
       icon: Wordpress,
+      category: "Other",
     },
     {
       name: "Litmus",
       icon: Litmus,
+      category: "Other",
     },
     {
       name: "MJML",
       icon: MJML,
+      category: "Other",
+    },
+    {
+      name: "Figma",
+      icon: figma,
+      category: "Other",
     },
   ];
   
@@ -874,118 +1129,34 @@ import {
           "Mejoré la eficiencia operativa automatizando el procesamiento de documentos y las interacciones con clientes, mientras aseguraba el manejo seguro de datos de clientes a través de encriptación y adherencia a las mejores prácticas para la protección de datos, todo mientras mantenía una interfaz amigable para el usuario.",
         ],
         tags: [
-          {
-            name: "#Pandas",
-            color: "red-text-gradient",
-          },
-          {
-            name: "#RAG",
-            color: "gray-text-gradient",
-          },
-          {
-            name: "#Flask",
-            color: "pink-text-gradient",
-          },
-          {
-            name: "#Docker",
-            color: "blue-text-gradient",
-          },
-          {
-            name: "#AWS (ECS,ECR,S3,EC2)",
-            color: "orange-text-gradient",
-          },
-          {
-            name: "#CI/CD",
-            color: "gray-text-gradient",
-          },
-          {
-            name: "#EasyOCR",
-            color: "red-text-gradient",
-          },
-          {
-            name: "#PyMyPDF",
-            color: "gray-text-gradient",
-          },
-          {
-            name: "#Matplotlib",
-            color: "gray-text-gradient",
-          },
-          {
-            name: "#PostgresSQL",
-            color: "gray-text-gradient",
-          },
-          {
-            name: "#Time Series Forecasting",
-            color: "gray-text-gradient",
-          },
-          {
-            name: "#Numpy",
-            color: "gray-text-gradient",
-          },
-          {
-            name: "#OpenCV",
-            color: "gray-text-gradient",
-          },
-          {
-            name: "#Claude 3.5 API",
-            color: "green-text-gradient",
-          },
-          {
-            name: "#VectorDB and embeddings",
-            color: "yellow-text-gradient",
-          },
-          {
-            name: "#Data Processing and Cleaning",
-            color: "blue-text-gradient",
-          },
-          {
-            name: "#CUDA",
-            color: "red-text-gradient",
-          },
-          {
-            name: "#Conditional Formatting",
-            color: "pink-text-gradient",
-          },
-          {
-            name: "#Prompt Caching",
-            color: "blue-text-gradient",
-          },
-          {
-            name: "#Prompt Chain",
-            color: "orange-text-gradient",
-          },
-          {
-            name: "#Performance Metrics",
-            color: "gray-text-gradient",
-          },
-          {
-            name: "#AI/ML Deployment",
-            color: "green-text-gradient",
-          },
-          {
-            name: "#TensorFlow",
-            color: "yellow-text-gradient",
-          },
-          {
-            name: "#PyTorch",
-            color: "blue-text-gradient",
-          },
-          {
-            name: "#Reinforcement Learning (RL)",
-            color: "red-text-gradient",
-          },
-          {
-            name: "#Transformer Architecture",
-            color: "pink-text-gradient",
-          },
-          {
-            name: "#Natural Language Processing (NLP)",
-            color: "blue-text-gradient",
-          },
-          {
-            name: "#Attention Mechanisms",
-            color: "orange-text-gradient",
-          },
+          { name: "#Pandas", color: "red-text-gradient" },
+          { name: "#RAG", color: "gray-text-gradient" },
+          { name: "#Flask", color: "pink-text-gradient" },
+          { name: "#Docker", color: "blue-text-gradient" },
+          { name: "#AWS (ECS,ECR,S3,EC2)", color: "orange-text-gradient" },
+          { name: "#CI/CD", color: "gray-text-gradient" },
+          { name: "#EasyOCR", color: "red-text-gradient" },
+          { name: "#PyMyPDF", color: "gray-text-gradient" },
+          { name: "#Matplotlib", color: "gray-text-gradient" },
+          { name: "#PostgresSQL", color: "gray-text-gradient" },
+          { name: "#Time Series Forecasting", color: "gray-text-gradient" },
+          { name: "#Numpy", color: "gray-text-gradient" },
+          { name: "#OpenCV", color: "gray-text-gradient" },
+          { name: "#Claude 3.5 API", color: "green-text-gradient" },
+          { name: "#VectorDB and embeddings", color: "yellow-text-gradient" },
+          { name: "#Data Processing and Cleaning", color: "blue-text-gradient" },
+          { name: "#CUDA", color: "red-text-gradient" },
+          { name: "#Conditional Formatting", color: "pink-text-gradient" },
+          { name: "#Prompt Caching", color: "blue-text-gradient" },
+          { name: "#Prompt Chain", color: "orange-text-gradient" },
+          { name: "#Performance Metrics", color: "gray-text-gradient" },
+          { name: "#AI/ML Deployment", color: "green-text-gradient" },
+          { name: "#TensorFlow", color: "yellow-text-gradient" },
+          { name: "#PyTorch", color: "blue-text-gradient" },
+          { name: "#Reinforcement Learning (RL)", color: "red-text-gradient" },
+          { name: "#Transformer Architecture", color: "pink-text-gradient" },
+          { name: "#Natural Language Processing (NLP)", color: "blue-text-gradient" },
+          { name: "#Attention Mechanisms", color: "orange-text-gradient" },
         ],
       },
       {
@@ -1003,90 +1174,27 @@ import {
           "Desarrollé un script para escanear repositorios PDF en busca de páginas duplicadas, procesando más de 22,000 PDFs y 300,000 páginas mensualmente. Usando bibliotecas Python como fitz (PyMuPDF), OpenCV, Pandas y skimage, el script aplica procesamiento de imágenes y algoritmos de machine learning para detectar duplicados, incluso con variaciones menores. Esto asegura un seguimiento completo, previene cargas duplicadas y optimiza la eficiencia de almacenamiento y tiempo. Los resultados se exportan en formato CSV para una fácil revisión.",
         ],
         tags: [
-          {
-            name: "#Pandas",
-            color: "red-text-gradient",
-          },
-          {
-            name: "#Power Query",
-            color: "gray-text-gradient",
-          },
-          {
-            name: "#Streamlit",
-            color: "pink-text-gradient",
-          },
-          {
-            name: "#Docker",
-            color: "blue-text-gradient",
-          },
-          {
-            name: "#AWS (ECS,ECR,S3,EC2)",
-            color: "orange-text-gradient",
-          },
-          {
-            name: "#CI/CD",
-            color: "gray-text-gradient",
-          },
-          {
-            name: "#SCIKIT IMAGE",
-            color: "red-text-gradient",
-          },
-          {
-            name: "#PyMyPDF",
-            color: "gray-text-gradient",
-          },
-          {
-            name: "#Matplotlib",
-            color: "gray-text-gradient",
-          },
-          {
-            name: "#Plotly",
-            color: "gray-text-gradient",
-          },
-          {
-            name: "#Time Series Forecasting",
-            color: "gray-text-gradient",
-          },
-          {
-            name: "#Numpy",
-            color: "gray-text-gradient",
-          },
-          {
-            name: "#OpenCV",
-            color: "gray-text-gradient",
-          },
-          {
-            name: "#Microsoft Excel",
-            color: "green-text-gradient",
-          },
-          {
-            name: "#Python Selenium Scripting Automatization",
-            color: "yellow-text-gradient",
-          },
-          {
-            name: "#Data Processing and Cleaning",
-            color: "blue-text-gradient",
-          },
-          {
-            name: "#Pivot Tables",
-            color: "red-text-gradient",
-          },
-          {
-            name: "#Conditional Formatting",
-            color: "pink-text-gradient",
-          },
-          {
-            name: "#Excel Dashboard Design",
-            color: "blue-text-gradient",
-          },
-          {
-            name: "#Report Storytelling",
-            color: "orange-text-gradient",
-          },
-          {
-            name: "#Performance Metrics",
-            color: "gray-text-gradient",
-          },
+          { name: "#Pandas", color: "red-text-gradient" },
+          { name: "#Power Query", color: "gray-text-gradient" },
+          { name: "#Streamlit", color: "pink-text-gradient" },
+          { name: "#Docker", color: "blue-text-gradient" },
+          { name: "#AWS (ECS,ECR,S3,EC2)", color: "orange-text-gradient" },
+          { name: "#CI/CD", color: "gray-text-gradient" },
+          { name: "#SCIKIT IMAGE", color: "red-text-gradient" },
+          { name: "#PyMyPDF", color: "gray-text-gradient" },
+          { name: "#Matplotlib", color: "gray-text-gradient" },
+          { name: "#Plotly", color: "gray-text-gradient" },
+          { name: "#Time Series Forecasting", color: "gray-text-gradient" },
+          { name: "#Numpy", color: "gray-text-gradient" },
+          { name: "#OpenCV", color: "gray-text-gradient" },
+          { name: "#Microsoft Excel", color: "green-text-gradient" },
+          { name: "#Python Selenium Scripting Automatization", color: "yellow-text-gradient" },
+          { name: "#Data Processing and Cleaning", color: "blue-text-gradient" },
+          { name: "#Pivot Tables", color: "red-text-gradient" },
+          { name: "#Conditional Formatting", color: "pink-text-gradient" },
+          { name: "#Excel Dashboard Design", color: "blue-text-gradient" },
+          { name: "#Report Storytelling", color: "orange-text-gradient" },
+          { name: "#Performance Metrics", color: "gray-text-gradient" },
         ],
       },
       {
@@ -1102,46 +1210,16 @@ import {
           "Creé informes PDF personalizados usando VBA para generar automáticamente resúmenes de rendimiento y enviarlos a la gerencia. El dashboard y los informes se utilizaron en reuniones de gestión para proporcionar insights sobre la eficiencia operativa, con refinamiento continuo basado en feedback de stakeholders.",
         ],
         tags: [
-          {
-            name: "#Microsoft Excel",
-            color: "green-text-gradient",
-          },
-          {
-            name: "#Python Selenium Scripting Automatization",
-            color: "yellow-text-gradient",
-          },
-          {
-            name: "#Data Processing and Cleaning",
-            color: "blue-text-gradient",
-          },
-          {
-            name: "#Pivot Tables",
-            color: "red-text-gradient",
-          },
-          {
-            name: "#Conditional Formatting",
-            color: "pink-text-gradient",
-          },
-          {
-            name: "#Excel Dashboard Design",
-            color: "blue-text-gradient",
-          },
-          {
-            name: "#Report Storytelling",
-            color: "orange-text-gradient",
-          },
-          {
-            name: "#Performance Metrics",
-            color: "gray-text-gradient",
-          },
-          {
-            name: "#Visual Basic",
-            color: "red-text-gradient",
-          },
-          {
-            name: "#Power Query",
-            color: "gray-text-gradient",
-          },
+          { name: "#Microsoft Excel", color: "green-text-gradient" },
+          { name: "#Python Selenium Scripting Automatization", color: "yellow-text-gradient" },
+          { name: "#Data Processing and Cleaning", color: "blue-text-gradient" },
+          { name: "#Pivot Tables", color: "red-text-gradient" },
+          { name: "#Conditional Formatting", color: "pink-text-gradient" },
+          { name: "#Excel Dashboard Design", color: "blue-text-gradient" },
+          { name: "#Report Storytelling", color: "orange-text-gradient" },
+          { name: "#Performance Metrics", color: "gray-text-gradient" },
+          { name: "#Visual Basic", color: "red-text-gradient" },
+          { name: "#Power Query", color: "gray-text-gradient" },
         ],
       },
       {
@@ -1157,42 +1235,15 @@ import {
           "La integración con sistemas de gestión de casos y Google Calendar facilitó la creación directa de perfiles y eventos desde el registro de llamadas. La automatización con Google Apps Script mejoró la eficiencia del flujo de trabajo, mientras que nuestro enfoque inquebrantable en la responsabilidad aseguró una supervisión completa sobre cada tarea asignada a asistentes virtuales. Los procesos transparentes y sistemas integrados reforzaron aún más nuestro compromiso con la precisión en los informes y la gestión eficiente de tareas.",
         ],
         tags: [
-          {
-            name: "#Google Sheets",
-            color: "green-text-gradient",
-          },
-          {
-            name: "#Google Calendar API",
-            color: "blue-text-gradient",
-          },
-          {
-            name: "#Python ",
-            color: "yellow-text-gradient",
-          },
-          {
-            name: "#Google Apps Script",
-            color: "red-text-gradient",
-          },
-          {
-            name: "#Actionable Insights",
-            color: "pink-text-gradient",
-          },
-          {
-            name: "#Looker Studio",
-            color: "blue-text-gradient",
-          },
-          {
-            name: "#Report Generation",
-            color: "orange-text-gradient",
-          },
-          {
-            name: "#Accountability",
-            color: "gray-text-gradient",
-          },
-          {
-            name: "#Automatization",
-            color: "green-text-gradient",
-          },
+          { name: "#Google Sheets", color: "green-text-gradient" },
+          { name: "#Google Calendar API", color: "blue-text-gradient" },
+          { name: "#Python ", color: "yellow-text-gradient" },
+          { name: "#Google Apps Script", color: "red-text-gradient" },
+          { name: "#Actionable Insights", color: "pink-text-gradient" },
+          { name: "#Looker Studio", color: "blue-text-gradient" },
+          { name: "#Report Generation", color: "orange-text-gradient" },
+          { name: "#Accountability", color: "gray-text-gradient" },
+          { name: "#Automatization", color: "green-text-gradient" },
         ],
       }, 
       {
@@ -1208,34 +1259,13 @@ import {
           "Trader de criptomonedas experimentado con análisis técnico avanzado, evaluación fundamental y estrategias de trading. Competente en uso de Rust para arbitraje DeFi, Onda Elliott, análisis de liquidez y evaluación de bloques de órdenes, así como implementación de estrategias de trading algorítmico para gestionar riesgo y optimizar rentabilidad.",
         ],
         tags: [
-          {
-            name: "#Crypto Hashing Algorithms",
-            color: "orange-text-gradient",
-          },
-          {
-            name: "#PoW",
-            color: "green-text-gradient",
-          },
-          {
-            name: "#Solidity",
-            color: "blue-text-gradient",
-          },
-          {
-            name: "#DeFi/DEXs",
-            color: "purple-text-gradient",
-          },
-          {
-            name: "#Risk Management",
-            color: "pink-text-gradient",
-          },
-          {
-            name: "#Rust",
-            color: "gray-text-gradient",
-          },
-          {
-            name: "#ASIC",
-            color: "red-text-gradient",
-          },
+          { name: "#Crypto Hashing Algorithms", color: "orange-text-gradient" },
+          { name: "#PoW", color: "green-text-gradient" },
+          { name: "#Solidity", color: "blue-text-gradient" },
+          { name: "#DeFi/DEXs", color: "purple-text-gradient" },
+          { name: "#Risk Management", color: "pink-text-gradient" },
+          { name: "#Rust", color: "gray-text-gradient" },
+          { name: "#ASIC", color: "red-text-gradient" },
         ],
       },
       {
@@ -1251,30 +1281,12 @@ import {
           "Optimización de Ventas e Ingresos: Aproveché el conocimiento del producto y técnicas de comunicación persuasiva para identificar oportunidades de venta adicional y cruzada, contribuyendo al aumento de generación de ingresos y al logro de objetivos de ventas dentro del entorno de servicio al cliente de AT&T.",
         ],
         tags: [
-          {
-            name: "#Customer Service",
-            color: "purple-text-gradient",
-          },
-          {
-            name: "#Sales Support",
-            color: "green-text-gradient",
-          },
-          {
-            name: "#Communication Skills",
-            color: "blue-text-gradient",
-          },
-          {
-            name: "#Conflict Resolution",
-            color: "pink-text-gradient",
-          },
-          {
-            name: "#Data Entry",
-            color: "red-text-gradient",
-          },
-          {
-            name: "#Multitasking",
-            color: "yellow-text-gradient",
-          },
+          { name: "#Customer Service", color: "purple-text-gradient" },
+          { name: "#Sales Support", color: "green-text-gradient" },
+          { name: "#Communication Skills", color: "blue-text-gradient" },
+          { name: "#Conflict Resolution", color: "pink-text-gradient" },
+          { name: "#Data Entry", color: "red-text-gradient" },
+          { name: "#Multitasking", color: "yellow-text-gradient" },
         ],
       },
       {
@@ -1289,30 +1301,12 @@ import {
           "Diseñé lecciones personalizadas en matemáticas, física y materias de ingeniería como estática, dinámica y resistencia de materiales para estudiantes de ingeniería civil, eléctrica y mecánica, preparándolos para proyectos, demostraciones y exámenes a través de instrucción y tutoría personalizada.",
         ],
         tags: [
-          {
-            name: "#Cálculo Multivariable",
-            color: "orange-text-gradient",
-          },
-          {
-            name: "#Estática, Dinámica y Resistencia de Materiales",
-            color: "green-text-gradient",
-          },
-          {
-            name: "#Física",
-            color: "blue-text-gradient",
-          },
-          {
-            name: "#Termodinámica",
-            color: "pink-text-gradient",
-          },
-          {
-            name: "#Estadística",
-            color: "gray-text-gradient",
-          },
-          {
-            name: "#Enseñanza",
-            color: "red-text-gradient",
-          },
+          { name: "#Cálculo Multivariable", color: "orange-text-gradient" },
+          { name: "#Estática, Dinámica y Resistencia de Materiales", color: "green-text-gradient" },
+          { name: "#Física", color: "blue-text-gradient" },
+          { name: "#Termodinámica", color: "pink-text-gradient" },
+          { name: "#Estadística", color: "gray-text-gradient" },
+          { name: "#Enseñanza", color: "red-text-gradient" },
         ],
       },
       {
@@ -1328,26 +1322,11 @@ import {
           "Certificado como Asociado en Diseño Mecánico de SolidWorks, demostrando competencia en la utilización del software SolidWorks para tareas de diseño mecánico y mejora de flujos de trabajo de ingeniería.",
         ],
         tags: [
-          {
-            name: "#Termodinámica",
-            color: "orange-text-gradient",
-          },
-          {
-            name: "#CAD/CAM/CAE/CSWA",
-            color: "green-text-gradient",
-          },
-          {
-            name: "#FEA",
-            color: "blue-text-gradient",
-          },
-          {
-            name: "#Transformada de Fourier",
-            color: "pink-text-gradient",
-          },
-          {
-            name: "#Análisis de Series Temporales",
-            color: "gray-text-gradient",
-          },
+          { name: "#Termodinámica", color: "orange-text-gradient" },
+          { name: "#CAD/CAM/CAE/CSWA", color: "green-text-gradient" },
+          { name: "#FEA", color: "blue-text-gradient" },
+          { name: "#Transformada de Fourier", color: "pink-text-gradient" },
+          { name: "#Análisis de Series Temporales", color: "gray-text-gradient" },
         ],
       },
     ]
@@ -1361,7 +1340,7 @@ import {
       name: "Joseph Rouse",
       designation: "COO",
       company: "Quiroga Law Office, PLLC",
-      image: "https://media.licdn.com/dms/image/v2/C560BAQGuujuxiPcRRA/company-logo_200_200/company-logo_200_200/0/1631370909330?e=1746057600&v=beta&t=NqJj7TqE7m6hAuEAnhunuzpzexeO03Mml21lKy3YM80",
+      image: quiroga2,
       url:"https://www.linkedin.com/company/quirogalawoffice",
       doc:"",
       email:""
@@ -1372,7 +1351,7 @@ import {
       name: "Katherin Daza",
       designation: "Enforcement Supervisor",
       company: "Quiroga Law Office, PLLC",
-      image: "https://media.licdn.com/dms/image/v2/C560BAQGuujuxiPcRRA/company-logo_200_200/company-logo_200_200/0/1631370909330?e=1746057600&v=beta&t=NqJj7TqE7m6hAuEAnhunuzpzexeO03Mml21lKy3YM80",
+      image: quiroga2,
       url:"https://www.linkedin.com/company/quirogalawoffice",
       doc:"",
       email:""
@@ -1405,7 +1384,7 @@ import {
         name: "Joseph Rouse",
         designation: "Director de Operaciones",
         company: "Quiroga Law Office, PLLC",
-        image: "https://media.licdn.com/dms/image/v2/C560BAQGuujuxiPcRRA/company-logo_200_200/company-logo_200_200/0/1631370909330?e=1746057600&v=beta&t=NqJj7TqE7m6hAuEAnhunuzpzexeO03Mml21lKy3YM80",
+        image: quiroga2,
         url: "https://www.linkedin.com/company/quirogalawoffice",
         doc: "",
         email: ""
@@ -1415,7 +1394,7 @@ import {
         name: "Katherin Daza",
         designation: "Supervisor de Ejecución",
         company: "Quiroga Law Office, PLLC",
-        image: "https://media.licdn.com/dms/image/v2/C560BAQGuujuxiPcRRA/company-logo_200_200/company-logo_200_200/0/1631370909330?e=1746057600&v=beta&t=NqJj7TqE7m6hAuEAnhunuzpzexeO03Mml21lKy3YM80",
+        image: quiroga2,
         url: "https://www.linkedin.com/company/quirogalawoffice",
         doc: "",
         email: ""
@@ -1593,22 +1572,10 @@ import {
         name: "Análisis de eventos de Google Calendar",
         description: "Este proyecto utiliza Google Apps Script para extraer datos de eventos de Google Calendar y almacenarlos en Google Sheets. Los datos incluyen Título del Evento, Fechas, Creador y más para responsabilidad. También se utiliza en Looker Studio para obtener información sobre consultas de oficina.",
         tags: [
-          {
-            name: "Google Sheets",
-            color: "green-text-gradient",
-          },
-          {
-            name: "Looker Studio",
-            color: "blue-text-gradient",
-          },
-          {
-            name: "Google Apps Script",
-            color: "red-text-gradient",
-          },
-          {
-            name: "Google API",
-            color: "gray-text-gradient",
-          },
+          { name: "Google Sheets", color: "green-text-gradient" },
+          { name: "Looker Studio", color: "blue-text-gradient" },
+          { name: "Google Apps Script", color: "red-text-gradient" },
+          { name: "Google API", color: "gray-text-gradient" },
         ],
         image: Calendar,
         source_code_link: "https://github.com/0xrphl/Google-calendar-events-analysis-Google-sheets-Google-App-Scripts-Looker-Studio-",
@@ -1617,14 +1584,8 @@ import {
         name: "Seguimiento de cartera de criptomonedas",
         description: "Este proyecto de Google Sheets le permite realizar un seguimiento de su cartera de criptomonedas utilizando datos en tiempo real extraídos de CoinMarketCap. Utiliza Google Apps Script para solicitar datos de la API de CoinMarketCap y actualizar su hoja de cálculo con los precios más recientes.",
         tags: [
-          {
-            name: "Google Sheets",
-            color: "green-text-gradient",
-          },
-          {
-            name: "CoinMarketCap API",
-            color: "blue-text-gradient",
-          },
+          { name: "Google Sheets", color: "green-text-gradient" },
+          { name: "CoinMarketCap API", color: "blue-text-gradient" },
         ],
         image: Cryptotracker,
         source_code_link: "https://github.com/0xrphl/Crypto-portfolio-tracker-Google-Sheets-Coinmarketcap-API-",
@@ -1633,14 +1594,8 @@ import {
         name: "Tablero de presupuesto y gastos",
         description: "Realice un seguimiento de sus finanzas fácilmente en Google Sheets. Ingrese ingresos, ahorros y gastos, categorizados por fecha y tipo. Integración con Looker Studio para visualizar datos. Simplifique fácilmente sus finanzas.",
         tags: [
-          {
-            name: "Google Sheets",
-            color: "green-text-gradient",
-          },
-          {
-            name: "Looker Studio",
-            color: "blue-text-gradient",
-          },
+          { name: "Google Sheets", color: "green-text-gradient" },
+          { name: "Looker Studio", color: "blue-text-gradient" },
         ],
         image: budget,
         source_code_link: "https://github.com/0xrphl/Budget-and-Expenses-dashboard-Google-Sheets-Looker-Studio-",
@@ -1649,22 +1604,10 @@ import {
         name: "Sistema de toma de datos y CRM",
         description: "Este proyecto streamline la toma de datos de CRM utilizando Google Sheets, Apps Script y Looker Studio. Las funciones incluyen sistema de toma de datos de oficina, integración de Sheets, automatización de Apps Script, integración de Google Calendar, API de SMS para recordatorios y Looker Studio para insights KPI en tiempo real.",
         tags: [
-          {
-            name: "Google Sheets",
-            color: "green-text-gradient",
-          },
-          {
-            name: "Looker Studio",
-            color: "blue-text-gradient",
-          },
-          {
-            name: "Google Apps Script",
-            color: "red-text-gradient",
-          },
-          {
-            name: "Google API",
-            color: "gray-text-gradient",
-          },
+          { name: "Google Sheets", color: "green-text-gradient" },
+          { name: "Looker Studio", color: "blue-text-gradient" },
+          { name: "Google Apps Script", color: "red-text-gradient" },
+          { name: "Google API", color: "gray-text-gradient" },
         ],
         image: CRM,
         source_code_link: "https://github.com/0xrphl/Intake-and-CRM-Google-Sheets-Google-App-Script-Looker-Studio-",
@@ -1673,22 +1616,10 @@ import {
         name: "Proyecto de anillo de oro de tres piedras en SOLIDWORKS",
         description: "Diseñé un anillo de oro de tres piedras en SolidWorks con diamantes certificados IGI. Hecho en 24k de oro radiante para elegancia y lujo ecológico, se utilizó SOLIDWORKS Visualize para renders. [GrabCAD model available on Github.]",
         tags: [
-          {
-            name: "SOLIDWORKS",
-            color: "red-text-gradient",
-          },
-          {
-            name: "IGI certified diamonds",
-            color: "orange-text-gradient",
-          },
-          {
-            name: "Jewelry Design",
-            color: "pink-text-gradient",
-          },
-          {
-            name: "SOLIDWORKS Visualize",
-            color: "gray-text-gradient",
-          },
+          { name: "SOLIDWORKS", color: "red-text-gradient" },
+          { name: "IGI certified diamonds", color: "orange-text-gradient" },
+          { name: "Jewelry Design", color: "pink-text-gradient" },
+          { name: "SOLIDWORKS Visualize", color: "gray-text-gradient" },
         ],
         image: ring,
         source_code_link: "https://github.com/0xrphl/Three-stone-radiant-cut-diamond-ring-SOLIDWORKS-project",
@@ -1697,26 +1628,11 @@ import {
         name: "Portafolio de Analista de Datos",
         description: "Creado con React-Three-Fiber y Tailwind CSS, presenta una exhibición inmersiva de mis habilidades SQL, Python, Tableau y Excel. Su plataforma interactiva y diseño responsivo crea una plataforma visualmente atractiva para explorar mis diversos proyectos de análisis de datos.",
         tags: [
-          {
-            name: "react",
-            color: "blue-text-gradient",
-          },
-          {
-            name: "ThreeJS",
-            color: "green-text-gradient",
-          },
-          {
-            name: "tailwind",
-            color: "pink-text-gradient",
-          },
-          {
-            name: "HTML",
-            color: "orange-text-gradient",
-          },
-          {
-            name: "CSS",
-            color: "blue-text-gradient",
-          },
+          { name: "react", color: "blue-text-gradient" },
+          { name: "ThreeJS", color: "green-text-gradient" },
+          { name: "tailwind", color: "pink-text-gradient" },
+          { name: "HTML", color: "orange-text-gradient" },
+          { name: "CSS", color: "blue-text-gradient" },
         ],
         image: carrent,
         source_code_link: "https://github.com/0xrphl/Data-Analyst-Portfolio",

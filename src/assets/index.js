@@ -60,20 +60,51 @@ import Calendar from "./Calendar.gif";
 import emaillogo from "./email.png";
 import recomendation from "./recomendation.png";
 import quiroga from "./company/quiroga.png";
+import quiroga2 from "./company/quiroga2.png";
 import Scikit_image from "./tech/Scikit_image.png";
 import CUDA from "./tech/CUDA.png";
-import PyTorch from "./tech/PyTorch.png";
+import PyTorch from "./tech/PyTorch.svg";
 import TensorFlow from "./tech/TensorFlow.png";
 import Flask from "./tech/Flask.png";
 import Streamlit from "./tech/Streamlit.png";
 import ECS from "./tech/ECS.png";
 import ECR from "./tech/ECR.png";
-import S3 from "./tech/S3.png";
+import S3 from "./tech/S3.svg";
 import EC2 from "./tech/EC2.png";
 import Plotly from "./tech/Plotly.png";
 import Keras from "./tech/Keras.png";
 import ollama from "./tech/ollama.png";
 import Seaborn from "./tech/Seaborn.svg";
+
+// New technology icons
+import Anthropic from "./tech/Anthropic.svg";
+import Gemini from "./tech/Gemini.svg";
+import DeepSeek from "./tech/DeepSeek.svg";
+import LangGraph from "./tech/LangGraph.svg";
+import Gemma from "./tech/Gemma.svg";
+import Qwen from "./tech/Qwen.svg";
+import Kimi from "./tech/Kimi.svg";
+import HuggingFace from "./tech/HuggingFace.svg";
+import Midjourney from "./tech/Midjourney.svg";
+import MCP from "./tech/MCP.svg";
+import Neo4j from "./tech/Neo4j.svg";
+import Pinecone from "./tech/Pinecone.svg";
+import Milvus from "./tech/Milvus.svg";
+import Supabase from "./tech/Supabase.png";
+import Qdrant from "./tech/Qdrant.svg";
+import NeonDB from "./tech/NeonDB.svg";
+import VueJS from "./tech/VueJS.svg";
+import FastAPI from "./tech/FastAPI.svg";
+import Vite from "./tech/Vite.svg";
+import Route53 from "./tech/Route53.svg";
+import ALB from "./tech/ALB.svg";
+import CloudFront from "./tech/CloudFront.svg";
+import Vercel from "./tech/Vercel.svg";
+import AzureAD from "./tech/AzureAD.svg";
+import N8N from "./tech/N8N.svg";
+import FireCrawler from "./tech/FireCrawler.svg";
+import Zapier from "./tech/Zapier.svg";
+import RDS from "./tech/RDS.svg";
 
 export {
   Calendar,
@@ -138,6 +169,7 @@ export {
   emaillogo,
   recomendation,
   quiroga,
+  quiroga2,
   CUDA,
   Scikit_image,
   PyTorch,
@@ -152,4 +184,33 @@ export {
   Seaborn,
   Keras,
   ollama,
+  // New exports
+  Anthropic,
+  Gemini,
+  DeepSeek,
+  LangGraph,
+  Gemma,
+  Qwen,
+  Kimi,
+  HuggingFace,
+  Midjourney,
+  MCP,
+  Neo4j,
+  Pinecone,
+  Milvus,
+  Supabase,
+  Qdrant,
+  NeonDB,
+  VueJS,
+  FastAPI,
+  Vite,
+  Route53,
+  ALB,
+  CloudFront,
+  Vercel,
+  AzureAD,
+  N8N,
+  FireCrawler,
+  Zapier,
+  RDS,
 };

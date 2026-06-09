@@ -99,6 +99,8 @@ import {
     FireCrawler,
     Zapier,
     RDS,
+    Arduino,
+    ESP32,
   } from "../assets";
   
   // Category definitions with colors for icosahedron surfaces (darkened for 3D look)
@@ -597,6 +599,16 @@ import {
     {
       name: "MATLAB",
       icon: MATLAB,
+      category: "Engineering",
+    },
+    {
+      name: "Arduino",
+      icon: Arduino,
+      category: "Engineering",
+    },
+    {
+      name: "ESP32",
+      icon: ESP32,
       category: "Engineering",
     },
 

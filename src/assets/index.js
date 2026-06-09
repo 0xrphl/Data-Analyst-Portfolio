@@ -105,6 +105,8 @@ import N8N from "./tech/N8N.svg";
 import FireCrawler from "./tech/FireCrawler.svg";
 import Zapier from "./tech/Zapier.svg";
 import RDS from "./tech/RDS.svg";
+import Arduino from "./tech/Arduino.svg";
+import ESP32 from "./tech/ESP32.svg";
 
 export {
   Calendar,
@@ -213,4 +215,6 @@ export {
   FireCrawler,
   Zapier,
   RDS,
+  Arduino,
+  ESP32,
 };

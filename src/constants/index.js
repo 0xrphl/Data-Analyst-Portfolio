@@ -125,16 +125,16 @@ import {
       title: "About",
     },
     {
+      id: "work",
+      title: "Work",
+    },
+    {
       id: "tech",
       title: "Technologies",
     },
     {
       id: "projects",
       title: "Projects",
-    },
-    {
-      id: "work",
-      title: "Work",
     },
     {
       id: "contact",
@@ -147,16 +147,16 @@ import {
         title: "Sobre mí",
       },
       {
+        id: "work",
+        title: "Experiencia",
+      },
+      {
         id: "tech",
         title: "Tecnologías",
       },
       {
         id: "projects",
         title: "Proyectos",
-      },
-      {
-        id: "work",
-        title: "Experiencia",
       },
       {
         id: "contact",

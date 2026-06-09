@@ -28,17 +28,7 @@ const { currentLanguage, toggleLanguage, t } = useLanguage();
         </p>
       </Link>
 
-      {/* Show language toggle only on desktop */}
-      <div className="hidden lg:block">
-        <button
-          onClick={toggleLanguage}
-          className="px-4 py-2 text-white bg-tertiary rounded-xl mx-4"
-        >
-          {currentLanguage === 'en' ? 'ES | Español' : 'EN | English'}
-        </button>
-      </div>
-
-      <ul className="list-none hidden lg:flex flex-row gap-6">
+      <ul className="list-none hidden lg:flex flex-row gap-6 items-center">
         {navLinks[currentLanguage].map((link) => (
           <li
           key={link.id}
@@ -52,6 +42,15 @@ const { currentLanguage, toggleLanguage, t } = useLanguage();
             <a href={`#${link.id}`}>{link.title}</a>
           </li>
         ))}
+        {/* Language toggle at the end on desktop */}
+        <li>
+          <button
+            onClick={toggleLanguage}
+            className="px-4 py-2 text-white bg-tertiary rounded-xl"
+          >
+            {currentLanguage === 'en' ? 'ES | Español' : 'EN | English'}
+          </button>
+        </li>
       </ul>
       <div className="lg:hidden flex flex-1 justify-end items-center">
           <img
@@ -63,17 +62,6 @@ const { currentLanguage, toggleLanguage, t } = useLanguage();
           <div className={`${!toggle ? 'hidden' 
           : 'flex' } p-6 black-gradient absolute top-20 right-0 mx-4 my-2 min-w-[140px] z-10 rounded-xl`}>
               <div className="flex flex-col gap-4">
-                {/* Language toggle button in mobile menu */}
-                <button
-                  onClick={() => {
-                    toggleLanguage();
-                    setToggle(false);
-                  }}
-                  className="px-4 py-2 text-white bg-tertiary rounded-xl text-[16px] font-medium"
-                >
-                  {currentLanguage === 'en' ? 'ES | Español' : 'EN | English'}
-                </button>
-
                 <ul className="list-none flex justify-end items-start flex-col gap-4">
                   {navLinks[currentLanguage].map((link) => (
                     <li
@@ -92,6 +80,17 @@ const { currentLanguage, toggleLanguage, t } = useLanguage();
                     </li>
                   ))}
                 </ul>
+
+                {/* Language toggle button at the end of mobile menu */}
+                <button
+                  onClick={() => {
+                    toggleLanguage();
+                    setToggle(false);
+                  }}
+                  className="px-4 py-2 text-white bg-tertiary rounded-xl text-[16px] font-medium"
+                >
+                  {currentLanguage === 'en' ? 'ES | Español' : 'EN | English'}
+                </button>
               </div>
           </div>
       </div>

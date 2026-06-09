@@ -62,7 +62,7 @@ const Tech = () => {
   const isFiltered = activeCategory !== "All";
   const cols = isFiltered
     ? 4
-    : (isMobile ? 5 : isMobile1 ? 6 : isMobile2 ? 8 : 9);
+    : (isMobile ? 4 : isMobile1 ? 5 : isMobile2 ? 8 : 9);
   const rows = Math.ceil(filteredTechnologies.length / cols);
 
   // Dynamic canvas height - scale generously with the number of rows
@@ -77,22 +77,22 @@ const Tech = () => {
     // When filtered to a category: 4 cols, bigger balls, lower FOV
     if (isFiltered) {
       if (isMobile) {
-        if (rows <= 1) return { position: [0, 0, 30], fov: 18 };
-        if (rows <= 2) return { position: [0, 0, 30], fov: 24 };
-        if (rows <= 3) return { position: [0, 0, 30], fov: 30 };
-        return { position: [0, 0, 30], fov: Math.min(24 + rows * 4, 55) };
+        if (rows <= 1) return { position: [3, -5, 38], fov: 22 };
+        if (rows <= 2) return { position: [3, -5, 38], fov: 28 };
+        if (rows <= 3) return { position: [3, -5, 38], fov: 35 };
+        return { position: [3, -5, 38], fov: Math.min(28 + rows * 4, 60) };
       }
       if (isMobile1) {
-        if (rows <= 1) return { position: [0, 0, 30], fov: 14 };
-        if (rows <= 2) return { position: [0, 0, 30], fov: 18 };
-        if (rows <= 3) return { position: [0, 0, 30], fov: 24 };
-        return { position: [0, 0, 30], fov: Math.min(20 + rows * 3, 45) };
+        if (rows <= 1) return { position: [0, 0, 38], fov: 19 };
+        if (rows <= 2) return { position: [0, 0, 38], fov: 24 };
+        if (rows <= 3) return { position: [0, 0, 38], fov: 30 };
+        return { position: [0, 0, 38], fov: Math.min(26 + rows * 3, 55) };
       }
       if (isMobile2) {
-        if (rows <= 1) return { position: [0, 0, 17], fov: 14 };
-        if (rows <= 2) return { position: [0, 0, 17], fov: 18 };
-        if (rows <= 3) return { position: [0, 0, 17], fov: 22 };
-        return { position: [0, 0, 17], fov: Math.min(18 + rows * 3, 40) };
+        if (rows <= 1) return { position: [3, -3, 21], fov: 14 };
+        if (rows <= 2) return { position: [3, -3, 21], fov: 18 };
+        if (rows <= 3) return { position: [3, -3, 21], fov: 22 };
+        return { position: [3, -3, 21], fov: Math.min(18 + rows * 3, 40) };
       }
       // Desktop filtered
       if (rows <= 1) return { position: [0, 0, 17], fov: 16 };
@@ -104,22 +104,22 @@ const Tech = () => {
 
     // "All" category - original logic
     if (isMobile) {
-      if (rows <= 1) return { position: [0, 0, 30], fov: Math.max(8 + maxItemsInRow * 3, 15) };
-      if (rows <= 2) return { position: [0, 0, 30], fov: 25 };
-      if (rows <= 3) return { position: [0, 0, 30], fov: 32 };
-      return { position: [0, 0, 30], fov: Math.min(28 + rows * 4, 65) };
+      if (rows <= 1) return { position: [4.2, -5, 45], fov: Math.max(12 + maxItemsInRow * 3, 20) };
+      if (rows <= 2) return { position: [4.2, -5, 45], fov: 30 };
+      if (rows <= 3) return { position: [4.2, -5, 45], fov: 38 };
+      return { position: [4.2, -5, 45], fov: Math.min(34 + rows * 4, 75) };
     }
     if (isMobile1) {
-      if (rows <= 1) return { position: [0, 0, 30], fov: Math.max(6 + maxItemsInRow * 2.5, 12) };
-      if (rows <= 2) return { position: [0, 0, 30], fov: 20 };
-      if (rows <= 3) return { position: [0, 0, 30], fov: 26 };
-      return { position: [0, 0, 30], fov: Math.min(22 + rows * 3.5, 55) };
+      if (rows <= 1) return { position: [1, 0, 43], fov: Math.max(10 + maxItemsInRow * 2.5, 16) };
+      if (rows <= 2) return { position: [1, 0, 43], fov: 27 };
+      if (rows <= 3) return { position: [1, 0, 43], fov: 33 };
+      return { position: [1, 0, 43], fov: Math.min(29 + rows * 3.5, 65) };
     }
     if (isMobile2) {
-      if (rows <= 1) return { position: [0, 0, 30], fov: Math.max(5 + maxItemsInRow * 2, 10) };
-      if (rows <= 2) return { position: [0, 0, 30], fov: 18 };
-      if (rows <= 3) return { position: [0, 0, 30], fov: 22 };
-      return { position: [0, 0, 30], fov: Math.min(18 + rows * 3, 50) };
+      if (rows <= 1) return { position: [4, -3, 34], fov: Math.max(5 + maxItemsInRow * 2, 10) };
+      if (rows <= 2) return { position: [4, -3, 34], fov: 18 };
+      if (rows <= 3) return { position: [4, -3, 34], fov: 22 };
+      return { position: [4, -3, 34], fov: Math.min(18 + rows * 3, 50) };
     }
     // Desktop
     if (rows <= 1) return { position: [2, 0, 17], fov: Math.max(8 + maxItemsInRow * 5, 20) };
@@ -229,7 +229,7 @@ const Tech = () => {
         })}
       </div>
 
-      <div style={{ ...canvasStyle }} className="relative">
+    <div style={{ ...canvasStyle, overflow: 'hidden' }} className="relative">
         <Canvas
           key={activeCategory}
           style={{ width: '100%', height: '100%' }}

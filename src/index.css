@@ -519,7 +519,7 @@
 .feedback-card .fb-card-orb:nth-child(1) {
   width: 280px;
   height: 280px;
-  background: radial-gradient(circle, rgba(100, 40, 180, 1) 0%, rgba(80, 20, 160, 0.6) 30%, transparent 70%);
+  background: radial-gradient(circle, rgba(45, 15, 80, 0.9) 0%, rgba(30, 8, 60, 0.5) 30%, transparent 70%);
   top: -30%;
   left: -20%;
   animation: feedbackOrbFloat1 12s ease-in-out infinite;
@@ -528,7 +528,7 @@
 .feedback-card .fb-card-orb:nth-child(2) {
   width: 240px;
   height: 240px;
-  background: radial-gradient(circle, rgba(60, 20, 140, 0.9) 0%, rgba(40, 10, 120, 0.5) 30%, transparent 70%);
+  background: radial-gradient(circle, rgba(25, 8, 55, 0.85) 0%, rgba(15, 5, 45, 0.4) 30%, transparent 70%);
   top: 50%;
   right: -25%;
   animation: feedbackOrbFloat2 15s ease-in-out infinite;
@@ -537,7 +537,7 @@
 .feedback-card .fb-card-orb:nth-child(3) {
   width: 200px;
   height: 200px;
-  background: radial-gradient(circle, rgba(30, 60, 160, 0.85) 0%, rgba(20, 40, 130, 0.4) 30%, transparent 70%);
+  background: radial-gradient(circle, rgba(12, 20, 65, 0.8) 0%, rgba(8, 12, 50, 0.35) 30%, transparent 70%);
   bottom: -20%;
   left: 20%;
   animation: feedbackOrbFloat3 18s ease-in-out infinite;
@@ -546,7 +546,7 @@
 .feedback-card .fb-card-orb:nth-child(4) {
   width: 180px;
   height: 180px;
-  background: radial-gradient(circle, rgba(120, 50, 200, 0.85) 0%, rgba(90, 30, 170, 0.4) 30%, transparent 70%);
+  background: radial-gradient(circle, rgba(50, 18, 85, 0.8) 0%, rgba(35, 12, 65, 0.35) 30%, transparent 70%);
   top: 20%;
   left: 55%;
   animation: feedbackOrbFloat4 14s ease-in-out infinite;

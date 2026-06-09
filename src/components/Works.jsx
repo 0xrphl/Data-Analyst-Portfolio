@@ -28,43 +28,56 @@ const ProjectCard = ({
           scale: 1,
           speed: 450,
         }}
-        className={`bg-tertiary p-3 sm:p-5 rounded-2xl h-full ${className || ''}`}
+        className={`works-card p-3 sm:p-5 rounded-2xl h-full ${className || ''}`}
       >
-        <div className='relative w-full h-[200px] sm:h-[230px]'>
-          <img
-            src={image}
-            alt='project_image'
-            className='w-full h-full object-cover rounded-2xl'
-          />
-
-          <div className='absolute inset-0 flex justify-end m-3 card-img_hover'>
-            <div
-              onClick={() => window.open(source_code_link, "_blank")}
-              className='black-gradient w-8 h-8 sm:w-10 sm:h-10 rounded-full flex justify-center items-center cursor-pointer'
-            >
-              <img
-                src={github}
-                alt='source code'
-                className='w-1/2 h-1/2 object-contain'
-              />
-            </div>
+        {/* Card background with orbs */}
+        <div className="works-card-bg">
+          <div className="works-card-bg-orbs">
+            <span className="works-card-bg-orb"></span>
+            <span className="works-card-bg-orb"></span>
+            <span className="works-card-bg-orb"></span>
+            <span className="works-card-bg-orb"></span>
           </div>
         </div>
 
-        <div className='mt-3 sm:mt-5'>
-          <h3 className='text-white font-bold text-[20px] sm:text-[24px]'>{name}</h3>
-          <p className='mt-2 text-secondary text-[12px] sm:text-[14px]'>{description}</p>
-        </div>
+        {/* Card content */}
+        <div className="works-card-content">
+          <div className='relative w-full h-[200px] sm:h-[230px]'>
+            <img
+              src={image}
+              alt='project_image'
+              className='w-full h-full object-cover rounded-2xl'
+            />
 
-        <div className='mt-4 flex flex-wrap gap-2'>
-          {tags.map((tag) => (
-            <p
-              key={`${name}-${tag.name}`}
-              className={`text-[12px] sm:text-[14px] ${tag.color}`}
-            >
-              #{tag.name}
-            </p>
-          ))}
+            <div className='absolute inset-0 flex justify-end m-3 card-img_hover'>
+              <div
+                onClick={() => window.open(source_code_link, "_blank")}
+                className='black-gradient w-8 h-8 sm:w-10 sm:h-10 rounded-full flex justify-center items-center cursor-pointer'
+              >
+                <img
+                  src={github}
+                  alt='source code'
+                  className='w-1/2 h-1/2 object-contain'
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className='mt-3 sm:mt-5'>
+            <h3 className='text-white font-bold text-[20px] sm:text-[24px]'>{name}</h3>
+            <p className='mt-2 text-secondary text-[12px] sm:text-[14px]'>{description}</p>
+          </div>
+
+          <div className='mt-4 flex flex-wrap gap-2'>
+            {tags.map((tag) => (
+              <p
+                key={`${name}-${tag.name}`}
+                className={`text-[12px] sm:text-[14px] ${tag.color}`}
+              >
+                #{tag.name}
+              </p>
+            ))}
+          </div>
         </div>
       </Tilt>
     </motion.div>
@@ -93,6 +106,17 @@ const Works = () => {
 
   return (
     <div className="relative w-full mx-auto">
+      {/* Goo Filter Effect for orbs (defined once, hidden) */}
+      <svg xmlns="http://www.w3.org/2000/svg" style={{ display: 'none' }}>
+        <defs>
+          <filter id="wkGoo">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="150" result="blur" />
+            <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -10" result="goo" />
+            <feBlend in="SourceGraphic" in2="goo" />
+          </filter>
+        </defs>
+      </svg>
+
       <motion.div variants={textVariant()}>
         <p className={`${styles.sectionSubText} text-[14px] sm:text-[18px]`}>
           {t('myWork')}

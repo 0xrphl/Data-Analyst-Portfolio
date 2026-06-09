@@ -66,7 +66,7 @@ const Tech = () => {
   const rows = Math.ceil(filteredTechnologies.length / cols);
 
   // Dynamic canvas height - scale generously with the number of rows
-  const rowHeight = isMobile ? 100 : (isFiltered ? 160 : 145);
+  const rowHeight = isMobile ? 100 : isMobile1 ? 110 : (isFiltered ? 160 : 145);
   const canvasHeight = Math.max(rows * rowHeight + 50, 500);
 
   // Dynamic camera - center on grid, adjust FOV based on grid width and height
@@ -82,17 +82,17 @@ const Tech = () => {
         if (rows <= 3) return { position: [3, -5, 38], fov: 35 };
         return { position: [3, -5, 38], fov: Math.min(28 + rows * 4, 60) };
       }
-      if (isMobile1) {
-        if (rows <= 1) return { position: [0, 0, 38], fov: 19 };
-        if (rows <= 2) return { position: [0, 0, 38], fov: 24 };
-        if (rows <= 3) return { position: [0, 0, 38], fov: 30 };
-        return { position: [0, 0, 38], fov: Math.min(26 + rows * 3, 55) };
-      }
+    if (isMobile1) {
+      if (rows <= 1) return { position: [4, 0, 38], fov: Math.max(6 + maxItemsInRow * 1.4, 10) };
+      if (rows <= 2) return { position: [4, 0, 38], fov: 16 };
+      if (rows <= 3) return { position: [4, 0, 38], fov: 20 };
+      return { position: [4, 0, 38], fov: Math.min(18 + rows * 2.1, 41) };
+    }
       if (isMobile2) {
-        if (rows <= 1) return { position: [3, -3, 21], fov: 14 };
-        if (rows <= 2) return { position: [3, -3, 21], fov: 18 };
-        if (rows <= 3) return { position: [3, -3, 21], fov: 22 };
-        return { position: [3, -3, 21], fov: Math.min(18 + rows * 3, 40) };
+        if (rows <= 1) return { position: [3, -5, 21], fov: 14 };
+        if (rows <= 2) return { position: [3, -5, 21], fov: 18 };
+        if (rows <= 3) return { position: [3, -5, 21], fov: 22 };
+        return { position: [3, -5, 21], fov: Math.min(18 + rows * 3, 40) };
       }
       // Desktop filtered
       if (rows <= 1) return { position: [0, 0, 17], fov: 16 };
@@ -110,10 +110,10 @@ const Tech = () => {
       return { position: [4.2, -5, 45], fov: Math.min(34 + rows * 4, 75) };
     }
     if (isMobile1) {
-      if (rows <= 1) return { position: [1, 0, 43], fov: Math.max(10 + maxItemsInRow * 2.5, 16) };
-      if (rows <= 2) return { position: [1, 0, 43], fov: 27 };
-      if (rows <= 3) return { position: [1, 0, 43], fov: 33 };
-      return { position: [1, 0, 43], fov: Math.min(29 + rows * 3.5, 65) };
+      if (rows <= 1) return { position: [4.5, -5, 43 ], fov: Math.max(10 + maxItemsInRow * 2.5, 16) };
+      if (rows <= 2) return { position: [4.5, -5, 43], fov: 27 };
+      if (rows <= 3) return { position: [4.5, -5, 43], fov: 33 };
+      return { position: [4.5, -5, 43], fov: Math.min(29 + rows * 3.5, 65) };
     }
     if (isMobile2) {
       if (rows <= 1) return { position: [4, -3, 34], fov: Math.max(5 + maxItemsInRow * 2, 10) };

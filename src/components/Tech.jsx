@@ -98,8 +98,8 @@ const Tech = () => {
       if (rows <= 1) return { position: [0, 0, 17], fov: 16 };
       if (rows <= 2) return { position: [0, 0, 17], fov: 22 };
       if (rows <= 3) return { position: [0, 0, 17], fov: 28 };
-      if (rows <= 5) return { position: [0, 0, 17], fov: 34 };
-      return { position: [0, 0, 17], fov: Math.min(26 + rows * 4, 60) };
+      if (rows <= 5) return { position: [0, 0, 20], fov: 32 };
+      return { position: [0, 0, 20], fov: Math.min(26 + rows * 4, 60) };
     }
 
     // "All" category - original logic

@@ -101,6 +101,7 @@ import {
     RDS,
     Arduino,
     ESP32,
+    MiroFish,
   } from "../assets";
   
   // Category definitions with colors for icosahedron surfaces (darkened for 3D look)
@@ -295,6 +296,11 @@ import {
     {
       name: "MCP",
       icon: MCP,
+      category: "AI & ML",
+    },
+    {
+      name: "MiroFish",
+      icon: MiroFish,
       category: "AI & ML",
     },
 

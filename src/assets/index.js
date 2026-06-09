@@ -107,6 +107,7 @@ import Zapier from "./tech/Zapier.svg";
 import RDS from "./tech/RDS.svg";
 import Arduino from "./tech/Arduino.svg";
 import ESP32 from "./tech/ESP32.svg";
+import MiroFish from "./tech/MiroFish.webp";
 
 export {
   Calendar,
@@ -217,4 +218,5 @@ export {
   RDS,
   Arduino,
   ESP32,
+  MiroFish,
 };

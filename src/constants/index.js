@@ -102,6 +102,7 @@ import {
     Arduino,
     ESP32,
     MiroFish,
+    Selenium,
   } from "../assets";
   
   // Category definitions with colors for icosahedron surfaces (darkened for 3D look)
@@ -585,6 +586,11 @@ import {
       icon: Zapier,
       category: "Automation",
     },
+    {
+      name: "Selenium",
+      icon: Selenium,
+      category: "Automation",
+    },
 
     // ============ Engineering (Red #DC2626) ============
     {
@@ -620,7 +626,7 @@ import {
 
     // ============ Other (Gray #6B7280) ============
     {
-      name: "C",
+      name: "C / C++",
       icon: C,
       category: "Other",
     },

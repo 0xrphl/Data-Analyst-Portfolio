@@ -108,6 +108,7 @@ import RDS from "./tech/RDS.svg";
 import Arduino from "./tech/Arduino.svg";
 import ESP32 from "./tech/ESP32.svg";
 import MiroFish from "./tech/MiroFish.webp";
+import Selenium from "./tech/selenium.svg";
 
 export {
   Calendar,
@@ -219,4 +220,5 @@ export {
   Arduino,
   ESP32,
   MiroFish,
+  Selenium,
 };

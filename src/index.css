@@ -743,6 +743,113 @@
   animation: wkOrbing 60s -45s ease-in-out infinite alternate;
 }
 
+/* ============================================
+   MOBILE PERFORMANCE OPTIMIZATIONS
+   Disable heavy effects (SVG filters, blur,
+   mix-blend-mode, backdrop-filter, orb
+   animations) on mobile/touch devices.
+   Desktop remains completely unchanged.
+   ============================================ */
+
+/* Target touch devices (phones/tablets) */
+@media (hover: none) and (pointer: coarse), (max-width: 768px) {
+
+  /* --- FEEDBACK SECTION background blobs --- */
+  .feedback-gradient-bg .fb-gradients-container {
+    filter: none !important;
+    /* Use a single soft static gradient instead of animated blobs */
+  }
+  .feedback-gradient-bg .fb-g1,
+  .feedback-gradient-bg .fb-g2,
+  .feedback-gradient-bg .fb-g3,
+  .feedback-gradient-bg .fb-g4,
+  .feedback-gradient-bg .fb-g5 {
+    animation: none !important;
+  }
+  /* Hide the mouse-tracking interactive blob (useless on touch) */
+  .feedback-gradient-bg .fb-interactive {
+    display: none !important;
+  }
+  /* Hide noise SVG (feTurbulence is CPU-heavy) */
+  .feedback-gradient-bg .fb-noise-bg {
+    display: none !important;
+  }
+
+  /* --- FEEDBACK CARDS --- */
+  .feedback-card {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: rgba(8, 5, 20, 0.85) !important;
+  }
+  /* Hide card orbs entirely on mobile */
+  .feedback-card .fb-card-orbs {
+    display: none !important;
+  }
+  /* Hide per-card noise SVG */
+  .feedback-card .fb-card-noise {
+    display: none !important;
+  }
+  /* Keep the top light line but simplify */
+  .feedback-card::before {
+    filter: none !important;
+  }
+
+  /* --- WORKS CARDS --- */
+  /* Disable container queries (performance overhead on mobile) */
+  .works-card {
+    container-type: normal;
+  }
+  /* Hide orbs entirely on mobile */
+  .works-card .works-card-bg-orbs {
+    display: none !important;
+  }
+  /* Use a richer static gradient background to compensate */
+  .works-card .works-card-bg {
+    background:
+      linear-gradient(
+        220deg,
+        rgba(26, 26, 46, 0.5) 0%,
+        rgba(22, 33, 62, 0.4) 35%,
+        rgba(26, 16, 48, 0.5) 65%,
+        rgba(15, 15, 25, 0.9) 100%
+      ),
+      #0a0a12;
+  }
+  /* Disable hover shimmer (no hover on touch) */
+  .works-card .works-card-bg::after {
+    display: none !important;
+  }
+}
+
+/* Respect OS-level reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .feedback-gradient-bg .fb-g1,
+  .feedback-gradient-bg .fb-g2,
+  .feedback-gradient-bg .fb-g3,
+  .feedback-gradient-bg .fb-g4,
+  .feedback-gradient-bg .fb-g5 {
+    animation: none !important;
+  }
+  .feedback-gradient-bg .fb-interactive {
+    display: none !important;
+  }
+  .feedback-card .fb-card-orb {
+    animation: none !important;
+  }
+  .works-card .works-card-bg-orb {
+    animation: none !important;
+  }
+  .feedback-gradient-bg .fb-gradients-container {
+    filter: none !important;
+  }
+  .feedback-card .fb-card-orbs {
+    filter: none !important;
+  }
+  .works-card .works-card-bg-orbs {
+    filter: none !important;
+  }
+}
+
 /* canvas- styles */
 .canvas-loader {
   font-size: 10px;

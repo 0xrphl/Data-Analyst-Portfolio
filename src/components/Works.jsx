@@ -16,6 +16,7 @@ const ProjectCard = ({
   image,
   source_code_link,
   className,
+  isMobileDevice,
 }) => {
   return (
     <motion.div 
@@ -24,20 +25,22 @@ const ProjectCard = ({
     >
       <Tilt
         options={{
-          max: 45,
+          max: isMobileDevice ? 0 : 45,
           scale: 1,
           speed: 450,
         }}
         className={`works-card p-3 sm:p-5 rounded-2xl h-full ${className || ''}`}
       >
-        {/* Card background with orbs */}
+        {/* Card background with orbs — skip orbs on mobile for performance */}
         <div className="works-card-bg">
-          <div className="works-card-bg-orbs">
-            <span className="works-card-bg-orb"></span>
-            <span className="works-card-bg-orb"></span>
-            <span className="works-card-bg-orb"></span>
-            <span className="works-card-bg-orb"></span>
-          </div>
+          {!isMobileDevice && (
+            <div className="works-card-bg-orbs">
+              <span className="works-card-bg-orb"></span>
+              <span className="works-card-bg-orb"></span>
+              <span className="works-card-bg-orb"></span>
+              <span className="works-card-bg-orb"></span>
+            </div>
+          )}
         </div>
 
         {/* Card content */}
@@ -84,12 +87,20 @@ const ProjectCard = ({
   );
 };
 
+// Helper: detect touch-only / mobile device (matches CSS media query)
+const getIsMobileDevice = () => {
+  if (typeof window === 'undefined') return false;
+  return window.matchMedia('(hover: none) and (pointer: coarse)').matches
+    || window.matchMedia('(max-width: 768px)').matches;
+};
+
 const Works = () => {
   const { currentLanguage, t } = useLanguage();
   const [isMobile, setIsMobile] = useState(false);
+  const [isMobileDevice, setIsMobileDevice] = useState(getIsMobileDevice);
 
   useEffect(() => {
-    // Add a listener for changes to screen size
+    // Small-screen layout detection (original)
     const mediaQuery = window.matchMedia("(max-width: 390px)");
     setIsMobile(mediaQuery.matches);
 
@@ -99,23 +110,32 @@ const Works = () => {
 
     mediaQuery.addEventListener("change", handleMediaQueryChange);
 
+    // Mobile/touch device detection for performance
+    const mql = window.matchMedia('(hover: none) and (pointer: coarse), (max-width: 768px)');
+    setIsMobileDevice(mql.matches);
+    const onDeviceChange = (e) => setIsMobileDevice(e.matches);
+    mql.addEventListener('change', onDeviceChange);
+
     return () => {
       mediaQuery.removeEventListener("change", handleMediaQueryChange);
+      mql.removeEventListener('change', onDeviceChange);
     };
   }, []);
 
   return (
     <div className="relative w-full mx-auto">
-      {/* Goo Filter Effect for orbs (defined once, hidden) */}
-      <svg xmlns="http://www.w3.org/2000/svg" style={{ display: 'none' }}>
-        <defs>
-          <filter id="wkGoo">
-            <feGaussianBlur in="SourceGraphic" stdDeviation="150" result="blur" />
-            <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -10" result="goo" />
-            <feBlend in="SourceGraphic" in2="goo" />
-          </filter>
-        </defs>
-      </svg>
+      {/* Goo Filter Effect for orbs — skip on mobile (extremely heavy SVG filter) */}
+      {!isMobileDevice && (
+        <svg xmlns="http://www.w3.org/2000/svg" style={{ display: 'none' }}>
+          <defs>
+            <filter id="wkGoo">
+              <feGaussianBlur in="SourceGraphic" stdDeviation="150" result="blur" />
+              <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -10" result="goo" />
+              <feBlend in="SourceGraphic" in2="goo" />
+            </filter>
+          </defs>
+        </svg>
+      )}
 
       <motion.div variants={textVariant()}>
         <p className={`${styles.sectionSubText} text-[14px] sm:text-[18px]`}>
@@ -140,6 +160,7 @@ const Works = () => {
           <ProjectCard 
             key={`project-${index}`} 
             index={index} 
+            isMobileDevice={isMobileDevice}
             {...project} 
           />
         ))}

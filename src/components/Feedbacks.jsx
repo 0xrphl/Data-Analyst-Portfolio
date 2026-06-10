@@ -124,12 +124,28 @@ const FeedbackCard = ({
   </motion.div>
 );
 
+// Helper: detect touch-only / mobile device (matches CSS media query)
+const getIsMobileDevice = () => {
+  if (typeof window === 'undefined') return false;
+  return window.matchMedia('(hover: none) and (pointer: coarse)').matches
+    || window.matchMedia('(max-width: 768px)').matches;
+};
+
 const Feedbacks = () => {
   const { currentLanguage, t } = useLanguage();
   const interBubbleRef = useRef(null);
   const animationRef = useRef(null);
   const cursorRef = useRef({ curX: 0, curY: 0, tgX: 0, tgY: 0 });
   const containerRef = useRef(null);
+  const [isMobile, setIsMobile] = React.useState(getIsMobileDevice);
+
+  // Keep isMobile in sync on resize / orientation change
+  useEffect(() => {
+    const mql = window.matchMedia('(hover: none) and (pointer: coarse), (max-width: 768px)');
+    const onChange = (e) => setIsMobile(e.matches);
+    mql.addEventListener('change', onChange);
+    return () => mql.removeEventListener('change', onChange);
+  }, []);
 
   const move = useCallback(() => {
     const { curX, curY, tgX, tgY } = cursorRef.current;
@@ -143,7 +159,10 @@ const Feedbacks = () => {
     animationRef.current = requestAnimationFrame(move);
   }, []);
 
+  // Only run the rAF mouse-tracking loop on desktop (no mouse on mobile)
   useEffect(() => {
+    if (isMobile) return; // skip entirely on touch devices
+
     const handleMouseMove = (event) => {
       if (containerRef.current) {
         const rect = containerRef.current.getBoundingClientRect();
@@ -161,7 +180,7 @@ const Feedbacks = () => {
         cancelAnimationFrame(animationRef.current);
       }
     };
-  }, [move]);
+  }, [move, isMobile]);
 
   return (
     <div

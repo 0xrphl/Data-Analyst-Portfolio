@@ -200,7 +200,8 @@ const Tech = () => {
             "Cloud & DevOps": "#EA580C",
             "BI & Spreadsheets": "#10B981",
             "Automation": "#CA8A04",
-            "Engineering": "#DC2626",
+            "Mechanical Eng.": "#DC2626",
+            "IoT & Embedded": "#8B1A4A",
             "Other": "#6B7280",
           };
 

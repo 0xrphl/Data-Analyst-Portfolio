@@ -103,6 +103,7 @@ import {
     ESP32,
     MiroFish,
     Selenium,
+    MicrochipPIC,
   } from "../assets";
   
   // Category definitions with colors for icosahedron surfaces (darkened for 3D look)
@@ -115,7 +116,8 @@ import {
     "Cloud & DevOps": { color: "#6B2F0A", label: "Cloud & DevOps" },
     "BI & Spreadsheets": { color: "#0A4D3A", label: "BI, Dashboards & Data Analysis" },
     "Automation": { color: "#5A3D0A", label: "Automation" },
-    "Engineering": { color: "#6B1515", label: "Engineering" },
+    "Mechanical Eng.": { color: "#6B1515", label: "Mechanical Engineering" },
+    "IoT & Embedded": { color: "#4A1A2E", label: "IoT & Embedded Systems" },
     "Other": { color: "#3A3F47", label: "Other" },
   };
 
@@ -592,44 +594,51 @@ import {
       category: "Automation",
     },
 
-    // ============ Engineering (Red #DC2626) ============
+    // ============ Mechanical Engineering (Red #DC2626) ============
     {
       name: "SOLIDWORKS",
       icon: SOLIDWORKS,
-      category: "Engineering",
+      category: "Mechanical Eng.",
     },
     {
       name: "Autodesk Inventor",
       icon: AutodeskInventor,
-      category: "Engineering",
+      category: "Mechanical Eng.",
     },
     {
       name: "ANSYS",
       icon: ANSYS,
-      category: "Engineering",
+      category: "Mechanical Eng.",
     },
     {
       name: "MATLAB",
       icon: MATLAB,
-      category: "Engineering",
-    },
-    {
-      name: "Arduino",
-      icon: Arduino,
-      category: "Engineering",
-    },
-    {
-      name: "ESP32",
-      icon: ESP32,
-      category: "Engineering",
+      category: "Mechanical Eng.",
     },
 
-    // ============ Other (Gray #6B7280) ============
+    // ============ IoT & Embedded Systems ============
+    {
+      name: "Arduino IDE & Controllers",
+      icon: Arduino,
+      category: "IoT & Embedded",
+    },
+    {
+      name: "Espressif (ESP32-S3 / ESP8266)",
+      icon: ESP32,
+      category: "IoT & Embedded",
+    },
+    {
+      name: "Microchip PIC",
+      icon: MicrochipPIC,
+      category: "IoT & Embedded",
+    },
     {
       name: "C / C++",
       icon: C,
-      category: "Other",
+      category: "IoT & Embedded",
     },
+
+    // ============ Other (Gray #6B7280) ============
     {
       name: "Solidity",
       icon: Solidity,

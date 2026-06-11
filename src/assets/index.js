@@ -109,6 +109,7 @@ import Arduino from "./tech/Arduino.svg";
 import ESP32 from "./tech/ESP32.svg";
 import MiroFish from "./tech/MiroFish.webp";
 import Selenium from "./tech/selenium.svg";
+import MicrochipPIC from "./tech/MicrochipPIC.webp";
 
 export {
   Calendar,
@@ -221,4 +222,5 @@ export {
   ESP32,
   MiroFish,
   Selenium,
+  MicrochipPIC,
 };

@@ -104,6 +104,11 @@ import {
     MiroFish,
     Selenium,
     MicrochipPIC,
+    expensesDashboardMain,
+    expensesDashboardScroll,
+    expensesDashboardAdd,
+    LMStudio,
+    ComfyUI,
   } from "../assets";
   
   // Category definitions with colors for icosahedron surfaces (darkened for 3D look)
@@ -304,6 +309,16 @@ import {
     {
       name: "MiroFish",
       icon: MiroFish,
+      category: "AI & ML",
+    },
+    {
+      name: "LM Studio",
+      icon: LMStudio,
+      category: "AI & ML",
+    },
+    {
+      name: "ComfyUI",
+      icon: ComfyUI,
       category: "AI & ML",
     },
 
@@ -1474,6 +1489,39 @@ import {
   const projects = {
     en: [
     {
+      name: "Household Expense Dashboard",
+      description:
+        "A real-time Streamlit dashboard for couples/households to track shared expenses, income, and debts — powered by Google Sheets as a database and Google Cloud API. Features KPIs, Sankey debt diagrams, interactive Plotly charts, advanced filters, fixed expense tracking, password protection, and CSV export.",
+      tags: [
+        {
+          name: "Streamlit",
+          color: "red-text-gradient",
+        },
+        {
+          name: "Python",
+          color: "yellow-text-gradient",
+        },
+        {
+          name: "Google Sheets",
+          color: "green-text-gradient",
+        },
+        {
+          name: "Google Cloud API",
+          color: "blue-text-gradient",
+        },
+        {
+          name: "Plotly",
+          color: "purple-text-gradient",
+        },
+        {
+          name: "Pandas",
+          color: "pink-text-gradient",
+        },
+      ],
+      image: [expensesDashboardMain, expensesDashboardScroll, expensesDashboardAdd],
+      source_code_link: "https://github.com/0xrphl/Streamlit-expenses-tracker-dashboard",
+    },
+    {
       name: "Google calendar events analysis",
       description:
       "This project uses Google Apps Script to extract event data from Google Calendar and store it in Google Sheets. Data includes Event Title, Dates, Creator, and more for accountability. It's also used in Looker Studio for insights on office consultations.",
@@ -1617,6 +1665,20 @@ import {
     },
     ],
     es: [
+      {
+        name: "Dashboard de Gastos del Hogar",
+        description: "Un dashboard en tiempo real con Streamlit para parejas/hogares que permite rastrear gastos compartidos, ingresos y deudas — impulsado por Google Sheets como base de datos y la API de Google Cloud. Incluye KPIs, diagramas Sankey de deudas, gráficos interactivos con Plotly, filtros avanzados, seguimiento de gastos fijos, protección con contraseña y exportación CSV.",
+        tags: [
+          { name: "Streamlit", color: "red-text-gradient" },
+          { name: "Python", color: "yellow-text-gradient" },
+          { name: "Google Sheets", color: "green-text-gradient" },
+          { name: "Google Cloud API", color: "blue-text-gradient" },
+          { name: "Plotly", color: "purple-text-gradient" },
+          { name: "Pandas", color: "pink-text-gradient" },
+        ],
+        image: [expensesDashboardMain, expensesDashboardScroll, expensesDashboardAdd],
+        source_code_link: "https://github.com/0xrphl/Streamlit-expenses-tracker-dashboard",
+      },
       {
         name: "Análisis de eventos de Google Calendar",
         description: "Este proyecto utiliza Google Apps Script para extraer datos de eventos de Google Calendar y almacenarlos en Google Sheets. Los datos incluyen Título del Evento, Fechas, Creador y más para responsabilidad. También se utiliza en Looker Studio para obtener información sobre consultas de oficina.",

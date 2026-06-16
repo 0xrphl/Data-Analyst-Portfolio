@@ -110,6 +110,11 @@ import ESP32 from "./tech/ESP32.svg";
 import MiroFish from "./tech/MiroFish.webp";
 import Selenium from "./tech/selenium.svg";
 import MicrochipPIC from "./tech/MicrochipPIC.webp";
+import LMStudio from "./tech/LMStudio.png";
+import ComfyUI from "./tech/ComfyUI.svg";
+import expensesDashboardMain from "./expenses-dashboard-main.png";
+import expensesDashboardScroll from "./expenses-dashboard-scroll.png";
+import expensesDashboardAdd from "./expenses-dashboard-add.png";
 
 export {
   Calendar,
@@ -223,4 +228,9 @@ export {
   MiroFish,
   Selenium,
   MicrochipPIC,
+  expensesDashboardMain,
+  expensesDashboardScroll,
+  expensesDashboardAdd,
+  LMStudio,
+  ComfyUI,
 };

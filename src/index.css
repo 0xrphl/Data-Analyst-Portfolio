@@ -850,6 +850,114 @@
   }
 }
 
+/* ============================================
+   IMAGE CAROUSEL - Project Cards
+   ============================================ */
+
+.carousel-container {
+  position: relative;
+}
+
+.carousel-track {
+  will-change: transform;
+}
+
+.carousel-slide {
+  min-width: 100%;
+}
+
+/* Arrow buttons */
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: white;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.3s ease, background 0.2s ease;
+}
+
+.carousel-container:hover .carousel-arrow {
+  opacity: 1;
+}
+
+.carousel-arrow:hover {
+  background: rgba(0, 0, 0, 0.75);
+}
+
+.carousel-arrow-left {
+  left: 6px;
+}
+
+.carousel-arrow-right {
+  right: 6px;
+}
+
+/* Dot indicators */
+.carousel-dots {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  gap: 6px;
+  padding: 4px 8px;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.carousel-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+  padding: 0;
+}
+
+.carousel-dot:hover {
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.carousel-dot-active {
+  background: rgba(255, 255, 255, 0.95) !important;
+  transform: scale(1.2);
+}
+
+/* Mobile: always show arrows (no hover on touch) */
+@media (hover: none) and (pointer: coarse), (max-width: 768px) {
+  .carousel-arrow {
+    opacity: 0.8;
+    width: 32px;
+    height: 32px;
+  }
+
+  .carousel-dots {
+    bottom: 6px;
+  }
+
+  .carousel-dot {
+    width: 7px;
+    height: 7px;
+  }
+}
+
 /* canvas- styles */
 .canvas-loader {
   font-size: 10px;

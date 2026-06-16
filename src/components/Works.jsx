@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { Tilt } from "react-tilt";
 import { motion } from "framer-motion";
 import { styles } from "../styles";
@@ -7,6 +7,87 @@ import { SectionWrapper } from "../hoc";
 import { projects } from "../constants";
 import { fadeIn, textVariant } from "../utils/motion";
 import { useLanguage } from '../context/LanguageContext';
+
+// Carousel sub-component for cards with multiple images
+const ImageCarousel = ({ images, name }) => {
+  const [current, setCurrent] = useState(0);
+  const total = images.length;
+
+  // Auto-advance every 4 seconds
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % total);
+    }, 4000);
+    return () => clearInterval(timer);
+  }, [total]);
+
+  const goTo = useCallback((idx) => {
+    setCurrent(idx);
+  }, []);
+
+  const prev = useCallback((e) => {
+    e.stopPropagation();
+    setCurrent((p) => (p - 1 + total) % total);
+  }, [total]);
+
+  const next = useCallback((e) => {
+    e.stopPropagation();
+    setCurrent((p) => (p + 1) % total);
+  }, [total]);
+
+  return (
+    <div className="carousel-container relative w-full h-full overflow-hidden rounded-2xl">
+      {/* Slides */}
+      <div
+        className="carousel-track flex h-full transition-transform duration-500 ease-in-out"
+        style={{ transform: `translateX(-${current * 100}%)` }}
+      >
+        {images.map((img, i) => (
+          <img
+            key={`${name}-slide-${i}`}
+            src={img}
+            alt={`${name} screenshot ${i + 1}`}
+            className="carousel-slide w-full h-full object-cover flex-shrink-0"
+          />
+        ))}
+      </div>
+
+      {/* Left arrow */}
+      <button
+        onClick={prev}
+        className="carousel-arrow carousel-arrow-left"
+        aria-label="Previous image"
+      >
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <polyline points="15 18 9 12 15 6" />
+        </svg>
+      </button>
+
+      {/* Right arrow */}
+      <button
+        onClick={next}
+        className="carousel-arrow carousel-arrow-right"
+        aria-label="Next image"
+      >
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <polyline points="9 18 15 12 9 6" />
+        </svg>
+      </button>
+
+      {/* Dot indicators */}
+      <div className="carousel-dots">
+        {images.map((_, i) => (
+          <button
+            key={`dot-${i}`}
+            onClick={(e) => { e.stopPropagation(); goTo(i); }}
+            className={`carousel-dot ${i === current ? 'carousel-dot-active' : ''}`}
+            aria-label={`Go to slide ${i + 1}`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
 
 const ProjectCard = ({
   index,
@@ -18,6 +99,8 @@ const ProjectCard = ({
   className,
   isMobileDevice,
 }) => {
+  const isCarousel = Array.isArray(image);
+
   return (
     <motion.div 
       variants={fadeIn("up", "spring", index * 0.5, 0.75)}
@@ -46,16 +129,21 @@ const ProjectCard = ({
         {/* Card content */}
         <div className="works-card-content">
           <div className='relative w-full h-[200px] sm:h-[230px]'>
-            <img
-              src={image}
-              alt='project_image'
-              className='w-full h-full object-cover rounded-2xl'
-            />
+            {isCarousel ? (
+              <ImageCarousel images={image} name={name} />
+            ) : (
+              <img
+                src={image}
+                alt='project_image'
+                className='w-full h-full object-cover rounded-2xl'
+              />
+            )}
 
-            <div className='absolute inset-0 flex justify-end m-3 card-img_hover'>
+            <div className='absolute inset-0 flex justify-end m-3 card-img_hover' style={{ pointerEvents: 'none' }}>
               <div
                 onClick={() => window.open(source_code_link, "_blank")}
                 className='black-gradient w-8 h-8 sm:w-10 sm:h-10 rounded-full flex justify-center items-center cursor-pointer'
+                style={{ pointerEvents: 'auto' }}
               >
                 <img
                   src={github}

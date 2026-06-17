@@ -109,6 +109,7 @@ import {
     expensesDashboardAdd,
     LMStudio,
     ComfyUI,
+    GLM,
   } from "../assets";
   
   // Category definitions with colors for icosahedron surfaces (darkened for 3D look)
@@ -319,6 +320,11 @@ import {
     {
       name: "ComfyUI",
       icon: ComfyUI,
+      category: "AI & ML",
+    },
+    {
+      name: "GLM-V OCR",
+      icon: GLM,
       category: "AI & ML",
     },
 

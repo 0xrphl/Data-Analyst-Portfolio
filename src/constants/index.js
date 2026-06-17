@@ -1586,7 +1586,7 @@ import {
         { name: "ChromaDB", color: "orange-text-gradient" },
         { name: "Flask", color: "pink-text-gradient" },
       ],
-      image: [mirofishHomepage, mirofishGraphBuild, mirofishGraphFullscreen, mirofishAgentPersonasGraph, mirofishAgentPersonasDual, mirofishSimulationSetup, mirofishSimulationRunning, mirofishFinalReport, mirofishBanner],
+      image: [mirofishBanner, mirofishHomepage, mirofishGraphBuild, mirofishGraphFullscreen, mirofishAgentPersonasGraph, mirofishAgentPersonasDual, mirofishSimulationSetup, mirofishSimulationRunning, mirofishFinalReport],
       source_code_link: "https://github.com/0xrphl/mirofish-neo4j-fork",
     },
     {
@@ -1772,7 +1772,7 @@ import {
           { name: "ChromaDB", color: "orange-text-gradient" },
           { name: "Flask", color: "pink-text-gradient" },
         ],
-        image: [mirofishHomepage, mirofishGraphBuild, mirofishGraphFullscreen, mirofishAgentPersonasGraph, mirofishAgentPersonasDual, mirofishSimulationSetup, mirofishSimulationRunning, mirofishFinalReport, mirofishBanner],
+        image: [mirofishBanner, mirofishHomepage, mirofishGraphBuild, mirofishGraphFullscreen, mirofishAgentPersonasGraph, mirofishAgentPersonasDual, mirofishSimulationSetup, mirofishSimulationRunning, mirofishFinalReport],
         source_code_link: "https://github.com/0xrphl/mirofish-neo4j-fork",
       },
       {

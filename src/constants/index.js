@@ -110,6 +110,9 @@ import {
     LMStudio,
     ComfyUI,
     GLM,
+    pdfDetectSimilarity,
+    pdfDetectAccuracy,
+    pdfDetectRobustness,
   } from "../assets";
   
   // Category definitions with colors for icosahedron surfaces (darkened for 3D look)
@@ -1528,6 +1531,39 @@ import {
       source_code_link: "https://github.com/0xrphl/Streamlit-expenses-tracker-dashboard",
     },
     {
+      name: "Duplicate PDF Detection Algorithm",
+      description:
+        "A pixel-map based duplicate detection system that identifies identical, near-duplicate, and partially overlapping PDF documents using SSIM (Structural Similarity Index). Includes synthetic government-style document generators, comprehensive benchmarks across 37 PDFs and 11 client folders, and professional benchmark charts for accuracy, robustness, and storage impact analysis.",
+      tags: [
+        {
+          name: "Python",
+          color: "yellow-text-gradient",
+        },
+        {
+          name: "scikit-image",
+          color: "blue-text-gradient",
+        },
+        {
+          name: "SSIM",
+          color: "green-text-gradient",
+        },
+        {
+          name: "PyMuPDF",
+          color: "red-text-gradient",
+        },
+        {
+          name: "Pandas",
+          color: "pink-text-gradient",
+        },
+        {
+          name: "Matplotlib",
+          color: "orange-text-gradient",
+        },
+      ],
+      image: [pdfDetectSimilarity, pdfDetectAccuracy, pdfDetectRobustness],
+      source_code_link: "https://github.com/0xrphl/Sci-kit-image-duplicate-pdf-image-batches",
+    },
+    {
       name: "Google calendar events analysis",
       description:
       "This project uses Google Apps Script to extract event data from Google Calendar and store it in Google Sheets. Data includes Event Title, Dates, Creator, and more for accountability. It's also used in Looker Studio for insights on office consultations.",
@@ -1684,6 +1720,20 @@ import {
         ],
         image: [expensesDashboardMain, expensesDashboardScroll, expensesDashboardAdd],
         source_code_link: "https://github.com/0xrphl/Streamlit-expenses-tracker-dashboard",
+      },
+      {
+        name: "Algoritmo de Detección de PDFs Duplicados",
+        description: "Un sistema de detección de duplicados basado en mapas de píxeles que identifica documentos PDF idénticos, casi duplicados y parcialmente superpuestos mediante SSIM (Índice de Similitud Estructural). Incluye generadores sintéticos de documentos gubernamentales, benchmarks completos con 37 PDFs en 11 carpetas de clientes, y gráficos profesionales de precisión, robustez e impacto en almacenamiento.",
+        tags: [
+          { name: "Python", color: "yellow-text-gradient" },
+          { name: "scikit-image", color: "blue-text-gradient" },
+          { name: "SSIM", color: "green-text-gradient" },
+          { name: "PyMuPDF", color: "red-text-gradient" },
+          { name: "Pandas", color: "pink-text-gradient" },
+          { name: "Matplotlib", color: "orange-text-gradient" },
+        ],
+        image: [pdfDetectSimilarity, pdfDetectAccuracy, pdfDetectRobustness],
+        source_code_link: "https://github.com/0xrphl/Sci-kit-image-duplicate-pdf-image-batches",
       },
       {
         name: "Análisis de eventos de Google Calendar",

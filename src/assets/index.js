@@ -116,6 +116,9 @@ import GLM from "./tech/GLM.png";
 import expensesDashboardMain from "./expenses-dashboard-main.png";
 import expensesDashboardScroll from "./expenses-dashboard-scroll.png";
 import expensesDashboardAdd from "./expenses-dashboard-add.png";
+import pdfDetectSimilarity from "./pdf-detect-similarity.png";
+import pdfDetectAccuracy from "./pdf-detect-accuracy.png";
+import pdfDetectRobustness from "./pdf-detect-robustness.png";
 
 export {
   Calendar,
@@ -235,4 +238,7 @@ export {
   LMStudio,
   ComfyUI,
   GLM,
+  pdfDetectSimilarity,
+  pdfDetectAccuracy,
+  pdfDetectRobustness,
 };

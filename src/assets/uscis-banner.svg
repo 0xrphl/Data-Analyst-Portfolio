@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0B1120"/>
+      <stop offset="100%" stop-color="#1A2942"/>
+    </linearGradient>
+    <linearGradient id="textGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#94A3B8"/>
+    </linearGradient>
+  </defs>
+  
+  <rect width="1200" height="600" fill="url(#bg)"/>
+  
+  <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#FFFFFF" stroke-opacity="0.03"/>
+  </pattern>
+  <rect width="1200" height="600" fill="url(#grid)"/>
+
+  <g stroke="#F59E0B" stroke-width="2" stroke-opacity="0.6">
+    <line x1="850" y1="200" x2="950" y2="150"/>
+    <line x1="850" y1="200" x2="900" y2="350"/>
+    <line x1="950" y1="150" x2="1050" y2="220"/>
+    <line x1="900" y1="350" x2="1050" y2="220"/>
+    <line x1="1050" y1="220" x2="1000" y2="400"/>
+    <line x1="900" y1="350" x2="1000" y2="400"/>
+    <line x1="850" y1="200" x2="750" y2="280"/>
+    <line x1="900" y1="350" x2="750" y2="280"/>
+  </g>
+
+  <g fill="#38BDF8">
+    <circle cx="850" cy="200" r="8"/>
+    <circle cx="950" cy="150" r="12" fill="#F59E0B"/> <circle cx="900" cy="350" r="10"/>
+    <circle cx="1050" cy="220" r="9"/>
+    <circle cx="1000" cy="400" r="7"/>
+    <circle cx="750" cy="280" r="6"/>
+  </g>
+
+  <text x="120" y="280" font-family="system-ui, -apple-system, sans-serif" font-size="72" font-weight="800" fill="url(#textGrad)" letter-spacing="-1">USCIS</text>
+  <text x="350" y="280" font-family="system-ui, -apple-system, sans-serif" font-size="72" font-weight="300" fill="#E2E8F0" letter-spacing="-1">Knowledge Base</text>
+  
+  <text x="125" y="340" font-family="system-ui, -apple-system, sans-serif" font-size="24" font-weight="500" fill="#94A3B8" letter-spacing="2">FULL DATA SCRAPE</text>
+  
+  <g transform="translate(125, 400)">
+    <rect x="0" y="0" width="130" height="40" rx="20" fill="#1E293B" stroke="#334155"/>
+    <text x="65" y="25" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="600" fill="#38BDF8" text-anchor="middle">AI RAG</text>
+    
+    <rect x="145" y="0" width="160" height="40" rx="20" fill="#1E293B" stroke="#334155"/>
+    <text x="225" y="25" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="600" fill="#F59E0B" text-anchor="middle">Firebase</text>
+    
+    <rect x="320" y="0" width="150" height="40" rx="20" fill="#1E293B" stroke="#334155"/>
+    <text x="395" y="25" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="600" fill="#10B981" text-anchor="middle">Graph RAG</text>
+  </g>
+</svg>

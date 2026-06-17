@@ -124,6 +124,13 @@ import {
     mirofishSimulationRunning,
     mirofishFinalReport,
     mirofishBanner,
+    uscisBanner,
+    uscisAtlasClusters,
+    uscisAtlasOverview,
+    uscisAtlasNeighbours,
+    uscisAtlasZoom,
+    uscisGithubRepo,
+    uscisHuggingfaceRepo,
   } from "../assets";
   
   // Category definitions with colors for icosahedron surfaces (darkened for 3D look)
@@ -1592,6 +1599,24 @@ import {
       source_code_link: "https://github.com/0xrphl/mirofish-neo4j-fork",
     },
     {
+      name: "USCIS Knowledge Base",
+      description:
+        "A comprehensive knowledge base of 99,489 content chunks from 4,666 USCIS pages with OpenAI embeddings (1536-dim), ready for RAG, semantic search, and GraphRAG. Scraped with Firecrawl, visualized with Apple's Embedding Atlas (UMAP clusters), stored in PostgreSQL+pgvector, Milvus, and Neo4j. Dataset hosted on HuggingFace. One-command Docker Compose deployment with 7 services.",
+      tags: [
+        { name: "Docker", color: "blue-text-gradient" },
+        { name: "PostgreSQL", color: "green-text-gradient" },
+        { name: "Neo4j", color: "purple-text-gradient" },
+        { name: "Milvus", color: "orange-text-gradient" },
+        { name: "OpenAI Embeddings", color: "yellow-text-gradient" },
+        { name: "Firecrawl", color: "red-text-gradient" },
+        { name: "HuggingFace", color: "pink-text-gradient" },
+        { name: "GraphRAG", color: "gray-text-gradient" },
+      ],
+      image: [uscisBanner, uscisAtlasClusters, uscisAtlasOverview, uscisAtlasNeighbours, uscisAtlasZoom, uscisGithubRepo, uscisHuggingfaceRepo],
+      source_code_link: "https://github.com/0xrphl/USCIS-knowledge-base-full-website",
+      huggingface_link: "https://huggingface.co/datasets/0xrphl/USCIS-knowledge-base-full-website",
+    },
+    {
       name: "Google calendar events analysis",
       description:
       "This project uses Google Apps Script to extract event data from Google Calendar and store it in Google Sheets. Data includes Event Title, Dates, Creator, and more for accountability. It's also used in Looker Studio for insights on office consultations.",
@@ -1778,6 +1803,23 @@ import {
         ],
         image: [mirofishBanner, mirofishHomepage, mirofishGraphBuild, mirofishGraphFullscreen, mirofishAgentPersonasGraph, mirofishAgentPersonasDual, mirofishSimulationSetup, mirofishSimulationRunning, mirofishFinalReport],
         source_code_link: "https://github.com/0xrphl/mirofish-neo4j-fork",
+      },
+      {
+        name: "Base de Conocimiento USCIS",
+        description: "Una base de conocimiento integral de 99,489 fragmentos de contenido de 4,666 páginas de USCIS con embeddings de OpenAI (1536-dim), lista para RAG, búsqueda semántica y GraphRAG. Scrapeado con Firecrawl, visualizado con Embedding Atlas de Apple (clusters UMAP), almacenado en PostgreSQL+pgvector, Milvus y Neo4j. Dataset alojado en HuggingFace. Despliegue con un solo comando Docker Compose con 7 servicios.",
+        tags: [
+          { name: "Docker", color: "blue-text-gradient" },
+          { name: "PostgreSQL", color: "green-text-gradient" },
+          { name: "Neo4j", color: "purple-text-gradient" },
+          { name: "Milvus", color: "orange-text-gradient" },
+          { name: "OpenAI Embeddings", color: "yellow-text-gradient" },
+          { name: "Firecrawl", color: "red-text-gradient" },
+          { name: "HuggingFace", color: "pink-text-gradient" },
+          { name: "GraphRAG", color: "gray-text-gradient" },
+        ],
+        image: [uscisBanner, uscisAtlasClusters, uscisAtlasOverview, uscisAtlasNeighbours, uscisAtlasZoom, uscisGithubRepo, uscisHuggingfaceRepo],
+        source_code_link: "https://github.com/0xrphl/USCIS-knowledge-base-full-website",
+        huggingface_link: "https://huggingface.co/datasets/0xrphl/USCIS-knowledge-base-full-website",
       },
       {
         name: "Análisis de eventos de Google Calendar",

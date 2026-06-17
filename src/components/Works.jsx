@@ -2,7 +2,7 @@ import React, { useEffect, useState, useCallback } from "react";
 import { Tilt } from "react-tilt";
 import { motion } from "framer-motion";
 import { styles } from "../styles";
-import { github } from "../assets";
+import { github, huggingfaceIcon } from "../assets";
 import { SectionWrapper } from "../hoc";
 import { projects } from "../constants";
 import { fadeIn, textVariant } from "../utils/motion";
@@ -96,6 +96,7 @@ const ProjectCard = ({
   tags,
   image,
   source_code_link,
+  huggingface_link,
   className,
   isMobileDevice,
 }) => {
@@ -139,7 +140,20 @@ const ProjectCard = ({
               />
             )}
 
-            <div className='absolute inset-0 flex justify-end m-3 card-img_hover' style={{ pointerEvents: 'none' }}>
+            <div className='absolute inset-0 flex justify-end m-3 card-img_hover gap-2' style={{ pointerEvents: 'none' }}>
+              {huggingface_link && (
+                <div
+                  onClick={() => window.open(huggingface_link, "_blank")}
+                  className='w-8 h-8 sm:w-10 sm:h-10 rounded-full flex justify-center items-center cursor-pointer'
+                  style={{ pointerEvents: 'auto', background: 'linear-gradient(135deg, #FFD21E 0%, #FFB800 100%)' }}
+                >
+                  <img
+                    src={huggingfaceIcon}
+                    alt='huggingface dataset'
+                    className='w-3/4 h-3/4 object-contain'
+                  />
+                </div>
+              )}
               <div
                 onClick={() => window.open(source_code_link, "_blank")}
                 className='black-gradient w-8 h-8 sm:w-10 sm:h-10 rounded-full flex justify-center items-center cursor-pointer'

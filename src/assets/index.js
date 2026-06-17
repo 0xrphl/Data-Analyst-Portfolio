@@ -130,6 +130,14 @@ import mirofishSimulationSetup from "./mirofish-simulation-setup.png";
 import mirofishSimulationRunning from "./mirofish-simulation-running.png";
 import mirofishFinalReport from "./mirofish-final-report.png";
 import mirofishBanner from "./mirofish-banner.png";
+import huggingfaceIcon from "./huggingface-icon.svg";
+import uscisBanner from "./uscis-banner.svg";
+import uscisAtlasClusters from "./uscis-atlas-clusters.png";
+import uscisAtlasOverview from "./uscis-atlas-overview.png";
+import uscisAtlasNeighbours from "./uscis-atlas-neighbours.png";
+import uscisAtlasZoom from "./uscis-atlas-zoom.png";
+import uscisGithubRepo from "./uscis-github-repo.png";
+import uscisHuggingfaceRepo from "./uscis-huggingface-repo.png";
 
 export {
   Calendar,
@@ -263,4 +271,12 @@ export {
   mirofishSimulationRunning,
   mirofishFinalReport,
   mirofishBanner,
+  huggingfaceIcon,
+  uscisBanner,
+  uscisAtlasClusters,
+  uscisAtlasOverview,
+  uscisAtlasNeighbours,
+  uscisAtlasZoom,
+  uscisGithubRepo,
+  uscisHuggingfaceRepo,
 };

@@ -113,6 +113,8 @@ import {
     pdfDetectSimilarity,
     pdfDetectAccuracy,
     pdfDetectRobustness,
+    pdfDetectExactMatch,
+    pdfDetectNonMatch,
   } from "../assets";
   
   // Category definitions with colors for icosahedron surfaces (darkened for 3D look)
@@ -1560,7 +1562,7 @@ import {
           color: "orange-text-gradient",
         },
       ],
-      image: [pdfDetectSimilarity, pdfDetectAccuracy, pdfDetectRobustness],
+      image: [pdfDetectSimilarity, pdfDetectAccuracy, pdfDetectRobustness, pdfDetectExactMatch, pdfDetectNonMatch],
       source_code_link: "https://github.com/0xrphl/Sci-kit-image-duplicate-pdf-image-batches",
     },
     {
@@ -1732,7 +1734,7 @@ import {
           { name: "Pandas", color: "pink-text-gradient" },
           { name: "Matplotlib", color: "orange-text-gradient" },
         ],
-        image: [pdfDetectSimilarity, pdfDetectAccuracy, pdfDetectRobustness],
+        image: [pdfDetectSimilarity, pdfDetectAccuracy, pdfDetectRobustness, pdfDetectExactMatch, pdfDetectNonMatch],
         source_code_link: "https://github.com/0xrphl/Sci-kit-image-duplicate-pdf-image-batches",
       },
       {

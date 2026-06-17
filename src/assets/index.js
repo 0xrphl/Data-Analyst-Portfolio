@@ -119,6 +119,8 @@ import expensesDashboardAdd from "./expenses-dashboard-add.png";
 import pdfDetectSimilarity from "./pdf-detect-similarity.png";
 import pdfDetectAccuracy from "./pdf-detect-accuracy.png";
 import pdfDetectRobustness from "./pdf-detect-robustness.png";
+import pdfDetectExactMatch from "./pdf-detect-exact-match.png";
+import pdfDetectNonMatch from "./pdf-detect-non-match.png";
 
 export {
   Calendar,
@@ -241,4 +243,6 @@ export {
   pdfDetectSimilarity,
   pdfDetectAccuracy,
   pdfDetectRobustness,
+  pdfDetectExactMatch,
+  pdfDetectNonMatch,
 };

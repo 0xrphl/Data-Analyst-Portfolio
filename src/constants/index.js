@@ -1577,14 +1577,16 @@ import {
     {
       name: "MiroFish Neo4j Fork",
       description:
-        "A fork of MiroFish that replaces Zep Cloud with a local Neo4j graph database — fully self-hosted multi-agent AI prediction engine. Features knowledge graph building, LLM-powered ontology generation, agent persona creation, multi-agent simulation, and interactive Q&A reports. Deployed via Docker Compose with Neo4j, ChromaDB, and Whisper ASR. Auto-patching entrypoint replaces cloud dependencies on every startup.",
+        "A fork of MiroFish replacing Zep Cloud with local Neo4j — fully self-hosted multi-agent AI prediction engine for predictive event simulation and agentic parallel consensus. Features knowledge graph building, LLM-powered ontology generation, agent persona creation, and multi-agent simulation where AI agents debate and reach consensus on outcomes. Designed as a roadmap for predictive market applications like Polymarket bot trading decisions. Deployed via Docker Compose with Neo4j, ChromaDB, and Whisper ASR with auto-patching entrypoint.",
       tags: [
+        { name: "MiroFish", color: "red-text-gradient" },
         { name: "Docker", color: "blue-text-gradient" },
         { name: "Neo4j", color: "green-text-gradient" },
         { name: "Python", color: "yellow-text-gradient" },
         { name: "GPT-4o", color: "purple-text-gradient" },
         { name: "ChromaDB", color: "orange-text-gradient" },
-        { name: "Flask", color: "pink-text-gradient" },
+        { name: "Multi-Agent", color: "pink-text-gradient" },
+        { name: "Predictive Markets", color: "gray-text-gradient" },
       ],
       image: [mirofishBanner, mirofishHomepage, mirofishGraphBuild, mirofishGraphFullscreen, mirofishAgentPersonasGraph, mirofishAgentPersonasDual, mirofishSimulationSetup, mirofishSimulationRunning, mirofishFinalReport],
       source_code_link: "https://github.com/0xrphl/mirofish-neo4j-fork",
@@ -1763,14 +1765,16 @@ import {
       },
       {
         name: "MiroFish Neo4j Fork",
-        description: "Un fork de MiroFish que reemplaza Zep Cloud con una base de datos de grafos Neo4j local — motor de predicción IA multi-agente completamente auto-hospedado. Incluye construcción de grafos de conocimiento, generación de ontologías con LLM, creación de personas de agentes, simulación multi-agente e informes interactivos de Q&A. Desplegado vía Docker Compose con Neo4j, ChromaDB y Whisper ASR. El entrypoint de auto-parcheo reemplaza las dependencias cloud en cada inicio.",
+        description: "Un fork de MiroFish que reemplaza Zep Cloud con Neo4j local — motor de predicción IA multi-agente auto-hospedado para simulación de eventos predictivos y consenso paralelo agéntico. Incluye construcción de grafos de conocimiento, generación de ontologías con LLM, creación de personas de agentes y simulación multi-agente donde agentes IA debaten y alcanzan consenso sobre resultados. Diseñado como hoja de ruta para aplicaciones de mercados predictivos como decisiones de trading de bots en Polymarket. Desplegado vía Docker Compose con Neo4j, ChromaDB y Whisper ASR con entrypoint de auto-parcheo.",
         tags: [
+          { name: "MiroFish", color: "red-text-gradient" },
           { name: "Docker", color: "blue-text-gradient" },
           { name: "Neo4j", color: "green-text-gradient" },
           { name: "Python", color: "yellow-text-gradient" },
           { name: "GPT-4o", color: "purple-text-gradient" },
           { name: "ChromaDB", color: "orange-text-gradient" },
-          { name: "Flask", color: "pink-text-gradient" },
+          { name: "Multi-Agente", color: "pink-text-gradient" },
+          { name: "Mercados Predictivos", color: "gray-text-gradient" },
         ],
         image: [mirofishBanner, mirofishHomepage, mirofishGraphBuild, mirofishGraphFullscreen, mirofishAgentPersonasGraph, mirofishAgentPersonasDual, mirofishSimulationSetup, mirofishSimulationRunning, mirofishFinalReport],
         source_code_link: "https://github.com/0xrphl/mirofish-neo4j-fork",

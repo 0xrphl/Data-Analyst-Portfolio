@@ -115,6 +115,15 @@ import {
     pdfDetectRobustness,
     pdfDetectExactMatch,
     pdfDetectNonMatch,
+    mirofishHomepage,
+    mirofishGraphBuild,
+    mirofishGraphFullscreen,
+    mirofishAgentPersonasGraph,
+    mirofishAgentPersonasDual,
+    mirofishSimulationSetup,
+    mirofishSimulationRunning,
+    mirofishFinalReport,
+    mirofishBanner,
   } from "../assets";
   
   // Category definitions with colors for icosahedron surfaces (darkened for 3D look)
@@ -1566,6 +1575,21 @@ import {
       source_code_link: "https://github.com/0xrphl/Sci-kit-image-duplicate-pdf-image-batches",
     },
     {
+      name: "MiroFish Neo4j Fork",
+      description:
+        "A fork of MiroFish that replaces Zep Cloud with a local Neo4j graph database — fully self-hosted multi-agent AI prediction engine. Features knowledge graph building, LLM-powered ontology generation, agent persona creation, multi-agent simulation, and interactive Q&A reports. Deployed via Docker Compose with Neo4j, ChromaDB, and Whisper ASR. Auto-patching entrypoint replaces cloud dependencies on every startup.",
+      tags: [
+        { name: "Docker", color: "blue-text-gradient" },
+        { name: "Neo4j", color: "green-text-gradient" },
+        { name: "Python", color: "yellow-text-gradient" },
+        { name: "GPT-4o", color: "purple-text-gradient" },
+        { name: "ChromaDB", color: "orange-text-gradient" },
+        { name: "Flask", color: "pink-text-gradient" },
+      ],
+      image: [mirofishHomepage, mirofishGraphBuild, mirofishGraphFullscreen, mirofishAgentPersonasGraph, mirofishAgentPersonasDual, mirofishSimulationSetup, mirofishSimulationRunning, mirofishFinalReport, mirofishBanner],
+      source_code_link: "https://github.com/0xrphl/mirofish-neo4j-fork",
+    },
+    {
       name: "Google calendar events analysis",
       description:
       "This project uses Google Apps Script to extract event data from Google Calendar and store it in Google Sheets. Data includes Event Title, Dates, Creator, and more for accountability. It's also used in Looker Studio for insights on office consultations.",
@@ -1736,6 +1760,20 @@ import {
         ],
         image: [pdfDetectSimilarity, pdfDetectAccuracy, pdfDetectRobustness, pdfDetectExactMatch, pdfDetectNonMatch],
         source_code_link: "https://github.com/0xrphl/Sci-kit-image-duplicate-pdf-image-batches",
+      },
+      {
+        name: "MiroFish Neo4j Fork",
+        description: "Un fork de MiroFish que reemplaza Zep Cloud con una base de datos de grafos Neo4j local — motor de predicción IA multi-agente completamente auto-hospedado. Incluye construcción de grafos de conocimiento, generación de ontologías con LLM, creación de personas de agentes, simulación multi-agente e informes interactivos de Q&A. Desplegado vía Docker Compose con Neo4j, ChromaDB y Whisper ASR. El entrypoint de auto-parcheo reemplaza las dependencias cloud en cada inicio.",
+        tags: [
+          { name: "Docker", color: "blue-text-gradient" },
+          { name: "Neo4j", color: "green-text-gradient" },
+          { name: "Python", color: "yellow-text-gradient" },
+          { name: "GPT-4o", color: "purple-text-gradient" },
+          { name: "ChromaDB", color: "orange-text-gradient" },
+          { name: "Flask", color: "pink-text-gradient" },
+        ],
+        image: [mirofishHomepage, mirofishGraphBuild, mirofishGraphFullscreen, mirofishAgentPersonasGraph, mirofishAgentPersonasDual, mirofishSimulationSetup, mirofishSimulationRunning, mirofishFinalReport, mirofishBanner],
+        source_code_link: "https://github.com/0xrphl/mirofish-neo4j-fork",
       },
       {
         name: "Análisis de eventos de Google Calendar",

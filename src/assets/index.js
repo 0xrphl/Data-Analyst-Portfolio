@@ -121,6 +121,15 @@ import pdfDetectAccuracy from "./pdf-detect-accuracy.png";
 import pdfDetectRobustness from "./pdf-detect-robustness.png";
 import pdfDetectExactMatch from "./pdf-detect-exact-match.png";
 import pdfDetectNonMatch from "./pdf-detect-non-match.png";
+import mirofishHomepage from "./mirofish-homepage.png";
+import mirofishGraphBuild from "./mirofish-graph-build.png";
+import mirofishGraphFullscreen from "./mirofish-graph-fullscreen.png";
+import mirofishAgentPersonasGraph from "./mirofish-agent-personas-graph.png";
+import mirofishAgentPersonasDual from "./mirofish-agent-personas-dual.png";
+import mirofishSimulationSetup from "./mirofish-simulation-setup.png";
+import mirofishSimulationRunning from "./mirofish-simulation-running.png";
+import mirofishFinalReport from "./mirofish-final-report.png";
+import mirofishBanner from "./mirofish-banner.png";
 
 export {
   Calendar,
@@ -245,4 +254,13 @@ export {
   pdfDetectRobustness,
   pdfDetectExactMatch,
   pdfDetectNonMatch,
+  mirofishHomepage,
+  mirofishGraphBuild,
+  mirofishGraphFullscreen,
+  mirofishAgentPersonasGraph,
+  mirofishAgentPersonasDual,
+  mirofishSimulationSetup,
+  mirofishSimulationRunning,
+  mirofishFinalReport,
+  mirofishBanner,
 };

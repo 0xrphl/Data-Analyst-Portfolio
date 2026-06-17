@@ -112,7 +112,7 @@ import Selenium from "./tech/selenium.svg";
 import MicrochipPIC from "./tech/MicrochipPIC.webp";
 import LMStudio from "./tech/LMStudio.png";
 import ComfyUI from "./tech/ComfyUI.svg";
-import GLM from "./tech/GLM.svg";
+import GLM from "./tech/GLM.png";
 import expensesDashboardMain from "./expenses-dashboard-main.png";
 import expensesDashboardScroll from "./expenses-dashboard-scroll.png";
 import expensesDashboardAdd from "./expenses-dashboard-add.png";

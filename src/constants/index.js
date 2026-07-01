@@ -131,6 +131,12 @@ import {
     uscisAtlasZoom,
     uscisGithubRepo,
     uscisHuggingfaceRepo,
+    mediaAgentArchitecture,
+    mediaAgentDocMgmt,
+    mediaAgentGraphFull,
+    mediaAgentGraphNode,
+    mediaAgentGraphDemo,
+    mediaAgentQueryDemo,
   } from "../assets";
   
   // Category definitions with colors for icosahedron surfaces (darkened for 3D look)
@@ -198,7 +204,7 @@ import {
   const services = {
     en: [
     {
-      title: "Data Scientist",
+      title: "AI Agent & Automation Expert",
       icon: web,
     },
     {
@@ -216,7 +222,7 @@ import {
     ],
     es: [
       {
-        title: "Científico de Datos",
+        title: "Experto en Agentes IA y Automatización",
         icon: web,
       },
       {
@@ -716,16 +722,56 @@ import {
   const experiences = {
     en: [
     {
+      title: "Assistant Chief Engineer — Year 2",
+      company_name: "Quiroga Law Office, PLLC",
+      icon: quiroga,
+      iconBg: "#fff",
+      date: "January 2026 - Present",
+      points: [
+        "Architected and deployed production-grade AI agent systems using LLM-powered RAG and GraphRAG pipelines (LightRAG, Neo4j, NanoVectorDB) with OpenAI embeddings (1536-dim) for intelligent knowledge graph search, multi-mode retrieval (naive, local, global, hybrid, mix), and autonomous document processing.",
+        "Built the Media Assets Marketing AI Agent — a Gemini Vision + LightRAG GraphRAG pipeline analyzing 420+ marketing images into a knowledge graph of 13,604 entities and 22,958 relationships, with 5-chunk-per-image ingestion, NanoVectorDB vector storage, and a Vue.js Explorer SPA. Pre-ingested dataset published on HuggingFace (~513 MB). Docker Compose deployment with Neo4j and LightRAG services.",
+        "Developed the MiroFish Neo4j Fork — a fully self-hosted multi-agent AI prediction engine replacing Zep Cloud with local Neo4j for predictive event simulation and agentic parallel consensus. Features LLM-powered ontology generation, agent persona creation, knowledge graph building, and multi-agent debate simulation. Deployed via Docker Compose with Neo4j, ChromaDB, and Whisper ASR.",
+        "Full AWS cloud infrastructure: ECS, EC2, S3, Route 53, ALB, CloudFront, RDS with Azure AD OAuth 2.0 authentication. End-to-end CI/CD pipelines, containerized microservices with Docker, and scalable cloud-native architecture for hosting AI agents, ML models, and full-stack applications.",
+        "Built comprehensive knowledge bases including the USCIS Knowledge Base (99,489 chunks from 4,666 pages) with Firecrawl web scraping, OpenAI embeddings, PostgreSQL+pgvector, Milvus, and Neo4j graph storage — dataset hosted on HuggingFace. Designed for RAG, semantic search, and GraphRAG retrieval.",
+      ],
+      tags: [
+        { name: "#LightRAG", color: "purple-text-gradient" },
+        { name: "#GraphRAG", color: "green-text-gradient" },
+        { name: "#Neo4j", color: "blue-text-gradient" },
+        { name: "#LLM Agents", color: "purple-text-gradient" },
+        { name: "#RAG", color: "green-text-gradient" },
+        { name: "#OpenAI Embeddings", color: "yellow-text-gradient" },
+        { name: "#Gemini Vision", color: "red-text-gradient" },
+        { name: "#GPT-4o", color: "purple-text-gradient" },
+        { name: "#Docker", color: "blue-text-gradient" },
+        { name: "#AWS (ECS,EC2,S3,ALB,Route53,RDS)", color: "orange-text-gradient" },
+        { name: "#OAuth 2.0 (Azure AD)", color: "blue-text-gradient" },
+        { name: "#CloudFront", color: "orange-text-gradient" },
+        { name: "#Vue.js", color: "green-text-gradient" },
+        { name: "#Multi-Agent AI", color: "pink-text-gradient" },
+        { name: "#Knowledge Graphs", color: "green-text-gradient" },
+        { name: "#NanoVectorDB", color: "gray-text-gradient" },
+        { name: "#Milvus", color: "blue-text-gradient" },
+        { name: "#pgvector", color: "green-text-gradient" },
+        { name: "#Firecrawl", color: "red-text-gradient" },
+        { name: "#HuggingFace", color: "yellow-text-gradient" },
+        { name: "#ChromaDB", color: "orange-text-gradient" },
+        { name: "#CI/CD", color: "gray-text-gradient" },
+        { name: "#MiroFish", color: "pink-text-gradient" },
+      ],
+    },
+    {
       title: "Assistant Chief Engineer",
       company_name: "Quiroga Law Office, PLLC",
       icon: quiroga,
       iconBg: "#fff",
-      date: "Promoted in January 2025 - Present",
+      date: "Promoted in January 2025 - December 2025",
       points: [
         "Led the development of two full-stack web applications using Flask, integrating machine learning models with real-time client data to automate and enhance client interactions for a law firm. Utilized open-source machine learning algorithms, such as EasyOCR and OpenCV, for optical character recognition (OCR) and advanced document processing, enabling efficient data extraction and interpretation from legal documents.",
         "Developed and deployed an AI agent powered by Claude embeddings within a Retrieval-Augmented Generation (RAG) system and a VectorDB to autonomously fill out immigration forms and interact with client data. Built an AI-driven chatbot using Claude and a RAG system to analyze client data and provide personalized legal advice, customer service support, and streamlined communication, including features like user login, chat history, caching, and agent profiles.",
         "Utilized AWS services, including ECS, ECR, EC2, and S3, for seamless deployment, containerization, and storage management, enabling scalable and reliable cloud-based solutions for hosting machine learning models and applications. Employed Docker to containerize applications, ensuring consistent environments across development, testing, and production, and streamlining deployment pipelines for both Flask apps and machine learning models.",
         "Enhanced operational efficiency by automating document processing and client interactions, while ensuring secure handling of client data through encryption and adhering to best practices for data protection, all while maintaining a user-friendly interface.",
+        "Built the USCIS Knowledge Base — a comprehensive RAG-ready dataset of 99,489 content chunks from 4,666 USCIS pages with OpenAI embeddings (1536-dim), stored in PostgreSQL+pgvector, Milvus, and Neo4j. Scraped with Firecrawl, visualized with Apple's Embedding Atlas (UMAP clusters), and published on HuggingFace. Deployed via Docker Compose with 7 services for semantic search and GraphRAG retrieval.",
       ],
       tags: [
         {
@@ -1208,16 +1254,56 @@ import {
     ],
     es: [
       {
+        title: "Ingeniero Jefe Asistente — Año 2",
+        company_name: "Quiroga Law Office, PLLC",
+        icon: quiroga,
+        iconBg: "#fff",
+        date: "Enero 2026 - Presente",
+        points: [
+          "Arquitecté y desplegué sistemas de agentes IA de grado de producción usando pipelines RAG y GraphRAG impulsados por LLM (LightRAG, Neo4j, NanoVectorDB) con embeddings de OpenAI (1536-dim) para búsqueda inteligente en grafos de conocimiento, recuperación multi-modo (naive, local, global, hybrid, mix) y procesamiento autónomo de documentos.",
+          "Construí el Agente AI de Marketing de Activos Multimedia — un pipeline Gemini Vision + LightRAG GraphRAG que analiza 420+ imágenes de marketing en un grafo de conocimiento de 13,604 entidades y 22,958 relaciones, con ingesta de 5 fragmentos por imagen, almacenamiento vectorial NanoVectorDB, y una SPA Explorer en Vue.js. Dataset pre-ingestado publicado en HuggingFace (~513 MB). Despliegue Docker Compose con servicios Neo4j y LightRAG.",
+          "Desarrollé el MiroFish Neo4j Fork — un motor de predicción IA multi-agente auto-hospedado que reemplaza Zep Cloud con Neo4j local para simulación de eventos predictivos y consenso paralelo agéntico. Incluye generación de ontologías con LLM, creación de personas de agentes, construcción de grafos de conocimiento y simulación de debate multi-agente. Desplegado vía Docker Compose con Neo4j, ChromaDB y Whisper ASR.",
+          "Infraestructura cloud AWS completa: ECS, EC2, S3, Route 53, ALB, CloudFront, RDS con autenticación Azure AD OAuth 2.0. Pipelines CI/CD de extremo a extremo, microservicios contenerizados con Docker y arquitectura cloud-native escalable para alojar agentes IA, modelos ML y aplicaciones full-stack.",
+          "Construí bases de conocimiento integrales incluyendo la Base de Conocimiento USCIS (99,489 fragmentos de 4,666 páginas) con web scraping Firecrawl, embeddings OpenAI, PostgreSQL+pgvector, Milvus y almacenamiento en grafos Neo4j — dataset alojado en HuggingFace. Diseñado para RAG, búsqueda semántica y recuperación GraphRAG.",
+        ],
+        tags: [
+          { name: "#LightRAG", color: "purple-text-gradient" },
+          { name: "#GraphRAG", color: "green-text-gradient" },
+          { name: "#Neo4j", color: "blue-text-gradient" },
+          { name: "#Agentes LLM", color: "purple-text-gradient" },
+          { name: "#RAG", color: "green-text-gradient" },
+          { name: "#OpenAI Embeddings", color: "yellow-text-gradient" },
+          { name: "#Gemini Vision", color: "red-text-gradient" },
+          { name: "#GPT-4o", color: "purple-text-gradient" },
+          { name: "#Docker", color: "blue-text-gradient" },
+          { name: "#AWS (ECS,EC2,S3,ALB,Route53,RDS)", color: "orange-text-gradient" },
+          { name: "#OAuth 2.0 (Azure AD)", color: "blue-text-gradient" },
+          { name: "#CloudFront", color: "orange-text-gradient" },
+          { name: "#Vue.js", color: "green-text-gradient" },
+          { name: "#IA Multi-Agente", color: "pink-text-gradient" },
+          { name: "#Grafos de Conocimiento", color: "green-text-gradient" },
+          { name: "#NanoVectorDB", color: "gray-text-gradient" },
+          { name: "#Milvus", color: "blue-text-gradient" },
+          { name: "#pgvector", color: "green-text-gradient" },
+          { name: "#Firecrawl", color: "red-text-gradient" },
+          { name: "#HuggingFace", color: "yellow-text-gradient" },
+          { name: "#ChromaDB", color: "orange-text-gradient" },
+          { name: "#CI/CD", color: "gray-text-gradient" },
+          { name: "#MiroFish", color: "pink-text-gradient" },
+        ],
+      },
+      {
         title: "Ingeniero Jefe Asistente",
         company_name: "Quiroga Law Office, PLLC",
         icon: quiroga,
         iconBg: "#fff",
-        date: "Promovido en Enero 2025 - Presente",
+        date: "Promovido en Enero 2025 - Diciembre 2025",
         points: [
           "Lideré el desarrollo de dos aplicaciones web full-stack utilizando Flask, integrando modelos de machine learning con datos de clientes en tiempo real para automatizar y mejorar las interacciones con clientes de un bufete de abogados. Utilicé algoritmos de machine learning de código abierto, como EasyOCR y OpenCV, para reconocimiento óptico de caracteres (OCR) y procesamiento avanzado de documentos, permitiendo una extracción e interpretación eficiente de documentos legales.",
           "Desarrollé e implementé un agente de IA impulsado por embeddings de Claude dentro de un sistema de Generación Aumentada por Recuperación (RAG) y una VectorDB para completar automáticamente formularios de inmigración e interactuar con datos de clientes. Construí un chatbot impulsado por IA usando Claude y un sistema RAG para analizar datos de clientes y proporcionar asesoramiento legal personalizado, soporte de servicio al cliente y comunicación optimizada, incluyendo características como inicio de sesión de usuario, historial de chat, caché y perfiles de agentes.",
           "Utilicé servicios de AWS, incluyendo ECS, ECR, EC2 y S3, para una implementación sin problemas, contenerización y gestión de almacenamiento, permitiendo soluciones escalables y confiables basadas en la nube para alojar modelos de machine learning y aplicaciones. Empleé Docker para contenerizar aplicaciones, asegurando entornos consistentes en desarrollo, pruebas y producción, y optimizando pipelines de implementación tanto para aplicaciones Flask como para modelos de machine learning.",
           "Mejoré la eficiencia operativa automatizando el procesamiento de documentos y las interacciones con clientes, mientras aseguraba el manejo seguro de datos de clientes a través de encriptación y adherencia a las mejores prácticas para la protección de datos, todo mientras mantenía una interfaz amigable para el usuario.",
+          "Construí la Base de Conocimiento USCIS — un dataset RAG-ready de 99,489 fragmentos de contenido de 4,666 páginas USCIS con embeddings OpenAI (1536-dim), almacenado en PostgreSQL+pgvector, Milvus y Neo4j. Scrapeado con Firecrawl, visualizado con Embedding Atlas de Apple (clusters UMAP) y publicado en HuggingFace. Desplegado vía Docker Compose con 7 servicios para búsqueda semántica y recuperación GraphRAG.",
         ],
         tags: [
           { name: "#Pandas", color: "red-text-gradient" },
@@ -1539,6 +1625,27 @@ import {
       huggingface_link: "https://huggingface.co/datasets/0xrphl/USCIS-knowledge-base-full-website",
     },
     {
+      name: "Media Assets Marketing AI Agent — LLM + GraphRAG + Embeddings",
+      description: "AI-powered LLM image asset library with RAG knowledge graph search and vector embeddings. Analyzes 420 marketing images with Gemini Vision AI, builds a rich knowledge graph with LightRAG GraphRAG (13,604 entities, 22,958 relationships), and queries your asset library by objects, colors, emotions, settings, mood, and marketing use-cases using LLM-driven RAG retrieval. Features 5-chunk-per-image ingestion pipeline, Neo4j graph storage, NanoVectorDB with 1536-dim OpenAI embeddings, 5 query modes, and a Vue.js Explorer SPA. Pre-ingested dataset on HuggingFace (~513 MB). Docker Compose deployment.",
+      tags: [
+        { name: "LightRAG", color: "purple-text-gradient" },
+        { name: "GraphRAG", color: "green-text-gradient" },
+        { name: "Neo4j", color: "blue-text-gradient" },
+        { name: "Docker", color: "blue-text-gradient" },
+        { name: "Python", color: "yellow-text-gradient" },
+        { name: "Gemini Vision", color: "red-text-gradient" },
+        { name: "GPT-4o", color: "purple-text-gradient" },
+        { name: "OpenAI Embeddings", color: "orange-text-gradient" },
+        { name: "Knowledge Graph", color: "green-text-gradient" },
+        { name: "NanoVectorDB", color: "pink-text-gradient" },
+        { name: "HuggingFace", color: "yellow-text-gradient" },
+        { name: "Vue.js", color: "green-text-gradient" },
+      ],
+      image: [mediaAgentArchitecture, mediaAgentGraphFull, mediaAgentGraphDemo, mediaAgentQueryDemo, mediaAgentGraphNode, mediaAgentDocMgmt],
+      source_code_link: "https://github.com/0xrphl/Light-RAG-Marketing-Assets-Agent",
+      huggingface_link: "https://huggingface.co/datasets/0xrphl/Light-RAG-Marketing-Assets-Agent",
+    },
+    {
       name: "MiroFish Neo4j Fork",
       description:
         "A fork of MiroFish replacing Zep Cloud with local Neo4j — fully self-hosted multi-agent AI prediction engine for predictive event simulation and agentic parallel consensus. Features knowledge graph building, LLM-powered ontology generation, agent persona creation, and multi-agent simulation where AI agents debate and reach consensus on outcomes. Designed as a roadmap for predictive market applications like Polymarket bot trading decisions. Deployed via Docker Compose with Neo4j, ChromaDB, and Whisper ASR with auto-patching entrypoint.",
@@ -1786,6 +1893,27 @@ import {
         image: [uscisBanner, uscisAtlasClusters, uscisAtlasOverview, uscisAtlasNeighbours, uscisAtlasZoom, uscisGithubRepo, uscisHuggingfaceRepo],
         source_code_link: "https://github.com/0xrphl/USCIS-knowledge-base-full-website",
         huggingface_link: "https://huggingface.co/datasets/0xrphl/USCIS-knowledge-base-full-website",
+      },
+      {
+        name: "Agente AI de Marketing de Activos Multimedia — LLM + GraphRAG + Embeddings",
+        description: "Biblioteca de activos de imágenes impulsada por IA y LLM con búsqueda RAG por grafo de conocimiento y embeddings vectoriales. Analiza 420 imágenes de marketing con Gemini Vision AI, construye un rico grafo de conocimiento con LightRAG GraphRAG (13,604 entidades, 22,958 relaciones), y consulta tu biblioteca de activos por objetos, colores, emociones, escenarios, estados de ánimo y casos de uso de marketing usando recuperación RAG impulsada por LLM. Incluye pipeline de ingesta de 5 fragmentos por imagen, almacenamiento en grafos Neo4j, NanoVectorDB con embeddings OpenAI de 1536 dimensiones, 5 modos de consulta y una SPA Explorer en Vue.js. Dataset pre-ingestado en HuggingFace (~513 MB). Despliegue con Docker Compose.",
+        tags: [
+          { name: "LightRAG", color: "purple-text-gradient" },
+          { name: "GraphRAG", color: "green-text-gradient" },
+          { name: "Neo4j", color: "blue-text-gradient" },
+          { name: "Docker", color: "blue-text-gradient" },
+          { name: "Python", color: "yellow-text-gradient" },
+          { name: "Gemini Vision", color: "red-text-gradient" },
+          { name: "GPT-4o", color: "purple-text-gradient" },
+          { name: "OpenAI Embeddings", color: "orange-text-gradient" },
+          { name: "Grafo de Conocimiento", color: "green-text-gradient" },
+          { name: "NanoVectorDB", color: "pink-text-gradient" },
+          { name: "HuggingFace", color: "yellow-text-gradient" },
+          { name: "Vue.js", color: "green-text-gradient" },
+        ],
+        image: [mediaAgentArchitecture, mediaAgentGraphFull, mediaAgentGraphDemo, mediaAgentQueryDemo, mediaAgentGraphNode, mediaAgentDocMgmt],
+        source_code_link: "https://github.com/0xrphl/Light-RAG-Marketing-Assets-Agent",
+        huggingface_link: "https://huggingface.co/datasets/0xrphl/Light-RAG-Marketing-Assets-Agent",
       },
       {
         name: "MiroFish Neo4j Fork",

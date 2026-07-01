@@ -138,6 +138,12 @@ import uscisAtlasNeighbours from "./uscis-atlas-neighbours.png";
 import uscisAtlasZoom from "./uscis-atlas-zoom.png";
 import uscisGithubRepo from "./uscis-github-repo.png";
 import uscisHuggingfaceRepo from "./uscis-huggingface-repo.png";
+import mediaAgentArchitecture from "./media-agent-architecture.svg";
+import mediaAgentDocMgmt from "./media-agent-document-management.png";
+import mediaAgentGraphFull from "./media-agent-graph-full.png";
+import mediaAgentGraphNode from "./media-agent-graph-node.png";
+import mediaAgentGraphDemo from "./media-agent-graph-demo.png";
+import mediaAgentQueryDemo from "./media-agent-query-demo.png";
 
 export {
   Calendar,
@@ -279,4 +285,10 @@ export {
   uscisAtlasZoom,
   uscisGithubRepo,
   uscisHuggingfaceRepo,
+  mediaAgentArchitecture,
+  mediaAgentDocMgmt,
+  mediaAgentGraphFull,
+  mediaAgentGraphNode,
+  mediaAgentGraphDemo,
+  mediaAgentQueryDemo,
 };

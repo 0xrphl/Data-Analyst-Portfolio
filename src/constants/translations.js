@@ -10,12 +10,12 @@ export const translations = {
 
     // Hero
     greeting: "Hi, I'm",
-    heroDescription: "Data Scientist with engineering expertise, building scalable web dashboards with 3D visuals, using AI and machine learning for data analysis, task automation, and enhancing user experiences to drive impactful results.",
+    heroDescription: "AI Agent & Automation Expert with engineering expertise, building scalable web dashboards with 3D visuals. Specializing in LLM-powered RAG systems, GraphRAG knowledge graphs, vector embeddings, and multi-agent AI pipelines. Leveraging Gemini Vision, GPT-4o, Claude, Neo4j, LightRAG, Docker, and AWS to transform complex data into intelligent, production-ready AI solutions.",
 
     // About
     introduction: "Introduction",
     overview: "Overview.",
-    aboutDescription: "Data Scientist with engineering expertise, building scalable dashboards with 3D visuals and using AI/ML for data analysis, task automation, and impactful results. Experienced with CUDA, closed-source models like ChatGPT and Claude, open-source tools like OCR, Ollama, Llama, and LLMs like DeepSeek V3. Skilled in Docker, AWS (ECS, EC2, ECR), TypeScript, JavaScript, React, Node.js, Three.js, SQL, Python (Pandas, NumPy, Matplotlib), and data visualization tools like Power BI and Tableau. Collaborative, adaptable, and focused on creating scalable solutions.",
+    aboutDescription: "AI Agent & Automation Expert with engineering expertise, building scalable dashboards with 3D visuals and using AI/ML for data analysis, task automation, and impactful results. Specializing in LLM-powered RAG and GraphRAG systems (LightRAG, Neo4j, Milvus, pgvector), vector embeddings (OpenAI 1536-dim), knowledge graph construction, and multi-agent AI pipelines. Experienced with CUDA, closed-source models like GPT-4o, Claude, and Gemini Vision, open-source tools like OCR, Ollama, Llama, LLMs like DeepSeek V3, and platforms like HuggingFace. Skilled in Docker, AWS (ECS, EC2, ECR, S3, Route 53, ALB, CloudFront, RDS, OAuth 2.0), TypeScript, JavaScript, React, Vue.js, Node.js, Three.js, SQL, Python (Pandas, NumPy, Matplotlib), Firecrawl, and data visualization tools like Power BI and Tableau. Collaborative, adaptable, and focused on creating scalable solutions.",
 
     // Experience
     workExperience: "Work Experience.",
@@ -71,12 +71,12 @@ export const translations = {
 
     // Hero
     greeting: "Hola, soy",
-    heroDescription: "Científico de datos con experiencia en ingeniería de metodos, construyendo dashboards web escalables con visualizaciones 3D, utilizando IA y machine learning para análisis de datos, automatización de tareas y mejora de experiencias de usuario para impulsar resultados impactantes.",
+    heroDescription: "Experto en Agentes IA y Automatización con experiencia en ingeniería, construyendo dashboards web escalables con visualizaciones 3D. Especializado en sistemas RAG impulsados por LLM, grafos de conocimiento GraphRAG, embeddings vectoriales y pipelines de IA multi-agente. Aprovechando Gemini Vision, GPT-4o, Claude, Neo4j, LightRAG, Docker y AWS para transformar datos complejos en soluciones IA inteligentes y listas para producción.",
 
     // About
     introduction: "Introducción",
     overview: "Resumen.",
-    aboutDescription: "Científico de datos con experiencia en ingeniería, desarrollando dashboards escalables con visualizaciones 3D y utilizando IA/ML para análisis de datos, automatización de tareas y resultados impactantes. Experimentado con CUDA, modelos cerrados como ChatGPT y Claude, herramientas de código abierto como OCR, Ollama, Llama y LLMs como DeepSeek V3. Competente en Docker, AWS (ECS, EC2, ECR), TypeScript, JavaScript, React, Node.js, Three.js, SQL, Python (Pandas, NumPy, Matplotlib) y herramientas de visualización de datos como Power BI y Tableau. Colaborativo, adaptable y enfocado en crear soluciones escalables.",
+    aboutDescription: "Experto en Agentes IA y Automatización con experiencia en ingeniería, desarrollando dashboards escalables con visualizaciones 3D y utilizando IA/ML para análisis de datos, automatización de tareas y resultados impactantes. Especializado en sistemas RAG y GraphRAG impulsados por LLM (LightRAG, Neo4j, Milvus, pgvector), embeddings vectoriales (OpenAI 1536-dim), construcción de grafos de conocimiento y pipelines de IA multi-agente. Experimentado con CUDA, modelos cerrados como GPT-4o, Claude y Gemini Vision, herramientas de código abierto como OCR, Ollama, Llama, LLMs como DeepSeek V3 y plataformas como HuggingFace. Competente en Docker, AWS (ECS, EC2, ECR, S3, Route 53, ALB, CloudFront, RDS, OAuth 2.0), TypeScript, JavaScript, React, Vue.js, Node.js, Three.js, SQL, Python (Pandas, NumPy, Matplotlib), Firecrawl y herramientas de visualización de datos como Power BI y Tableau. Colaborativo, adaptable y enfocado en crear soluciones escalables.",
 
     // Experience
     workExperience: "Experiencia Laboral.",

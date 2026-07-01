@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 1120" font-family="Segoe UI, sans-serif">
+  <defs>
+    <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#6c8cff"/><stop offset="100%" stop-color="#a78bfa"/></linearGradient>
+    <linearGradient id="g2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#f472b6"/><stop offset="100%" stop-color="#fb923c"/></linearGradient>
+    <linearGradient id="g3" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#4ade80"/><stop offset="100%" stop-color="#22d3ee"/></linearGradient>
+    <linearGradient id="g4" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#fbbf24"/><stop offset="100%" stop-color="#f59e0b"/></linearGradient>
+    <linearGradient id="g5" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#f87171"/><stop offset="100%" stop-color="#dc2626"/></linearGradient>
+    <linearGradient id="g6" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#38bdf8"/><stop offset="100%" stop-color="#818cf8"/></linearGradient>
+    <filter id="shadow"><feDropShadow dx="0" dy="2" stdDeviation="4" flood-opacity=".2"/></filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#8b8fa8"/>
+    </marker>
+  </defs>
+<rect width="1400" height="1120" rx="16" fill="#0b0d13"/>
+<text x="700" y="36" text-anchor="middle" fill="#e4e6f0" font-size="22" font-weight="700">Media Assets Marketing Agent — End-to-End GraphRAG Pipeline</text>
+<text x="700" y="58" text-anchor="middle" fill="#8b8fa8" font-size="12" font-weight="normal">Ingestion · Object Extraction · Vector Embeddings · Knowledge Graph · Multi-Mode Retrieval</text>
+<rect x="30" y="90" width="190" height="150" rx="12" fill="#151822" stroke="#2d3148" stroke-width="1" filter="url(#shadow)" />
+<text x="125" y="122" text-anchor="middle" fill="#e4e6f0" font-size="26" font-weight="normal">🖼️</text>
+<text x="125" y="146" text-anchor="middle" fill="#e4e6f0" font-size="13" font-weight="700">419 Images</text>
+<text x="125" y="164" text-anchor="middle" fill="#8b8fa8" font-size="10" font-weight="normal">JPG / PNG / WebP</text>
+<text x="125" y="180" text-anchor="middle" fill="#8b8fa8" font-size="10" font-weight="normal">Stock + Creative Assets</text>
+<text x="125" y="200" text-anchor="middle" fill="#6c8cff" font-size="10" font-weight="normal">imgs/ folder</text>
+<text x="125" y="220" text-anchor="middle" fill="#8b8fa8" font-size="9" font-weight="normal">~2-4 MB avg / image</text>
+<line x1="220" y1="165" x2="270" y2="165" stroke="#8b8fa8" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="275" y="90" width="220" height="150" rx="12" fill="#151822" stroke="url(#g2)" stroke-width="1.5" filter="url(#shadow)" />
+<text x="385" y="122" text-anchor="middle" fill="#e4e6f0" font-size="26" font-weight="normal">🔮</text>
+<text x="385" y="146" text-anchor="middle" fill="#e4e6f0" font-size="13" font-weight="700">Gemini Vision Analysis</text>
+<text x="385" y="164" text-anchor="middle" fill="#8b8fa8" font-size="10" font-weight="normal">gemini-2.5-flash</text>
+<text x="385" y="182" text-anchor="middle" fill="#8b8fa8" font-size="10" font-weight="normal">Object &amp;amp; scene detection</text>
+<text x="385" y="198" text-anchor="middle" fill="#8b8fa8" font-size="10" font-weight="normal">Colors · People · Mood · Tags</text>
+<text x="385" y="216" text-anchor="middle" fill="#f472b6" font-size="9" font-weight="normal">Structured 8-section prompt</text>
+<line x1="495" y1="165" x2="545" y2="165" stroke="#8b8fa8" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="550" y="90" width="230" height="150" rx="12" fill="#151822" stroke="url(#g3)" stroke-width="1.5" filter="url(#shadow)" />
+<text x="665" y="122" text-anchor="middle" fill="#e4e6f0" font-size="26" font-weight="normal">📦</text>
+<text x="665" y="146" text-anchor="middle" fill="#e4e6f0" font-size="13" font-weight="700">5 Chunks / Image</text>
+<text x="665" y="164" text-anchor="middle" fill="#8b8fa8" font-size="10" font-weight="normal">Core · Visual · People/Setting</text>
+<text x="665" y="180" text-anchor="middle" fill="#8b8fa8" font-size="10" font-weight="normal">Marketing · Full Analysis</text>
+<text x="665" y="200" text-anchor="middle" fill="#4ade80" font-size="10" font-weight="600">2,095 documents total</text>
+<text x="665" y="216" text-anchor="middle" fill="#8b8fa8" font-size="9" font-weight="normal">CHUNK_SIZE=1200 / overlap=200</text>
+<line x1="780" y1="165" x2="830" y2="165" stroke="#8b8fa8" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="835" y="70" width="260" height="190" rx="12" fill="#151822" stroke="url(#g4)" stroke-width="1.5" filter="url(#shadow)" />
+<text x="965" y="102" text-anchor="middle" fill="#e4e6f0" font-size="26" font-weight="normal">🧠</text>
+<text x="965" y="126" text-anchor="middle" fill="#e4e6f0" font-size="13" font-weight="700">LightRAG Extraction (GPT-4o)</text>
+<text x="965" y="146" text-anchor="middle" fill="#8b8fa8" font-size="10" font-weight="normal">Entity + Relationship extraction</text>
+<text x="965" y="164" text-anchor="middle" fill="#fbbf24" font-size="11" font-weight="600">13,604 entities (raw)</text>
+<text x="965" y="180" text-anchor="middle" fill="#fbbf24" font-size="11" font-weight="600">22,958 relationships (raw)</text>
+<text x="965" y="198" text-anchor="middle" fill="#8b8fa8" font-size="10" font-weight="normal">→ 2,094 unique entities</text>
+<text x="965" y="214" text-anchor="middle" fill="#8b8fa8" font-size="10" font-weight="normal">→ 2,039 unique relations</text>
+<text x="965" y="234" text-anchor="middle" fill="#8b8fa8" font-size="9" font-weight="normal">Entity types: object, person, place,</text>
+<text x="965" y="248" text-anchor="middle" fill="#8b8fa8" font-size="9" font-weight="normal">color, mood, industry, use-case</text>
+<line x1="1095" y1="165" x2="1145" y2="165" stroke="#8b8fa8" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="1150" y="70" width="220" height="190" rx="12" fill="#151822" stroke="url(#g6)" stroke-width="1.5" filter="url(#shadow)" />
+<text x="1260" y="102" text-anchor="middle" fill="#e4e6f0" font-size="26" font-weight="normal">🧬</text>
+<text x="1260" y="126" text-anchor="middle" fill="#e4e6f0" font-size="13" font-weight="700">Embeddings</text>
+<text x="1260" y="146" text-anchor="middle" fill="#8b8fa8" font-size="10" font-weight="normal">text-embedding-3-small</text>
+<text x="1260" y="164" text-anchor="middle" fill="#38bdf8" font-size="12" font-weight="700">1536 dimensions</text>
+<text x="1260" y="184" text-anchor="middle" fill="#8b8fa8" font-size="9" font-weight="normal">Entities · Relations · Chunks</text>
+<text x="1260" y="202" text-anchor="middle" fill="#8b8fa8" font-size="9" font-weight="normal">3 separate vector indexes</text>
+<text x="1260" y="222" text-anchor="middle" fill="#8b8fa8" font-size="9" font-weight="normal">Cosine similarity search</text>
+<text x="1260" y="240" text-anchor="middle" fill="#8b8fa8" font-size="9" font-weight="normal">~466 MB total vectors</text>
+<line x1="965" y1="260" x2="965" y2="310" stroke="#8b8fa8" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="1260" y1="260" x2="1260" y2="310" stroke="#8b8fa8" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="700" y="300" text-anchor="middle" fill="#8b8fa8" font-size="13" font-weight="700">STORAGE LAYER</text>
+<rect x="835" y="315" width="260" height="130" rx="12" fill="#151822" stroke="url(#g5)" stroke-width="1.5" filter="url(#shadow)" />
+<text x="965" y="345" text-anchor="middle" fill="#e4e6f0" font-size="24" font-weight="normal">🕸️</text>
+<text x="965" y="368" text-anchor="middle" fill="#e4e6f0" font-size="13" font-weight="700">Neo4j Graph DB</text>
+<text x="965" y="386" text-anchor="middle" fill="#8b8fa8" font-size="10" font-weight="normal">GRAPH_STORAGE=Neo4JStorage</text>
+<text x="965" y="404" text-anchor="middle" fill="#8b8fa8" font-size="10" font-weight="normal">13,604 nodes · 22,958 edges</text>
+<text x="965" y="422" text-anchor="middle" fill="#8b8fa8" font-size="9" font-weight="normal">Community detection (Leiden)</text>
+<text x="965" y="436" text-anchor="middle" fill="#8b8fa8" font-size="9" font-weight="normal">graph_chunk_entity_relation.graphml (20MB)</text>
+<rect x="1150" y="315" width="220" height="130" rx="12" fill="#151822" stroke="url(#g6)" stroke-width="1.5" filter="url(#shadow)" />
+<text x="1260" y="345" text-anchor="middle" fill="#e4e6f0" font-size="24" font-weight="normal">🗂️</text>
+<text x="1260" y="368" text-anchor="middle" fill="#e4e6f0" font-size="13" font-weight="700">NanoVectorDB + KV Store</text>
+<text x="1260" y="386" text-anchor="middle" fill="#8b8fa8" font-size="10" font-weight="normal">vdb_entities.json (165 MB)</text>
+<text x="1260" y="402" text-anchor="middle" fill="#8b8fa8" font-size="10" font-weight="normal">vdb_relationships.json (274 MB)</text>
+<text x="1260" y="418" text-anchor="middle" fill="#8b8fa8" font-size="10" font-weight="normal">vdb_chunks.json (27 MB)</text>
+<text x="1260" y="434" text-anchor="middle" fill="#8b8fa8" font-size="9" font-weight="normal">JsonKVStorage (docs/status/cache)</text>
+<line x1="965" y1="445" x2="965" y2="500" stroke="#8b8fa8" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="1260" y1="445" x2="1260" y2="500" stroke="#8b8fa8" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="965" y1="500" x2="1260" y2="500" stroke="#8b8fa8" stroke-width="2"/>
+<line x1="1112" y1="500" x2="1112" y2="530" stroke="#8b8fa8" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="700" y="560" text-anchor="middle" fill="#8b8fa8" font-size="13" font-weight="700">RETRIEVAL — 5 QUERY MODES (query.py)</text>
+<rect x="60" y="580" width="220" height="120" rx="12" fill="#151822" stroke="#2d3148" stroke-width="1" filter="url(#shadow)" />
+<text x="170" y="606" text-anchor="middle" fill="#e4e6f0" font-size="13" font-weight="700">naive</text>
+<text x="170" y="626" text-anchor="middle" fill="#8b8fa8" font-size="9" font-weight="normal">Pure vector similarity</text>
+<text x="170" y="642" text-anchor="middle" fill="#8b8fa8" font-size="9" font-weight="normal">over chunk embeddings</text>
+<text x="170" y="658" text-anchor="middle" fill="#8b8fa8" font-size="9" font-weight="normal">No graph traversal</text>
+<text x="170" y="678" text-anchor="middle" fill="#4ade80" font-size="9" font-weight="normal">Fastest, least contextual</text>
+<rect x="300" y="580" width="220" height="120" rx="12" fill="#151822" stroke="#2d3148" stroke-width="1" filter="url(#shadow)" />
+<text x="410" y="606" text-anchor="middle" fill="#e4e6f0" font-size="13" font-weight="700">local</text>
+<text x="410" y="626" text-anchor="middle" fill="#8b8fa8" font-size="9" font-weight="normal">Entity-centric neighborhood</text>
+<text x="410" y="642" text-anchor="middle" fill="#8b8fa8" font-size="9" font-weight="normal">1-hop graph expansion from</text>
+<text x="410" y="658" text-anchor="middle" fill="#8b8fa8" font-size="9" font-weight="normal">matched entities</text>
+<text x="410" y="678" text-anchor="middle" fill="#4ade80" font-size="9" font-weight="normal">Good for specific objects</text>
+<rect x="540" y="580" width="220" height="120" rx="12" fill="#151822" stroke="#2d3148" stroke-width="1" filter="url(#shadow)" />
+<text x="650" y="606" text-anchor="middle" fill="#e4e6f0" font-size="13" font-weight="700">global</text>
+<text x="650" y="626" text-anchor="middle" fill="#8b8fa8" font-size="9" font-weight="normal">Community / theme-level</text>
+<text x="650" y="642" text-anchor="middle" fill="#8b8fa8" font-size="9" font-weight="normal">summaries via Leiden clusters</text>
+<text x="650" y="658" text-anchor="middle" fill="#8b8fa8" font-size="9" font-weight="normal">on the knowledge graph</text>
+<text x="650" y="678" text-anchor="middle" fill="#4ade80" font-size="9" font-weight="normal">Good for broad themes</text>
+<rect x="780" y="580" width="220" height="120" rx="12" fill="#151822" stroke="url(#g1)" stroke-width="1.5" filter="url(#shadow)" />
+<text x="890" y="606" text-anchor="middle" fill="#e4e6f0" font-size="13" font-weight="700">hybrid (default)</text>
+<text x="890" y="626" text-anchor="middle" fill="#8b8fa8" font-size="9" font-weight="normal">local + global combined</text>
+<text x="890" y="642" text-anchor="middle" fill="#8b8fa8" font-size="9" font-weight="normal">Entities + community context</text>
+<text x="890" y="658" text-anchor="middle" fill="#8b8fa8" font-size="9" font-weight="normal">merged into one context window</text>
+<text x="890" y="678" text-anchor="middle" fill="#a78bfa" font-size="9" font-weight="normal">Balanced precision/recall</text>
+<rect x="1020" y="580" width="220" height="120" rx="12" fill="#151822" stroke="url(#g2)" stroke-width="1.5" filter="url(#shadow)" />
+<text x="1130" y="606" text-anchor="middle" fill="#e4e6f0" font-size="13" font-weight="700">mix</text>
+<text x="1130" y="626" text-anchor="middle" fill="#8b8fa8" font-size="9" font-weight="normal">naive + local + global fused</text>
+<text x="1130" y="642" text-anchor="middle" fill="#8b8fa8" font-size="9" font-weight="normal">Vector search AND full graph</text>
+<text x="1130" y="658" text-anchor="middle" fill="#8b8fa8" font-size="9" font-weight="normal">traversal in one reranked pass</text>
+<text x="1130" y="678" text-anchor="middle" fill="#f472b6" font-size="9" font-weight="normal">Most thorough, slowest</text>
+<line x1="700" y1="700" x2="700" y2="740" stroke="#8b8fa8" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="500" y="745" width="400" height="110" rx="12" fill="#151822" stroke="url(#g4)" stroke-width="1.5" filter="url(#shadow)" />
+<text x="700" y="775" text-anchor="middle" fill="#e4e6f0" font-size="24" font-weight="normal">✨</text>
+<text x="700" y="800" text-anchor="middle" fill="#e4e6f0" font-size="13" font-weight="700">GPT-4o Answer Synthesis</text>
+<text x="700" y="818" text-anchor="middle" fill="#8b8fa8" font-size="10" font-weight="normal">Retrieved context → natural language response</text>
+<text x="700" y="834" text-anchor="middle" fill="#8b8fa8" font-size="10" font-weight="normal">+ matched image asset filenames for the Explorer app</text>
+<text x="700" y="870" text-anchor="middle" fill="#8b8fa8" font-size="13" font-weight="700">INGESTION DETAIL — ingest.py (Gemini Vision Prompt → 5-Chunk Strategy)</text>
+<rect x="30" y="885" width="450" height="195" rx="12" fill="#151822" stroke="url(#g2)" stroke-width="1.5" filter="url(#shadow)" />
+<text x="255" y="910" text-anchor="middle" fill="#e4e6f0" font-size="12" font-weight="700">Gemini Vision — 8-Section Structured Prompt</text>
+<text x="255" y="928" text-anchor="middle" fill="#8b8fa8" font-size="9" font-weight="normal">Each image is analyzed with a detailed prompt that extracts:</text>
+<text x="55" y="946" text-anchor="start" fill="#f472b6" font-size="9" font-weight="normal">1.</text>
+<text x="72" y="946" text-anchor="start" fill="#e4e6f0" font-size="9" font-weight="600">CORE DESCRIPTION</text>
+<text x="222" y="946" text-anchor="start" fill="#8b8fa8" font-size="8" font-weight="normal">— subject, scene, composition (2-3 sentences)</text>
+<text x="55" y="961" text-anchor="start" fill="#f472b6" font-size="9" font-weight="normal">2.</text>
+<text x="72" y="961" text-anchor="start" fill="#e4e6f0" font-size="9" font-weight="600">OBJECTS &amp; ELEMENTS</text>
+<text x="222" y="961" text-anchor="start" fill="#8b8fa8" font-size="8" font-weight="normal">— exhaustive list of every visible item/prop/animal</text>
+<text x="55" y="976" text-anchor="start" fill="#f472b6" font-size="9" font-weight="normal">3.</text>
+<text x="72" y="976" text-anchor="start" fill="#e4e6f0" font-size="9" font-weight="600">COLORS &amp; PALETTE</text>
+<text x="222" y="976" text-anchor="start" fill="#8b8fa8" font-size="8" font-weight="normal">— primary/secondary colors, mood, harmony</text>
+<text x="55" y="991" text-anchor="start" fill="#f472b6" font-size="9" font-weight="normal">4.</text>
+<text x="72" y="991" text-anchor="start" fill="#e4e6f0" font-size="9" font-weight="600">PEOPLE &amp; DEMOGRAPHICS</text>
+<text x="222" y="991" text-anchor="start" fill="#8b8fa8" font-size="8" font-weight="normal">— count, age, clothing, expressions, activities</text>
+<text x="55" y="1006" text-anchor="start" fill="#f472b6" font-size="9" font-weight="normal">5.</text>
+<text x="72" y="1006" text-anchor="start" fill="#e4e6f0" font-size="9" font-weight="600">SETTING &amp; PLACE</text>
+<text x="222" y="1006" text-anchor="start" fill="#8b8fa8" font-size="8" font-weight="normal">— indoor/outdoor, architecture, time of day, geography</text>
+<text x="55" y="1021" text-anchor="start" fill="#f472b6" font-size="9" font-weight="normal">6.</text>
+<text x="72" y="1021" text-anchor="start" fill="#e4e6f0" font-size="9" font-weight="600">PHOTOGRAPHY &amp; STYLE</text>
+<text x="222" y="1021" text-anchor="start" fill="#8b8fa8" font-size="8" font-weight="normal">— shot type, angle, lighting, focus, post-processing</text>
+<text x="55" y="1036" text-anchor="start" fill="#f472b6" font-size="9" font-weight="normal">7.</text>
+<text x="72" y="1036" text-anchor="start" fill="#e4e6f0" font-size="9" font-weight="600">MOOD &amp; ATMOSPHERE</text>
+<text x="222" y="1036" text-anchor="start" fill="#8b8fa8" font-size="8" font-weight="normal">— 3-5 mood descriptors, energy level, emotional tone</text>
+<text x="55" y="1051" text-anchor="start" fill="#f472b6" font-size="9" font-weight="normal">8.</text>
+<text x="72" y="1051" text-anchor="start" fill="#e4e6f0" font-size="9" font-weight="600">MARKETING USE CASES + TAGS</text>
+<text x="222" y="1051" text-anchor="start" fill="#8b8fa8" font-size="8" font-weight="normal">— industries, campaigns, audiences, 30-50 tags</text>
+<rect x="500" y="885" width="440" height="195" rx="12" fill="#151822" stroke="url(#g3)" stroke-width="1.5" filter="url(#shadow)" />
+<text x="720" y="910" text-anchor="middle" fill="#e4e6f0" font-size="12" font-weight="700">Why 5 Chunks Per Image?</text>
+<text x="720" y="928" text-anchor="middle" fill="#8b8fa8" font-size="9" font-weight="normal">Splitting maximizes entity extraction &amp; graph connectivity:</text>
+<text x="520" y="948" text-anchor="start" fill="#4ade80" font-size="9" font-weight="normal">📋 Core</text>
+<text x="590" y="948" text-anchor="start" fill="#e4e6f0" font-size="9" font-weight="600">Description + Objects</text>
+<text x="590" y="962" text-anchor="start" fill="#8b8fa8" font-size="8" font-weight="normal">Grounds identity: what IS this image</text>
+<text x="520" y="980" text-anchor="start" fill="#4ade80" font-size="9" font-weight="normal">🎨 Visual</text>
+<text x="590" y="980" text-anchor="start" fill="#e4e6f0" font-size="9" font-weight="600">Colors + Photography</text>
+<text x="590" y="994" text-anchor="start" fill="#8b8fa8" font-size="8" font-weight="normal">Enables style/palette/technique search</text>
+<text x="520" y="1012" text-anchor="start" fill="#4ade80" font-size="9" font-weight="normal">👥 People</text>
+<text x="590" y="1012" text-anchor="start" fill="#e4e6f0" font-size="9" font-weight="600">Demographics + Setting + Mood</text>
+<text x="590" y="1026" text-anchor="start" fill="#8b8fa8" font-size="8" font-weight="normal">Human context &amp; emotional matching</text>
+<text x="520" y="1044" text-anchor="start" fill="#4ade80" font-size="9" font-weight="normal">📣 Marketing</text>
+<text x="590" y="1044" text-anchor="start" fill="#e4e6f0" font-size="9" font-weight="600">Industries + Tags</text>
+<text x="590" y="1058" text-anchor="start" fill="#8b8fa8" font-size="8" font-weight="normal">Direct campaign/audience targeting</text>
+<text x="520" y="1076" text-anchor="start" fill="#4ade80" font-size="9" font-weight="normal">📑 Full</text>
+<text x="590" y="1076" text-anchor="start" fill="#e4e6f0" font-size="9" font-weight="600">Complete analysis (all 8 sections)</text>
+<text x="590" y="1090" text-anchor="start" fill="#8b8fa8" font-size="8" font-weight="normal">Holistic cross-section graph edges</text>
+<text x="720" y="1065" text-anchor="middle" fill="#4ade80" font-size="8" font-weight="normal">Full chunk enables LightRAG to find cross-domain entity links</text>
+<rect x="960" y="885" width="410" height="195" rx="12" fill="#151822" stroke="#2d3148" stroke-width="1" filter="url(#shadow)" />
+<text x="1165" y="910" text-anchor="middle" fill="#e4e6f0" font-size="12" font-weight="700">ingest.py — Pipeline Flow</text>
+<text x="980" y="930" text-anchor="start" fill="#8b8fa8" font-size="9" font-weight="normal">1. Scan imgs/ for JPG/PNG/WebP files</text>
+<text x="980" y="945" text-anchor="start" fill="#8b8fa8" font-size="9" font-weight="normal">2. For each image: base64 encode + send to Gemini API</text>
+<text x="980" y="960" text-anchor="start" fill="#8b8fa8" font-size="9" font-weight="normal">3. Parse 8-section response into structured dict</text>
+<text x="980" y="975" text-anchor="start" fill="#8b8fa8" font-size="9" font-weight="normal">4. build_chunks() → 5 labeled text documents</text>
+<text x="980" y="990" text-anchor="start" fill="#8b8fa8" font-size="9" font-weight="normal">5. POST each chunk to LightRAG /documents/text</text>
+<text x="980" y="1005" text-anchor="start" fill="#8b8fa8" font-size="9" font-weight="normal">6. LightRAG: GPT-4o entity extraction + embedding</text>
+<text x="980" y="1020" text-anchor="start" fill="#8b8fa8" font-size="9" font-weight="normal">7. Store: NanoVectorDB (vectors) + Neo4j (graph)</text>
+<text x="980" y="1035" text-anchor="start" fill="#8b8fa8" font-size="9" font-weight="normal">8. Save progress to ingestion_progress.json</text>
+<text x="980" y="1050" text-anchor="start" fill="#8b8fa8" font-size="9" font-weight="normal"></text>
+<text x="980" y="1065" text-anchor="start" fill="#6c8cff" font-size="9" font-weight="normal">Flags: --resume  --batch-size  --dry-run  --limit  --clear</text>
+<text x="700" y="1105" text-anchor="middle" fill="#8b8fa8" font-size="11" font-weight="normal">Media Assets Marketing Agent — LightRAG GraphRAG Pipeline · 419 images · 2,095 chunks · 2,094 entities · 2,039 relations · 1536-dim embeddings</text>
+</svg>

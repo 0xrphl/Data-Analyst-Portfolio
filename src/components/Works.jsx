@@ -2,7 +2,7 @@ import React, { useEffect, useState, useCallback } from "react";
 import { Tilt } from "react-tilt";
 import { motion } from "framer-motion";
 import { styles } from "../styles";
-import { github, huggingfaceIcon } from "../assets";
+import { github, HuggingFace } from "../assets";
 import { SectionWrapper } from "../hoc";
 import { projects } from "../constants";
 import { fadeIn, textVariant } from "../utils/motion";
@@ -148,7 +148,7 @@ const ProjectCard = ({
                   style={{ pointerEvents: 'auto', background: 'linear-gradient(135deg, #FFD21E 0%, #FFB800 100%)' }}
                 >
                   <img
-                    src={huggingfaceIcon}
+                    src={HuggingFace}
                     alt='huggingface dataset'
                     className='w-3/4 h-3/4 object-contain'
                   />

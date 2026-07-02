@@ -131,6 +131,7 @@ import mirofishSimulationRunning from "./mirofish-simulation-running.png";
 import mirofishFinalReport from "./mirofish-final-report.png";
 import mirofishBanner from "./mirofish-banner.png";
 import huggingfaceIcon from "./huggingface-icon.svg";
+import uscisRepoCover from "./uscis-repo-cover.png";
 import uscisBanner from "./uscis-banner.svg";
 import uscisAtlasClusters from "./uscis-atlas-clusters.png";
 import uscisAtlasOverview from "./uscis-atlas-overview.png";
@@ -278,6 +279,7 @@ export {
   mirofishFinalReport,
   mirofishBanner,
   huggingfaceIcon,
+  uscisRepoCover,
   uscisBanner,
   uscisAtlasClusters,
   uscisAtlasOverview,

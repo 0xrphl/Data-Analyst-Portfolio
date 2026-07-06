@@ -138,7 +138,20 @@ import {
     mediaAgentGraphNode,
     mediaAgentGraphDemo,
     mediaAgentQueryDemo,
+    solarDiagramSystem,
+    solarDiagramEnergyFlow,
+    solarDiagramProfiles,
+    solarDiagramNetwork,
+    solarDiagramChannels,
+    solarDiagramElectrical,
+    solarDiagramDecision,
+    solarDiagramCircuitDashboard,
+    solarDiagramHouseIsometricMiners,
+    solarDiagramHouseIsometricProject,
   } from "../assets";
+
+
+
   
   // Category definitions with colors for icosahedron surfaces (darkened for 3D look)
   export const TECH_CATEGORIES = {
@@ -1603,7 +1616,31 @@ import {
   const projects = {
     en: [
     {
+      name: "Solar Crypto Mining Farm — Autonomous Surplus Maximization Control",
+      description:
+        "A fully autonomous solar-powered Bitcoin mining system built on ESP32-S3 that dynamically scales hash power (0–2001W, 0–104.5 TH/s) to match real-time solar surplus — mining ONLY with free solar energy, zero grid consumption, ever. Reads a 6-channel Refoss energy monitor every 30s, calculates solar surplus, and auto-switches between 16 mining profiles across a BitAxe, NerdQAxe+, Octaxe, and Canaan Avalon Q. Includes Tasmota relay control, CGMiner TCP API integration, power-outage state recovery, and full Supabase cloud logging. Features a live public 3D dashboard with real-time energy gauges, historical charts, mining fleet status, and a password-gated admin panel to remotely control miners.",
+      tags: [
+        { name: "ESP32-S3", color: "blue-text-gradient" },
+        { name: "Solar Energy", color: "green-text-gradient" },
+        { name: "Bitcoin Mining", color: "orange-text-gradient" },
+        { name: "Supabase", color: "green-text-gradient" },
+        { name: "IoT", color: "purple-text-gradient" },
+        { name: "Tasmota", color: "yellow-text-gradient" },
+        { name: "C / C++", color: "gray-text-gradient" },
+        { name: "Arduino", color: "blue-text-gradient" },
+        { name: "Three.js Dashboard", color: "pink-text-gradient" },
+        { name: "Real-Time Energy Monitoring", color: "orange-text-gradient" },
+        { name: "AntPool", color: "red-text-gradient" },
+      ],
+      image: [solarDiagramCircuitDashboard, solarDiagramHouseIsometricMiners, solarDiagramHouseIsometricProject, solarDiagramSystem, solarDiagramEnergyFlow, solarDiagramProfiles, solarDiagramNetwork, solarDiagramChannels, solarDiagramElectrical, solarDiagramDecision],
+      source_code_link: "https://github.com/0xrphl/Solar-crypto-mining-farm-maximization-control",
+      live_demo_link: "/solar-mining-cluster",
+    },
+    {
       name: "USCIS Knowledge Base",
+
+
+
       description:
         "A comprehensive knowledge base of 99,489 content chunks from 4,666 USCIS pages with OpenAI embeddings (1536-dim), ready for RAG, semantic search, and GraphRAG. Scraped with Firecrawl, visualized with Apple's Embedding Atlas (UMAP clusters), stored in PostgreSQL+pgvector, Milvus, and Neo4j. Dataset hosted on HuggingFace. One-command Docker Compose deployment with 7 services.",
       tags: [
@@ -1874,7 +1911,31 @@ import {
     ],
     es: [
       {
+        name: "Granja Solar de Minería Cripto — Control Autónomo de Maximización de Excedente",
+        description:
+          "Un sistema autónomo de minería de Bitcoin alimentado por energía solar, construido sobre ESP32-S3, que escala dinámicamente la potencia de hash (0–2001W, 0–104.5 TH/s) para igualar el excedente solar en tiempo real — minando ÚNICAMENTE con energía solar gratuita, cero consumo de red eléctrica, siempre. Lee un monitor de energía Refoss de 6 canales cada 30s, calcula el excedente solar y cambia automáticamente entre 16 perfiles de minería a través de un BitAxe, NerdQAxe+, Octaxe y Canaan Avalon Q. Incluye control de relés Tasmota, integración con la API TCP de CGMiner, recuperación de estado ante cortes de energía y registro completo en la nube con Supabase. Cuenta con un dashboard 3D público en vivo con medidores de energía en tiempo real, gráficos históricos, estado de la flota de mineros y un panel de administración protegido por contraseña para controlar los mineros de forma remota.",
+        tags: [
+          { name: "ESP32-S3", color: "blue-text-gradient" },
+          { name: "Energía Solar", color: "green-text-gradient" },
+          { name: "Minería Bitcoin", color: "orange-text-gradient" },
+          { name: "Supabase", color: "green-text-gradient" },
+          { name: "IoT", color: "purple-text-gradient" },
+          { name: "Tasmota", color: "yellow-text-gradient" },
+          { name: "C / C++", color: "gray-text-gradient" },
+          { name: "Arduino", color: "blue-text-gradient" },
+          { name: "Dashboard Three.js", color: "pink-text-gradient" },
+          { name: "Monitoreo de Energía en Tiempo Real", color: "orange-text-gradient" },
+          { name: "AntPool", color: "red-text-gradient" },
+        ],
+        image: [solarDiagramCircuitDashboard, solarDiagramHouseIsometricMiners, solarDiagramHouseIsometricProject, solarDiagramSystem, solarDiagramEnergyFlow, solarDiagramProfiles, solarDiagramNetwork, solarDiagramChannels, solarDiagramElectrical, solarDiagramDecision],
+        source_code_link: "https://github.com/0xrphl/Solar-crypto-mining-farm-maximization-control",
+        live_demo_link: "/solar-mining-cluster",
+      },
+      {
         name: "Base de Conocimiento USCIS",
+
+
+
         description: "Una base de conocimiento integral de 99,489 fragmentos de contenido de 4,666 páginas de USCIS con embeddings de OpenAI (1536-dim), lista para RAG, búsqueda semántica y GraphRAG. Scrapeado con Firecrawl, visualizado con Embedding Atlas de Apple (clusters UMAP), almacenado en PostgreSQL+pgvector, Milvus y Neo4j. Dataset alojado en HuggingFace. Despliegue con un solo comando Docker Compose con 7 servicios.",
         tags: [
           { name: "IA", color: "purple-text-gradient" },

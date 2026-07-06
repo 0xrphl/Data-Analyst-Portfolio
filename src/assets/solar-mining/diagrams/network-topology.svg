@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 320" font-family="Segoe UI,Arial,sans-serif">
+  <rect width="800" height="320" fill="#f8f9fa" rx="10"/>
+  <text x="400" y="25" text-anchor="middle" font-size="15" font-weight="700" fill="#222">Network Topology - WiFi 2.4GHz (FamiliaSanchez.)</text>
+  <!-- Router -->
+  <rect x="320" y="45" width="160" height="40" fill="#333" rx="8"/>
+  <text x="400" y="70" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">WiFi Router</text>
+  <!-- Devices -->
+  <rect x="30" y="120" width="130" height="55" fill="#764ba2" rx="6"/>
+  <text x="95" y="140" text-anchor="middle" font-size="10" font-weight="600" fill="#fff">ESP32-S3</text>
+  <text x="95" y="155" text-anchor="middle" font-size="8" fill="#ddd">192.168.1.26</text>
+  <text x="95" y="168" text-anchor="middle" font-size="7" fill="#bbb">HTTP :80</text>
+
+  <rect x="180" y="120" width="130" height="55" fill="#FF8C00" rx="6"/>
+  <text x="245" y="140" text-anchor="middle" font-size="10" font-weight="600" fill="#fff">Refoss EM06P</text>
+  <text x="245" y="155" text-anchor="middle" font-size="8" fill="#fff">192.168.1.82</text>
+  <text x="245" y="168" text-anchor="middle" font-size="7" fill="#ddd">HTTP RPC</text>
+
+  <rect x="330" y="120" width="130" height="55" fill="#00b09b" rx="6"/>
+  <text x="395" y="140" text-anchor="middle" font-size="10" font-weight="600" fill="#fff">Tasmota Relay</text>
+  <text x="395" y="155" text-anchor="middle" font-size="8" fill="#fff">192.168.1.78</text>
+  <text x="395" y="168" text-anchor="middle" font-size="7" fill="#ddd">HTTP cmnd</text>
+
+  <rect x="30" y="210" width="130" height="55" fill="#667eea" rx="6"/>
+  <text x="95" y="230" text-anchor="middle" font-size="10" font-weight="600" fill="#fff">BitAxe Rafa</text>
+  <text x="95" y="245" text-anchor="middle" font-size="8" fill="#fff">192.168.1.21</text>
+  <text x="95" y="258" text-anchor="middle" font-size="7" fill="#ddd">HTTP :80 | 21W</text>
+
+  <rect x="180" y="210" width="130" height="55" fill="#667eea" rx="6"/>
+  <text x="245" y="230" text-anchor="middle" font-size="10" font-weight="600" fill="#fff">NerdQAxe+</text>
+  <text x="245" y="245" text-anchor="middle" font-size="8" fill="#fff">192.168.1.28</text>
+  <text x="245" y="258" text-anchor="middle" font-size="7" fill="#ddd">HTTP :80 | 60W</text>
+
+  <rect x="330" y="210" width="130" height="55" fill="#667eea" rx="6"/>
+  <text x="395" y="230" text-anchor="middle" font-size="10" font-weight="600" fill="#fff">Octaxe</text>
+  <text x="395" y="245" text-anchor="middle" font-size="8" fill="#fff">192.168.1.37</text>
+  <text x="395" y="258" text-anchor="middle" font-size="7" fill="#ddd">HTTP :80 | 180W</text>
+
+  <rect x="480" y="210" width="130" height="55" fill="#fa709a" rx="6"/>
+  <text x="545" y="230" text-anchor="middle" font-size="10" font-weight="600" fill="#fff">Avalon Q</text>
+  <text x="545" y="245" text-anchor="middle" font-size="8" fill="#fff">192.168.1.51</text>
+  <text x="545" y="258" text-anchor="middle" font-size="7" fill="#ddd">TCP :4028 | 800-1720W</text>
+
+  <rect x="630" y="120" width="140" height="55" fill="#3ecf8e" rx="6"/>
+  <text x="700" y="140" text-anchor="middle" font-size="10" font-weight="600" fill="#fff">Supabase Cloud</text>
+  <text x="700" y="155" text-anchor="middle" font-size="8" fill="#fff">PostgreSQL</text>
+  <text x="700" y="168" text-anchor="middle" font-size="7" fill="#ddd">HTTPS REST</text>
+
+  <!-- Lines to router -->
+  <line x1="95" y1="120" x2="350" y2="85" stroke="#764ba2" stroke-width="1.5"/>
+  <line x1="245" y1="120" x2="380" y2="85" stroke="#FF8C00" stroke-width="1.5"/>
+  <line x1="395" y1="120" x2="400" y2="85" stroke="#00b09b" stroke-width="1.5"/>
+  <line x1="95" y1="210" x2="360" y2="85" stroke="#667eea" stroke-width="1"/>
+  <line x1="245" y1="210" x2="370" y2="85" stroke="#667eea" stroke-width="1"/>
+  <line x1="395" y1="210" x2="400" y2="85" stroke="#667eea" stroke-width="1"/>
+  <line x1="545" y1="210" x2="420" y2="85" stroke="#fa709a" stroke-width="1"/>
+  <line x1="700" y1="120" x2="440" y2="85" stroke="#3ecf8e" stroke-width="1.5" stroke-dasharray="4"/>
+
+  <text x="400" y="300" text-anchor="middle" font-size="10" fill="#888">All devices on 2.4GHz WiFi | Total mining: 0-2001W | 0-104.5 TH/s</text>
+</svg>

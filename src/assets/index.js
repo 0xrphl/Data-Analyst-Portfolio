@@ -146,7 +146,27 @@ import mediaAgentGraphNode from "./media-agent-graph-node.png";
 import mediaAgentGraphDemo from "./media-agent-graph-demo.png";
 import mediaAgentQueryDemo from "./media-agent-query-demo.png";
 
+// Solar Mining Cluster project assets
+import solarProductAvalonQ from "./solar-mining/products/avalon-q.png";
+
+import solarProductBitaxe from "./solar-mining/products/bitaxe-gamma.png";
+import solarProductNerdqaxe from "./solar-mining/products/nerdqaxe-plus.png";
+import solarProductOctaxe from "./solar-mining/products/octaxe.webp";
+import solarProductPanel from "./solar-mining/products/solar-panel.png";
+import solarDiagramSystem from "./solar-mining/diagrams/system-architecture.svg";
+import solarDiagramEnergyFlow from "./solar-mining/diagrams/energy-flow.svg";
+import solarDiagramProfiles from "./solar-mining/diagrams/mining-profiles.svg";
+import solarDiagramNetwork from "./solar-mining/diagrams/network-topology.svg";
+import solarDiagramChannels from "./solar-mining/diagrams/channel-mapping.svg";
+import solarDiagramElectrical from "./solar-mining/diagrams/electrical-distribution.svg";
+import solarDiagramDecision from "./solar-mining/diagrams/decision-logic.svg";
+import solarDiagramCircuitDashboard from "./solar-mining/diagrams/circuit-diagram-dashboard.jpg";
+import solarDiagramHouseIsometricMiners from "./solar-mining/diagrams/house-isometric-miners.jpg";
+import solarDiagramHouseIsometricProject from "./solar-mining/diagrams/house-isometric-project.jpg";
+
 export {
+
+
   Calendar,
   CRM,
   Cryptotracker,
@@ -293,4 +313,24 @@ export {
   mediaAgentGraphNode,
   mediaAgentGraphDemo,
   mediaAgentQueryDemo,
+  // Solar Mining Cluster exports
+  solarProductAvalonQ,
+
+  solarProductBitaxe,
+  solarProductNerdqaxe,
+  solarProductOctaxe,
+  solarProductPanel,
+  solarDiagramSystem,
+  solarDiagramEnergyFlow,
+  solarDiagramProfiles,
+  solarDiagramNetwork,
+  solarDiagramChannels,
+  solarDiagramElectrical,
+  solarDiagramDecision,
+  solarDiagramCircuitDashboard,
+  solarDiagramHouseIsometricMiners,
+  solarDiagramHouseIsometricProject,
 };
+
+
+

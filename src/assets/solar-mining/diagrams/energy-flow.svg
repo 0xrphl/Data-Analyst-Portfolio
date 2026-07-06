@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 350" font-family="Segoe UI,Arial,sans-serif">
+  <defs><marker id="a" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6Z" fill="#666"/></marker></defs>
+  <rect width="800" height="350" fill="#f8f9fa" rx="10"/>
+  <text x="400" y="25" text-anchor="middle" font-size="15" font-weight="700" fill="#222">Energy Flow - Solar Mining System</text>
+  <!-- Solar -->
+  <rect x="30" y="80" width="160" height="80" fill="#FFD700" rx="10" stroke="#cca300" stroke-width="2"/>
+  <text x="110" y="110" text-anchor="middle" font-size="14" font-weight="700">Solar Panels</text>
+  <text x="110" y="130" text-anchor="middle" font-size="10">~5kW peak</text>
+  <text x="110" y="145" text-anchor="middle" font-size="9" fill="#555">CT: A1 + |B2|</text>
+  <!-- Grid -->
+  <rect x="30" y="200" width="160" height="80" fill="#ff6b6b" rx="10" stroke="#cc4444" stroke-width="2"/>
+  <text x="110" y="230" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">Grid</text>
+  <text x="110" y="248" text-anchor="middle" font-size="10" fill="#fff">Bi-directional</text>
+  <text x="110" y="263" text-anchor="middle" font-size="9" fill="#ddd">CT: A2 + C2</text>
+  <!-- Distribution -->
+  <rect x="280" y="120" width="140" height="100" fill="#e8eef4" rx="10" stroke="#667" stroke-width="2"/>
+  <text x="350" y="150" text-anchor="middle" font-size="12" font-weight="700" fill="#333">Distribution</text>
+  <text x="350" y="168" text-anchor="middle" font-size="10" fill="#555">Panel</text>
+  <text x="350" y="185" text-anchor="middle" font-size="9" fill="#888">EM06P monitors</text>
+  <text x="350" y="200" text-anchor="middle" font-size="9" fill="#888">all 6 channels</text>
+  <!-- House -->
+  <rect x="520" y="60" width="160" height="80" fill="#4ecdc4" rx="10" stroke="#35a89e" stroke-width="2"/>
+  <text x="600" y="90" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">House</text>
+  <text x="600" y="108" text-anchor="middle" font-size="10" fill="#fff">General loads</text>
+  <text x="600" y="123" text-anchor="middle" font-size="9" fill="#ddd">CT: |B1| + |C1|</text>
+  <!-- Miners -->
+  <rect x="520" y="180" width="160" height="80" fill="#667eea" rx="10" stroke="#4a5fd0" stroke-width="2"/>
+  <text x="600" y="210" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">Miners</text>
+  <text x="600" y="228" text-anchor="middle" font-size="10" fill="#fff">0-2001W auto</text>
+  <text x="600" y="243" text-anchor="middle" font-size="9" fill="#ddd">16 profiles</text>
+  <!-- Arrows -->
+  <line x1="190" y1="120" x2="280" y2="150" stroke="#cca300" stroke-width="3" marker-end="url(#a)"/>
+  <text x="235" y="125" font-size="9" fill="#aa8800" font-weight="600">Solar in</text>
+  <line x1="280" y1="200" x2="190" y2="230" stroke="#cc4444" stroke-width="3" marker-end="url(#a)"/>
+  <line x1="190" y1="220" x2="280" y2="180" stroke="#cc4444" stroke-width="3" marker-end="url(#a)"/>
+  <text x="220" y="210" font-size="8" fill="#cc4444">import/export</text>
+  <line x1="420" y1="145" x2="520" y2="100" stroke="#35a89e" stroke-width="3" marker-end="url(#a)"/>
+  <text x="475" y="110" font-size="9" fill="#35a89e" font-weight="600">to house</text>
+  <line x1="420" y1="185" x2="520" y2="210" stroke="#4a5fd0" stroke-width="3" marker-end="url(#a)"/>
+  <text x="475" y="205" font-size="9" fill="#4a5fd0" font-weight="600">to miners</text>
+  <!-- Formula -->
+  <rect x="100" y="300" width="600" height="35" fill="rgba(0,0,0,0.05)" rx="6"/>
+  <text x="400" y="322" text-anchor="middle" font-size="11" fill="#333" font-weight="600">Energy Balance: Solar + Grid = House + Miners + Losses</text>
+</svg>

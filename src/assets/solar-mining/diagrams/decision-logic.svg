@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 480" font-family="Segoe UI,Arial,sans-serif">
+  <defs><marker id="a" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto"><path d="M0,0 L7,2.5 L0,5Z" fill="#666"/></marker></defs>
+  <rect width="720" height="480" fill="#f8f9fa" rx="10"/>
+  <text x="360" y="25" text-anchor="middle" font-size="15" font-weight="700" fill="#222">⛏️ Decision Engine — Every 5 Min</text>
+  <!-- Steps -->
+  <rect x="220" y="42" width="280" height="32" fill="#764ba2" rx="7"/>
+  <text x="360" y="63" text-anchor="middle" font-size="10" font-weight="600" fill="#fff">1. Average 10 grid samples (30s each)</text>
+  <line x1="360" y1="74" x2="360" y2="88" stroke="#666" stroke-width="1.5" marker-end="url(#a)"/>
+  <rect x="180" y="88" width="360" height="32" fill="#FF8C00" rx="7"/>
+  <text x="360" y="108" text-anchor="middle" font-size="10" font-weight="600" fill="#fff">2. surplus = -avgGrid + currentMiningWatts</text>
+  <line x1="360" y1="120" x2="360" y2="134" stroke="#666" stroke-width="1.5" marker-end="url(#a)"/>
+  <rect x="180" y="134" width="360" height="28" fill="#3ecf8e" rx="7"/>
+  <text x="360" y="153" text-anchor="middle" font-size="10" font-weight="600" fill="#fff">3. Highest profile where totalW ≤ surplus</text>
+  <line x1="360" y1="162" x2="360" y2="178" stroke="#666" stroke-width="1.5" marker-end="url(#a)"/>
+  <polygon points="360,178 430,203 360,228 290,203" fill="#FFD700" stroke="#cca300" stroke-width="2"/>
+  <text x="360" y="207" text-anchor="middle" font-size="10" font-weight="600">Changed?</text>
+  <line x1="430" y1="203" x2="500" y2="203" stroke="#666" stroke-width="1.5" marker-end="url(#a)"/>
+  <text x="530" y="207" font-size="10" fill="#888">No → skip</text>
+  <line x1="360" y1="228" x2="360" y2="248" stroke="#666" stroke-width="1.5" marker-end="url(#a)"/>
+  <rect x="200" y="248" width="320" height="65" fill="#667eea" rx="7"/>
+  <text x="360" y="268" text-anchor="middle" font-size="10" font-weight="600" fill="#fff">4. Execute: R1 ON/OFF, R2 ON/OFF, Avalon mode</text>
+  <text x="360" y="283" text-anchor="middle" font-size="9" fill="#ddd">R1 = BitAxe+Nerdaxe (81W) | R2 = Octaxe (180W)</text>
+  <text x="360" y="298" text-anchor="middle" font-size="9" fill="#ddd">Avalon Q: off / low(800) / mid(1600) / high(1720)</text>
+  <text x="360" y="308" text-anchor="middle" font-size="8" fill="#bbb">Wakes Avalon first if switching from off → any mode</text>
+  <line x1="360" y1="313" x2="360" y2="328" stroke="#666" stroke-width="1.5" marker-end="url(#a)"/>
+  <rect x="230" y="328" width="260" height="28" fill="#3ecf8e" rx="7"/>
+  <text x="360" y="347" text-anchor="middle" font-size="10" font-weight="600" fill="#fff">5. INSERT → transitions (old_id, new_id)</text>
+  <!-- Profile list -->
+  <rect x="10" y="42" width="155" height="320" fill="#fff" rx="5" stroke="#ddd"/>
+  <text x="87" y="60" text-anchor="middle" font-size="10" font-weight="700" fill="#333">16 Profiles (↓scan)</text>
+  <text x="15" y="78" font-size="7.5" fill="#333" font-family="monospace"> 0 OFF            0W</text>
+  <text x="15" y="91" font-size="7.5" fill="#333" font-family="monospace"> 1 BN            81W</text>
+  <text x="15" y="104" font-size="7.5" fill="#333" font-family="monospace"> 2 OCT          180W</text>
+  <text x="15" y="117" font-size="7.5" fill="#333" font-family="monospace"> 3 BN+OCT       261W</text>
+  <text x="15" y="130" font-size="7.5" fill="#667eea" font-family="monospace"> 4 AV_LO        800W</text>
+  <text x="15" y="143" font-size="7.5" fill="#667eea" font-family="monospace"> 5 AV_LO+BN     881W</text>
+  <text x="15" y="156" font-size="7.5" fill="#667eea" font-family="monospace"> 6 AV_LO+OCT    980W</text>
+  <text x="15" y="169" font-size="7.5" fill="#667eea" font-family="monospace"> 7 AV_LO+ALL   1061W</text>
+  <text x="15" y="182" font-size="7.5" fill="#fa709a" font-family="monospace"> 8 AV_MD       1600W</text>
+  <text x="15" y="195" font-size="7.5" fill="#fa709a" font-family="monospace"> 9 AV_MD+BN    1681W</text>
+  <text x="15" y="208" font-size="7.5" fill="#d33" font-family="monospace">10 AV_HI       1720W</text>
+  <text x="15" y="221" font-size="7.5" fill="#fa709a" font-family="monospace">11 AV_MD+OCT   1780W</text>
+  <text x="15" y="234" font-size="7.5" fill="#d33" font-family="monospace">12 AV_HI+BN    1801W</text>
+  <text x="15" y="247" font-size="7.5" fill="#fa709a" font-family="monospace">13 AV_MD+ALL   1861W</text>
+  <text x="15" y="260" font-size="7.5" fill="#d33" font-family="monospace">14 AV_HI+OCT   1900W</text>
+  <text x="15" y="273" font-size="7.5" fill="#d33" font-family="monospace" font-weight="700">15 MAX        2001W</text>
+  <text x="87" y="300" text-anchor="middle" font-size="8" fill="#666">Scan from #15 down</text>
+  <text x="87" y="312" text-anchor="middle" font-size="8" fill="#666">First W ≤ surplus wins</text>
+  <!-- Example box -->
+  <rect x="10" y="375" width="700" height="95" fill="#fffbe6" rx="6" stroke="#e6d000"/>
+  <text x="360" y="395" text-anchor="middle" font-size="11" font-weight="700" fill="#333">Example: Midday Solar Boom</text>
+  <text x="30" y="415" font-size="9.5" fill="#555">Solar=2000W | Home=500W | Currently S3(261W) | Grid=-1239W</text>
+  <text x="30" y="432" font-size="9.5" fill="#333" font-weight="600">surplus = -(-1239) + 261 = 1500W</text>
+  <text x="30" y="449" font-size="9.5" fill="#667eea">Scan: #15(2001)>1500❌ #14(1900)>1500❌ ... #7(1061)≤1500✅</text>
+  <text x="30" y="465" font-size="10" fill="#333" font-weight="700">→ Switch to S7: AV_LO+BN+OCT (1061W) — Avalon Low + all small miners</text>
+</svg>

@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 500" font-family="Segoe UI,Arial,sans-serif">
+  <rect width="960" height="500" fill="#f0f4f8" rx="12"/>
+  <text x="480" y="28" text-anchor="middle" font-size="16" font-weight="700" fill="#222">Electrical Distribution Panel - Solar Mining System</text>
+  <!-- Solar Panels -->
+  <rect x="30" y="50" width="180" height="80" fill="#FFD700" rx="8" stroke="#cca300" stroke-width="2"/>
+  <text x="120" y="80" text-anchor="middle" font-size="12" font-weight="700">Solar Panels</text>
+  <text x="120" y="98" text-anchor="middle" font-size="9">Bi-phase ~5kW peak</text>
+  <text x="120" y="115" text-anchor="middle" font-size="8" fill="#555">Phase A + Phase B</text>
+  <!-- Grid -->
+  <rect x="30" y="160" width="180" height="60" fill="#ff6b6b" rx="8" stroke="#cc4444" stroke-width="2"/>
+  <text x="120" y="185" text-anchor="middle" font-size="12" font-weight="700" fill="#fff">Utility Grid</text>
+  <text x="120" y="205" text-anchor="middle" font-size="9" fill="#fff">Bi-directional</text>
+  <!-- Distribution Panel -->
+  <rect x="280" y="40" width="400" height="200" fill="#e8eef4" rx="10" stroke="#667" stroke-width="2"/>
+  <text x="480" y="62" text-anchor="middle" font-size="13" font-weight="700" fill="#333">Distribution Panel (Outdoor)</text>
+  <!-- Breakers -->
+  <rect x="300" y="75" width="80" height="35" fill="#555" rx="4"/>
+  <text x="340" y="97" text-anchor="middle" font-size="9" fill="#fff">Solar Brk</text>
+  <rect x="400" y="75" width="80" height="35" fill="#555" rx="4"/>
+  <text x="440" y="97" text-anchor="middle" font-size="9" fill="#fff">Grid Brk</text>
+  <rect x="500" y="75" width="80" height="35" fill="#555" rx="4"/>
+  <text x="540" y="97" text-anchor="middle" font-size="9" fill="#fff">House Brk</text>
+  <rect x="600" y="75" width="60" height="35" fill="#555" rx="4"/>
+  <text x="630" y="97" text-anchor="middle" font-size="9" fill="#fff">Shower</text>
+  <!-- CT Clamps -->
+  <circle cx="340" cy="135" r="12" fill="#FFD700" stroke="#aa8800" stroke-width="2"/>
+  <text x="340" y="139" text-anchor="middle" font-size="8" font-weight="700">A1</text>
+  <circle cx="380" cy="155" r="12" fill="#FFD700" stroke="#aa8800" stroke-width="2"/>
+  <text x="380" y="159" text-anchor="middle" font-size="8" font-weight="700">B2</text>
+  <circle cx="440" cy="135" r="12" fill="#ff6b6b" stroke="#cc4444" stroke-width="2"/>
+  <text x="440" y="139" text-anchor="middle" font-size="8" font-weight="700">A2</text>
+  <circle cx="480" cy="155" r="12" fill="#ff6b6b" stroke="#cc4444" stroke-width="2"/>
+  <text x="480" y="159" text-anchor="middle" font-size="8" font-weight="700">C2</text>
+  <circle cx="540" cy="135" r="12" fill="#4ecdc4" stroke="#35a89e" stroke-width="2"/>
+  <text x="540" y="139" text-anchor="middle" font-size="8" font-weight="700">B1</text>
+  <circle cx="630" cy="135" r="12" fill="#44bd7a" stroke="#2a8a5a" stroke-width="2"/>
+  <text x="630" y="139" text-anchor="middle" font-size="8" font-weight="700">C1</text>
+  <!-- Refoss -->
+  <rect x="340" y="180" width="280" height="45" fill="#FF8C00" rx="6" stroke="#cc7000" stroke-width="2"/>
+  <text x="480" y="200" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">Refoss EM06P Energy Monitor</text>
+  <text x="480" y="215" text-anchor="middle" font-size="8" fill="#fff">192.168.1.82 | WiFi | 6-ch CT clamps</text>
+  <!-- House -->
+  <rect x="750" y="50" width="180" height="80" fill="#4ecdc4" rx="8" stroke="#35a89e" stroke-width="2"/>
+  <text x="840" y="80" text-anchor="middle" font-size="12" font-weight="700" fill="#fff">House Loads</text>
+  <text x="840" y="98" text-anchor="middle" font-size="9" fill="#fff">General consumption</text>
+  <text x="840" y="115" text-anchor="middle" font-size="8" fill="#ddd">B1 clamp measures this</text>
+  <!-- Miners -->
+  <rect x="750" y="160" width="180" height="80" fill="#667eea" rx="8" stroke="#4a5fd0" stroke-width="2"/>
+  <text x="840" y="185" text-anchor="middle" font-size="12" font-weight="700" fill="#fff">Mining Cluster</text>
+  <text x="840" y="203" text-anchor="middle" font-size="9" fill="#fff">0-2001W (16 profiles)</text>
+  <text x="840" y="218" text-anchor="middle" font-size="8" fill="#ddd">Part of house load</text>
+  <!-- Connections -->
+  <line x1="210" y1="90" x2="300" y2="92" stroke="#cca300" stroke-width="2"/>
+  <line x1="210" y1="190" x2="400" y2="92" stroke="#cc4444" stroke-width="2"/>
+  <line x1="580" y1="92" x2="750" y2="90" stroke="#35a89e" stroke-width="2"/>
+  <line x1="660" y1="92" x2="750" y2="200" stroke="#4a5fd0" stroke-width="1.5" stroke-dasharray="4"/>
+  <!-- Legend -->
+  <rect x="30" y="270" width="900" height="220" fill="#fff" rx="8" stroke="#ddd"/>
+  <text x="480" y="295" text-anchor="middle" font-size="13" font-weight="700" fill="#333">CT Clamp Summary</text>
+  <circle cx="60" cy="320" r="8" fill="#FFD700"/><text x="80" y="324" font-size="10" fill="#333">A1: Solar Phase A (ch1)</text>
+  <circle cx="60" cy="345" r="8" fill="#FFD700"/><text x="80" y="349" font-size="10" fill="#333">B2: Solar Phase B (ch5)</text>
+  <circle cx="350" cy="320" r="8" fill="#ff6b6b"/><text x="370" y="324" font-size="10" fill="#333">A2: Grid Phase A (ch4)</text>
+  <circle cx="350" cy="345" r="8" fill="#ff6b6b"/><text x="370" y="349" font-size="10" fill="#333">C2: Grid Phase B (ch6)</text>
+  <circle cx="650" cy="320" r="8" fill="#4ecdc4"/><text x="670" y="324" font-size="10" fill="#333">B1: House Phase B (ch2)</text>
+  <circle cx="650" cy="345" r="8" fill="#44bd7a"/><text x="670" y="349" font-size="10" fill="#333">C1: Shower (ch3)</text>
+  <text x="60" y="385" font-size="11" font-weight="600" fill="#FFD700">Solar = A1 + |B2|</text>
+  <text x="350" y="385" font-size="11" font-weight="600" fill="#ff6b6b">Grid = A2 + C2 (neg=export)</text>
+  <text x="650" y="385" font-size="11" font-weight="600" fill="#4ecdc4">House = |B1| + |C1|</text>
+  <text x="60" y="415" font-size="10" fill="#666">Energy balance: Solar + Grid = House (approx, with losses)</text>
+  <text x="60" y="435" font-size="10" fill="#666">Mining surplus = -Grid + currentMiningWatts</text>
+  <text x="60" y="455" font-size="10" fill="#666">Refoss EM06P reports Active Power (W). PF reported separately. No PF multiplication needed.</text>
+  <text x="60" y="475" font-size="10" fill="#999">Photos: see Miner_solar_cluster_imgs/ for distribution panel and circuit diagram photos</text>
+</svg>

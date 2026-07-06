@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 280" font-family="Segoe UI,Arial,sans-serif">
+  <defs><marker id="a" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6Z" fill="#666"/></marker></defs>
+  <rect width="960" height="280" fill="#f8f9fa" rx="10"/>
+  <text x="480" y="22" text-anchor="middle" font-size="15" font-weight="700" fill="#222">Solar Mining Control v3 System Architecture</text>
+  <!-- Energy Sources -->
+  <rect x="8" y="34" width="140" height="155" fill="none" rx="8" stroke="#aaa" stroke-width="1" stroke-dasharray="4"/>
+  <text x="78" y="48" text-anchor="middle" font-size="8" font-weight="600" fill="#999">ENERGY (DIRECT)</text>
+  <rect x="15" y="54" width="126" height="28" fill="#FFD700" rx="6" stroke="#cca300" stroke-width="1.5"/>
+  <text x="78" y="72" text-anchor="middle" font-size="9" font-weight="600">Solar A1+|B2|</text>
+  <rect x="15" y="88" width="126" height="28" fill="#ff6b6b" rx="6" stroke="#cc4444" stroke-width="1.5"/>
+  <text x="78" y="106" text-anchor="middle" font-size="9" font-weight="600" fill="#fff">Grid A2+C2 (direct)</text>
+  <rect x="15" y="122" width="126" height="28" fill="#4ecdc4" rx="6" stroke="#35a89e" stroke-width="1.5"/>
+  <text x="78" y="140" text-anchor="middle" font-size="9" font-weight="600" fill="#fff">House |B1|+|C1|</text>
+  <rect x="15" y="156" width="126" height="24" fill="#44bd7a" rx="6" stroke="#2a8a5a" stroke-width="1"/>
+  <text x="78" y="172" text-anchor="middle" font-size="8" font-weight="600" fill="#fff">Shower C1</text>
+  <!-- Refoss -->
+  <rect x="168" y="54" width="138" height="52" fill="#FF8C00" rx="7" stroke="#cc7000" stroke-width="2"/>
+  <text x="237" y="72" text-anchor="middle" font-size="11" font-weight="600" fill="#fff">Refoss EM06P</text>
+  <text x="237" y="85" text-anchor="middle" font-size="8" fill="#fff">6-Ch 192.168.1.82</text>
+  <text x="237" y="97" text-anchor="middle" font-size="7" fill="#fff">Active Power (W) + PF</text>
+  <line x1="141" y1="70" x2="168" y2="72" stroke="#cca300" stroke-width="1.5" marker-end="url(#a)"/>
+  <line x1="141" y1="102" x2="168" y2="82" stroke="#cc4444" stroke-width="1.5" marker-end="url(#a)"/>
+  <line x1="141" y1="136" x2="168" y2="92" stroke="#35a89e" stroke-width="1.5" marker-end="url(#a)"/>
+  <!-- ESP32-S3 -->
+  <rect x="338" y="40" width="168" height="100" fill="#764ba2" rx="8" stroke="#5a3580" stroke-width="2"/>
+  <text x="422" y="58" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">ESP32-S3 T-Display</text>
+  <text x="422" y="72" text-anchor="middle" font-size="8" fill="#ddd">Controller+WebUI+Decisions</text>
+  <text x="422" y="84" text-anchor="middle" font-size="8" fill="#ddd">192.168.1.26</text>
+  <text x="422" y="97" text-anchor="middle" font-size="8" fill="#ddd">30s poll | 5min avg | 16 profiles</text>
+  <text x="422" y="110" text-anchor="middle" font-size="7" fill="#bbb">+ Pre-transition verification</text>
+  <text x="422" y="135" text-anchor="middle" font-size="7" fill="#bbb">Arduino ESP32 2.0.14</text>
+  <line x1="306" y1="80" x2="338" y2="78" stroke="#FF8C00" stroke-width="2" marker-end="url(#a)"/>
+  <text x="322" y="72" text-anchor="middle" font-size="7" fill="#888">30s</text>
+  <!-- Tasmota -->
+  <rect x="540" y="36" width="150" height="48" fill="#00b09b" rx="7" stroke="#008f7a" stroke-width="2"/>
+  <text x="615" y="54" text-anchor="middle" font-size="10" font-weight="600" fill="#fff">Tasmota Relay Board</text>
+  <text x="615" y="66" text-anchor="middle" font-size="8" fill="#fff">192.168.1.78</text>
+  <text x="615" y="78" text-anchor="middle" font-size="7" fill="#ddd">R1:BN(81W) R2:Oct(180W)</text>
+  <line x1="506" y1="62" x2="540" y2="58" stroke="#00cc66" stroke-width="2" marker-end="url(#a)"/>
+  <!-- Miners -->
+  <rect x="718" y="30" width="233" height="110" fill="none" rx="8" stroke="#aaa" stroke-width="1" stroke-dasharray="4"/>
+  <text x="834" y="43" text-anchor="middle" font-size="8" font-weight="600" fill="#999">SHA-256 MINERS</text>
+  <rect x="725" y="48" width="220" height="18" fill="#667eea" rx="4" stroke="#4a5fd0" stroke-width="1"/>
+  <text x="835" y="60" text-anchor="middle" font-size="8" font-weight="600" fill="#fff">BitAxe Gamma 21W 1.2 TH/s R1</text>
+  <rect x="725" y="70" width="220" height="18" fill="#667eea" rx="4" stroke="#4a5fd0" stroke-width="1"/>
+  <text x="835" y="82" text-anchor="middle" font-size="8" font-weight="600" fill="#fff">NerdQAxe+ 60W 2.6 TH/s R1</text>
+  <rect x="725" y="94" width="220" height="18" fill="#667eea" rx="4" stroke="#4a5fd0" stroke-width="1"/>
+  <text x="835" y="106" text-anchor="middle" font-size="8" font-weight="600" fill="#fff">Octaxe 180W 10.7 TH/s R2</text>
+  <line x1="690" y1="52" x2="725" y2="57" stroke="#00cc66" stroke-width="1.5" marker-end="url(#a)"/>
+  <line x1="690" y1="68" x2="725" y2="100" stroke="#00cc66" stroke-width="1.5" marker-end="url(#a)"/>
+  <rect x="725" y="118" width="220" height="18" fill="#fa709a" rx="4" stroke="#d94f7a" stroke-width="1"/>
+  <text x="835" y="130" text-anchor="middle" font-size="8" font-weight="600" fill="#fff">Avalon Q 800-1720W 52-90 TH/s API</text>
+  <line x1="506" y1="110" x2="725" y2="127" stroke="#fa709a" stroke-width="1.5" marker-end="url(#a)"/>
+  <text x="610" y="115" font-size="7" fill="#888">TCP 4028</text>
+  <!-- Supabase -->
+  <rect x="338" y="178" width="168" height="44" fill="#3ecf8e" rx="7" stroke="#2ea670" stroke-width="2"/>
+  <text x="422" y="196" text-anchor="middle" font-size="10" font-weight="600" fill="#fff">Supabase PostgreSQL</text>
+  <text x="422" y="209" text-anchor="middle" font-size="7" fill="#fff">energy | transitions | profiles</text>
+  <text x="422" y="219" text-anchor="middle" font-size="7" fill="#ddd">HTTPS REST Free Tier</text>
+  <line x1="422" y1="140" x2="422" y2="178" stroke="#4488ff" stroke-width="2" marker-end="url(#a)"/>
+  <text x="436" y="162" font-size="7" fill="#888">5min</text>
+  <!-- Browser -->
+  <rect x="168" y="185" width="125" height="26" fill="#333" rx="5" stroke="#555" stroke-width="1.5"/>
+  <text x="230" y="202" text-anchor="middle" font-size="9" font-weight="600" fill="#fff">Browser / Phone</text>
+  <line x1="293" y1="195" x2="338" y2="125" stroke="#666" stroke-width="1.5" marker-end="url(#a)"/>
+  <!-- Legend -->
+  <rect x="8" y="234" width="943" height="38" fill="#fff" rx="5" stroke="#ddd"/>
+  <line x1="18" y1="254" x2="38" y2="254" stroke="#FF8C00" stroke-width="2"/>
+  <text x="42" y="258" font-size="8" fill="#333">Energy 30s</text>
+  <line x1="118" y1="254" x2="138" y2="254" stroke="#00cc66" stroke-width="2"/>
+  <text x="142" y="258" font-size="8" fill="#333">Relay ctrl</text>
+  <line x1="208" y1="254" x2="228" y2="254" stroke="#4488ff" stroke-width="2"/>
+  <text x="232" y="258" font-size="8" fill="#333">Supabase 5m</text>
+  <line x1="318" y1="254" x2="338" y2="254" stroke="#fa709a" stroke-width="2"/>
+  <text x="342" y="258" font-size="8" fill="#333">Avalon TCP</text>
+  <text x="440" y="258" font-size="8" fill="#888">Total: 0-2001W | 0-104.5 TH/s | Pre-transition verification every 5min</text>
+</svg>

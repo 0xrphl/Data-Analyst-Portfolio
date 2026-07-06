@@ -3,3 +3,9 @@ dist/
 .vs/
 .vscode/
 CV_Raphael_Rueda.md
+.env
+.env.local
+esp32/
+ESP32_COMMANDS_POLLING_SNIPPET.md
+
+

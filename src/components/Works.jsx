@@ -1,12 +1,14 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { Tilt } from "react-tilt";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { styles } from "../styles";
 import { github, HuggingFace } from "../assets";
 import { SectionWrapper } from "../hoc";
 import { projects } from "../constants";
 import { fadeIn, textVariant } from "../utils/motion";
 import { useLanguage } from '../context/LanguageContext';
+
 
 // Carousel sub-component for cards with multiple images
 const ImageCarousel = ({ images, name }) => {
@@ -97,10 +99,12 @@ const ProjectCard = ({
   image,
   source_code_link,
   huggingface_link,
+  live_demo_link,
   className,
   isMobileDevice,
 }) => {
   const isCarousel = Array.isArray(image);
+
 
   return (
     <motion.div 
@@ -173,6 +177,16 @@ const ProjectCard = ({
             <p className='mt-2 text-secondary text-[12px] sm:text-[14px]'>{description}</p>
           </div>
 
+          {live_demo_link && (
+            <Link
+              to={live_demo_link}
+              className='mt-4 inline-flex items-center justify-center gap-2 w-full py-2.5 rounded-xl font-semibold text-[13px] sm:text-[14px] text-white transition-transform duration-300 hover:scale-[1.02]'
+              style={{ background: 'linear-gradient(90deg, #FFA500 0%, #FF7A00 50%, #FFD700 100%)' }}
+            >
+              ⚡ Live 3D Dashboard
+            </Link>
+          )}
+
           <div className='mt-4 flex flex-wrap gap-2'>
             {tags.map((tag) => (
               <p
@@ -188,6 +202,7 @@ const ProjectCard = ({
     </motion.div>
   );
 };
+
 
 // Helper: detect touch-only / mobile device (matches CSS media query)
 const getIsMobileDevice = () => {

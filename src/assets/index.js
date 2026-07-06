@@ -163,6 +163,9 @@ import solarDiagramDecision from "./solar-mining/diagrams/decision-logic.svg";
 import solarDiagramCircuitDashboard from "./solar-mining/diagrams/circuit-diagram-dashboard.jpg";
 import solarDiagramHouseIsometricMiners from "./solar-mining/diagrams/house-isometric-miners.jpg";
 import solarDiagramHouseIsometricProject from "./solar-mining/diagrams/house-isometric-project.jpg";
+import solarDashboardAntpool from "./solar-mining/diagrams/antpool-iframe-dashboard.png";
+import solarDashboardMinerfleet from "./solar-mining/diagrams/minerfleet-threejs-dashboard.png";
+import solarDashboardThreejs from "./solar-mining/diagrams/threejs-render-solar-mining-dashboard.png";
 
 export {
 
@@ -330,6 +333,9 @@ export {
   solarDiagramCircuitDashboard,
   solarDiagramHouseIsometricMiners,
   solarDiagramHouseIsometricProject,
+  solarDashboardAntpool,
+  solarDashboardMinerfleet,
+  solarDashboardThreejs,
 };
 
 

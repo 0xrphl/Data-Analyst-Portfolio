@@ -148,6 +148,9 @@ import {
     solarDiagramCircuitDashboard,
     solarDiagramHouseIsometricMiners,
     solarDiagramHouseIsometricProject,
+    solarDashboardAntpool,
+    solarDashboardMinerfleet,
+    solarDashboardThreejs,
   } from "../assets";
 
 
@@ -1632,7 +1635,7 @@ import {
         { name: "Real-Time Energy Monitoring", color: "orange-text-gradient" },
         { name: "AntPool", color: "red-text-gradient" },
       ],
-      image: [solarDiagramCircuitDashboard, solarDiagramHouseIsometricMiners, solarDiagramHouseIsometricProject, solarDiagramSystem, solarDiagramEnergyFlow, solarDiagramProfiles, solarDiagramNetwork, solarDiagramChannels, solarDiagramElectrical, solarDiagramDecision],
+      image: [solarDashboardThreejs, solarDashboardMinerfleet, solarDashboardAntpool, solarDiagramCircuitDashboard, solarDiagramHouseIsometricMiners, solarDiagramHouseIsometricProject, solarDiagramSystem, solarDiagramEnergyFlow, solarDiagramProfiles, solarDiagramNetwork, solarDiagramChannels, solarDiagramElectrical, solarDiagramDecision],
       source_code_link: "https://github.com/0xrphl/Solar-crypto-mining-farm-maximization-control",
       live_demo_link: "/solar-mining-cluster",
     },
@@ -1927,7 +1930,7 @@ import {
           { name: "Monitoreo de Energía en Tiempo Real", color: "orange-text-gradient" },
           { name: "AntPool", color: "red-text-gradient" },
         ],
-        image: [solarDiagramCircuitDashboard, solarDiagramHouseIsometricMiners, solarDiagramHouseIsometricProject, solarDiagramSystem, solarDiagramEnergyFlow, solarDiagramProfiles, solarDiagramNetwork, solarDiagramChannels, solarDiagramElectrical, solarDiagramDecision],
+        image: [solarDashboardThreejs, solarDashboardMinerfleet, solarDashboardAntpool, solarDiagramCircuitDashboard, solarDiagramHouseIsometricMiners, solarDiagramHouseIsometricProject, solarDiagramSystem, solarDiagramEnergyFlow, solarDiagramProfiles, solarDiagramNetwork, solarDiagramChannels, solarDiagramElectrical, solarDiagramDecision],
         source_code_link: "https://github.com/0xrphl/Solar-crypto-mining-farm-maximization-control",
         live_demo_link: "/solar-mining-cluster",
       },

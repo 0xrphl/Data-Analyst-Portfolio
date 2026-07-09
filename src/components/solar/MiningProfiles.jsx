@@ -46,12 +46,11 @@ const MiningProfiles = () => {
   }, []);
 
   return (
-    <div className="bg-tertiary/40 backdrop-blur-md rounded-2xl border border-white/10 p-5">
-      <h4 className="text-white font-bold text-[18px] mb-1">16 Mining Profiles</h4>
-      <p className="text-secondary text-[12px] mb-4">
-        Auto-selected every 5 minutes based on real-time solar surplus.
+    <div>
+      <p className="text-secondary text-[10px] mb-2">
+        16 profiles · Auto-selected every ~9 min based on solar surplus
       </p>
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+      <div className="grid grid-cols-4 gap-1.5">
         {PROFILES.map((p) => {
           const isActive = activeId === p.id;
           return (
@@ -64,7 +63,7 @@ const MiningProfiles = () => {
               className={`rounded-xl p-2.5 border text-center relative overflow-hidden ${
                 isActive ? "border-[#FFD700] shadow-[0_0_15px_rgba(255,215,0,0.4)]" : "border-white/10"
               }`}
-              style={{ background: isActive ? "rgba(255,215,0,0.08)" : "rgba(255,255,255,0.03)" }}
+              style={{ background: isActive ? "rgba(255,215,0,0.12)" : "rgba(255,255,255,0.02)" }}
             >
               {isActive && (
                 <span className="absolute top-1 right-1 text-[9px] bg-[#FFD700] text-black px-1.5 py-0.5 rounded-full font-bold">

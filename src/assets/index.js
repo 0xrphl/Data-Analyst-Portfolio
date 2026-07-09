@@ -166,6 +166,8 @@ import solarDiagramHouseIsometricProject from "./solar-mining/diagrams/house-iso
 import solarDashboardAntpool from "./solar-mining/diagrams/antpool-iframe-dashboard.png";
 import solarDashboardMinerfleet from "./solar-mining/diagrams/minerfleet-threejs-dashboard.png";
 import solarDashboardThreejs from "./solar-mining/diagrams/threejs-render-solar-mining-dashboard.png";
+import solarDashboardFull from "./solar_dashboard_full.png";
+import solarDashboardZoom from "./solar_dashboard_zoom.png";
 
 export {
 
@@ -336,6 +338,8 @@ export {
   solarDashboardAntpool,
   solarDashboardMinerfleet,
   solarDashboardThreejs,
+  solarDashboardFull,
+  solarDashboardZoom,
 };
 
 

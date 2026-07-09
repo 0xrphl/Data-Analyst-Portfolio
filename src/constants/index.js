@@ -151,6 +151,8 @@ import {
     solarDashboardAntpool,
     solarDashboardMinerfleet,
     solarDashboardThreejs,
+    solarDashboardFull,
+    solarDashboardZoom,
   } from "../assets";
 
 
@@ -1621,7 +1623,7 @@ import {
     {
       name: "Solar Crypto Mining Farm — Autonomous Surplus Maximization Control",
       description:
-        "A fully autonomous solar-powered Bitcoin mining system built on ESP32-S3 that dynamically scales hash power (0–2001W, 0–104.5 TH/s) to match real-time solar surplus — mining ONLY with free solar energy, zero grid consumption, ever. Reads a 6-channel Refoss energy monitor every 30s, calculates solar surplus, and auto-switches between 16 mining profiles across a BitAxe, NerdQAxe+, Octaxe, and Canaan Avalon Q. Includes Tasmota relay control, CGMiner TCP API integration, power-outage state recovery, and full Supabase cloud logging. Features a live public 3D dashboard with real-time energy gauges, historical charts, mining fleet status, and a password-gated admin panel to remotely control miners.",
+        "Autonomous ESP32-S3 system that scales Bitcoin mining (0–2001W, 4 miners, 16 profiles) to match real-time solar surplus — zero grid, ever. Reads 6-channel Refoss every 30s, auto-switches profiles via Tasmota relays + CGMiner API, with power-outage recovery and Supabase logging. Live 3D dashboard with energy gauges, charts, fleet status, and remote admin panel.",
       tags: [
         { name: "ESP32-S3", color: "blue-text-gradient" },
         { name: "Solar Energy", color: "green-text-gradient" },
@@ -1635,7 +1637,7 @@ import {
         { name: "Real-Time Energy Monitoring", color: "orange-text-gradient" },
         { name: "AntPool", color: "red-text-gradient" },
       ],
-      image: [solarDashboardThreejs, solarDashboardMinerfleet, solarDashboardAntpool, solarDiagramCircuitDashboard, solarDiagramHouseIsometricMiners, solarDiagramHouseIsometricProject, solarDiagramSystem, solarDiagramEnergyFlow, solarDiagramProfiles, solarDiagramNetwork, solarDiagramChannels, solarDiagramElectrical, solarDiagramDecision],
+      image: [solarDashboardFull, solarDashboardZoom, solarDashboardThreejs, solarDashboardMinerfleet, solarDashboardAntpool, solarDiagramCircuitDashboard, solarDiagramHouseIsometricMiners, solarDiagramHouseIsometricProject, solarDiagramSystem, solarDiagramEnergyFlow, solarDiagramProfiles, solarDiagramNetwork, solarDiagramChannels, solarDiagramElectrical, solarDiagramDecision],
       source_code_link: "https://github.com/0xrphl/Solar-crypto-mining-farm-maximization-control",
       live_demo_link: "/solar-mining-cluster",
     },
@@ -1930,7 +1932,7 @@ import {
           { name: "Monitoreo de Energía en Tiempo Real", color: "orange-text-gradient" },
           { name: "AntPool", color: "red-text-gradient" },
         ],
-        image: [solarDashboardThreejs, solarDashboardMinerfleet, solarDashboardAntpool, solarDiagramCircuitDashboard, solarDiagramHouseIsometricMiners, solarDiagramHouseIsometricProject, solarDiagramSystem, solarDiagramEnergyFlow, solarDiagramProfiles, solarDiagramNetwork, solarDiagramChannels, solarDiagramElectrical, solarDiagramDecision],
+        image: [solarDashboardFull, solarDashboardZoom, solarDashboardThreejs, solarDashboardMinerfleet, solarDashboardAntpool, solarDiagramCircuitDashboard, solarDiagramHouseIsometricMiners, solarDiagramHouseIsometricProject, solarDiagramSystem, solarDiagramEnergyFlow, solarDiagramProfiles, solarDiagramNetwork, solarDiagramChannels, solarDiagramElectrical, solarDiagramDecision],
         source_code_link: "https://github.com/0xrphl/Solar-crypto-mining-farm-maximization-control",
         live_demo_link: "/solar-mining-cluster",
       },

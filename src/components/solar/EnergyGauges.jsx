@@ -2,40 +2,36 @@ import React from "react";
 import { motion } from "framer-motion";
 import { useLatestEnergy } from "../../lib/useLatestEnergy";
 
-const Gauge = ({ label, value, unit, color, icon, max = 3000 }) => {
+const CompactGauge = ({ label, value, unit, color, icon, max = 3000 }) => {
   const pct = Math.min(100, Math.max(0, (Math.abs(value || 0) / max) * 100));
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      className="relative bg-tertiary/60 backdrop-blur-md rounded-2xl p-5 border border-white/10 flex flex-col gap-3 min-w-[200px] flex-1"
-    >
-      <div className="flex items-center justify-between">
-        <span className="text-secondary text-[13px] uppercase tracking-wider">{label}</span>
-        <span className="text-[22px]">{icon}</span>
+    <div className="flex items-center gap-2.5 py-1.5">
+      <span className="text-[16px] w-5 text-center">{icon}</span>
+      <div className="flex-1 min-w-0">
+        <div className="flex items-baseline justify-between mb-1">
+          <span className="text-[11px] text-secondary uppercase tracking-wider">{label}</span>
+          <div className="flex items-baseline gap-0.5">
+            <span className="text-white font-black text-[18px] tabular-nums" style={{ color }}>
+              {value != null ? Math.round(value).toLocaleString() : "—"}
+            </span>
+            <span className="text-secondary text-[10px]">{unit}</span>
+          </div>
+        </div>
+        <div className="w-full h-[4px] rounded-full bg-white/8 overflow-hidden">
+          <motion.div
+            className="h-full rounded-full"
+            style={{ background: color }}
+            initial={{ width: 0 }}
+            animate={{ width: `${pct}%` }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+          />
+        </div>
       </div>
-      <div className="flex items-baseline gap-1">
-        <span className="text-white font-black text-[32px]" style={{ color }}>
-          {value !== null && value !== undefined ? Math.round(value).toLocaleString() : "—"}
-        </span>
-        <span className="text-secondary text-[14px]">{unit}</span>
-      </div>
-      <div className="w-full h-2 rounded-full bg-white/10 overflow-hidden">
-        <motion.div
-          className="h-full rounded-full"
-          style={{ background: color }}
-          initial={{ width: 0 }}
-          animate={{ width: `${pct}%` }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-        />
-      </div>
-    </motion.div>
+    </div>
   );
 };
 
-const EnergyGauges = ({ latest: latestProp, loading: loadingProp, error: errorProp, lastUpdated: lastUpdatedProp }) => {
-  // If parent already fetched the data (shared with 3D scene), use it; otherwise fetch independently.
+const EnergyGauges = ({ latest: latestProp, loading: loadingProp, error: errorProp, lastUpdated: lastUpdatedProp, compact = false }) => {
   const own = useLatestEnergy();
   const latest = latestProp !== undefined ? latestProp : own.latest;
   const loading = loadingProp !== undefined ? loadingProp : own.loading;
@@ -44,22 +40,22 @@ const EnergyGauges = ({ latest: latestProp, loading: loadingProp, error: errorPr
 
   return (
     <div className="w-full">
-      <div className="flex flex-col sm:flex-row gap-4">
-        <Gauge label="Solar" value={latest?.solar} unit="W" color="#FFD700" icon="☀️" max={7740} />
-        <Gauge label="Grid" value={latest?.grid} unit="W" color={latest?.grid < 0 ? "#4ecdc4" : "#ff6b6b"} icon="⚡" max={3000} />
-        <Gauge label="Home" value={latest?.home} unit="W" color="#4ecdc4" icon="🏠" max={3000} />
+      <div className="flex flex-col gap-1">
+        <CompactGauge label="Solar" value={latest?.solar} unit="W" color="#FFD700" icon="☀️" max={7740} />
+        <CompactGauge label="Grid" value={latest?.grid} unit="W" color={latest?.grid < 0 ? "#4ecdc4" : "#ff6b6b"} icon="⚡" max={3000} />
+        <CompactGauge label="Home" value={latest?.home} unit="W" color="#4ecdc4" icon="🏠" max={3000} />
       </div>
-      <div className="mt-3 flex items-center justify-between text-[11px] text-secondary">
+      <div className="mt-2 flex items-center justify-between text-[9px] text-secondary">
         <span>
           {loading
-            ? "Connecting to live feed…"
+            ? "Connecting…"
             : error
             ? `⚠️ ${error}`
             : latest?.grid < 0
-            ? "🟢 Exporting surplus solar to mining cluster"
-            : "🟡 Importing from grid — mining scaled down"}
+            ? "🟢 Exporting surplus"
+            : "🟡 Importing from grid"}
         </span>
-        {lastUpdated && <span>Updated {lastUpdated.toLocaleTimeString()}</span>}
+        {lastUpdated && <span>{lastUpdated.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" })}</span>}
       </div>
     </div>
   );

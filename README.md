@@ -4,7 +4,7 @@
 
 # 0xraphael.com | AI Engineer & Data Analyst Portfolio
 
-Welcome to my AI Engineer & Data Analyst Portfolio, a visually engaging showcase of my skills and projects. This portfolio, deployed at [0xraphael.com](https://0xraphael.com/), features the **V3.0** version — now showcasing AI agent development, RAG/GraphRAG systems, knowledge base engineering, and full-stack data solutions alongside traditional data analysis work.
+Welcome to my AI Engineer & Data Analyst Portfolio, a visually engaging showcase of my skills and projects. This portfolio, deployed at [0xraphael.com](https://0xraphael.com/), features the **V3.1** version — now showcasing AI agent development, RAG/GraphRAG systems, knowledge base engineering, IoT solar mining systems, and full-stack data solutions alongside traditional data analysis work.
 
 ## Purpose
 
@@ -87,6 +87,10 @@ Built with React-Three-Fiber and Tailwind CSS, this portfolio provides an intera
 
 ## Projects Highlight
 
+### Solar Crypto Mining Farm — Autonomous Surplus Maximization Control
+Autonomous ESP32-S3 system that scales Bitcoin mining (0–2001W, 4 miners, 16 profiles) to match real-time solar surplus — zero grid, ever. Reads 6-channel Refoss every 30s, auto-switches profiles via Tasmota relays + CGMiner API, with power-outage recovery and Supabase logging. Features a **live 3D dashboard** with real-time energy gauges, historical charts, mining fleet status, collapsible sidebars, and a password-gated remote admin panel.
+- [GitHub](https://github.com/0xrphl/Solar-crypto-mining-farm-maximization-control) | [Live Dashboard](https://0xraphael.com/solar-mining-cluster)
+
 ### USCIS Knowledge Base
 A comprehensive RAG-ready knowledge base of **99,489 content chunks** from **4,666 USCIS pages** with OpenAI embeddings (1536-dim). Stored in PostgreSQL+pgvector, Milvus, and Neo4j. Scraped with Firecrawl, visualized with Apple's Embedding Atlas (UMAP clusters), and published on HuggingFace. One-command Docker Compose deployment with 7 services for semantic search and GraphRAG retrieval.
 - [GitHub](https://github.com/0xrphl/USCIS-knowledge-base-full-website) | [HuggingFace Dataset](https://huggingface.co/datasets/0xrphl/USCIS-knowledge-base-full-website)
@@ -114,6 +118,7 @@ Pixel-map based duplicate detection system processing **22,000+ PDFs** and **300
 - **Intake and CRM System** — Google Sheets + Apps Script + Looker Studio + SMS API
 - **Three Stone Diamond Ring** — SOLIDWORKS CAD design with SOLIDWORKS Visualize renders
 - **This Portfolio** — React + Three.js + Tailwind CSS
+- **Solar Mining Cluster Dashboard** — Live 3D Three.js dashboard with Supabase real-time energy data
 
 ## Technologies (Portfolio Stack)
 
@@ -181,7 +186,16 @@ Feel free to reach out to me via email at [0xrphl@gmail.com](mailto:0xrphl@gmail
 
 ## Version History
 
-- **V3.0** (July 2025) — Current version
+- **V3.1** (July 2025) — Current version
+  - **Solar Mining Cluster Live Dashboard** — Full-screen Three.js 3D scene with animated house, solar panels, miners, sun, wires, pets, and environment. Collapsible left/right sidebars with live energy gauges, phase breakdowns, channel details, energy saved metrics, historical charts, mining fleet status (4 miners with on/off indicators), 16 mining profiles, profile usage charts, AntPool integration, transitions timeline, and password-gated admin panel. Mobile landscape prompt. Supabase real-time data with v4 schema (30+ columns, per-phase/per-channel granularity).
+  - Added `solarDashboardFull` and `solarDashboardZoom` screenshots as first carousel images
+  - Shortened solar project description for readability
+  - Sleek thin scrollbar styling for dashboard sidebars
+  - Dark gray borders (`border-gray-800`) replacing white borders on all sidebar cards
+  - Navbar title with fade-in animation (two-row stacked layout)
+  - Mobile portrait rotate prompt for dashboard
+
+- **V3.0** (July 2025)
   - Added USCIS Knowledge Base project with repo cover image carousel
   - Added Media Assets Marketing AI Agent project (LightRAG GraphRAG + Gemini Vision)
   - HuggingFace SVG logo integration in project cards

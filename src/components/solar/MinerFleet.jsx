@@ -1,5 +1,4 @@
 import React from "react";
-import { Tilt } from "react-tilt";
 import { motion } from "framer-motion";
 import {
   solarProductBitaxe,
@@ -9,86 +8,110 @@ import {
 } from "../../assets";
 
 const MINERS = [
-  {
-    name: "BitAxe Gamma 601",
-    image: solarProductBitaxe,
-    hashrate: "1.5 TH/s",
-    power: "21W",
-    ip: "192.168.1.21",
-    relay: "R1",
-    color: "#4ecdc4",
-  },
-  {
-    name: "NerdQAxe+",
-    image: solarProductNerdqaxe,
-    hashrate: "2.5 TH/s",
-    power: "60W",
-    ip: "192.168.1.28",
-    relay: "R1",
-    color: "#4ecdc4",
-  },
-  {
-    name: "Nerd Octaxe",
-    image: solarProductOctaxe,
-    hashrate: "10.7 TH/s",
-    power: "180W",
-    ip: "192.168.1.37",
-    relay: "R2",
-    color: "#FFD700",
-  },
-  {
-    name: "Canaan Avalon Q",
-    image: solarProductAvalonQ,
-    hashrate: "52-90 TH/s",
-    power: "800-1720W",
-    ip: "192.168.1.51:4028",
-    relay: "API",
-    color: "#ff6b6b",
-  },
+  { name: "BitAxe Gamma 601", image: solarProductBitaxe, hashrate: "1.5 TH/s", power: "21W", relay: "R1", color: "#4ecdc4", stateKey: "bitaxe" },
+  { name: "NerdQAxe+", image: solarProductNerdqaxe, hashrate: "2.5 TH/s", power: "60W", relay: "R1", color: "#4ecdc4", stateKey: "nerdqaxe" },
+  { name: "Nerd Octaxe", image: solarProductOctaxe, hashrate: "10.7 TH/s", power: "180W", relay: "R2", color: "#FFD700", stateKey: "octaxe" },
+  { name: "Canaan Avalon Q", image: solarProductAvalonQ, hashrate: "52-90 TH/s", power: "800-1720W", relay: "API", color: "#ff6b6b", stateKey: "avalonq" },
 ];
 
-const MinerCard = ({ miner, index }) => (
+const PROFILES = [
+  { r1: false, r2: false, avalon: "off" },
+  { r1: true,  r2: false, avalon: "off" },
+  { r1: false, r2: true,  avalon: "off" },
+  { r1: true,  r2: true,  avalon: "off" },
+  { r1: false, r2: false, avalon: "low" },
+  { r1: true,  r2: false, avalon: "low" },
+  { r1: false, r2: true,  avalon: "low" },
+  { r1: true,  r2: true,  avalon: "low" },
+  { r1: false, r2: false, avalon: "mid" },
+  { r1: true,  r2: false, avalon: "mid" },
+  { r1: false, r2: false, avalon: "high" },
+  { r1: false, r2: true,  avalon: "mid" },
+  { r1: true,  r2: false, avalon: "high" },
+  { r1: true,  r2: true,  avalon: "mid" },
+  { r1: false, r2: true,  avalon: "high" },
+  { r1: true,  r2: true,  avalon: "high" },
+];
+
+const getMinerOnline = (profileId, stateKey) => {
+  const p = PROFILES[profileId] || PROFILES[0];
+  if (stateKey === "bitaxe" || stateKey === "nerdqaxe") return p.r1;
+  if (stateKey === "octaxe") return p.r2;
+  if (stateKey === "avalonq") return p.avalon !== "off";
+  return false;
+};
+
+const MinerCard = ({ miner, index, online }) => (
   <motion.div
-    initial={{ opacity: 0, y: 30 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    transition={{ delay: index * 0.1 }}
+    initial={{ opacity: 0, scale: 0.9 }}
+    animate={{ opacity: 1, scale: 1 }}
+    transition={{ delay: index * 0.08, type: "spring", damping: 20 }}
+    whileHover={{ scale: 1.04, y: -2 }}
+    className="rounded-xl border border-gray-800 overflow-hidden flex flex-col"
+    style={{ background: "rgba(255,255,255,0.03)" }}
   >
-    <Tilt options={{ max: 20, scale: 1.02, speed: 400 }}>
-      <div className="bg-tertiary/60 backdrop-blur-md rounded-2xl p-4 border border-white/10 flex flex-col items-center gap-2 h-full">
-        <div className="w-full h-[100px] flex items-center justify-center">
-          <img src={miner.image} alt={miner.name} className="max-h-full max-w-full object-contain" />
-        </div>
-        <h5 className="text-white font-semibold text-[14px] text-center">{miner.name}</h5>
-        <div className="flex items-center gap-2 mt-1">
-          <span className="text-[11px] px-2 py-0.5 rounded-full" style={{ background: `${miner.color}22`, color: miner.color }}>
-            {miner.relay}
-          </span>
-          <span className="text-[11px] text-secondary">{miner.ip}</span>
-        </div>
-        <div className="flex justify-between w-full mt-2 text-[13px]">
-          <div className="text-center flex-1">
-            <div className="text-white font-bold">{miner.hashrate}</div>
-            <div className="text-secondary text-[10px] uppercase">Hashrate</div>
-          </div>
-          <div className="text-center flex-1">
-            <div className="font-bold" style={{ color: miner.color }}>{miner.power}</div>
-            <div className="text-secondary text-[10px] uppercase">Power</div>
-          </div>
-        </div>
+    {/* Image — maximized */}
+    <div className="w-full aspect-square bg-black/30 flex items-center justify-center p-3 relative overflow-hidden">
+      <div
+        className="absolute inset-0 opacity-10"
+        style={{ background: `radial-gradient(circle at 50% 80%, ${miner.color}40, transparent 70%)` }}
+      />
+      <motion.img
+        src={miner.image}
+        alt={miner.name}
+        className="w-full h-full object-contain relative z-10 drop-shadow-lg"
+        whileHover={{ scale: 1.08 }}
+        transition={{ type: "spring", damping: 15 }}
+      />
+      {/* Relay badge — top right */}
+      <span
+        className="absolute top-2 right-2 text-[9px] px-2 py-0.5 rounded-full font-bold z-20"
+        style={{ background: `${miner.color}20`, color: miner.color, border: `1px solid ${miner.color}30` }}
+      >
+        {miner.relay}
+      </span>
+      {/* Online/Offline breathing dot — top left */}
+      <span className="absolute top-2 left-2 z-20 flex items-center gap-1">
+        <span className="relative flex h-2.5 w-2.5">
+          {online && (
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75"
+              style={{ backgroundColor: "#00ff88" }}
+            />
+          )}
+          <span className="relative inline-flex rounded-full h-2.5 w-2.5"
+            style={{ backgroundColor: online ? "#00ff88" : "#ff3344" }}
+          />
+        </span>
+        <span className="text-[8px] font-bold" style={{ color: online ? "#00ff88" : "#ff3344" }}>
+          {online ? "ON" : "OFF"}
+        </span>
+      </span>
+    </div>
+
+    {/* Info */}
+    <div className="px-2.5 py-2 flex flex-col gap-0.5">
+      <div className="text-white text-[11px] font-bold truncate">{miner.name}</div>
+      <div className="flex items-center justify-between">
+        <span className="text-[10px] font-bold" style={{ color: miner.color }}>{miner.hashrate}</span>
+        <span className="text-[10px] text-secondary">{miner.power}</span>
       </div>
-    </Tilt>
+    </div>
   </motion.div>
 );
 
-const MinerFleet = () => {
-  return (
-    <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+const MinerFleet = ({ activeProfileId = 0 }) => (
+  <div>
+    <div className="grid grid-cols-2 gap-2.5">
       {MINERS.map((m, i) => (
-        <MinerCard key={m.name} miner={m} index={i} />
+        <MinerCard
+          key={m.name}
+          miner={m}
+          index={i}
+          online={getMinerOnline(activeProfileId, m.stateKey)}
+        />
       ))}
     </div>
-  );
-};
+  </div>
+);
 
 export default MinerFleet;

@@ -153,6 +153,17 @@ import {
     solarDashboardThreejs,
     solarDashboardFull,
     solarDashboardZoom,
+    esp32divFrontIsometric,
+    esp32divFrontCloseup,
+    esp32divBackBatteriesOn,
+    esp32divBackVelcro,
+    esp32divBackVelcroNoflash,
+    esp32divRightSide,
+    esp32divBackButtons,
+    esp32divSolidworksIsometric,
+    esp32divSolidworksFront,
+    esp32divSolidworksInside,
+    esp32divFlasherComplete,
   } from "../assets";
 
 
@@ -1621,6 +1632,26 @@ import {
   const projects = {
     en: [
     {
+      name: "ESP32-DIV V2 — Battery Mod & Custom Case Build",
+      description:
+        "A field-ready modification of the CiferTech ESP32-DIV V2 — an open-source multi-band wireless security toolkit built on the ESP32-S3. This mod adds dual 18650 lithium battery power via JST XH 2.54mm connector, a custom 3D-printed SolidWorks enclosure (modified from @DownLord's MakerWorld design), velcro-mounted swappable battery module, Nintendo DS Lite stylus for touchscreen navigation, and a complete firmware flashing guide using mstrvndev's Rust-based GUI Flasher.",
+      tags: [
+        { name: "ESP32-S3", color: "blue-text-gradient" },
+        { name: "IoT", color: "purple-text-gradient" },
+        { name: "Arduino", color: "blue-text-gradient" },
+        { name: "C / C++", color: "gray-text-gradient" },
+        { name: "SolidWorks", color: "red-text-gradient" },
+        { name: "3D Printing", color: "green-text-gradient" },
+        { name: "Hardware Mod", color: "orange-text-gradient" },
+        { name: "18650 Battery", color: "yellow-text-gradient" },
+        { name: "Wireless Security", color: "pink-text-gradient" },
+        { name: "Rust Flasher", color: "red-text-gradient" },
+        { name: "Open Source", color: "green-text-gradient" },
+      ],
+      image: [esp32divFrontIsometric, esp32divFrontCloseup, esp32divSolidworksIsometric, esp32divBackBatteriesOn, esp32divBackVelcro, esp32divBackVelcroNoflash, esp32divRightSide, esp32divBackButtons, esp32divSolidworksFront, esp32divSolidworksInside, esp32divFlasherComplete],
+      source_code_link: "https://github.com/0xrphl/esp32-div-v2-battery-mod",
+    },
+    {
       name: "Solar Crypto Mining Farm — Autonomous Surplus Maximization Control",
       description:
         "Autonomous ESP32-S3 system that scales Bitcoin mining (0–2001W, 4 miners, 16 profiles) to match real-time solar surplus — zero grid, ever. Reads 6-channel Refoss every 30s, auto-switches profiles via Tasmota relays + CGMiner API, with power-outage recovery and Supabase logging. Live 3D dashboard with energy gauges, charts, fleet status, and remote admin panel.",
@@ -1915,6 +1946,26 @@ import {
     },
     ],
     es: [
+      {
+        name: "ESP32-DIV V2 — Mod de Batería y Carcasa Personalizada",
+        description:
+          "Una modificación lista para campo del CiferTech ESP32-DIV V2 — un toolkit de seguridad inalámbrica multibanda de código abierto construido sobre el ESP32-S3. Este mod agrega alimentación por batería de litio dual 18650 vía conector JST XH 2.54mm, una carcasa 3D personalizada diseñada en SolidWorks (modificada del diseño de @DownLord en MakerWorld), módulo de batería desmontable con velcro, stylus Nintendo DS Lite para navegación táctil, y una guía completa de flasheo de firmware usando el Flasher GUI basado en Rust de mstrvndev.",
+        tags: [
+          { name: "ESP32-S3", color: "blue-text-gradient" },
+          { name: "IoT", color: "purple-text-gradient" },
+          { name: "Arduino", color: "blue-text-gradient" },
+          { name: "C / C++", color: "gray-text-gradient" },
+          { name: "SolidWorks", color: "red-text-gradient" },
+          { name: "Impresión 3D", color: "green-text-gradient" },
+          { name: "Mod Hardware", color: "orange-text-gradient" },
+          { name: "Batería 18650", color: "yellow-text-gradient" },
+          { name: "Seguridad Inalámbrica", color: "pink-text-gradient" },
+          { name: "Flasher Rust", color: "red-text-gradient" },
+          { name: "Código Abierto", color: "green-text-gradient" },
+        ],
+        image: [esp32divFrontIsometric, esp32divFrontCloseup, esp32divSolidworksIsometric, esp32divBackBatteriesOn, esp32divBackVelcro, esp32divBackVelcroNoflash, esp32divRightSide, esp32divBackButtons, esp32divSolidworksFront, esp32divSolidworksInside, esp32divFlasherComplete],
+        source_code_link: "https://github.com/0xrphl/esp32-div-v2-battery-mod",
+      },
       {
         name: "Granja Solar de Minería Cripto — Control Autónomo de Maximización de Excedente",
         description:

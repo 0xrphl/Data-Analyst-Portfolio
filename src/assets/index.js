@@ -169,6 +169,19 @@ import solarDashboardThreejs from "./solar-mining/diagrams/threejs-render-solar-
 import solarDashboardFull from "./solar_dashboard_full.png";
 import solarDashboardZoom from "./solar_dashboard_zoom.png";
 
+// ESP32-DIV V2 project assets
+import esp32divFrontIsometric from "./esp32div-front-isometric.jpeg";
+import esp32divFrontCloseup from "./esp32div-front-closeup.jpeg";
+import esp32divBackBatteriesOn from "./esp32div-back-batteries-on.jpeg";
+import esp32divBackVelcro from "./esp32div-back-velcro.jpeg";
+import esp32divBackVelcroNoflash from "./esp32div-back-velcro-noflash.jpeg";
+import esp32divRightSide from "./esp32div-right-side.jpeg";
+import esp32divBackButtons from "./esp32div-back-buttons.jpeg";
+import esp32divSolidworksIsometric from "./esp32div-solidworks-isometric.png";
+import esp32divSolidworksFront from "./esp32div-solidworks-front.png";
+import esp32divSolidworksInside from "./esp32div-solidworks-inside.png";
+import esp32divFlasherComplete from "./esp32div-flasher-complete.png";
+
 export {
 
 
@@ -340,6 +353,18 @@ export {
   solarDashboardThreejs,
   solarDashboardFull,
   solarDashboardZoom,
+  // ESP32-DIV V2 exports
+  esp32divFrontIsometric,
+  esp32divFrontCloseup,
+  esp32divBackBatteriesOn,
+  esp32divBackVelcro,
+  esp32divBackVelcroNoflash,
+  esp32divRightSide,
+  esp32divBackButtons,
+  esp32divSolidworksIsometric,
+  esp32divSolidworksFront,
+  esp32divSolidworksInside,
+  esp32divFlasherComplete,
 };
 
 

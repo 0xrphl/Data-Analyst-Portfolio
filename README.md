@@ -4,7 +4,7 @@
 
 # 0xraphael.com | AI Engineer & Data Analyst Portfolio
 
-Welcome to my AI Engineer & Data Analyst Portfolio, a visually engaging showcase of my skills and projects. This portfolio, deployed at [0xraphael.com](https://0xraphael.com/), features the **V3.1** version — now showcasing AI agent development, RAG/GraphRAG systems, knowledge base engineering, IoT solar mining systems, and full-stack data solutions alongside traditional data analysis work.
+Welcome to my AI Engineer & Data Analyst Portfolio, a visually engaging showcase of my skills and projects. This portfolio, deployed at [0xraphael.com](https://0xraphael.com/), features the **V3.2** version — now showcasing AI agent development, RAG/GraphRAG systems, knowledge base engineering, IoT solar mining systems, and full-stack data solutions alongside traditional data analysis work.
 
 ## Purpose
 
@@ -186,7 +186,13 @@ Feel free to reach out to me via email at [0xrphl@gmail.com](mailto:0xrphl@gmail
 
 ## Version History
 
-- **V3.1** (July 2025) — Current version
+- **V3.2** (July 2025) — Current version
+  - Added **ESP32-DIV V2 — Battery Mod & Custom Case Build** project card with 11-image carousel (front isometric, front closeup, SolidWorks isometric, assembled photos, CAD views, flasher screenshot)
+  - Full English/Spanish descriptions and tags (ESP32-S3, IoT, Arduino, C/C++, SolidWorks, 3D Printing, Hardware Mod, 18650 Battery, Wireless Security, Rust Flasher, Open Source)
+  - GitHub link: [esp32-div-v2-battery-mod](https://github.com/0xrphl/esp32-div-v2-battery-mod)
+  - Reordered projects: ESP32-DIV V2 first, Solar Mining second, then remaining projects
+
+- **V3.1** (July 2025)
   - **Solar Mining Cluster Live Dashboard** — Full-screen Three.js 3D scene with animated house, solar panels, miners, sun, wires, pets, and environment. Collapsible left/right sidebars with live energy gauges, phase breakdowns, channel details, energy saved metrics, historical charts, mining fleet status (4 miners with on/off indicators), 16 mining profiles, profile usage charts, AntPool integration, transitions timeline, and password-gated admin panel. Mobile landscape prompt. Supabase real-time data with v4 schema (30+ columns, per-phase/per-channel granularity).
   - Added `solarDashboardFull` and `solarDashboardZoom` screenshots as first carousel images
   - Shortened solar project description for readability

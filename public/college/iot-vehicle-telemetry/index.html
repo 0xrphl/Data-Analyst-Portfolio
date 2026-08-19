@@ -87,7 +87,7 @@ pre.code{background:rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.06);paddin
 <div id="diagram" class="section active">
 <div id="zoom-controls"><button id="btn-zoom-in">+</button><button id="btn-zoom-out">−</button><div id="zoom-level">100%</div><button id="btn-fit">⊡</button><button id="btn-reset">↺</button></div>
 <div id="diagram-container"></div>
-<div id="legend"><h3>Legend — Architecture Layers</h3>
+<div id="legend"><h3 data-i18n="legendTitle">Legend — Architecture Layers</h3>
 
 <div style="font-size:9px;color:#58a6ff;font-weight:700;margin:8px 0 3px;border-bottom:1px solid #21262d;padding-bottom:2px">📐 REGIONS (Colored Planes)</div>
 <div class="legend-item"><div class="legend-rect" style="background:#F44336;border-color:#F44336"></div>🔴 IoT Sensors — CT Clamp, ADS1115, BMI160, GPS</div>
@@ -139,14 +139,14 @@ pre.code{background:rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.06);paddin
 
 <!-- TAB 2: PEREIRA LORA MAP -->
 <div id="map" class="section">
-<div class="section-header"><h2>🗺️ LoRa Mesh Coverage — Pereira, Risaralda</h2>
-<p>10 nodes (3 gateways + 7 repeaters) • ~95% urban coverage • 915 MHz ISM • Total: $186.50 USD</p></div>
+<div class="section-header"><h2 data-i18n="mapTitle">🗺️ LoRa Mesh Coverage — Pereira, Risaralda</h2>
+<p data-i18n="mapDesc">10 nodes (3 gateways + 7 repeaters) • ~95% urban coverage • 915 MHz ISM • Total: $186.50 USD</p></div>
 <div id="map-container"></div>
 </div>
 
 <!-- TAB 3: COSTS -->
 <div id="costs" class="section">
-<div class="section-header"><h2>💰 Complete Cost Breakdown</h2><p>All prices sourced from AliExpress · Click images to buy · Updated Aug 2026</p></div>
+<div class="section-header"><h2 data-i18n="costsTitle">💰 Complete Cost Breakdown</h2><p data-i18n="costsDesc">All prices sourced from AliExpress · Click images to buy · Updated Aug 2026</p></div>
 <div class="stats-row">
 <div class="stat-card green"><div class="value">$48.50</div><div class="label">Per Vehicle (LoRa)</div></div>
 <div class="stat-card blue"><div class="value">$22.70</div><div class="label">Per Gateway</div></div>
@@ -351,7 +351,7 @@ pre.code{background:rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.06);paddin
 
 <!-- TAB 4: SPECS -->
 <div id="specs" class="section">
-<div class="section-header"><h2>⚡ Full Hardware Specs & Data Pipeline</h2><p>Detailed sensor specifications, microcontroller comparison, wiring diagram, data pipeline, Supabase schema</p></div>
+<div class="section-header"><h2 data-i18n="specsTitle">⚡ Full Hardware Specs & Data Pipeline</h2><p data-i18n="specsDesc">Detailed sensor specifications, microcontroller comparison, wiring diagram, data pipeline, Supabase schema</p></div>
 <div class="tables-wrap">
 
 <!-- Circuit Diagram -->
@@ -642,7 +642,7 @@ pre.code{background:rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.06);paddin
 
 <!-- TAB 5: ROADMAP -->
 <div id="roadmap" class="section">
-<div class="section-header"><h2>🗓️ 5-Week Implementation Roadmap</h2><p>Day-by-day plan from procurement to full deployment · 35 days to system live</p></div>
+<div class="section-header"><h2 data-i18n="roadmapTitle">🗓️ 5-Week Implementation Roadmap</h2><p data-i18n="roadmapDesc">Day-by-day plan from procurement to full deployment · 35 days to system live</p></div>
 <div class="stats-row">
 <div class="stat-card blue"><div class="value">5</div><div class="label">Weeks</div></div>
 <div class="stat-card green"><div class="value">35</div><div class="label">Days Total</div></div>
@@ -823,8 +823,36 @@ window.addEventListener('mouseup',function(){ip=false;ct.style.cursor='grab'});c
 </script>
 <script>
 var I18N={
-en:{navTitle:'IoT Vehicle Telemetry — Pereira, Risaralda',tabArch:'🏗️ Architecture',tabMap:'🗺️ LoRa Map',tabCosts:'💰 Costs',tabSpecs:'⚡ Specs',tabRoadmap:'🗓️ Roadmap'},
-es:{navTitle:'Telemetría Vehicular IoT — Pereira, Risaralda',tabArch:'🏗️ Arquitectura',tabMap:'🗺️ Mapa LoRa',tabCosts:'💰 Costos',tabSpecs:'⚡ Especificaciones',tabRoadmap:'🗓️ Cronograma'}
+en:{
+navTitle:'IoT Vehicle Telemetry — Pereira, Risaralda',
+tabArch:'🏗️ Architecture',tabMap:'🗺️ LoRa Map',tabCosts:'💰 Costs',tabSpecs:'⚡ Specs',tabRoadmap:'🗓️ Roadmap',
+legendTitle:'Legend — Architecture Layers',
+mapTitle:'🗺️ LoRa Mesh Coverage — Pereira, Risaralda',
+mapDesc:'10 nodes (3 gateways + 7 repeaters) • ~95% urban coverage • 915 MHz ISM • Total: $186.50 USD',
+costsTitle:'💰 Complete Cost Breakdown',
+costsDesc:'All prices sourced from AliExpress · Click images to buy · Updated Aug 2026',
+specsTitle:'⚡ Full Hardware Specs & Data Pipeline',
+specsDesc:'Detailed sensor specifications, microcontroller comparison, wiring diagram, data pipeline, Supabase schema',
+roadmapTitle:'🗓️ 5-Week Implementation Roadmap',
+roadmapDesc:'Day-by-day plan from procurement to full deployment · 35 days to system live',
+costLabels:['Per Vehicle (LoRa)','Per Gateway','4G Gateway','Full Deploy (10 vehicles)','4G Data Only','LoRa Break-Even'],
+roadmapLabels:['Weeks','Days Total','Vehicles','LoRa Nodes','GW + Repeaters','Field Test']
+},
+es:{
+navTitle:'Telemetría Vehicular IoT — Pereira, Risaralda',
+tabArch:'🏗️ Arquitectura',tabMap:'🗺️ Mapa LoRa',tabCosts:'💰 Costos',tabSpecs:'⚡ Especificaciones',tabRoadmap:'🗓️ Cronograma',
+legendTitle:'Leyenda — Capas de Arquitectura',
+mapTitle:'🗺️ Cobertura LoRa Mesh — Pereira, Risaralda',
+mapDesc:'10 nodos (3 gateways + 7 repetidores) • ~95% cobertura urbana • 915 MHz ISM • Total: $186.50 USD',
+costsTitle:'💰 Desglose Completo de Costos',
+costsDesc:'Todos los precios de AliExpress · Clic en imágenes para comprar · Actualizado Ago 2026',
+specsTitle:'⚡ Especificaciones de Hardware y Pipeline de Datos',
+specsDesc:'Especificaciones de sensores, comparación de microcontroladores, diagrama de circuitos, pipeline de datos, esquema Supabase',
+roadmapTitle:'🗓️ Cronograma de Implementación — 5 Semanas',
+roadmapDesc:'Plan día a día desde adquisición hasta despliegue completo · 35 días hasta sistema en vivo',
+costLabels:['Por Vehículo (LoRa)','Por Gateway','Gateway 4G','Despliegue Total (10 vehículos)','Solo Datos 4G','Punto de Equilibrio LoRa'],
+roadmapLabels:['Semanas','Días Totales','Vehículos','Nodos LoRa','GW + Repetidores','Prueba de Campo']
+}
 };
 var curLang=localStorage.getItem('iot-lang')||'en';
 function setLang(l){
@@ -833,6 +861,10 @@ document.getElementById('btn-lang-en').classList.toggle('active',l==='en');
 document.getElementById('btn-lang-es').classList.toggle('active',l==='es');
 var t=I18N[l];
 document.querySelectorAll('[data-i18n]').forEach(function(el){var k=el.getAttribute('data-i18n');if(t[k])el.textContent=t[k];});
+var cs=document.getElementById('costs');
+if(cs){var cl=cs.querySelectorAll('.stat-card .label');cl.forEach(function(el,i){if(t.costLabels[i])el.textContent=t.costLabels[i];});}
+var rm=document.getElementById('roadmap');
+if(rm){var rl=rm.querySelectorAll('.stat-card .label');rl.forEach(function(el,i){if(t.roadmapLabels[i])el.textContent=t.roadmapLabels[i];});}
 }
 setLang(curLang);
 </script>

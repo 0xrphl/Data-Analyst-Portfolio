@@ -10,18 +10,24 @@
 <div id="app">
   <aside id="sidebar">
     <div id="sidebar-header">
-      <h1>🚛 IoT Fleet Telemetry<span class="badge">LIVE</span></h1>
-      <p>Pereira, Risaralda · 10 LoRa · 5 Vehicles</p>
+      <div style="display:flex;align-items:center;justify-content:space-between">
+        <h1>🚛 <span data-i18n="sideTitle">IoT Fleet Telemetry</span><span class="badge">LIVE</span></h1>
+        <div style="display:flex;gap:2px">
+          <button class="lang-btn active" id="btn-lang-en" onclick="setLang3d('en')">EN</button>
+          <button class="lang-btn" id="btn-lang-es" onclick="setLang3d('es')">ES</button>
+        </div>
+      </div>
+      <p data-i18n="sideSub">Pereira, Risaralda · 10 LoRa · 5 Vehicles</p>
     </div>
     <div id="vehicle-list"></div>
   </aside>
   <main id="main-view">
     <div id="map-perspective"><div id="map-3d"></div></div>
     <div id="overlay-stats">
-      <div class="stat-box green"><div class="num" id="s-on">5</div><div class="txt">Online</div></div>
-      <div class="stat-box blue"><div class="num" id="s-km">127</div><div class="txt">km Today</div></div>
-      <div class="stat-box orange"><div class="num" id="s-al">2</div><div class="txt">Alerts</div></div>
-      <div class="stat-box red"><div class="num" id="s-kw">156</div><div class="txt">kWh</div></div>
+      <div class="stat-box green"><div class="num" id="s-on">5</div><div class="txt" data-i18n="statOnline">Online</div></div>
+      <div class="stat-box blue"><div class="num" id="s-km">127</div><div class="txt" data-i18n="statKm">km Today</div></div>
+      <div class="stat-box orange"><div class="num" id="s-al">2</div><div class="txt" data-i18n="statAlerts">Alerts</div></div>
+      <div class="stat-box red"><div class="num" id="s-kw">156</div><div class="txt" data-i18n="statKwh">kWh</div></div>
     </div>
     <div id="time-bar">
       <span>🕐</span>
@@ -29,16 +35,49 @@
       <span class="td" id="time-display">Live</span>
     </div>
     <div id="controls">
-      <button id="btn-3d" class="active">🏔️ 3D Tilt</button>
-      <button id="btn-coverage">📡 Coverage</button>
-      <button id="btn-trails" class="active">🛣️ Trails</button>
-      <button id="btn-dark" class="active">🌙 Dark</button>
+      <button id="btn-3d" class="active" data-i18n="btn3d">🏔️ 3D Tilt</button>
+      <button id="btn-coverage" data-i18n="btnCoverage">📡 Coverage</button>
+      <button id="btn-trails" class="active" data-i18n="btnTrails">🛣️ Trails</button>
+      <button id="btn-dark" class="active" data-i18n="btnDark">🌙 Dark</button>
     </div>
     <div id="chart-panel">
-      <h4>📈 Amps · Last Hour</h4>
+      <h4 data-i18n="chartTitle">📈 Amps · Last Hour</h4>
       <canvas id="chart-canvas" width="220" height="60"></canvas>
     </div>
   </main>
 </div>
 <script src="dashboard-3d.js"></script>
+<script>
+var I18N3d={
+en:{sideTitle:'IoT Fleet Telemetry',sideSub:'Pereira, Risaralda · 10 LoRa · 5 Vehicles',
+statOnline:'Online',statKm:'km Today',statAlerts:'Alerts',statKwh:'kWh',
+btn3d:'🏔️ 3D Tilt',btnCoverage:'📡 Coverage',btnTrails:'🛣️ Trails',btnDark:'🌙 Dark',
+chartTitle:'📈 Amps · Last Hour',lblAmps:'Amps',lblBat:'Battery',lblSpeed:'km/h',lblRSSI:'RSSI'},
+es:{sideTitle:'Telemetría de Flota IoT',sideSub:'Pereira, Risaralda · 10 LoRa · 5 Vehículos',
+statOnline:'En Línea',statKm:'km Hoy',statAlerts:'Alertas',statKwh:'kWh',
+btn3d:'🏔️ Vista 3D',btnCoverage:'📡 Cobertura',btnTrails:'🛣️ Rutas',btnDark:'🌙 Oscuro',
+chartTitle:'📈 Amperios · Última Hora',lblAmps:'Amperios',lblBat:'Batería',lblSpeed:'km/h',lblRSSI:'RSSI'}
+};
+var curLang3d=localStorage.getItem('iot-lang')||'en';
+function setLang3d(l){
+curLang3d=l;localStorage.setItem('iot-lang',l);
+document.getElementById('btn-lang-en').classList.toggle('active',l==='en');
+document.getElementById('btn-lang-es').classList.toggle('active',l==='es');
+var t=I18N3d[l];
+document.querySelectorAll('[data-i18n]').forEach(function(el){var k=el.getAttribute('data-i18n');if(t[k])el.textContent=t[k];});
+// Update metric labels in sidebar vehicle cards
+document.querySelectorAll('.metric.amps .lbl').forEach(function(el){el.textContent=t.lblAmps;});
+document.querySelectorAll('.metric.bat .lbl').forEach(function(el){el.textContent=t.lblBat;});
+document.querySelectorAll('.metric.speed .lbl').forEach(function(el){el.textContent=t.lblSpeed;});
+document.querySelectorAll('.metric.rssi .lbl').forEach(function(el){el.textContent=t.lblRSSI;});
+}
+setLang3d(curLang3d);
+// Re-apply after sidebar rerenders
+setInterval(function(){var t=I18N3d[curLang3d];
+document.querySelectorAll('.metric.amps .lbl').forEach(function(el){el.textContent=t.lblAmps;});
+document.querySelectorAll('.metric.bat .lbl').forEach(function(el){el.textContent=t.lblBat;});
+document.querySelectorAll('.metric.speed .lbl').forEach(function(el){el.textContent=t.lblSpeed;});
+document.querySelectorAll('.metric.rssi .lbl').forEach(function(el){el.textContent=t.lblRSSI;});
+},600);
+</script>
 </body></html>

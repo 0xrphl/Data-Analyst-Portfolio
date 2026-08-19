@@ -164,6 +164,11 @@ import {
     esp32divSolidworksFront,
     esp32divSolidworksInside,
     esp32divFlasherComplete,
+    heatTransferFurnace,
+    heatTransferSolidCube,
+    iotTelemetryDashboard3d,
+    iotTelemetryDashboard2d,
+    iotTelemetryCircuitDiagrams,
   } from "../assets";
 
 
@@ -234,38 +239,38 @@ import {
   const services = {
     en: [
     {
-      title: "AI Agent & Automation Expert",
+      title: "Full-Stack Software Engineer",
       icon: web,
     },
     {
-      title: "React, Three.js web Developer",
-      icon: mobile,
+      title: "IoT & Mechanical Engineer",
+      icon: creator,
     },
     {
-      title: "Data & Business Analyst",
+      title: "Data & BI Analyst",
       icon: backend,
     },
     {
-      title: "Prospective Mechanical Engineer",
-      icon: creator,
+      title: "AI Agent & Automation Expert",
+      icon: mobile,
     },
     ],
     es: [
       {
-        title: "Experto en Agentes IA y Automatización",
+        title: "Ingeniero de Software Full-Stack",
         icon: web,
       },
       {
-        title: "Desarrollador React, Three.js",
-        icon: mobile,
+        title: "Ingeniero IoT y Mecánico",
+        icon: creator,
       },
       {
-        title: "Analista de Datos",
+        title: "Analista de Datos y BI",
         icon: backend,
       },
       {
-        title: "Ingeniero Mecánico",
-        icon: creator,
+        title: "Experto en Agentes IA y Automatización",
+        icon: mobile,
       },
     ]
   };
@@ -923,7 +928,7 @@ import {
       company_name: "Quiroga Law Office, PLLC",
       icon: quiroga,
       iconBg: "#fff",
-      date: "April 2024 - Promoted in January 2024",
+      date: "April 2024 - Promoted in January 2025",
       points: [
         "Data Analysis & Visualization: Utilize Python (Pandas, Matplotlib, Seaborn) to extract, clean, and analyze data, creating insightful reports with comprehensive visualizations that highlight trends and performance patterns.",
         "Web Scraping Automation: Employ Selenium to automate data extraction from online sources, ensuring access to up-to-date information crucial for analysis.",
@@ -1371,7 +1376,7 @@ import {
         company_name: "Quiroga Law Office, PLLC",
         icon: quiroga,
         iconBg: "#fff",
-        date: "Abril 2024 - Promovido en Enero 2024",
+        date: "Abril 2024 - Promovido en Enero 2025",
         points: [
           "Análisis y Visualización de Datos: Utilización de Python (Pandas, Matplotlib, Seaborn) para extraer, limpiar y analizar datos, creando informes perspicaces con visualizaciones completas que resaltan tendencias y patrones de rendimiento.",
           "Automatización de Web Scraping: Empleo de Selenium para automatizar la extracción de datos de fuentes en línea, asegurando acceso a información actualizada crucial para el análisis.",
@@ -1632,6 +1637,52 @@ import {
   const projects = {
     en: [
     {
+      name: "CFD/FEM Thermal Simulation — Fourier Heat Transfer PDE Solver",
+      description:
+        "Interactive WebGL thermal simulation built with React Three Fiber solving the general Fourier heat transfer equation (∂T/∂t = κ∇²T + q) in real-time on a 3D grid. Features two modes: solid insulating cube with embedded heater and hollow furnace with configurable shell/cavity materials. Includes volumetric rendering with clip planes, contour bands, and color-mapped temperature fields. Full PDE derivation panel with LaTeX-rendered equations (KaTeX), Leva GUI controls for material properties, grid resolution (up to 40³), and visualization parameters. Converges to analytical steady-state with energy balance validation.",
+      tags: [
+        { name: "CFD", color: "red-text-gradient" },
+        { name: "FEM", color: "orange-text-gradient" },
+        { name: "React Three Fiber", color: "blue-text-gradient" },
+        { name: "WebGL", color: "green-text-gradient" },
+        { name: "Three.js", color: "purple-text-gradient" },
+        { name: "Fourier PDE", color: "pink-text-gradient" },
+        { name: "Heat Transfer", color: "red-text-gradient" },
+        { name: "Thermal Simulation", color: "orange-text-gradient" },
+        { name: "JavaScript", color: "yellow-text-gradient" },
+        { name: "Vite", color: "blue-text-gradient" },
+        { name: "KaTeX", color: "gray-text-gradient" },
+      ],
+      image: [heatTransferSolidCube, heatTransferFurnace],
+      source_code_link: "https://github.com/0xrphl/Data-Analyst-Portfolio",
+      live_demo_link: "/college/heat-transfer",
+      live_demo_label: "🔥 Interactive Simulation",
+      live_demo_style: { background: 'linear-gradient(90deg, #D32F2F 0%, #FF6F00 50%, #FFB300 100%)' },
+    },
+    {
+      name: "IoT Vehicle Telemetry — LoRa Mesh + 4G LTE Fleet Tracking",
+      description:
+        "End-to-end IoT telemetry system for 10-vehicle fleet in Pereira, Colombia. CT clamp (SCT-013) + BMI160 gyroscope + GPS on LilyGo T-Beam V1.2 nodes transmit via LoRa 915MHz mesh (3 gateways + 7 repeaters, ~95% urban coverage). 4G LTE backup via T-SIM7670G-S3. Data pipeline: ESP32 → LoRa/4G → Supabase PostgreSQL → Edge Functions (15-min aggregation) → Realtime WebSocket dashboard. Features isometric architecture diagram, Leaflet coverage map, full BOM ($868 for 10 vehicles), circuit wiring diagrams, and 5-week implementation roadmap. 3D live dashboard with vehicle tracking, amps/speed gauges, and route replay.",
+      tags: [
+        { name: "ESP32", color: "blue-text-gradient" },
+        { name: "LoRa", color: "purple-text-gradient" },
+        { name: "IoT", color: "green-text-gradient" },
+        { name: "Meshtastic", color: "orange-text-gradient" },
+        { name: "Supabase", color: "green-text-gradient" },
+        { name: "Leaflet", color: "blue-text-gradient" },
+        { name: "GPS", color: "cyan-text-gradient" },
+        { name: "4G LTE", color: "pink-text-gradient" },
+        { name: "CT Clamp", color: "red-text-gradient" },
+        { name: "Three.js", color: "purple-text-gradient" },
+        { name: "3D Printing", color: "gray-text-gradient" },
+      ],
+      image: [iotTelemetryDashboard3d, iotTelemetryDashboard2d, iotTelemetryCircuitDiagrams],
+      source_code_link: "https://github.com/0xrphl/iot-vehicle-telemetry",
+      live_demo_link: "/college/iot-vehicle-telemetry",
+      live_demo_label: "📡 Live Fleet Dashboard",
+      live_demo_style: { background: 'linear-gradient(90deg, #0097A7 0%, #1565C0 50%, #4A148C 100%)' },
+    },
+    {
       name: "ESP32-DIV V2 — Battery Mod & Custom Case Build",
       description:
         "A field-ready modification of the CiferTech ESP32-DIV V2 — an open-source multi-band wireless security toolkit built on the ESP32-S3. This mod adds dual 18650 lithium battery power via JST XH 2.54mm connector, a custom 3D-printed SolidWorks enclosure (modified from @DownLord's MakerWorld design), velcro-mounted swappable battery module, Nintendo DS Lite stylus for touchscreen navigation, and a complete firmware flashing guide using mstrvndev's Rust-based GUI Flasher.",
@@ -1671,6 +1722,8 @@ import {
       image: [solarDashboardFull, solarDashboardZoom, solarDashboardThreejs, solarDashboardMinerfleet, solarDashboardAntpool, solarDiagramCircuitDashboard, solarDiagramHouseIsometricMiners, solarDiagramHouseIsometricProject, solarDiagramSystem, solarDiagramEnergyFlow, solarDiagramProfiles, solarDiagramNetwork, solarDiagramChannels, solarDiagramElectrical, solarDiagramDecision],
       source_code_link: "https://github.com/0xrphl/Solar-crypto-mining-farm-maximization-control",
       live_demo_link: "/solar-mining-cluster",
+      live_demo_label: "⚡ Live 3D Dashboard",
+      live_demo_style: { background: 'linear-gradient(90deg, #FFA500 0%, #FF7A00 50%, #FFD700 100%)' },
     },
     {
       name: "MiroFish Neo4j Fork",
@@ -1947,6 +2000,52 @@ import {
     ],
     es: [
       {
+        name: "Simulación Térmica CFD/FEM — Solver de EDP de Transferencia de Calor de Fourier",
+        description:
+          "Simulación térmica interactiva WebGL construida con React Three Fiber que resuelve la ecuación general de transferencia de calor de Fourier (∂T/∂t = κ∇²T + q) en tiempo real sobre una malla 3D. Incluye dos modos: cubo sólido aislante con calentador embebido y horno hueco con materiales de carcasa/cavidad configurables. Renderizado volumétrico con planos de corte, bandas de contorno y campos de temperatura con mapa de colores. Panel completo de derivación de EDP con ecuaciones renderizadas en LaTeX (KaTeX), controles GUI Leva para propiedades de materiales, resolución de malla (hasta 40³) y parámetros de visualización. Converge al estado estacionario analítico con validación de balance energético.",
+        tags: [
+          { name: "CFD", color: "red-text-gradient" },
+          { name: "FEM", color: "orange-text-gradient" },
+          { name: "React Three Fiber", color: "blue-text-gradient" },
+          { name: "WebGL", color: "green-text-gradient" },
+          { name: "Three.js", color: "purple-text-gradient" },
+          { name: "EDP de Fourier", color: "pink-text-gradient" },
+          { name: "Transferencia de Calor", color: "red-text-gradient" },
+          { name: "Simulación Térmica", color: "orange-text-gradient" },
+          { name: "JavaScript", color: "yellow-text-gradient" },
+          { name: "Vite", color: "blue-text-gradient" },
+          { name: "KaTeX", color: "gray-text-gradient" },
+        ],
+        image: [heatTransferSolidCube, heatTransferFurnace],
+        source_code_link: "https://github.com/0xrphl/Data-Analyst-Portfolio",
+        live_demo_link: "/college/heat-transfer",
+        live_demo_label: "🔥 Simulación Interactiva",
+        live_demo_style: { background: 'linear-gradient(90deg, #D32F2F 0%, #FF6F00 50%, #FFB300 100%)' },
+      },
+      {
+        name: "Telemetría Vehicular IoT — LoRa Mesh + 4G LTE para Flotas",
+        description:
+          "Sistema integral de telemetría IoT para flota de 10 vehículos en Pereira, Colombia. Pinza amperimétrica (SCT-013) + giroscopio BMI160 + GPS en nodos LilyGo T-Beam V1.2 transmiten vía LoRa 915MHz mesh (3 gateways + 7 repetidores, ~95% cobertura urbana). Respaldo 4G LTE vía T-SIM7670G-S3. Pipeline de datos: ESP32 → LoRa/4G → Supabase PostgreSQL → Edge Functions (agregación cada 15 min) → Dashboard WebSocket en tiempo real. Incluye diagrama de arquitectura isométrica, mapa de cobertura Leaflet, BOM completo ($868 para 10 vehículos), diagramas de circuitos y hoja de ruta de implementación de 5 semanas. Dashboard 3D en vivo con rastreo vehicular, medidores de amperios/velocidad y replay de rutas.",
+        tags: [
+          { name: "ESP32", color: "blue-text-gradient" },
+          { name: "LoRa", color: "purple-text-gradient" },
+          { name: "IoT", color: "green-text-gradient" },
+          { name: "Meshtastic", color: "orange-text-gradient" },
+          { name: "Supabase", color: "green-text-gradient" },
+          { name: "Leaflet", color: "blue-text-gradient" },
+          { name: "GPS", color: "cyan-text-gradient" },
+          { name: "4G LTE", color: "pink-text-gradient" },
+          { name: "Pinza CT", color: "red-text-gradient" },
+          { name: "Three.js", color: "purple-text-gradient" },
+          { name: "Impresión 3D", color: "gray-text-gradient" },
+        ],
+        image: [iotTelemetryDashboard3d, iotTelemetryDashboard2d, iotTelemetryCircuitDiagrams],
+        source_code_link: "https://github.com/0xrphl/iot-vehicle-telemetry",
+        live_demo_link: "/college/iot-vehicle-telemetry",
+        live_demo_label: "📡 Dashboard de Flota en Vivo",
+        live_demo_style: { background: 'linear-gradient(90deg, #0097A7 0%, #1565C0 50%, #4A148C 100%)' },
+      },
+      {
         name: "ESP32-DIV V2 — Mod de Batería y Carcasa Personalizada",
         description:
           "Una modificación lista para campo del CiferTech ESP32-DIV V2 — un toolkit de seguridad inalámbrica multibanda de código abierto construido sobre el ESP32-S3. Este mod agrega alimentación por batería de litio dual 18650 vía conector JST XH 2.54mm, una carcasa 3D personalizada diseñada en SolidWorks (modificada del diseño de @DownLord en MakerWorld), módulo de batería desmontable con velcro, stylus Nintendo DS Lite para navegación táctil, y una guía completa de flasheo de firmware usando el Flasher GUI basado en Rust de mstrvndev.",
@@ -1986,6 +2085,8 @@ import {
         image: [solarDashboardFull, solarDashboardZoom, solarDashboardThreejs, solarDashboardMinerfleet, solarDashboardAntpool, solarDiagramCircuitDashboard, solarDiagramHouseIsometricMiners, solarDiagramHouseIsometricProject, solarDiagramSystem, solarDiagramEnergyFlow, solarDiagramProfiles, solarDiagramNetwork, solarDiagramChannels, solarDiagramElectrical, solarDiagramDecision],
         source_code_link: "https://github.com/0xrphl/Solar-crypto-mining-farm-maximization-control",
         live_demo_link: "/solar-mining-cluster",
+        live_demo_label: "⚡ Dashboard 3D en Vivo",
+        live_demo_style: { background: 'linear-gradient(90deg, #FFA500 0%, #FF7A00 50%, #FFD700 100%)' },
       },
       {
         name: "MiroFish Neo4j Fork",

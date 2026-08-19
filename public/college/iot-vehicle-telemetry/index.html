@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>IoT Vehicle Telemetry — Pereira, Risaralda</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',Roboto,Arial,sans-serif;background:#0a0e17;color:#e0e0e0}
+a{color:#58a6ff}
+#top-nav{position:sticky;top:0;z-index:200;background:linear-gradient(135deg,#1a1f2e,#0d1117);border-bottom:1px solid #2d333b;display:flex;align-items:center;padding:10px 24px;gap:16px;flex-wrap:wrap}
+#top-nav h1{font-size:16px;color:#58a6ff;white-space:nowrap}
+.badge{background:#238636;color:#fff;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:600}
+.nav-tabs{display:flex;gap:4px;margin-left:auto}
+.nav-tabs button{background:0 0;border:1px solid #30363d;color:#8b949e;padding:6px 14px;border-radius:6px;cursor:pointer;font-size:12px;font-weight:600;transition:.2s}
+.nav-tabs button:hover{border-color:#58a6ff;color:#e0e0e0}
+.nav-tabs button.active{background:#21262d;border-color:#58a6ff;color:#58a6ff}
+.section{display:none}.section.active{display:block}
+.section-header{padding:24px 32px 12px}
+.section-header h2{font-size:22px;color:#58a6ff;margin-bottom:4px}
+.section-header p{color:#8b949e;font-size:13px}
+#diagram-container{width:100%;height:calc(100vh - 52px);overflow:hidden;cursor:grab}
+#zoom-controls{position:fixed;top:64px;right:16px;display:flex;flex-direction:column;gap:4px;z-index:150}
+#zoom-controls button{width:34px;height:34px;border:1px solid #30363d;background:rgba(22,27,34,.95);color:#e0e0e0;font-size:16px;border-radius:6px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+#zoom-controls button:hover{background:#30363d;border-color:#58a6ff}
+#zoom-level{text-align:center;font-size:10px;color:#8b949e}
+#legend{position:fixed;bottom:5px;left:5px;background:rgba(22,27,34,.95);border:1px solid #30363d;border-radius:8px;padding:10px 14px;z-index:150;font-size:11px;max-width:300px}
+#legend h3{color:#58a6ff;font-size:12px;margin-bottom:6px;border-bottom:1px solid #21262d;padding-bottom:4px}
+.legend-item{display:flex;align-items:center;margin:3px 0}
+.legend-line{width:20px;height:2px;margin-right:8px;border-radius:1px}
+.legend-rect{width:12px;height:8px;margin-right:8px;border-radius:2px;opacity:.4;border:1px solid}
+#info-panel{position:fixed;bottom:5px;right:5px;background:rgba(22,27,34,.95);border:1px solid #30363d;border-radius:8px;padding:14px 18px;z-index:150;font-size:12px;max-width:350px;display:none}
+#info-panel h4{color:#58a6ff;margin-bottom:4px}
+#info-panel p{color:#8b949e;line-height:1.4}
+#map-container{height:calc(100vh - 140px);margin:0 32px 24px;border-radius:12px;border:1px solid #30363d}
+.tables-wrap{padding:0 32px 48px}
+.cost-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:32px}
+@media(max-width:900px){.cost-grid{grid-template-columns:1fr}}
+.card{background:#161b22;border:1px solid #30363d;border-radius:10px;overflow:hidden}
+.card-header{padding:12px 16px;font-size:14px;font-weight:600;border-bottom:1px solid #21262d}
+.card-header.red{background:linear-gradient(135deg,rgba(244,67,54,.15),transparent);color:#ef5350}
+.card-header.orange{background:linear-gradient(135deg,rgba(255,152,0,.15),transparent);color:#FFB74D}
+.card-header.green{background:linear-gradient(135deg,rgba(76,175,80,.15),transparent);color:#66BB6A}
+.card-header.blue{background:linear-gradient(135deg,rgba(33,150,243,.15),transparent);color:#42A5F5}
+.card-header.purple{background:linear-gradient(135deg,rgba(156,39,176,.15),transparent);color:#CE93D8}
+.card-header.cyan{background:linear-gradient(135deg,rgba(0,188,212,.15),transparent);color:#4DD0E1}
+.card-header.teal{background:linear-gradient(135deg,rgba(0,150,136,.15),transparent);color:#4DB6AC}
+table{width:100%;border-collapse:collapse;font-size:12px}
+th{text-align:left;padding:8px 12px;color:#8b949e;border-bottom:1px solid #21262d;font-weight:600}
+td{padding:7px 12px;border-bottom:1px solid rgba(48,54,61,.5)}
+tr:hover td{background:rgba(88,166,255,.04)}
+.price{color:#66BB6A;font-weight:600;font-family:'Cascadia Code',monospace}
+.total-row td{font-weight:700;border-top:2px solid #30363d;color:#58a6ff;font-size:13px}
+.highlight{background:rgba(88,166,255,.08)!important}
+.stats-row{display:flex;gap:16px;padding:0 32px 24px;flex-wrap:wrap}
+.stat-card{flex:1;min-width:140px;background:#161b22;border:1px solid #30363d;border-radius:10px;padding:16px;text-align:center}
+.stat-card .value{font-size:24px;font-weight:700}
+.stat-card .label{font-size:11px;color:#8b949e;margin-top:4px}
+.stat-card.red .value{color:#ef5350}.stat-card.orange .value{color:#FFB74D}
+.stat-card.green .value{color:#66BB6A}.stat-card.blue .value{color:#42A5F5}
+.stat-card.purple .value{color:#CE93D8}.stat-card.cyan .value{color:#4DD0E1}
+pre.code{background:#0d1117;padding:12px;border-radius:6px;overflow-x:auto;color:#e0e0e0;font-size:11px;font-family:'Cascadia Code',monospace}
+</style>
+</head>
+<body>
+<nav id="top-nav">
+<h1>⚡ IoT Vehicle Telemetry — Pereira, Risaralda</h1>
+<span class="badge">v1.0</span>
+<div class="nav-tabs">
+<button class="active" onclick="showTab('diagram',this)">🏗️ Architecture</button>
+<button onclick="showTab('map',this)">🗺️ LoRa Map</button>
+<button onclick="showTab('costs',this)">💰 Costs</button>
+<button onclick="showTab('specs',this)">⚡ Specs</button>
+<button onclick="showTab('roadmap',this)">🗓️ Roadmap</button>
+<button onclick="window.open('dashboard-3d.html','_blank')" style="background:#238636;border-color:#238636;color:#fff">🎮 3D Demo</button>
+</div>
+</nav>
+
+<!-- TAB 1: ARCHITECTURE DIAGRAM -->
+<div id="diagram" class="section active">
+<div id="zoom-controls"><button id="btn-zoom-in">+</button><button id="btn-zoom-out">−</button><div id="zoom-level">100%</div><button id="btn-fit">⊡</button><button id="btn-reset">↺</button></div>
+<div id="diagram-container"></div>
+<div id="legend"><h3>Legend — Architecture Layers</h3>
+
+<div style="font-size:9px;color:#58a6ff;font-weight:700;margin:8px 0 3px;border-bottom:1px solid #21262d;padding-bottom:2px">📐 REGIONS (Colored Planes)</div>
+<div class="legend-item"><div class="legend-rect" style="background:#F44336;border-color:#F44336"></div>🔴 IoT Sensors — CT Clamp, ADS1115, BMI160, GPS</div>
+<div class="legend-item"><div class="legend-rect" style="background:#FF9800;border-color:#FF9800"></div>🟠 LoRa Mesh — T-Beam, ESP32+SX1278, Repeaters, Solar, Battery, 3D Case</div>
+<div class="legend-item"><div class="legend-rect" style="background:#3F51B5;border-color:#3F51B5"></div>🟣 4G LTE — T-SIM7670G-S3, Cell Tower, EV Vehicle</div>
+<div class="legend-item"><div class="legend-rect" style="background:#4CAF50;border-color:#4CAF50"></div>🟢 Cloud DB — Supabase PostgreSQL, Realtime, Edge Functions</div>
+<div class="legend-item"><div class="legend-rect" style="background:#2196F3;border-color:#2196F3"></div>🔵 Frontend — Hostinger, Dashboard, Map, User Browser</div>
+
+<div style="font-size:9px;color:#58a6ff;font-weight:700;margin:8px 0 3px;border-bottom:1px solid #21262d;padding-bottom:2px">🔌 CONNECTIONS (Lines)</div>
+<div class="legend-item"><div class="legend-line" style="background:#F44336"></div>Analog 0-1V / I2C Bus (sensor → MCU)</div>
+<div class="legend-item"><div class="legend-line" style="background:#2196F3"></div>I2C 0x68 (BMI160 gyro → MCU)</div>
+<div class="legend-item"><div class="legend-line" style="background:#00BCD4"></div>UART GPS (NEO-6M → MCU)</div>
+<div class="legend-item"><div class="legend-line" style="background:#FF9800"></div>LoRa 915MHz mesh (node → repeater → gateway)</div>
+<div class="legend-item"><div class="legend-line" style="background:#3F51B5"></div>4G LTE Cat-1 (T-SIM → cell tower → Supabase)</div>
+<div class="legend-item"><div class="legend-line" style="background:#4CAF50"></div>HTTPS / Realtime WS (gateway ↔ Supabase)</div>
+<div class="legend-item"><div class="legend-line" style="background:#009688"></div>15-min cron (Supabase → Edge Functions)</div>
+<div class="legend-item"><div class="legend-line" style="background:#9C27B0"></div>Serves SPA (Hostinger → Dashboard)</div>
+<div class="legend-item"><div class="legend-line" style="background:#FFC107;height:1px;border-top:1px dashed #FFC107"></div>Solar 6V (panel → repeater) [dashed]</div>
+<div class="legend-item"><div class="legend-line" style="background:#CDDC39;height:1px;border-top:1px dashed #CDDC39"></div>3.7V battery backup [dashed]</div>
+<div class="legend-item"><div class="legend-line" style="background:#9E9E9E"></div>HTTPS (user browser → dashboard)</div>
+
+<div style="font-size:9px;color:#58a6ff;font-weight:700;margin:8px 0 3px;border-bottom:1px solid #21262d;padding-bottom:2px">🔌 ENCLOSURE</div>
+<div class="legend-item"><div class="legend-line" style="background:#9E9E9E;height:1px;border-top:1px dashed #9E9E9E"></div>Enclosure (3D case → T-Beam/T-SIM/ESP32) [dashed]</div>
+
+<div style="font-size:9px;color:#58a6ff;font-weight:700;margin:8px 0 3px;border-bottom:1px solid #21262d;padding-bottom:2px">🧊 NODE COLORS (Cubes)</div>
+<div class="legend-item"><div class="legend-rect" style="background:#F44336;border-color:#F44336;opacity:1"></div><span style="font-size:8px">CT Clamp (SCT-013)</span></div>
+<div class="legend-item"><div class="legend-rect" style="background:#E91E63;border-color:#E91E63;opacity:1"></div><span style="font-size:8px">ADS1115 ADC</span></div>
+<div class="legend-item"><div class="legend-rect" style="background:#2196F3;border-color:#2196F3;opacity:1"></div><span style="font-size:8px">BMI160 Gyroscope</span></div>
+<div class="legend-item"><div class="legend-rect" style="background:#1E88E5;border-color:#1E88E5;opacity:1"></div><span style="font-size:8px">GPS NEO-6M</span></div>
+<div class="legend-item"><div class="legend-rect" style="background:#4CAF50;border-color:#4CAF50;opacity:1"></div><span style="font-size:8px">T-Beam V1.2 (LoRa+GPS)</span></div>
+<div class="legend-item"><div class="legend-rect" style="background:#7C4DFF;border-color:#7C4DFF;opacity:1"></div><span style="font-size:8px">T-SIM7670G (4G+GPS)</span></div>
+<div class="legend-item"><div class="legend-rect" style="background:#009688;border-color:#009688;opacity:1"></div><span style="font-size:8px">ESP32 LoRa Repeater</span></div>
+<div class="legend-item"><div class="legend-rect" style="background:#E040FB;border-color:#E040FB;opacity:1"></div><span style="font-size:8px">LoRa Gateway</span></div>
+<div class="legend-item"><div class="legend-rect" style="background:#FFC107;border-color:#FFC107;opacity:1"></div><span style="font-size:8px">Solar Panel</span></div>
+<div class="legend-item"><div class="legend-rect" style="background:#4CAF50;border-color:#66BB6A;opacity:1"></div><span style="font-size:8px">18650 Battery</span></div>
+<div class="legend-item"><div class="legend-rect" style="background:#9E9E9E;border-color:#9E9E9E;opacity:1"></div><span style="font-size:8px">3D Print Case (PETG+TPU)</span></div>
+<div class="legend-item"><div class="legend-rect" style="background:#5C6BC0;border-color:#5C6BC0;opacity:1"></div><span style="font-size:8px">4G Cell Tower</span></div>
+<div class="legend-item"><div class="legend-rect" style="background:#3BEF8A;border-color:#3BEF8A;opacity:1"></div><span style="font-size:8px">Supabase DB</span></div>
+<div class="legend-item"><div class="legend-rect" style="background:#26A69A;border-color:#26A69A;opacity:1"></div><span style="font-size:8px">Edge Functions</span></div>
+<div class="legend-item"><div class="legend-rect" style="background:#CE93D8;border-color:#CE93D8;opacity:1"></div><span style="font-size:8px">Hostinger</span></div>
+<div class="legend-item"><div class="legend-rect" style="background:#03A9F4;border-color:#03A9F4;opacity:1"></div><span style="font-size:8px">Dashboard</span></div>
+<div class="legend-item"><div class="legend-rect" style="background:#4CAF50;border-color:#2E7D32;opacity:1"></div><span style="font-size:8px">GPS Map</span></div>
+<div class="legend-item"><div class="legend-rect" style="background:#00BCD4;border-color:#00BCD4;opacity:1"></div><span style="font-size:8px">Vehicle EV</span></div>
+<div class="legend-item"><div class="legend-rect" style="background:#FF8D40;border-color:#FF8D40;opacity:1"></div><span style="font-size:8px">Vehicle ICE/Truck</span></div>
+<div class="legend-item"><div class="legend-rect" style="background:#90A4AE;border-color:#90A4AE;opacity:1"></div><span style="font-size:8px">User Browser</span></div>
+</div>
+<div id="info-panel"><h4 id="info-title"></h4><p id="info-desc"></p></div>
+</div>
+
+<!-- TAB 2: PEREIRA LORA MAP -->
+<div id="map" class="section">
+<div class="section-header"><h2>🗺️ LoRa Mesh Coverage — Pereira, Risaralda</h2>
+<p>10 nodes (3 gateways + 7 repeaters) • ~95% urban coverage • 915 MHz ISM • Total: $186.50 USD</p></div>
+<div id="map-container"></div>
+</div>
+
+<!-- TAB 3: COSTS -->
+<div id="costs" class="section">
+<div class="section-header"><h2>💰 Complete Cost Breakdown</h2><p>All prices sourced from AliExpress · Click images to buy · Updated Aug 2026</p></div>
+<div class="stats-row">
+<div class="stat-card green"><div class="value">$48.50</div><div class="label">Per Vehicle (LoRa)</div></div>
+<div class="stat-card blue"><div class="value">$22.70</div><div class="label">Per Gateway</div></div>
+<div class="stat-card purple"><div class="value">$58</div><div class="label">4G Gateway</div></div>
+<div class="stat-card orange"><div class="value">$868</div><div class="label">Full Deploy (10 vehicles)</div></div>
+<div class="stat-card cyan"><div class="value">$5-8/mo</div><div class="label">4G Data Only</div></div>
+<div class="stat-card red"><div class="value">~4.5 mo</div><div class="label">LoRa Break-Even</div></div>
+</div>
+<div class="tables-wrap">
+
+<!-- LoRa Node BOM with images -->
+<h3 style="color:#66BB6A;margin:24px 0 16px;font-size:18px">🟢 LoRa Node — Vehicle Unit (~$48.50)</h3>
+<div class="cost-grid">
+<div class="card"><div class="card-header green">🚛 MCU — LilyGo T-Beam V1.2</div>
+<div style="text-align:center;padding:12px;background:#0d1117"><a href="https://aliexpress.com/item/4001178678568.html" target="_blank"><img src="images/lilygo-tbeam-v12.png" alt="T-Beam V1.2" style="max-width:100%;max-height:200px;border-radius:8px;border:1px solid #30363d"></a></div>
+<table>
+<tr><th>Spec</th><th>Value</th></tr>
+<tr><td>MCU</td><td>ESP32 (240MHz dual-core, WiFi + BT)</td></tr>
+<tr><td>LoRa</td><td>SX1262 — 433/868/915MHz</td></tr>
+<tr><td>GPS</td><td>NEO-6M (2.5m CEP)</td></tr>
+<tr><td>PMU</td><td>AXP2101 — 18650 battery management</td></tr>
+<tr><td>Display</td><td>OLED 0.96" (optional)</td></tr>
+<tr><td>Firmware</td><td>Meshtastic compatible</td></tr>
+<tr class="total-row"><td><b>Price</b></td><td class="price"><a href="https://aliexpress.com/item/4001178678568.html" target="_blank">$28.00 — Buy on AliExpress</a></td></tr>
+</table></div>
+
+<div class="card"><div class="card-header red">⚡ CT Clamp — SCT-013</div>
+<div style="text-align:center;padding:12px;background:#0d1117"><a href="https://www.aliexpress.us/item/3256808061666229.html" target="_blank"><img src="images/sct013-ct-clamp.png" alt="SCT-013" style="max-width:100%;max-height:200px;border-radius:8px;border:1px solid #30363d"></a></div>
+<table>
+<tr><th>Spec</th><th>Value</th></tr>
+<tr><td>Range</td><td>0–100A (30A variant recommended)</td></tr>
+<tr><td>Output</td><td>0–1V AC</td></tr>
+<tr><td>Accuracy</td><td>±1%</td></tr>
+<tr><td>Type</td><td>Non-invasive, split-core clamp-on</td></tr>
+<tr><td>Rating</td><td>⭐ 4.9 (211 reviews)</td></tr>
+<tr class="total-row"><td><b>Price</b></td><td class="price"><a href="https://www.aliexpress.us/item/3256808061666229.html" target="_blank">$6.03 — Buy on AliExpress</a></td></tr>
+</table></div>
+
+<div class="card"><div class="card-header blue">📏 ADC — ADS1115 16-Bit</div>
+<div style="text-align:center;padding:12px;background:#0d1117"><a href="https://www.aliexpress.us/item/3256812085808204.html" target="_blank"><img src="images/ads1115-adc.png" alt="ADS1115" style="max-width:100%;max-height:200px;border-radius:8px;border:1px solid #30363d"></a></div>
+<table>
+<tr><th>Spec</th><th>Value</th></tr>
+<tr><td>Resolution</td><td>16-bit</td></tr>
+<tr><td>Channels</td><td>4 (multiplexed)</td></tr>
+<tr><td>Sample Rate</td><td>Up to 860 SPS</td></tr>
+<tr><td>Voltage</td><td>2.0–5.5V</td></tr>
+<tr><td>Interface</td><td>I2C (addr 0x48)</td></tr>
+<tr><td>PGA</td><td>Programmable gain amplifier</td></tr>
+<tr class="total-row"><td><b>Price</b></td><td class="price"><a href="https://www.aliexpress.us/item/3256812085808204.html" target="_blank">$2.28 — Buy on AliExpress</a></td></tr>
+</table></div>
+
+<div class="card"><div class="card-header purple">🔄 IMU — BMI160 6DOF</div>
+<div style="text-align:center;padding:12px;background:#0d1117"><a href="https://www.aliexpress.us/item/3256809462979321.html" target="_blank"><img src="images/bmi160-gyroscope.png" alt="BMI160" style="max-width:100%;max-height:200px;border-radius:8px;border:1px solid #30363d"></a></div>
+<table>
+<tr><th>Spec</th><th>Value</th></tr>
+<tr><td>Axes</td><td>6DOF (3-axis gyro + 3-axis accel)</td></tr>
+<tr><td>Gyro Range</td><td>±2000°/s</td></tr>
+<tr><td>Accel Range</td><td>±16g</td></tr>
+<tr><td>Resolution</td><td>16-bit</td></tr>
+<tr><td>Interface</td><td>I2C (0x68) / SPI</td></tr>
+<tr><td>Voltage</td><td>3–5V</td></tr>
+<tr class="total-row"><td><b>Price</b></td><td class="price"><a href="https://www.aliexpress.us/item/3256809462979321.html" target="_blank">$2.50 — Buy on AliExpress</a></td></tr>
+</table></div>
+</div>
+
+<!-- Remaining LoRa Node items -->
+<div class="cost-grid">
+<div class="card"><div class="card-header orange">☀️ Solar + Battery + Misc</div><table>
+<tr><th>Component</th><th>Specs</th><th>Source</th><th>Price</th></tr>
+<tr><td>Solar Panel</td><td>Mono/Poly 2V 150mA 60×60mm, CE certified</td><td><a href="https://es.aliexpress.com/item/1005005825496564.html" target="_blank">AliExpress</a></td><td class="price">$5.49</td></tr>
+<tr><td>18650 Battery</td><td>Li-ion 3400mAh 3.7V</td><td>AliExpress</td><td class="price">$3.00</td></tr>
+<tr><td>Burden Resistor</td><td>33Ω 1% (for CT clamp)</td><td>Local</td><td class="price">$0.20</td></tr>
+<tr><td>Filter Caps</td><td>10µF ceramic + 100nF bypass</td><td>Local</td><td class="price">$0.30</td></tr>
+<tr><td>Jumper Wires</td><td>Dupont M-F, M-M pack</td><td>AliExpress</td><td class="price">$0.50</td></tr>
+<tr><td>JST Connectors</td><td>2-pin JST-PH for battery</td><td>AliExpress</td><td class="price">$0.20</td></tr>
+<tr class="total-row"><td colspan="3"><b>Subtotal</b></td><td class="price">$9.69</td></tr>
+</table></div>
+<div class="card"><div class="card-header green">📋 LoRa Node — Total Summary</div><table>
+<tr><th>#</th><th>Component</th><th>Price</th></tr>
+<tr><td>1</td><td>LilyGo T-Beam V1.2 (ESP32 + LoRa + GPS)</td><td class="price">$28.00</td></tr>
+<tr><td>2</td><td>SCT-013-030 CT Clamp (30A, 1V)</td><td class="price">$6.03</td></tr>
+<tr><td>3</td><td>ADS1115 ADC (16-bit, I2C)</td><td class="price">$2.28</td></tr>
+<tr><td>4</td><td>BMI160 Gyroscope (6DOF)</td><td class="price">$2.50</td></tr>
+<tr><td>5</td><td>Solar Panel (2V 150mA)</td><td class="price">$5.49</td></tr>
+<tr><td>6</td><td>18650 Battery (3400mAh)</td><td class="price">$3.00</td></tr>
+<tr><td>7</td><td>Misc (resistors, caps, wires, connectors)</td><td class="price">$1.20</td></tr>
+<tr class="total-row"><td></td><td><b>Total per Vehicle</b></td><td class="price">$48.50</td></tr>
+</table></div>
+</div>
+
+<!-- Gateway BOM -->
+<h3 style="color:#42A5F5;margin:32px 0 16px;font-size:18px">🔵 LoRa Gateway Node (~$22.70)</h3>
+<div class="cost-grid">
+<div class="card"><div class="card-header blue">📡 Gateway LoRa — SX1278 Ra-02 (10KM)</div>
+<div style="text-align:center;padding:12px;background:#0d1117"><a href="https://es.aliexpress.com/item/1005004991920495.html" target="_blank"><img src="images/sx1278-lora-module.png" alt="SX1278 Ra-02" style="max-width:100%;max-height:200px;border-radius:8px;border:1px solid #30363d"></a></div>
+<table>
+<tr><th>Spec</th><th>Value</th></tr>
+<tr><td>Chip</td><td>SX1278 (Semtech)</td></tr>
+<tr><td>Frequency</td><td>433MHz</td></tr>
+<tr><td>Range</td><td>Up to 10km (line of sight)</td></tr>
+<tr><td>Antenna</td><td>IPX spring antenna (included)</td></tr>
+<tr><td>Interface</td><td>SPI</td></tr>
+<tr><td>Rating</td><td>⭐ 4.8 (183 reviews) · 4,000+ sold</td></tr>
+<tr class="total-row"><td><b>Price</b></td><td class="price"><a href="https://es.aliexpress.com/item/1005004991920495.html" target="_blank">$4.17 — Buy on AliExpress</a></td></tr>
+</table></div>
+<div class="card"><div class="card-header blue">📋 Gateway — Full BOM</div><table>
+<tr><th>#</th><th>Component</th><th>Price</th></tr>
+<tr><td>1</td><td>ESP32-WROOM-32 DevKit V1 (WiFi + BT)</td><td class="price">$3.50</td></tr>
+<tr><td>2</td><td>SX1278 Ra-02 433MHz LoRa (10km)</td><td class="price">$4.17</td></tr>
+<tr><td>3</td><td>Solar Panel (3V 150mA 60×55mm)</td><td class="price">$5.49</td></tr>
+<tr><td>4</td><td>18650 Li-ion Battery (3400mAh)</td><td class="price">$3.00</td></tr>
+<tr><td>5</td><td>TP4056 USB-C Charger Module</td><td class="price">$0.50</td></tr>
+<tr><td>6</td><td>433MHz spring antenna (incl. w/ Ra-02)</td><td class="price">$0.00</td></tr>
+<tr><td>7</td><td>IP65 Waterproof Box (100×68×50mm)</td><td class="price">$3.00</td></tr>
+<tr><td>8</td><td>Pole clamp + zip ties + sealant</td><td class="price">$2.00</td></tr>
+<tr><td>9</td><td>SMA pigtail, jumper wires, solder</td><td class="price">$1.04</td></tr>
+<tr class="total-row"><td></td><td><b>Total per Gateway</b></td><td class="price">$22.70</td></tr>
+</table></div>
+</div>
+
+<!-- 4G Gateway BOM -->
+<h3 style="color:#CE93D8;margin:32px 0 16px;font-size:18px">🟠 4G Gateway — Backup / Rural (~$58 + $5-8/mo)</h3>
+<div class="cost-grid">
+<div class="card"><div class="card-header purple">📱 LilyGo T-SIM7670G-S3 — 4G LTE + GPS</div>
+<div style="text-align:center;padding:12px;background:#0d1117"><a href="https://aliexpress.com/item/1005007058444056.html" target="_blank"><img src="images/lilygo-tsim7670g.png" alt="T-SIM7670G-S3" style="max-width:100%;max-height:200px;border-radius:8px;border:1px solid #30363d"></a></div>
+<table>
+<tr><th>Spec</th><th>Value</th></tr>
+<tr><td>MCU</td><td>ESP32-S3</td></tr>
+<tr><td>Cellular</td><td>SIM7670G LTE CAT-1</td></tr>
+<tr><td>GPS</td><td>Built-in</td></tr>
+<tr><td>Battery</td><td>18650 holder</td></tr>
+<tr><td>Use Case</td><td>Rural areas, 4G backup</td></tr>
+<tr class="total-row"><td><b>Price</b></td><td class="price"><a href="https://aliexpress.com/item/1005007058444056.html" target="_blank">$45.00 — Buy on AliExpress</a></td></tr>
+</table></div>
+<div class="card"><div class="card-header purple">📋 4G Gateway — Full BOM</div><table>
+<tr><th>#</th><th>Component</th><th>Price</th></tr>
+<tr><td>1</td><td>LilyGo T-SIM7670G-S3 (ESP32-S3 + 4G + GPS)</td><td class="price">$45.00</td></tr>
+<tr><td>2</td><td>SIM Card (Claro/Movistar prepaid)</td><td class="price">$5.00</td></tr>
+<tr><td>3</td><td>Data Plan (500MB/mo IoT)</td><td class="price">$5-8/mo</td></tr>
+<tr><td>4</td><td>18650 Li-ion Battery (3400mAh)</td><td class="price">$3.00</td></tr>
+<tr><td>5</td><td>Solar Panel (3V 150mA)</td><td class="price">$5.49</td></tr>
+<tr><td>6</td><td>IP65 Box + LTE external antenna</td><td class="price">$4.50</td></tr>
+<tr class="total-row"><td></td><td><b>Total (one-time)</b></td><td class="price">~$58.00 + $5-8/mo</td></tr>
+</table></div>
+</div>
+
+<!-- Full Deployment Budget -->
+<h3 style="color:#58a6ff;margin:32px 0 16px;font-size:18px">💰 Full Deployment — 10 Vehicles + Infrastructure</h3>
+<div class="cost-grid">
+<div class="card"><div class="card-header green">🏗️ Total One-Time Budget</div><table>
+<tr><th>Item</th><th>Qty</th><th>Unit Cost</th><th>Total</th></tr>
+<tr><td>LoRa Node (vehicle unit)</td><td>10</td><td class="price">$48.50</td><td class="price">$485.00</td></tr>
+<tr><td>LoRa Gateway (ESP32 + SX1278)</td><td>3</td><td class="price">$22.70</td><td class="price">$68.10</td></tr>
+<tr><td>LoRa Repeater (T-Beam)</td><td>7</td><td class="price">$33.00</td><td class="price">$231.00</td></tr>
+<tr><td>4G Gateway (backup)</td><td>1</td><td class="price">$58.00</td><td class="price">$58.00</td></tr>
+<tr><td>Tools & Consumables</td><td>1</td><td class="price">$26.00</td><td class="price">$26.00</td></tr>
+<tr class="total-row"><td colspan="3"><b>Grand Total (one-time)</b></td><td class="price">$868.10</td></tr>
+</table></div>
+<div class="card"><div class="card-header blue">📊 LoRa vs 4G — 1 Year Comparison</div><table>
+<tr><th>Metric</th><th>LoRa Mesh</th><th>4G LTE</th></tr>
+<tr><td>One-time hardware</td><td class="price">$894</td><td class="price">$668</td></tr>
+<tr><td>Monthly cost</td><td class="price">~$4/mo</td><td class="price">~$54/mo</td></tr>
+<tr><td>Year 1 Total</td><td class="price" style="font-size:14px"><b>$944</b></td><td class="price" style="font-size:14px"><b>$1,316</b></td></tr>
+<tr class="highlight"><td><b>Savings</b></td><td colspan="2" style="color:#66BB6A;font-weight:700;font-size:14px">LoRa saves $372/year</td></tr>
+<tr class="highlight"><td><b>Break-even</b></td><td colspan="2" style="color:#FFB74D;font-weight:700">~4.5 months</td></tr>
+</table></div>
+</div>
+
+<!-- LoRa Nodes Pereira -->
+<div class="cost-grid">
+<div class="card" style="grid-column:1/-1"><div class="card-header teal">📍 LoRa Nodes — Pereira, Risaralda (10 Nodes)</div><table>
+<tr><th>#</th><th>Location</th><th>Elevation</th><th>Role</th><th>Range</th><th>Cost</th></tr>
+<tr><td>1</td><td>Centro (Plaza Bolívar)</td><td>1411m</td><td>Gateway</td><td>3.5km</td><td class="price">$22.70</td></tr>
+<tr><td>2</td><td>Dosquebradas Centro</td><td>1480m</td><td>Gateway</td><td>3.0km</td><td class="price">$22.70</td></tr>
+<tr><td>3</td><td>Cuba Industrial</td><td>1420m</td><td>Gateway</td><td>3.0km</td><td class="price">$22.70</td></tr>
+<tr><td>4</td><td>Circunvalar Mall</td><td>1440m</td><td>Repeater</td><td>2.5km</td><td class="price">$33.00</td></tr>
+<tr><td>5</td><td>Universidad Tecnológica</td><td>1450m</td><td>Repeater</td><td>2.5km</td><td class="price">$33.00</td></tr>
+<tr><td>6</td><td>Boston</td><td>1400m</td><td>Repeater</td><td>2.5km</td><td class="price">$33.00</td></tr>
+<tr><td>7</td><td>Kennedy</td><td>1430m</td><td>Repeater</td><td>2.5km</td><td class="price">$33.00</td></tr>
+<tr><td>8</td><td>Perla del Otún</td><td>1380m</td><td>Repeater</td><td>2.5km</td><td class="price">$33.00</td></tr>
+<tr><td>9</td><td>Villa Santana</td><td>1500m</td><td>Repeater</td><td>2.5km</td><td class="price">$33.00</td></tr>
+<tr><td>10</td><td>Alamos</td><td>1450m</td><td>Repeater</td><td>2.5km</td><td class="price">$33.00</td></tr>
+<tr class="total-row"><td colspan="5"><b>Total 10 nodes (3 GW + 7 RP)</b></td><td class="price">$299.10</td></tr>
+</table></div>
+</div>
+
+<!-- Tools -->
+<div class="cost-grid">
+<div class="card" style="grid-column:1/-1"><div class="card-header orange">🛠️ Tools & Consumables (One-Time)</div><table>
+<tr><th>Item</th><th>Purpose</th><th>Price</th></tr>
+<tr><td>Soldering iron + solder</td><td>Assembly & connections</td><td class="price">$8.00</td></tr>
+<tr><td>Breadboard + jumper wires</td><td>Prototyping</td><td class="price">$3.00</td></tr>
+<tr><td>Heat shrink tubing</td><td>Wire insulation</td><td class="price">$2.00</td></tr>
+<tr><td>Multimeter</td><td>Testing & debugging</td><td class="price">$10.00</td></tr>
+<tr><td>USB-C cables (×3)</td><td>Programming & charging</td><td class="price">$3.00</td></tr>
+<tr class="total-row"><td colspan="2"><b>Total</b></td><td class="price">$26.00</td></tr>
+</table></div>
+</div>
+
+</div>
+</div>
+
+<!-- TAB 4: SPECS -->
+<div id="specs" class="section">
+<div class="section-header"><h2>⚡ Full Hardware Specs & Data Pipeline</h2><p>Detailed sensor specifications, microcontroller comparison, wiring diagram, data pipeline, Supabase schema</p></div>
+<div class="tables-wrap">
+
+<!-- Circuit Diagram -->
+<h3 style="color:#ef5350;margin:24px 0 16px;font-size:18px">🔌 Circuit Wiring Diagram</h3>
+<div style="text-align:center;margin-bottom:32px;background:#161b22;border:1px solid #30363d;border-radius:10px;padding:16px">
+<img src="images/circuit-diagrams.png" alt="Circuit Wiring Diagram" style="max-width:100%;border-radius:8px;border:1px solid #30363d">
+<p style="color:#8b949e;font-size:11px;margin-top:8px">CT Clamp → Burden Resistor → ADS1115 (I2C) → ESP32/T-Beam · BMI160 (I2C) → ESP32 · GPS (UART) → NEO-6M</p>
+</div>
+
+<!-- Sensor Specs with Images -->
+<h3 style="color:#ef5350;margin:24px 0 16px;font-size:18px">📏 Sensor Specifications</h3>
+<div class="cost-grid">
+<div class="card"><div class="card-header red">⚡ CT Clamp — SCT-013-030</div>
+<div style="text-align:center;padding:12px;background:#0d1117"><a href="https://www.aliexpress.us/item/3256808061666229.html" target="_blank"><img src="images/sct013-ct-clamp.png" alt="SCT-013" style="max-width:100%;max-height:180px;border-radius:8px;border:1px solid #30363d"></a></div>
+<table>
+<tr><th>Parameter</th><th>Value</th></tr>
+<tr><td>Measurement</td><td>AC Current (non-invasive)</td></tr>
+<tr><td>Range</td><td>0–30A (30A variant) / 0–100A</td></tr>
+<tr><td>Output</td><td>0–1V AC</td></tr>
+<tr><td>Accuracy</td><td>±1%</td></tr>
+<tr><td>Linearity</td><td>±0.2%</td></tr>
+<tr><td>Type</td><td>Split-core, clamp-on</td></tr>
+<tr><td>Aperture</td><td>13mm</td></tr>
+<tr><td>Burden Resistor</td><td>33Ω (for 30A → 1V output)</td></tr>
+<tr><td>Frequency</td><td>50/60Hz</td></tr>
+<tr><td>Dielectric Strength</td><td>6000V AC / 1min</td></tr>
+<tr class="total-row"><td><b>Price</b></td><td class="price"><a href="https://www.aliexpress.us/item/3256808061666229.html" target="_blank">$6.03</a> · ⭐ 4.9 (211 reviews)</td></tr>
+</table></div>
+
+<div class="card"><div class="card-header blue">📏 ADC — ADS1115 16-Bit</div>
+<div style="text-align:center;padding:12px;background:#0d1117"><a href="https://www.aliexpress.us/item/3256812085808204.html" target="_blank"><img src="images/ads1115-adc.png" alt="ADS1115" style="max-width:100%;max-height:180px;border-radius:8px;border:1px solid #30363d"></a></div>
+<table>
+<tr><th>Parameter</th><th>Value</th></tr>
+<tr><td>Resolution</td><td>16-bit</td></tr>
+<tr><td>Channels</td><td>4 single-ended / 2 differential</td></tr>
+<tr><td>Sample Rate</td><td>8 to 860 SPS (programmable)</td></tr>
+<tr><td>Input Range</td><td>±0.256V to ±6.144V (PGA)</td></tr>
+<tr><td>Supply Voltage</td><td>2.0–5.5V</td></tr>
+<tr><td>Interface</td><td>I2C (addr 0x48–0x4B)</td></tr>
+<tr><td>INL</td><td>±0.5 LSB max</td></tr>
+<tr><td>Power</td><td>150µA (continuous), 0.5µA (shutdown)</td></tr>
+<tr class="total-row"><td><b>Price</b></td><td class="price"><a href="https://www.aliexpress.us/item/3256812085808204.html" target="_blank">$2.28</a> · 34 sold</td></tr>
+</table></div>
+
+<div class="card"><div class="card-header purple">🔄 IMU — BMI160 6DOF</div>
+<div style="text-align:center;padding:12px;background:#0d1117"><a href="https://www.aliexpress.us/item/3256809462979321.html" target="_blank"><img src="images/bmi160-gyroscope.png" alt="BMI160" style="max-width:100%;max-height:180px;border-radius:8px;border:1px solid #30363d"></a></div>
+<table>
+<tr><th>Parameter</th><th>Value</th></tr>
+<tr><td>Axes</td><td>6DOF (3-axis gyro + 3-axis accel)</td></tr>
+<tr><td>Gyro Range</td><td>±125 / ±250 / ±500 / ±1000 / ±2000°/s</td></tr>
+<tr><td>Accel Range</td><td>±2 / ±4 / ±8 / ±16g</td></tr>
+<tr><td>Resolution</td><td>16-bit (both)</td></tr>
+<tr><td>ODR (Gyro)</td><td>25–3200 Hz</td></tr>
+<tr><td>ODR (Accel)</td><td>12.5–1600 Hz</td></tr>
+<tr><td>Noise (Gyro)</td><td>0.007 °/s/√Hz</td></tr>
+<tr><td>Interface</td><td>I2C (0x68/0x69) / SPI (10MHz)</td></tr>
+<tr><td>Supply</td><td>1.71–3.6V (core), 1.2–3.6V (I/O)</td></tr>
+<tr><td>Current</td><td>925µA (gyro+accel), 3µA (suspend)</td></tr>
+<tr class="total-row"><td><b>Price</b></td><td class="price"><a href="https://www.aliexpress.us/item/3256809462979321.html" target="_blank">$2.50</a></td></tr>
+</table></div>
+
+<div class="card"><div class="card-header green">📡 GPS — NEO-6M (T-Beam built-in)</div>
+<table>
+<tr><th>Parameter</th><th>Value</th></tr>
+<tr><td>Receiver</td><td>u-blox NEO-6M (50-channel)</td></tr>
+<tr><td>Position Accuracy</td><td>2.5m CEP (horizontal)</td></tr>
+<tr><td>Velocity Accuracy</td><td>0.1 m/s</td></tr>
+<tr><td>TTFF (Cold)</td><td>27 seconds</td></tr>
+<tr><td>TTFF (Hot)</td><td>1 second</td></tr>
+<tr><td>Update Rate</td><td>1–5 Hz (configurable)</td></tr>
+<tr><td>Protocol</td><td>NMEA 0183, UBX binary</td></tr>
+<tr><td>Interface</td><td>UART (9600–115200 baud)</td></tr>
+<tr><td>Sensitivity</td><td>-162 dBm (tracking)</td></tr>
+<tr><td>Supply</td><td>2.7–3.6V, 45mA (acquisition)</td></tr>
+<tr><td>Included in</td><td>T-Beam V1.2 (built-in)</td></tr>
+</table></div>
+</div>
+
+<!-- Microcontroller Comparison -->
+<h3 style="color:#42A5F5;margin:32px 0 16px;font-size:18px">🖥️ Microcontroller Comparison</h3>
+<div class="cost-grid">
+<div class="card"><div class="card-header green">🚛 LilyGo T-Beam V1.2 (LoRa Node)</div>
+<div style="text-align:center;padding:12px;background:#0d1117"><a href="https://aliexpress.com/item/4001178678568.html" target="_blank"><img src="images/lilygo-tbeam-v12.png" alt="T-Beam V1.2" style="max-width:100%;max-height:180px;border-radius:8px;border:1px solid #30363d"></a></div>
+<table>
+<tr><th>Parameter</th><th>Value</th></tr>
+<tr><td>MCU</td><td>ESP32 (Xtensa LX6, 240MHz dual-core)</td></tr>
+<tr><td>Flash / PSRAM</td><td>4MB / 8MB</td></tr>
+<tr><td>WiFi</td><td>802.11 b/g/n (2.4GHz)</td></tr>
+<tr><td>Bluetooth</td><td>BT 4.2 + BLE</td></tr>
+<tr><td>LoRa</td><td>SX1262 — 433/868/915MHz, 20dBm</td></tr>
+<tr><td>GPS</td><td>NEO-6M (UART)</td></tr>
+<tr><td>PMU</td><td>AXP2101 — charge/discharge management</td></tr>
+<tr><td>Battery</td><td>18650 holder (3.7V)</td></tr>
+<tr><td>GPIO</td><td>34 programmable</td></tr>
+<tr><td>I2C / SPI / UART</td><td>2 / 3 / 3</td></tr>
+<tr><td>Deep Sleep</td><td>~10µA</td></tr>
+<tr><td>USB</td><td>Type-C (CP2102 UART bridge)</td></tr>
+<tr><td>Firmware</td><td>Meshtastic, Arduino, ESP-IDF</td></tr>
+<tr class="total-row"><td><b>Price</b></td><td class="price"><a href="https://aliexpress.com/item/4001178678568.html" target="_blank">$28.00</a></td></tr>
+</table></div>
+
+<div class="card"><div class="card-header purple">📱 LilyGo T-SIM7670G-S3 (4G Gateway)</div>
+<div style="text-align:center;padding:12px;background:#0d1117"><a href="https://aliexpress.com/item/1005007058444056.html" target="_blank"><img src="images/lilygo-tsim7670g.png" alt="T-SIM7670G" style="max-width:100%;max-height:180px;border-radius:8px;border:1px solid #30363d"></a></div>
+<table>
+<tr><th>Parameter</th><th>Value</th></tr>
+<tr><td>MCU</td><td>ESP32-S3 (Xtensa LX7, 240MHz dual-core)</td></tr>
+<tr><td>Flash / PSRAM</td><td>16MB / 8MB</td></tr>
+<tr><td>WiFi</td><td>802.11 b/g/n (2.4GHz)</td></tr>
+<tr><td>Bluetooth</td><td>BT 5.0 + BLE</td></tr>
+<tr><td>Cellular</td><td>SIM7670G LTE CAT-1 (DL 10Mbps)</td></tr>
+<tr><td>Bands</td><td>B1/B2/B3/B4/B5/B7/B8/B28/B66</td></tr>
+<tr><td>GPS</td><td>Built-in (GNSS)</td></tr>
+<tr><td>SIM</td><td>Nano-SIM slot</td></tr>
+<tr><td>Battery</td><td>18650 holder</td></tr>
+<tr><td>USB</td><td>Type-C (native USB-OTG)</td></tr>
+<tr><td>GPIO</td><td>45 programmable</td></tr>
+<tr><td>Antenna</td><td>External SMA (LTE + GPS)</td></tr>
+<tr class="total-row"><td><b>Price</b></td><td class="price"><a href="https://aliexpress.com/item/1005007058444056.html" target="_blank">$45.00</a></td></tr>
+</table></div>
+</div>
+
+<div class="cost-grid">
+<div class="card"><div class="card-header blue">📡 SX1278 Ra-02 (Gateway LoRa Radio)</div>
+<div style="text-align:center;padding:12px;background:#0d1117"><a href="https://es.aliexpress.com/item/1005004991920495.html" target="_blank"><img src="images/sx1278-lora-module.png" alt="SX1278 Ra-02" style="max-width:100%;max-height:180px;border-radius:8px;border:1px solid #30363d"></a></div>
+<table>
+<tr><th>Parameter</th><th>Value</th></tr>
+<tr><td>Chip</td><td>Semtech SX1278</td></tr>
+<tr><td>Frequency</td><td>433MHz</td></tr>
+<tr><td>Modulation</td><td>LoRa (CSS) / FSK / OOK</td></tr>
+<tr><td>TX Power</td><td>+20 dBm (100mW)</td></tr>
+<tr><td>Sensitivity</td><td>-148 dBm</td></tr>
+<tr><td>Range</td><td>Up to 10km (LOS)</td></tr>
+<tr><td>Spreading Factor</td><td>SF6–SF12</td></tr>
+<tr><td>Bandwidth</td><td>7.8–500 kHz</td></tr>
+<tr><td>Interface</td><td>SPI (up to 10MHz)</td></tr>
+<tr><td>Supply</td><td>1.8–3.7V, 10mA (RX), 120mA (TX)</td></tr>
+<tr><td>Antenna</td><td>IPX spring antenna (included)</td></tr>
+<tr class="total-row"><td><b>Price</b></td><td class="price"><a href="https://es.aliexpress.com/item/1005004991920495.html" target="_blank">$4.17</a> · ⭐ 4.8 · 4,000+ sold</td></tr>
+</table></div>
+
+<div class="card"><div class="card-header orange">☀️ Solar Panel — Mono/Poly</div>
+<table>
+<tr><th>Parameter</th><th>Value</th></tr>
+<tr><td>Voltage</td><td>2V / 3V options</td></tr>
+<tr><td>Current</td><td>150mA (60×60mm) / 300mA (50×80mm)</td></tr>
+<tr><td>Size</td><td>60×60mm (compact) to 60×80mm</td></tr>
+<tr><td>Type</td><td>Mono/Poly crystalline</td></tr>
+<tr><td>Certification</td><td>CE</td></tr>
+<tr><td>Weight</td><td>~50g</td></tr>
+<tr><td>Charge Controller</td><td>TP4056 USB-C module ($0.50)</td></tr>
+<tr><td>Battery Combo</td><td>Panel → TP4056 → 18650 → ESP32</td></tr>
+<tr><td>Daily Yield</td><td>~150mAh (6h sun, Pereira avg)</td></tr>
+<tr class="total-row"><td><b>Price</b></td><td class="price"><a href="https://es.aliexpress.com/item/1005005825496564.html" target="_blank">$5.49</a> · ⭐ 4.8 · 1,000+ sold</td></tr>
+</table></div>
+</div>
+
+<!-- Sensor Summary Table -->
+<h3 style="color:#4DD0E1;margin:32px 0 16px;font-size:18px">📊 Sensor Summary Matrix</h3>
+<div class="cost-grid">
+<div class="card" style="grid-column:1/-1"><div class="card-header cyan">📏 All Sensors at a Glance</div><table>
+<tr><th>Sensor</th><th>Model</th><th>Measurement</th><th>Range</th><th>Resolution</th><th>Interface</th><th>Rate</th><th>Price</th></tr>
+<tr><td>Current</td><td>SCT-013-030</td><td>AC Current</td><td>0–30A</td><td>±1%</td><td>Analog → ADS1115</td><td>10Hz</td><td class="price">$6.03</td></tr>
+<tr><td>Voltage</td><td>Burden calc</td><td>AC Voltage</td><td>0–250V</td><td>Derived</td><td>Software</td><td>10Hz</td><td>—</td></tr>
+<tr><td>Power Factor</td><td>Phase angle</td><td>PF</td><td>0–1.0</td><td>±0.01</td><td>Software ZCD</td><td>1Hz</td><td>—</td></tr>
+<tr><td>ADC</td><td>ADS1115</td><td>Analog → Digital</td><td>±4.096V</td><td>16-bit</td><td>I2C (0x48)</td><td>860 SPS</td><td class="price">$2.28</td></tr>
+<tr><td>Gyroscope</td><td>BMI160</td><td>Angular rate</td><td>±2000°/s</td><td>16-bit</td><td>I2C (0x68)</td><td>100Hz</td><td class="price" rowspan="2">$2.50</td></tr>
+<tr><td>Accelerometer</td><td>BMI160</td><td>Linear accel</td><td>±16g</td><td>16-bit</td><td>I2C (0x68)</td><td>100Hz</td></tr>
+<tr><td>GPS</td><td>NEO-6M</td><td>Position/Speed</td><td>Global</td><td>2.5m CEP</td><td>UART (NMEA)</td><td>1–5Hz</td><td>Built-in</td></tr>
+</table></div>
+</div>
+
+<!-- Data Pipeline -->
+<h3 style="color:#66BB6A;margin:32px 0 16px;font-size:18px">🔄 Data Pipeline — 15-Minute Aggregation</h3>
+<div class="cost-grid">
+<div class="card"><div class="card-header green">🔄 Pipeline Steps</div><table>
+<tr><th>Step</th><th>Component</th><th>Description</th><th>Frequency</th></tr>
+<tr><td>1. Sample</td><td>ESP32 + Sensors</td><td>Read CT (amps), BMI160 (gyro), GPS (position)</td><td>Every 1–10s</td></tr>
+<tr><td>2. Buffer</td><td>ESP32 PSRAM</td><td>Ring buffer in SPIFFS/PSRAM (900 samples)</td><td>Continuous</td></tr>
+<tr><td>3. Aggregate</td><td>ESP32 firmware</td><td>Compute avg/min/max over 15min window</td><td>Every 15 min</td></tr>
+<tr><td>4. Transmit</td><td>LoRa / 4G</td><td>JSON payload via LoRa mesh or HTTPS (4G)</td><td>Every 15 min</td></tr>
+<tr><td>5. Ingest</td><td>Supabase</td><td>POST → telemetry_raw table</td><td>Every 15 min</td></tr>
+<tr><td>6. Process</td><td>Edge Function</td><td>Deno edge fn: validate, enrich, aggregate</td><td>Every 15 min</td></tr>
+<tr><td>7. Store</td><td>Supabase DB</td><td>Insert into telemetry_15min</td><td>Every 15 min</td></tr>
+<tr><td>8. Alert</td><td>Edge Function</td><td>Threshold check → alerts table</td><td>On anomaly</td></tr>
+<tr><td>9. Broadcast</td><td>Realtime WS</td><td>Push to all connected dashboards</td><td>Real-time</td></tr>
+</table></div>
+<div class="card"><div class="card-header orange">⚠️ Alert Thresholds</div><table>
+<tr><th>Alert Type</th><th>Condition</th><th>Severity</th><th>Action</th></tr>
+<tr><td>Over-current</td><td>Amps > 25A</td><td style="color:#ef5350">Critical</td><td>Notify + log</td></tr>
+<tr><td>High vibration</td><td>Accel > 4g sustained</td><td style="color:#FFB74D">Warning</td><td>Notify driver</td></tr>
+<tr><td>Geofence breach</td><td>Outside defined polygon</td><td style="color:#ef5350">Critical</td><td>Alert + track</td></tr>
+<tr><td>Low battery</td><td>Node bat < 20%</td><td style="color:#FFB74D">Warning</td><td>Maintenance alert</td></tr>
+<tr><td>GPS lost</td><td>No fix > 5 min</td><td style="color:#42A5F5">Info</td><td>Log event</td></tr>
+<tr><td>Node offline</td><td>No packet > 30 min</td><td style="color:#ef5350">Critical</td><td>Dashboard alert</td></tr>
+<tr><td>Speed limit</td><td>Speed > 80 km/h</td><td style="color:#FFB74D">Warning</td><td>Notify fleet mgr</td></tr>
+</table></div>
+</div>
+
+<!-- Supabase Schema -->
+<h3 style="color:#3BEF8A;margin:32px 0 16px;font-size:18px">🗄️ Supabase Database Schema</h3>
+<div class="cost-grid">
+<div class="card"><div class="card-header green">🗄️ Tables</div><table>
+<tr><th>Table</th><th>Columns</th><th>Purpose</th></tr>
+<tr><td><code>vehicles</code></td><td>id, name, type (ICE/EV), chip (T-Beam/T-SIM), plate, active, created_at</td><td>Vehicle registry</td></tr>
+<tr><td><code>telemetry_raw</code></td><td>ts, vehicle_id, amps, voltage, pf, lat, lng, speed, heading, pitch, roll, yaw, vibration, rssi, battery</td><td>Raw 15-min readings</td></tr>
+<tr><td><code>telemetry_15min</code></td><td>period_start, vehicle_id, avg_amps, min_amps, max_amps, avg_v, avg_pf, distance_km, avg_speed, max_speed</td><td>Aggregated analytics</td></tr>
+<tr><td><code>alerts</code></td><td>ts, vehicle_id, type, severity (info/warning/critical), message, acknowledged</td><td>Anomaly notifications</td></tr>
+<tr><td><code>lora_nodes</code></td><td>id, name, lat, lng, elevation, role (GW/RP), last_seen, battery_pct, firmware_version</td><td>Network infrastructure</td></tr>
+</table></div>
+<div class="card"><div class="card-header cyan">📦 JSON Payload (15-min)</div>
+<pre class="code">{
+  "v": "truck-07",
+  "ts": "2026-08-18T17:00:00Z",
+  "ct": {
+    "avg_a": 12.4,
+    "max_a": 18.2,
+    "avg_v": 118.7,
+    "pf": 0.87
+  },
+  "imu": {
+    "pitch": 2.1,
+    "roll": -0.5,
+    "yaw": 187.3,
+    "vib": 0.8
+  },
+  "gps": {
+    "lat": 4.8133,
+    "lng": -75.6961,
+    "spd": 32.5,
+    "hdg": 187,
+    "alt": 1425
+  },
+  "bat": 3.92,
+  "rssi": -67,
+  "snr": 9.5
+}</pre></div>
+</div>
+
+<!-- 3D Printed Enclosure -->
+<h3 style="color:#9E9E9E;margin:32px 0 16px;font-size:18px">🖨️ 3D Printed Enclosure — Elegoo Centauri Carbon 2</h3>
+<div class="cost-grid">
+<div class="card" style="grid-column:1/-1"><div class="card-header" style="background:linear-gradient(135deg,rgba(158,158,158,.15),transparent);color:#BDBDBD">🖨️ IP65 Node Enclosure — PETG Body + TPU Gasket</div><table>
+<tr><th>Parameter</th><th>Value</th></tr>
+<tr><td>Printer</td><td><b>Elegoo Centauri Carbon 2</b> (CoreXY, 500mm/s)</td></tr>
+<tr><td>Body Material</td><td>PETG (weather-resistant, UV stable, food-safe)</td></tr>
+<tr><td>Body Infill</td><td>30% gyroid pattern</td></tr>
+<tr><td>Wall Thickness</td><td>2.0mm (3 perimeters)</td></tr>
+<tr><td>Layer Height</td><td>0.2mm</td></tr>
+<tr><td>Seal/Gasket Material</td><td>TPU 95A (flexible, waterproof compression seal)</td></tr>
+<tr><td>IP Rating</td><td>IP65 (dust-tight + water jet protection)</td></tr>
+<tr><td>Body Weight</td><td>~50g (PETG)</td></tr>
+<tr><td>Gasket Weight</td><td>~8g (TPU 95A)</td></tr>
+<tr><td>Print Time (body)</td><td>~3.5 hours</td></tr>
+<tr><td>Print Time (gasket)</td><td>~45 minutes</td></tr>
+<tr><td>Filament Cost (body)</td><td>~$0.75</td></tr>
+<tr><td>Filament Cost (gasket)</td><td>~$0.25</td></tr>
+<tr><td>Used For</td><td>LoRa Repeater node, Gateway node, Vehicle node enclosure</td></tr>
+<tr><td>Features</td><td>Cable gland holes (×2), SMA antenna pass-through, 18650 battery bay, solar panel recess, mounting tabs (pole/wall), snap-fit lid</td></tr>
+<tr><td>Compatibility</td><td>Fits: T-Beam V1.2, ESP32 DevKit + SX1278, T-SIM7670G-S3</td></tr>
+<tr><td>Nozzle</td><td>0.4mm hardened steel</td></tr>
+<tr><td>Bed Temp</td><td>70°C (PETG) / 50°C (TPU)</td></tr>
+<tr><td>Nozzle Temp</td><td>240°C (PETG) / 220°C (TPU)</td></tr>
+<tr class="total-row"><td><b>Total Cost</b></td><td class="price">$1.00 per enclosure (body + gasket)</td></tr>
+</table></div>
+</div>
+
+<!-- LoRa Parameters -->
+<h3 style="color:#CE93D8;margin:32px 0 16px;font-size:18px">📡 LoRa Radio Parameters</h3>
+<div class="cost-grid">
+<div class="card" style="grid-column:1/-1"><div class="card-header purple">📡 Recommended LoRa Configuration</div><table>
+<tr><th>Parameter</th><th>Value</th><th>Notes</th></tr>
+<tr><td>Frequency</td><td>433 MHz (gateway) / 915 MHz ISM (nodes)</td><td>Colombia ISM band</td></tr>
+<tr><td>Spreading Factor</td><td>SF10</td><td>Best range/speed balance for urban</td></tr>
+<tr><td>Bandwidth</td><td>125 kHz</td><td>Standard LoRa BW</td></tr>
+<tr><td>Coding Rate</td><td>4/5</td><td>Minimal FEC overhead</td></tr>
+<tr><td>TX Power</td><td>+20 dBm (100mW)</td><td>Max allowed ISM</td></tr>
+<tr><td>Payload Size</td><td>~120 bytes</td><td>JSON compressed</td></tr>
+<tr><td>Airtime per Packet</td><td>~370ms</td><td>@ SF10/BW125</td></tr>
+<tr><td>Duty Cycle</td><td>< 1%</td><td>1 pkt/15min = 0.04%</td></tr>
+<tr><td>Link Budget</td><td>157 dB</td><td>SF10 + 20dBm TX</td></tr>
+<tr><td>Urban Range</td><td>2.5–3.5 km</td><td>With buildings/trees</td></tr>
+<tr><td>LOS Range</td><td>Up to 10 km</td><td>Open field, elevated</td></tr>
+</table></div>
+</div>
+
+</div>
+</div>
+
+<!-- TAB 5: ROADMAP -->
+<div id="roadmap" class="section">
+<div class="section-header"><h2>🗓️ 5-Week Implementation Roadmap</h2><p>Day-by-day plan from procurement to full deployment · 35 days to system live</p></div>
+<div class="stats-row">
+<div class="stat-card blue"><div class="value">5</div><div class="label">Weeks</div></div>
+<div class="stat-card green"><div class="value">35</div><div class="label">Days Total</div></div>
+<div class="stat-card orange"><div class="value">10</div><div class="label">Vehicles</div></div>
+<div class="stat-card purple"><div class="value">10</div><div class="label">LoRa Nodes</div></div>
+<div class="stat-card cyan"><div class="value">3+7</div><div class="label">GW + Repeaters</div></div>
+<div class="stat-card red"><div class="value">48h</div><div class="label">Field Test</div></div>
+</div>
+<div class="tables-wrap"><div class="cost-grid">
+
+<div class="card"><div class="card-header blue">📦 Week 1 — Procurement & Setup</div><table>
+<tr><th>Day</th><th>Task</th><th>Deliverable</th></tr>
+<tr><td>1–2</td><td>Order all components from AliExpress (T-Beam ×10, SX1278 ×3, ESP32 DevKit ×3, SCT-013 ×10, ADS1115 ×10, BMI160 ×10, solar panels ×13, batteries ×13)</td><td>Purchase orders placed</td></tr>
+<tr><td>3</td><td>Install Arduino IDE / PlatformIO, ESP32 board support, LoRa libraries (RadioLib, Meshtastic)</td><td>Dev environment ready</td></tr>
+<tr><td>4</td><td>Set up Supabase project: create tables (raw_telemetry, aggregates, vehicles, nodes)</td><td>Database schema deployed</td></tr>
+<tr><td>5</td><td>Design PCB layout / breadboard wiring for sensor node (CT + ADS1115 + BMI160 → T-Beam)</td><td>Wiring diagram finalized</td></tr>
+<tr><td>6–7</td><td>Research Meshtastic firmware & LoRa parameters (SF7–SF12, BW, coding rate)</td><td>Parameter selection documented</td></tr>
+</table></div>
+
+<div class="card"><div class="card-header green">⚡ Week 2 — Sensor Integration & Node Firmware</div><table>
+<tr><th>Day</th><th>Task</th><th>Deliverable</th></tr>
+<tr><td>1</td><td>Wire CT Clamp → burden resistor (33Ω) → ADS1115 → T-Beam (I2C)</td><td>CT clamp reading amps</td></tr>
+<tr><td>2</td><td>Wire BMI160 → T-Beam (I2C), read pitch/roll/yaw/vibration</td><td>Gyro data on serial monitor</td></tr>
+<tr><td>3</td><td>Integrate GPS (T-Beam built-in NEO-6M), verify lat/lng/speed</td><td>GPS fix confirmed</td></tr>
+<tr><td>4</td><td>Write unified firmware: read all sensors → build JSON → transmit via LoRa</td><td>Firmware v0.1 flashed</td></tr>
+<tr><td>5</td><td>Add deep sleep + wake-on-timer (60s cycle), measure power consumption</td><td>Battery life estimated</td></tr>
+<tr><td>6</td><td>Assemble solar charging circuit (panel → TP4056 → 18650 → T-Beam)</td><td>Solar charging tested</td></tr>
+<tr><td>7</td><td>Assemble 2 complete LoRa node prototypes in enclosures</td><td>2 nodes built & tested</td></tr>
+</table></div>
+
+<div class="card"><div class="card-header orange">📡 Week 3 — LoRa Gateway & Mesh Network</div><table>
+<tr><th>Day</th><th>Task</th><th>Deliverable</th></tr>
+<tr><td>1</td><td>Assemble gateway: ESP32 DevKit + SX1278 Ra-02 (SPI wiring)</td><td>Gateway hardware assembled</td></tr>
+<tr><td>2</td><td>Write gateway firmware: receive LoRa → parse JSON → POST to Supabase via WiFi</td><td>Gateway receiving data</td></tr>
+<tr><td>3</td><td>Configure LoRa mesh: 433MHz, SF10, BW 125kHz, CR 4/5</td><td>Optimal settings for 10km</td></tr>
+<tr><td>4</td><td>Range test: node ↔ gateway at 1km, 3km, 5km, 10km (open field + urban)</td><td>Range test report</td></tr>
+<tr><td>5</td><td>Set up 4G backup gateway (T-SIM7670G-S3), test cellular data path</td><td>4G failover working</td></tr>
+<tr><td>6</td><td>Deploy Gateway 1 at Centro (Plaza Bolívar) — mount, solar, weatherproof</td><td>GW1 live</td></tr>
+<tr><td>7</td><td>Deploy Gateway 2 at Dosquebradas Centro</td><td>GW2 live</td></tr>
+</table></div>
+
+<div class="card"><div class="card-header purple">🖥️ Week 4 — Backend, Dashboard & Integration</div><table>
+<tr><th>Day</th><th>Task</th><th>Deliverable</th></tr>
+<tr><td>1</td><td>Write Supabase Edge Function: aggregate raw data every 15 min</td><td>Aggregation pipeline running</td></tr>
+<tr><td>2</td><td>Set up Supabase Realtime subscriptions for live dashboard updates</td><td>WebSocket events verified</td></tr>
+<tr><td>3</td><td>Connect index.html dashboard to live Supabase data</td><td>Dashboard showing real data</td></tr>
+<tr><td>4</td><td>Connect dashboard-3d.html to live data (Three.js vehicle markers)</td><td>3D dashboard live</td></tr>
+<tr><td>5</td><td>Add alerts: over-current (>25A), vibration, geofence, low battery (<20%)</td><td>Alert system tested</td></tr>
+<tr><td>6</td><td>Build vehicle management UI: register vehicles, assign nodes, view history</td><td>Admin panel functional</td></tr>
+<tr><td>7</td><td>Deploy Gateway 3 at Cuba Industrial + 4G backup gateway</td><td>GW3 + 4G backup live</td></tr>
+</table></div>
+
+<div class="card" style="grid-column:1/-1"><div class="card-header red">🚀 Week 5 — Field Testing, Deployment & Documentation</div><table>
+<tr><th>Day</th><th>Task</th><th>Deliverable</th></tr>
+<tr><td>1</td><td>Flash firmware on all 10 LoRa nodes, pair with vehicle IDs</td><td>10 nodes programmed</td></tr>
+<tr><td>2</td><td>Install nodes on 10 test vehicles (mount CT clamp, secure enclosure)</td><td>All vehicles equipped</td></tr>
+<tr><td>3</td><td>Deploy 7 repeater nodes across Pereira (R1–R7 locations)</td><td>Full mesh network live</td></tr>
+<tr><td>4</td><td>Run 48-hour continuous field test — monitor RSSI, packet loss, battery, GPS</td><td>Test data collected</td></tr>
+<tr><td>5</td><td>Analyze results: optimize SF/power, fix dead zones, tune sleep intervals</td><td>Performance report</td></tr>
+<tr><td>6</td><td>Write final documentation: setup guide, troubleshooting, API reference</td><td>Docs complete</td></tr>
+<tr><td>7</td><td>Team demo & handoff — present dashboard, explain maintenance</td><td>✅ <b>Project delivered</b></td></tr>
+</table></div>
+
+<div class="card" style="grid-column:1/-1"><div class="card-header teal">📊 Roadmap Timeline</div>
+<div style="padding:20px;font-family:'Cascadia Code',monospace;font-size:12px;line-height:2">
+<div style="display:flex;align-items:center;gap:12px"><span style="width:120px;color:#42A5F5;font-weight:700">Week 1</span><div style="flex:1;height:24px;background:linear-gradient(90deg,#1565C0,#42A5F5);border-radius:6px;display:flex;align-items:center;padding:0 12px;color:#fff;font-size:11px;font-weight:600">📦 Procurement & Setup</div></div>
+<div style="display:flex;align-items:center;gap:12px"><span style="width:120px;color:#66BB6A;font-weight:700">Week 2</span><div style="flex:1;height:24px;background:linear-gradient(90deg,#2E7D32,#66BB6A);border-radius:6px;display:flex;align-items:center;padding:0 12px;color:#fff;font-size:11px;font-weight:600">⚡ Sensor Integration & Node Assembly</div></div>
+<div style="display:flex;align-items:center;gap:12px"><span style="width:120px;color:#FFB74D;font-weight:700">Week 3</span><div style="flex:1;height:24px;background:linear-gradient(90deg,#E65100,#FFB74D);border-radius:6px;display:flex;align-items:center;padding:0 12px;color:#fff;font-size:11px;font-weight:600">📡 LoRa Gateway & Mesh Network</div></div>
+<div style="display:flex;align-items:center;gap:12px"><span style="width:120px;color:#CE93D8;font-weight:700">Week 4</span><div style="flex:1;height:24px;background:linear-gradient(90deg,#6A1B9A,#CE93D8);border-radius:6px;display:flex;align-items:center;padding:0 12px;color:#fff;font-size:11px;font-weight:600">🖥️ Backend & Dashboard</div></div>
+<div style="display:flex;align-items:center;gap:12px"><span style="width:120px;color:#ef5350;font-weight:700">Week 5</span><div style="flex:1;height:24px;background:linear-gradient(90deg,#B71C1C,#ef5350);border-radius:6px;display:flex;align-items:center;padding:0 12px;color:#fff;font-size:11px;font-weight:600">🚀 Field Testing & Deployment</div></div>
+<div style="margin-top:8px;color:#8b949e;text-align:center">Day 1 ─────────────────────────────────────── Day 35 → ✅ System Live</div>
+</div></div>
+
+</div></div>
+</div>
+
+<script>
+function showTab(id,btn){
+document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+document.querySelectorAll('.nav-tabs button').forEach(b=>b.classList.remove('active'));
+document.getElementById(id).classList.add('active');
+if(btn)btn.classList.add('active');
+if(id==='map'&&!window._mapInit)initMap();
+document.getElementById('zoom-controls').style.display=id==='diagram'?'flex':'none';
+document.getElementById('legend').style.display=id==='diagram'?'block':'none';
+document.getElementById('info-panel').style.display='none';
+}
+var NODES=[
+{n:"Centro (Plaza Bolívar)",lat:4.8133,lng:-75.6961,e:1411,r:"GW",c:21,k:3.5},
+{n:"Dosquebradas Centro",lat:4.839,lng:-75.673,e:1480,r:"GW",c:21,k:3.0},
+{n:"Cuba Industrial",lat:4.789,lng:-75.715,e:1420,r:"GW",c:21,k:3.0},
+{n:"Circunvalar Mall",lat:4.805,lng:-75.685,e:1440,r:"RP",c:17.5,k:2.5},
+{n:"Universidad Tecnológica",lat:4.792,lng:-75.689,e:1450,r:"RP",c:17.5,k:2.5},
+{n:"Boston",lat:4.785,lng:-75.702,e:1400,r:"RP",c:17.5,k:2.5},
+{n:"Kennedy",lat:4.82,lng:-75.705,e:1430,r:"RP",c:17.5,k:2.5},
+{n:"Perla del Otún",lat:4.778,lng:-75.688,e:1380,r:"RP",c:17.5,k:2.5},
+{n:"Villa Santana",lat:4.795,lng:-75.668,e:1500,r:"RP",c:17.5,k:2.5},
+{n:"Alamos",lat:4.828,lng:-75.688,e:1450,r:"RP",c:17.5,k:2.5}
+];
+function initMap(){
+window._mapInit=true;
+var m=L.map('map-container').setView([4.810,-75.700],13);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap',maxZoom:18}).addTo(m);
+var gwI=L.divIcon({className:'',html:'<div style="width:18px;height:18px;background:#E040FB;border:2px solid #fff;border-radius:50%;box-shadow:0 0 8px #E040FB"></div>',iconSize:[18,18],iconAnchor:[9,9]});
+var rpI=L.divIcon({className:'',html:'<div style="width:14px;height:14px;background:#FF9800;border:2px solid #fff;border-radius:50%;box-shadow:0 0 6px #FF9800"></div>',iconSize:[14,14],iconAnchor:[7,7]});
+NODES.forEach(function(nd,i){
+var isGw=nd.r==='GW';
+L.marker([nd.lat,nd.lng],{icon:isGw?gwI:rpI}).addTo(m).bindPopup('<div style="font-family:Segoe UI"><b>#'+(i+1)+' '+nd.n+'</b><br>Role: '+nd.r+'<br>Elev: '+nd.e+'m<br>Cover: '+nd.k+'km<br><b style="color:#2e7d32">$'+nd.c.toFixed(2)+'</b></div>');
+L.circle([nd.lat,nd.lng],{radius:nd.k*1000,color:isGw?'#E040FB':'#FF9800',fillColor:isGw?'#E040FB':'#FF9800',fillOpacity:.08,weight:1,dashArray:isGw?'':'5,5'}).addTo(m);
+});
+var lg=L.control({position:'bottomright'});
+lg.onAdd=function(){var d=L.DomUtil.create('div');d.style.cssText='background:rgba(255,255,255,.92);padding:10px 14px;border-radius:8px;font-size:12px;line-height:1.8;box-shadow:0 2px 8px rgba(0,0,0,.2)';d.innerHTML='<b>LoRa Network</b><br><span style="display:inline-block;width:12px;height:12px;background:#E040FB;border-radius:50%;margin-right:6px;vertical-align:middle"></span>Gateway (3)<br><span style="display:inline-block;width:12px;height:12px;background:#FF9800;border-radius:50%;margin-right:6px;vertical-align:middle"></span>Repeater (7)<br><b>Total: $186.50</b>';return d;};
+lg.addTo(m);
+setTimeout(function(){m.invalidateSize()},200);
+}
+</script>
+<script>
+fetch('./iot-telemetry-architecture.json').then(function(r){return r.json()}).then(function(data){
+var ct=document.getElementById('diagram-container'),W=ct.clientWidth||1600,H=ct.clientHeight||900;
+var svg=document.createElementNS('http://www.w3.org/2000/svg','svg');
+svg.setAttribute('width','100%');svg.setAttribute('height','100%');svg.setAttribute('viewBox','0 0 '+W+' '+H);
+var defs=document.createElementNS('http://www.w3.org/2000/svg','defs');
+defs.innerHTML='<filter id="sh" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#000" flood-opacity="0.4"/></filter>';
+svg.appendChild(defs);
+var CM={};data.colors.forEach(function(c){CM[c.id]=c.value});
+var IC={'icon-ct-clamp':'#F44336','icon-ads1115':'#E91E63','icon-gyroscope':'#2196F3','icon-gps':'#1E88E5','icon-tbeam':'#4CAF50','icon-tsim':'#7C4DFF','icon-esp32':'#009688','icon-lora-gateway':'#E040FB','icon-solar':'#FFC107','icon-battery':'#4CAF50','icon-3dprint':'#9E9E9E','icon-cell-tower':'#5C6BC0','icon-supabase':'#3BEF8A','icon-edge-fn':'#26A69A','icon-hostinger':'#CE93D8','icon-dashboard':'#03A9F4','icon-map':'#4CAF50','icon-vehicle-electric':'#00BCD4','icon-vehicle-combustion':'#FF8D40','icon-user-browser':'#90A4AE'};
+var IL={'icon-ct-clamp':'CT','icon-ads1115':'ADC','icon-gyroscope':'GYR','icon-gps':'GPS','icon-tbeam':'T-BEAM','icon-tsim':'T-SIM','icon-esp32':'ESP32','icon-lora-gateway':'GW','icon-solar':'SOL','icon-battery':'BAT','icon-3dprint':'3DP','icon-cell-tower':'4G','icon-supabase':'SB','icon-edge-fn':'fn()','icon-hostinger':'HOST','icon-dashboard':'DASH','icon-map':'MAP','icon-vehicle-electric':'EV','icon-vehicle-combustion':'TRUCK','icon-user-browser':'USR'};
+var view=data.views[0],tW=48,tH=28,oX=120,oY=180;
+function t2p(x,y){return{px:oX+(x-y)*tW/2,py:oY+(x+y)*tH/2}}
+var IP={};view.items.forEach(function(v){IP[v.id]=t2p(v.tile.x,v.tile.y)});
+if(view.rectangles)view.rectangles.forEach(function(r){
+var cs=[t2p(r.from.x,r.from.y),t2p(r.to.x,r.from.y),t2p(r.to.x,r.to.y),t2p(r.from.x,r.to.y)];
+var co=CM[r.color]||'#58a6ff',p=document.createElementNS('http://www.w3.org/2000/svg','polygon');
+p.setAttribute('points',cs.map(function(c){return c.px+','+c.py}).join(' '));
+p.setAttribute('fill',co);p.setAttribute('fill-opacity','0.06');p.setAttribute('stroke',co);p.setAttribute('stroke-width','1.5');p.setAttribute('stroke-opacity','0.3');p.setAttribute('stroke-dasharray','6,4');svg.appendChild(p)});
+if(view.connectors)view.connectors.forEach(function(cn){
+if(!cn.anchors||cn.anchors.length<2)return;var f=IP[cn.anchors[0].ref.item],t=IP[cn.anchors[1].ref.item];if(!f||!t)return;
+var co=CM[cn.color]||'#58a6ff',ln=document.createElementNS('http://www.w3.org/2000/svg','line');
+ln.setAttribute('x1',f.px);ln.setAttribute('y1',f.py);ln.setAttribute('x2',t.px);ln.setAttribute('y2',t.py);
+ln.setAttribute('stroke',co);ln.setAttribute('stroke-width',cn.style==='DASHED'?'1.2':'1.8');ln.setAttribute('stroke-opacity','0.65');
+if(cn.style==='DASHED')ln.setAttribute('stroke-dasharray','6,4');svg.appendChild(ln);
+var mx=(f.px+t.px)/2,my=(f.py+t.py)/2,lb=document.createElementNS('http://www.w3.org/2000/svg','text');
+lb.setAttribute('x',mx);lb.setAttribute('y',my-4);lb.setAttribute('text-anchor','middle');lb.setAttribute('fill',co);lb.setAttribute('fill-opacity','0.7');lb.setAttribute('font-size','7.5');lb.setAttribute('font-weight','600');lb.setAttribute('font-family','Segoe UI,sans-serif');lb.textContent=cn.description;svg.appendChild(lb)});
+var IM={};data.items.forEach(function(it){IM[it.id]=it});
+view.items.forEach(function(vi){
+var it=IM[vi.id],pos=IP[vi.id];if(!it||!pos)return;
+var co=IC[it.icon]||'#58a6ff',g=document.createElementNS('http://www.w3.org/2000/svg','g');
+g.setAttribute('filter','url(#sh)');g.style.cursor='pointer';
+var s=28,dm=document.createElementNS('http://www.w3.org/2000/svg','polygon');
+dm.setAttribute('points',pos.px+','+(pos.py-s/2)+' '+(pos.px+s)+','+pos.py+' '+pos.px+','+(pos.py+s/2)+' '+(pos.px-s)+','+pos.py);
+dm.setAttribute('fill',co);dm.setAttribute('fill-opacity','0.18');dm.setAttribute('stroke',co);dm.setAttribute('stroke-width','2');dm.setAttribute('stroke-opacity','0.85');g.appendChild(dm);
+var ex=10,lf=document.createElementNS('http://www.w3.org/2000/svg','polygon');
+lf.setAttribute('points',(pos.px-s)+','+pos.py+' '+pos.px+','+(pos.py+s/2)+' '+pos.px+','+(pos.py+s/2+ex)+' '+(pos.px-s)+','+(pos.py+ex));
+lf.setAttribute('fill',co);lf.setAttribute('fill-opacity','0.1');lf.setAttribute('stroke',co);lf.setAttribute('stroke-width','1');lf.setAttribute('stroke-opacity','0.3');g.appendChild(lf);
+var rf=document.createElementNS('http://www.w3.org/2000/svg','polygon');
+rf.setAttribute('points',(pos.px+s)+','+pos.py+' '+pos.px+','+(pos.py+s/2)+' '+pos.px+','+(pos.py+s/2+ex)+' '+(pos.px+s)+','+(pos.py+ex));
+rf.setAttribute('fill',co);rf.setAttribute('fill-opacity','0.06');rf.setAttribute('stroke',co);rf.setAttribute('stroke-width','1');rf.setAttribute('stroke-opacity','0.2');g.appendChild(rf);
+var lb=document.createElementNS('http://www.w3.org/2000/svg','text');
+lb.setAttribute('x',pos.px);lb.setAttribute('y',pos.py+2);lb.setAttribute('text-anchor','middle');lb.setAttribute('fill',co);lb.setAttribute('font-size','8');lb.setAttribute('font-weight','700');lb.setAttribute('font-family','monospace');lb.textContent=IL[it.icon]||'?';g.appendChild(lb);
+var nm=document.createElementNS('http://www.w3.org/2000/svg','text');
+nm.setAttribute('x',pos.px);nm.setAttribute('y',pos.py+s/2+ex+12);nm.setAttribute('text-anchor','middle');nm.setAttribute('fill','#c9d1d9');nm.setAttribute('font-size','7.5');nm.setAttribute('font-weight','600');nm.setAttribute('font-family','Segoe UI,sans-serif');nm.textContent=it.name;g.appendChild(nm);
+g.addEventListener('click',function(){document.getElementById('info-panel').style.display='block';document.getElementById('info-title').textContent=it.name;document.getElementById('info-desc').textContent=it.description});
+svg.appendChild(g)});
+ct.appendChild(svg);
+var sc=1,pX=0,pY=0,ip=false,sX,sY;
+function ut(){var vw=W/sc,vh=H/sc;svg.setAttribute('viewBox',(-pX/sc+(W-vw)/2)+' '+(-pY/sc+(H-vh)/2)+' '+vw+' '+vh);document.getElementById('zoom-level').textContent=Math.round(sc*100)+'%'}
+function fit(){var bb=svg.getBBox(),pd=60,sx=W/(bb.width+pd*2),sy=H/(bb.height+pd*2);sc=Math.min(sx,sy,1.5);pX=0;pY=0;var vw=W/sc,vh=H/sc;svg.setAttribute('viewBox',(bb.x-(vw-bb.width)/2)+' '+(bb.y-(vh-bb.height)/2)+' '+vw+' '+vh);document.getElementById('zoom-level').textContent=Math.round(sc*100)+'%'}
+setTimeout(fit,100);
+document.getElementById('btn-zoom-in').onclick=function(){sc=Math.min(sc*1.2,5);ut()};
+document.getElementById('btn-zoom-out').onclick=function(){sc=Math.max(sc/1.2,.1);ut()};
+document.getElementById('btn-fit').onclick=fit;
+document.getElementById('btn-reset').onclick=function(){sc=1;pX=0;pY=0;svg.setAttribute('viewBox','0 0 '+W+' '+H);document.getElementById('zoom-level').textContent='100%'};
+ct.addEventListener('wheel',function(e){e.preventDefault();sc=e.deltaY<0?Math.min(sc*1.1,5):Math.max(sc/1.1,.1);ut()},{passive:false});
+ct.addEventListener('mousedown',function(e){if(e.button===0){ip=true;sX=e.clientX;sY=e.clientY;ct.style.cursor='grabbing'}});
+window.addEventListener('mousemove',function(e){if(ip){pX+=e.clientX-sX;pY+=e.clientY-sY;sX=e.clientX;sY=e.clientY;ut()}});
+window.addEventListener('mouseup',function(){ip=false;ct.style.cursor='grab'});ct.style.cursor='grab';
+});
+</script>
+</body>
+</html>

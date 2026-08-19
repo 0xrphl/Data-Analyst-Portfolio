@@ -1,0 +1,989 @@
+{
+  "title": "IoT Vehicle Telemetry — Pereira, Risaralda",
+  "description": "CT Clamp + Gyroscope + GPS telemetry. Dual: LoRa Mesh (T-Beam) + 4G LTE (T-SIM 7670G). Supabase + Hostinger.",
+  "icons": [
+    {
+      "id": "icon-ct-clamp",
+      "name": "CT Clamp",
+      "url": ""
+    },
+    {
+      "id": "icon-gyroscope",
+      "name": "Gyroscope",
+      "url": ""
+    },
+    {
+      "id": "icon-gps",
+      "name": "GPS",
+      "url": ""
+    },
+    {
+      "id": "icon-tbeam",
+      "name": "T-Beam",
+      "url": ""
+    },
+    {
+      "id": "icon-tsim",
+      "name": "T-SIM 4G",
+      "url": ""
+    },
+    {
+      "id": "icon-esp32",
+      "name": "ESP32",
+      "url": ""
+    },
+    {
+      "id": "icon-lora-node",
+      "name": "LoRa Node",
+      "url": ""
+    },
+    {
+      "id": "icon-lora-gateway",
+      "name": "LoRa Gateway",
+      "url": ""
+    },
+    {
+      "id": "icon-solar",
+      "name": "Solar Panel",
+      "url": ""
+    },
+    {
+      "id": "icon-battery",
+      "name": "18650 Battery",
+      "url": ""
+    },
+    {
+      "id": "icon-3dprint",
+      "name": "3D Print Case",
+      "url": ""
+    },
+    {
+      "id": "icon-cell-tower",
+      "name": "4G Tower",
+      "url": ""
+    },
+    {
+      "id": "icon-supabase",
+      "name": "Supabase",
+      "url": ""
+    },
+    {
+      "id": "icon-edge-fn",
+      "name": "Edge Function",
+      "url": ""
+    },
+    {
+      "id": "icon-hostinger",
+      "name": "Hostinger",
+      "url": ""
+    },
+    {
+      "id": "icon-dashboard",
+      "name": "Dashboard",
+      "url": ""
+    },
+    {
+      "id": "icon-vehicle-electric",
+      "name": "Electric Vehicle",
+      "url": ""
+    },
+    {
+      "id": "icon-vehicle-combustion",
+      "name": "Combustion Vehicle",
+      "url": ""
+    },
+    {
+      "id": "icon-user-browser",
+      "name": "User",
+      "url": ""
+    },
+    {
+      "id": "icon-ads1115",
+      "name": "ADS1115 ADC",
+      "url": ""
+    },
+    {
+      "id": "icon-map",
+      "name": "Map View",
+      "url": ""
+    }
+  ],
+  "colors": [
+    {
+      "id": "color-red",
+      "value": "#F44336"
+    },
+    {
+      "id": "color-orange",
+      "value": "#FF9800"
+    },
+    {
+      "id": "color-yellow",
+      "value": "#FFC107"
+    },
+    {
+      "id": "color-green",
+      "value": "#4CAF50"
+    },
+    {
+      "id": "color-teal",
+      "value": "#009688"
+    },
+    {
+      "id": "color-blue",
+      "value": "#2196F3"
+    },
+    {
+      "id": "color-indigo",
+      "value": "#3F51B5"
+    },
+    {
+      "id": "color-purple",
+      "value": "#9C27B0"
+    },
+    {
+      "id": "color-pink",
+      "value": "#E91E63"
+    },
+    {
+      "id": "color-grey",
+      "value": "#9E9E9E"
+    },
+    {
+      "id": "color-cyan",
+      "value": "#00BCD4"
+    },
+    {
+      "id": "color-lime",
+      "value": "#CDDC39"
+    }
+  ],
+  "items": [
+    {
+      "id": "item-ct-clamp",
+      "name": "CT Clamp (SCT-013-030)",
+      "description": "Split-core current transformer. 30A max. 0-1V AC output. Amps, voltage, power factor.",
+      "icon": "icon-ct-clamp"
+    },
+    {
+      "id": "item-ads1115",
+      "name": "ADS1115 16-bit ADC",
+      "description": "4-ch 16-bit ADC. I2C 0x48. Reads CT clamp analog. 860 SPS.",
+      "icon": "icon-ads1115"
+    },
+    {
+      "id": "item-gyroscope",
+      "name": "BMI160 Gyro/Accel",
+      "description": "6-axis IMU (Bosch). Gyro ±2000°/s + Accel ±16g. I2C 0x68. Low-power 925µA. Pitch, roll, yaw.",
+      "icon": "icon-gyroscope"
+    },
+    {
+      "id": "item-gps",
+      "name": "GPS NEO-6M",
+      "description": "u-blox NEO-6M or T-Beam integrated. NMEA UART. 2.5m accuracy.",
+      "icon": "icon-gps"
+    },
+    {
+      "id": "item-tbeam",
+      "name": "LilyGo T-Beam v1.2",
+      "description": "ESP32+SX1276 LoRa 915MHz+GPS+18650. Meshtastic. ~.",
+      "icon": "icon-tbeam"
+    },
+    {
+      "id": "item-tsim",
+      "name": "LilyGo T-SIM 7670G S3",
+      "description": "ESP32-S3+SIM7670G LTE Cat-1. Nano-SIM. HTTPS to Supabase. ~.",
+      "icon": "icon-tsim"
+    },
+    {
+      "id": "item-esp32-repeater",
+      "name": "ESP32 LoRa Repeater",
+      "description": "ESP32+SX1276 915MHz. Solar+18650. Meshtastic repeater. 3D case+TPU. ~.50.",
+      "icon": "icon-esp32"
+    },
+    {
+      "id": "item-lora-gateway",
+      "name": "LoRa Gateway",
+      "description": "ESP32+LoRa+WiFi/Ethernet backhaul. Forwards to Supabase. 3 gateways. ~.",
+      "icon": "icon-lora-gateway"
+    },
+    {
+      "id": "item-solar-panel",
+      "name": "6W Solar + TP4056",
+      "description": "6V 6W panel + TP4056 charger + DW01. DC-DC buck 3.3V.",
+      "icon": "icon-solar"
+    },
+    {
+      "id": "item-battery-18650",
+      "name": "18650 Li-ion 3000mAh",
+      "description": "3.7V 3000mAh. ~72h without solar. /cell.",
+      "icon": "icon-battery"
+    },
+    {
+      "id": "item-3dprint-case",
+      "name": "3D Print Case+TPU",
+      "description": "PETG case ~.75 + TPU gasket ~.25. IP65. Pole/wall mount.",
+      "icon": "icon-3dprint"
+    },
+    {
+      "id": "item-cell-tower",
+      "name": "4G LTE Cell Tower",
+      "description": "Claro/Movistar/Tigo. LTE Band 4+28. ~-8/mo per vehicle.",
+      "icon": "icon-cell-tower"
+    },
+    {
+      "id": "item-supabase-db",
+      "name": "Supabase PostgreSQL",
+      "description": "Tables: telemetry_raw, telemetry_15min, vehicles, alerts. Free tier.",
+      "icon": "icon-supabase"
+    },
+    {
+      "id": "item-supabase-realtime",
+      "name": "Supabase Realtime",
+      "description": "WebSocket live vehicle positions+sensors. Channels: vehicle:{id}.",
+      "icon": "icon-supabase"
+    },
+    {
+      "id": "item-supabase-edge",
+      "name": "Edge Functions (15min)",
+      "description": "Deno serverless. 15-min aggregation. Anomaly detection. Alerts.",
+      "icon": "icon-edge-fn"
+    },
+    {
+      "id": "item-hostinger",
+      "name": "Hostinger (/yr)",
+      "description": "Shared hosting/VPS. Vue/React SPA. SSL Let’s Encrypt.",
+      "icon": "icon-hostinger"
+    },
+    {
+      "id": "item-dashboard",
+      "name": "Web Dashboard",
+      "description": "Vue 3 SPA. Fleet Overview, Telemetry Charts, Alerts, GPS Map, Reports.",
+      "icon": "icon-dashboard"
+    },
+    {
+      "id": "item-gps-map",
+      "name": "GPS Map View",
+      "description": "Leaflet+OSM. Real-time positions, trails, geofencing, LoRa coverage.",
+      "icon": "icon-map"
+    },
+    {
+      "id": "item-vehicle-ev",
+      "name": "Electric Vehicle",
+      "description": "Electric bus/van. T-SIM 7670G. CT clamp on motor. Monthly 4G.",
+      "icon": "icon-vehicle-electric"
+    },
+    {
+      "id": "item-vehicle-ice",
+      "name": "High-Value Truck",
+      "description": "Combustion truck, high-value cargo. T-Beam LoRa mesh. No SIM.",
+      "icon": "icon-vehicle-combustion"
+    },
+    {
+      "id": "item-user-browser",
+      "name": "Fleet Operator",
+      "description": "Fleet manager. Real-time telemetry, alerts, GPS, 15-min reports.",
+      "icon": "icon-user-browser"
+    }
+  ],
+  "views": [
+    {
+      "id": "view-overview",
+      "name": "Combined Overview",
+      "description": "Full arch: LoRa+4G, sensors, cloud, frontend",
+      "items": [
+        {
+          "id": "item-ct-clamp",
+          "tile": {
+            "x": 3,
+            "y": 4
+          }
+        },
+        {
+          "id": "item-ads1115",
+          "tile": {
+            "x": 6,
+            "y": 4
+          }
+        },
+        {
+          "id": "item-gyroscope",
+          "tile": {
+            "x": 3,
+            "y": 7
+          }
+        },
+        {
+          "id": "item-gps",
+          "tile": {
+            "x": 3,
+            "y": 10
+          }
+        },
+        {
+          "id": "item-tbeam",
+          "tile": {
+            "x": 10,
+            "y": 4
+          }
+        },
+        {
+          "id": "item-tsim",
+          "tile": {
+            "x": 10,
+            "y": 10
+          }
+        },
+        {
+          "id": "item-esp32-repeater",
+          "tile": {
+            "x": 16,
+            "y": 3
+          }
+        },
+        {
+          "id": "item-lora-gateway",
+          "tile": {
+            "x": 20,
+            "y": 3
+          }
+        },
+        {
+          "id": "item-solar-panel",
+          "tile": {
+            "x": 16,
+            "y": 6
+          }
+        },
+        {
+          "id": "item-battery-18650",
+          "tile": {
+            "x": 19,
+            "y": 6
+          }
+        },
+        {
+          "id": "item-3dprint-case",
+          "tile": {
+            "x": 17,
+            "y": 9
+          }
+        },
+        {
+          "id": "item-cell-tower",
+          "tile": {
+            "x": 18,
+            "y": 12
+          }
+        },
+        {
+          "id": "item-supabase-db",
+          "tile": {
+            "x": 25,
+            "y": 7
+          }
+        },
+        {
+          "id": "item-supabase-realtime",
+          "tile": {
+            "x": 25,
+            "y": 10
+          }
+        },
+        {
+          "id": "item-supabase-edge",
+          "tile": {
+            "x": 28,
+            "y": 7
+          }
+        },
+        {
+          "id": "item-hostinger",
+          "tile": {
+            "x": 32,
+            "y": 7
+          }
+        },
+        {
+          "id": "item-dashboard",
+          "tile": {
+            "x": 32,
+            "y": 10
+          }
+        },
+        {
+          "id": "item-gps-map",
+          "tile": {
+            "x": 32,
+            "y": 13
+          }
+        },
+        {
+          "id": "item-vehicle-ev",
+          "tile": {
+            "x": 10,
+            "y": 13
+          }
+        },
+        {
+          "id": "item-vehicle-ice",
+          "tile": {
+            "x": 10,
+            "y": 1
+          }
+        },
+        {
+          "id": "item-user-browser",
+          "tile": {
+            "x": 36,
+            "y": 10
+          }
+        }
+      ],
+      "rectangles": [
+        {
+          "id": "r1",
+          "color": "color-red",
+          "from": {
+            "x": 1,
+            "y": 2
+          },
+          "to": {
+            "x": 8,
+            "y": 12
+          }
+        },
+        {
+          "id": "r2",
+          "color": "color-orange",
+          "from": {
+            "x": 9,
+            "y": 0
+          },
+          "to": {
+            "x": 22,
+            "y": 8
+          }
+        },
+        {
+          "id": "r3",
+          "color": "color-indigo",
+          "from": {
+            "x": 9,
+            "y": 9
+          },
+          "to": {
+            "x": 22,
+            "y": 14
+          }
+        },
+        {
+          "id": "r4",
+          "color": "color-green",
+          "from": {
+            "x": 23,
+            "y": 5
+          },
+          "to": {
+            "x": 30,
+            "y": 12
+          }
+        },
+        {
+          "id": "r5",
+          "color": "color-blue",
+          "from": {
+            "x": 31,
+            "y": 5
+          },
+          "to": {
+            "x": 38,
+            "y": 15
+          }
+        }
+      ],
+      "connectors": [
+        {
+          "id": "c1",
+          "description": "Analog 0-1V",
+          "color": "color-red",
+          "style": "SOLID",
+          "anchors": [
+            {
+              "id": "a1",
+              "ref": {
+                "item": "item-ct-clamp"
+              }
+            },
+            {
+              "id": "a2",
+              "ref": {
+                "item": "item-ads1115"
+              }
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "description": "I2C",
+          "color": "color-red",
+          "style": "SOLID",
+          "anchors": [
+            {
+              "id": "a3",
+              "ref": {
+                "item": "item-ads1115"
+              }
+            },
+            {
+              "id": "a4",
+              "ref": {
+                "item": "item-tbeam"
+              }
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "description": "I2C",
+          "color": "color-red",
+          "style": "SOLID",
+          "anchors": [
+            {
+              "id": "a5",
+              "ref": {
+                "item": "item-ads1115"
+              }
+            },
+            {
+              "id": "a6",
+              "ref": {
+                "item": "item-tsim"
+              }
+            }
+          ]
+        },
+        {
+          "id": "c4",
+          "description": "I2C 0x68",
+          "color": "color-blue",
+          "style": "SOLID",
+          "anchors": [
+            {
+              "id": "a7",
+              "ref": {
+                "item": "item-gyroscope"
+              }
+            },
+            {
+              "id": "a8",
+              "ref": {
+                "item": "item-tbeam"
+              }
+            }
+          ]
+        },
+        {
+          "id": "c5",
+          "description": "I2C 0x68",
+          "color": "color-blue",
+          "style": "SOLID",
+          "anchors": [
+            {
+              "id": "a9",
+              "ref": {
+                "item": "item-gyroscope"
+              }
+            },
+            {
+              "id": "a10",
+              "ref": {
+                "item": "item-tsim"
+              }
+            }
+          ]
+        },
+        {
+          "id": "c6",
+          "description": "UART GPS",
+          "color": "color-cyan",
+          "style": "SOLID",
+          "anchors": [
+            {
+              "id": "a11",
+              "ref": {
+                "item": "item-gps"
+              }
+            },
+            {
+              "id": "a12",
+              "ref": {
+                "item": "item-tbeam"
+              }
+            }
+          ]
+        },
+        {
+          "id": "c7",
+          "description": "UART GPS",
+          "color": "color-cyan",
+          "style": "SOLID",
+          "anchors": [
+            {
+              "id": "a13",
+              "ref": {
+                "item": "item-gps"
+              }
+            },
+            {
+              "id": "a14",
+              "ref": {
+                "item": "item-tsim"
+              }
+            }
+          ]
+        },
+        {
+          "id": "c8",
+          "description": "LoRa 915MHz",
+          "color": "color-orange",
+          "style": "SOLID",
+          "anchors": [
+            {
+              "id": "a15",
+              "ref": {
+                "item": "item-tbeam"
+              }
+            },
+            {
+              "id": "a16",
+              "ref": {
+                "item": "item-esp32-repeater"
+              }
+            }
+          ]
+        },
+        {
+          "id": "c9",
+          "description": "LoRa relay",
+          "color": "color-orange",
+          "style": "SOLID",
+          "anchors": [
+            {
+              "id": "a17",
+              "ref": {
+                "item": "item-esp32-repeater"
+              }
+            },
+            {
+              "id": "a18",
+              "ref": {
+                "item": "item-lora-gateway"
+              }
+            }
+          ]
+        },
+        {
+          "id": "c10",
+          "description": "HTTPS WiFi",
+          "color": "color-green",
+          "style": "SOLID",
+          "anchors": [
+            {
+              "id": "a19",
+              "ref": {
+                "item": "item-lora-gateway"
+              }
+            },
+            {
+              "id": "a20",
+              "ref": {
+                "item": "item-supabase-db"
+              }
+            }
+          ]
+        },
+        {
+          "id": "c11",
+          "description": "LTE Cat-1",
+          "color": "color-indigo",
+          "style": "SOLID",
+          "anchors": [
+            {
+              "id": "a21",
+              "ref": {
+                "item": "item-tsim"
+              }
+            },
+            {
+              "id": "a22",
+              "ref": {
+                "item": "item-cell-tower"
+              }
+            }
+          ]
+        },
+        {
+          "id": "c12",
+          "description": "HTTPS 4G",
+          "color": "color-indigo",
+          "style": "SOLID",
+          "anchors": [
+            {
+              "id": "a23",
+              "ref": {
+                "item": "item-cell-tower"
+              }
+            },
+            {
+              "id": "a24",
+              "ref": {
+                "item": "item-supabase-db"
+              }
+            }
+          ]
+        },
+        {
+          "id": "c13",
+          "description": "Solar 6V",
+          "color": "color-yellow",
+          "style": "DASHED",
+          "anchors": [
+            {
+              "id": "a25",
+              "ref": {
+                "item": "item-solar-panel"
+              }
+            },
+            {
+              "id": "a26",
+              "ref": {
+                "item": "item-esp32-repeater"
+              }
+            }
+          ]
+        },
+        {
+          "id": "c14",
+          "description": "3.7V backup",
+          "color": "color-lime",
+          "style": "DASHED",
+          "anchors": [
+            {
+              "id": "a27",
+              "ref": {
+                "item": "item-battery-18650"
+              }
+            },
+            {
+              "id": "a28",
+              "ref": {
+                "item": "item-esp32-repeater"
+              }
+            }
+          ]
+        },
+        {
+          "id": "c15",
+          "description": "15-min cron",
+          "color": "color-teal",
+          "style": "SOLID",
+          "anchors": [
+            {
+              "id": "a29",
+              "ref": {
+                "item": "item-supabase-db"
+              }
+            },
+            {
+              "id": "a30",
+              "ref": {
+                "item": "item-supabase-edge"
+              }
+            }
+          ]
+        },
+        {
+          "id": "c16",
+          "description": "Realtime WS",
+          "color": "color-green",
+          "style": "SOLID",
+          "anchors": [
+            {
+              "id": "a31",
+              "ref": {
+                "item": "item-supabase-db"
+              }
+            },
+            {
+              "id": "a32",
+              "ref": {
+                "item": "item-supabase-realtime"
+              }
+            }
+          ]
+        },
+        {
+          "id": "c17",
+          "description": "WS live data",
+          "color": "color-blue",
+          "style": "SOLID",
+          "anchors": [
+            {
+              "id": "a33",
+              "ref": {
+                "item": "item-supabase-realtime"
+              }
+            },
+            {
+              "id": "a34",
+              "ref": {
+                "item": "item-dashboard"
+              }
+            }
+          ]
+        },
+        {
+          "id": "c18",
+          "description": "Serves SPA",
+          "color": "color-purple",
+          "style": "SOLID",
+          "anchors": [
+            {
+              "id": "a35",
+              "ref": {
+                "item": "item-hostinger"
+              }
+            },
+            {
+              "id": "a36",
+              "ref": {
+                "item": "item-dashboard"
+              }
+            }
+          ]
+        },
+        {
+          "id": "c19",
+          "description": "HTTPS",
+          "color": "color-grey",
+          "style": "SOLID",
+          "anchors": [
+            {
+              "id": "a37",
+              "ref": {
+                "item": "item-user-browser"
+              }
+            },
+            {
+              "id": "a38",
+              "ref": {
+                "item": "item-dashboard"
+              }
+            }
+          ]
+        },
+        {
+          "id": "c20",
+          "description": "Truck sensors",
+          "color": "color-orange",
+          "style": "DASHED",
+          "anchors": [
+            {
+              "id": "a39",
+              "ref": {
+                "item": "item-vehicle-ice"
+              }
+            },
+            {
+              "id": "a40",
+              "ref": {
+                "item": "item-tbeam"
+              }
+            }
+          ]
+        },
+        {
+          "id": "c21",
+          "description": "EV sensors",
+          "color": "color-indigo",
+          "style": "DASHED",
+          "anchors": [
+            {
+              "id": "a41",
+              "ref": {
+                "item": "item-vehicle-ev"
+              }
+            },
+            {
+              "id": "a42",
+              "ref": {
+                "item": "item-tsim"
+              }
+            }
+          ]
+        },
+        {
+          "id": "c22",
+          "description": "Enclosure",
+          "color": "color-grey",
+          "style": "DASHED",
+          "anchors": [
+            {
+              "id": "a43",
+              "ref": {
+                "item": "item-3dprint-case"
+              }
+            },
+            {
+              "id": "a44",
+              "ref": {
+                "item": "item-tbeam"
+              }
+            }
+          ]
+        },
+        {
+          "id": "c23",
+          "description": "Enclosure",
+          "color": "color-grey",
+          "style": "DASHED",
+          "anchors": [
+            {
+              "id": "a45",
+              "ref": {
+                "item": "item-3dprint-case"
+              }
+            },
+            {
+              "id": "a46",
+              "ref": {
+                "item": "item-tsim"
+              }
+            }
+          ]
+        },
+        {
+          "id": "c24",
+          "description": "Enclosure",
+          "color": "color-grey",
+          "style": "DASHED",
+          "anchors": [
+            {
+              "id": "a47",
+              "ref": {
+                "item": "item-3dprint-case"
+              }
+            },
+            {
+              "id": "a48",
+              "ref": {
+                "item": "item-esp32-repeater"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

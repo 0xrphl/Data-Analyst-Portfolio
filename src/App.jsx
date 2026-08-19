@@ -11,6 +11,8 @@ const Feedbacks = lazy(() => import('./components/Feedbacks'));
 const Contact = lazy(() => import('./components/Contact'));
 const StarsCanvas = lazy(() => import('./components/canvas/Stars'));
 const SolarMiningCluster = lazy(() => import('./pages/SolarMiningCluster'));
+const HeatTransferSim = lazy(() => import('./pages/HeatTransfer/HeatTransferSim'));
+const IoTVehicleTelemetry = lazy(() => import('./pages/IoTVehicleTelemetry'));
 
 // Import immediately needed components normally
 import { Hero, Navbar } from './components';
@@ -46,6 +48,22 @@ const App = () => {
             element={
               <Suspense fallback={<div className="min-h-screen bg-primary flex items-center justify-center text-white">Loading dashboard...</div>}>
                 <SolarMiningCluster />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/college/heat-transfer"
+            element={
+              <Suspense fallback={<div className="min-h-screen bg-primary flex items-center justify-center text-white">Loading simulation...</div>}>
+                <HeatTransferSim />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/college/iot-vehicle-telemetry"
+            element={
+              <Suspense fallback={<div className="min-h-screen bg-black flex items-center justify-center text-white">Loading IoT dashboard...</div>}>
+                <IoTVehicleTelemetry />
               </Suspense>
             }
           />

@@ -100,6 +100,8 @@ const ProjectCard = ({
   source_code_link,
   huggingface_link,
   live_demo_link,
+  live_demo_label,
+  live_demo_style,
   className,
   isMobileDevice,
 }) => {
@@ -180,10 +182,10 @@ const ProjectCard = ({
           {live_demo_link && (
             <Link
               to={live_demo_link}
-              className='mt-4 inline-flex items-center justify-center gap-2 w-full py-2.5 rounded-xl font-semibold text-[13px] sm:text-[14px] text-white transition-transform duration-300 hover:scale-[1.02]'
-              style={{ background: 'linear-gradient(90deg, #FFA500 0%, #FF7A00 50%, #FFD700 100%)' }}
+              className='mt-4 inline-flex items-center justify-center gap-2 w-full py-2.5 rounded-xl font-semibold text-[13px] sm:text-[14px] text-white transition-all duration-300 hover:scale-[1.03] hover:shadow-lg active:scale-[0.98]'
+              style={live_demo_style || { background: 'linear-gradient(90deg, #FFA500 0%, #FF7A00 50%, #FFD700 100%)' }}
             >
-              ⚡ Live 3D Dashboard
+              {live_demo_label || '⚡ Live 3D Dashboard'}
             </Link>
           )}
 

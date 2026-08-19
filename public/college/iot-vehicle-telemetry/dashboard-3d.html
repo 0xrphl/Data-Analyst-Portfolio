@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>IoT Telemetry 3D Dashboard — Pereira</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<link rel="stylesheet" href="dashboard-3d.css"/>
+</head>
+<body>
+<div id="app">
+  <aside id="sidebar">
+    <div id="sidebar-header">
+      <h1>🚛 IoT Fleet Telemetry<span class="badge">LIVE</span></h1>
+      <p>Pereira, Risaralda · 10 LoRa · 5 Vehicles</p>
+    </div>
+    <div id="vehicle-list"></div>
+  </aside>
+  <main id="main-view">
+    <div id="map-perspective"><div id="map-3d"></div></div>
+    <div id="overlay-stats">
+      <div class="stat-box green"><div class="num" id="s-on">5</div><div class="txt">Online</div></div>
+      <div class="stat-box blue"><div class="num" id="s-km">127</div><div class="txt">km Today</div></div>
+      <div class="stat-box orange"><div class="num" id="s-al">2</div><div class="txt">Alerts</div></div>
+      <div class="stat-box red"><div class="num" id="s-kw">156</div><div class="txt">kWh</div></div>
+    </div>
+    <div id="time-bar">
+      <span>🕐</span>
+      <input type="range" id="time-range" min="0" max="100" value="100"/>
+      <span class="td" id="time-display">Live</span>
+    </div>
+    <div id="controls">
+      <button id="btn-3d" class="active">🏔️ 3D Tilt</button>
+      <button id="btn-coverage">📡 Coverage</button>
+      <button id="btn-trails" class="active">🛣️ Trails</button>
+      <button id="btn-dark" class="active">🌙 Dark</button>
+    </div>
+    <div id="chart-panel">
+      <h4>📈 Amps · Last Hour</h4>
+      <canvas id="chart-canvas" width="220" height="60"></canvas>
+    </div>
+  </main>
+</div>
+<script src="dashboard-3d.js"></script>
+</body></html>

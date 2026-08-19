@@ -184,9 +184,29 @@ This project is licensed under the [MIT License](LICENSE).
 
 Feel free to reach out to me via email at [0xrphl@gmail.com](mailto:0xrphl@gmail.com) or connect with me on [LinkedIn](https://www.linkedin.com/in/0xraphael/).
 
+## Heat Transfer Simulation
+
+Interactive WebGL thermal simulation accessible at `/college/heat-transfer`. Built with **React Three Fiber**, it solves the **general Fourier heat transfer PDE** (∂T/∂t = κ∇²T + q) in real-time on a 3D finite-difference grid (up to 40³). Two simulation modes:
+
+- **🧱 Solid Cube** — insulating material with an embedded volumetric heater, Dirichlet boundary conditions on all faces.
+- **🔥 Furnace (Hollow Cube)** — configurable shell material and cavity fill (still air, convection, radiation, argon, vacuum), with an interior heater and energy balance tracking.
+
+Features volumetric ray-marched rendering with clip planes, contour bands, color-mapped temperature fields, a full LaTeX-rendered PDE derivation panel (KaTeX), and Leva GUI controls for material properties, grid resolution, and visualization parameters. Converges to analytical steady-state with energy balance validation (q_in = q_out).
+
+**Tech:** React Three Fiber · Three.js · WebGL · Vite · KaTeX · Leva · Web Workers · JavaScript
+
 ## Version History
 
-- **V3.2** (July 2025) — Current version
+- **V3.3** (August 2026) — Current version
+  - Added **CFD/FEM Thermal Simulation — Fourier Heat Transfer PDE Solver** at `/college/heat-transfer`
+  - Interactive WebGL simulation solving the Fourier heat equation (∂T/∂t = κ∇²T + q) with React Three Fiber
+  - Two modes: solid insulating cube and hollow furnace with configurable materials
+  - Volumetric rendering, clip planes, contour bands, KaTeX derivation panel, Leva GUI controls
+  - 2-image carousel project card (first position) with live demo + GitHub buttons
+  - Full Spanish translations for project card
+  - Added `katex` and `leva` dependencies to main portfolio
+
+- **V3.2** (July 2025)
   - Added **ESP32-DIV V2 — Battery Mod & Custom Case Build** project card with 11-image carousel (front isometric, front closeup, SolidWorks isometric, assembled photos, CAD views, flasher screenshot)
   - Full English/Spanish descriptions and tags (ESP32-S3, IoT, Arduino, C/C++, SolidWorks, 3D Printing, Hardware Mod, 18650 Battery, Wireless Security, Rust Flasher, Open Source)
   - GitHub link: [esp32-div-v2-battery-mod](https://github.com/0xrphl/esp32-div-v2-battery-mod)

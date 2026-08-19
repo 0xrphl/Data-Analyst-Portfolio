@@ -5,17 +5,17 @@ export const translations = {
     work: "Work",
     contact: "Contact",
     portfolio: "Portfolio",
-    role: "Data Scientist, Analyst & Web Developer",
+    role: "Software & Mechanical Engineer | Data & BI Analyst",
     roleShort: "Portfolio",
 
     // Hero
     greeting: "Hi, I'm",
-    heroDescription: "AI Agent & Automation Expert with engineering expertise, building scalable web dashboards with 3D visuals. Specializing in LLM-powered RAG systems, GraphRAG knowledge graphs, vector embeddings, and multi-agent AI pipelines. Leveraging Gemini Vision, GPT-4o, Claude, Neo4j, LightRAG, Docker, and AWS to transform complex data into intelligent, production-ready AI solutions.",
+    heroDescription: "Software Engineer, Mechanical Engineer, and Data Analyst who builds end-to-end systems — from IoT embedded devices and 3D-printed hardware to full-stack web dashboards, AI-powered automation pipelines, and real-time business intelligence. I turn complex engineering and data challenges into production-ready solutions.",
 
     // About
     introduction: "Introduction",
     overview: "Overview.",
-    aboutDescription: "AI Agent & Automation Expert with engineering expertise, building scalable dashboards with 3D visuals and using AI/ML for data analysis, task automation, and impactful results. Specializing in LLM-powered RAG and GraphRAG systems (LightRAG, Neo4j, Milvus, pgvector), vector embeddings (OpenAI 1536-dim), knowledge graph construction, and multi-agent AI pipelines. Experienced with CUDA, closed-source models like GPT-4o, Claude, and Gemini Vision, open-source tools like OCR, Ollama, Llama, LLMs like DeepSeek V3, and platforms like HuggingFace. Skilled in Docker, AWS (ECS, EC2, ECR, S3, Route 53, ALB, CloudFront, RDS, OAuth 2.0), TypeScript, JavaScript, React, Vue.js, Node.js, Three.js, SQL, Python (Pandas, NumPy, Matplotlib), Firecrawl, and data visualization tools like Power BI and Tableau. Collaborative, adaptable, and focused on creating scalable solutions.",
+    aboutDescription: "Multidisciplinary engineer combining software development, mechanical engineering, IoT systems, data analytics, and AI automation. I design and build full-stack web applications (React, Vue.js, Three.js, Node.js, TypeScript) with interactive 3D dashboards, deploy cloud infrastructure on AWS (ECS, EC2, S3, CloudFront, RDS, Route 53), and containerize everything with Docker. On the hardware side, I develop IoT telemetry systems with ESP32, LoRa mesh networks, and solar-powered sensor nodes — designing custom 3D-printed enclosures in SolidWorks and programming embedded firmware in C/C++. As a data and BI analyst, I build dashboards in Power BI, Tableau, and Looker Studio, and work extensively with SQL, Python (Pandas, NumPy, Matplotlib), and Excel for data-driven decision making. In AI, I architect multi-agent pipelines, RAG and GraphRAG systems (Neo4j, Milvus, pgvector, LightRAG), and leverage models like GPT-4o, Claude, Gemini Vision, DeepSeek, and open-source LLMs via Ollama and HuggingFace. Collaborative, adaptable, and focused on delivering scalable, real-world impact.",
 
     // Experience
     workExperience: "Work Experience.",
@@ -66,17 +66,17 @@ export const translations = {
     work: "Experiencia",
     contact: "Contacto",
     portfolio: "Portafolio",
-    role: "Científico de Datos, Analista y Desarrollador Web",
+    role: "Ingeniero de Software y Mecánico | Analista de Datos y BI",
     roleShort: "Portafolio",
 
     // Hero
     greeting: "Hola, soy",
-    heroDescription: "Experto en Agentes IA y Automatización con experiencia en ingeniería, construyendo dashboards web escalables con visualizaciones 3D. Especializado en sistemas RAG impulsados por LLM, grafos de conocimiento GraphRAG, embeddings vectoriales y pipelines de IA multi-agente. Aprovechando Gemini Vision, GPT-4o, Claude, Neo4j, LightRAG, Docker y AWS para transformar datos complejos en soluciones IA inteligentes y listas para producción.",
+    heroDescription: "Ingeniero de Software, Ingeniero Mecánico y Analista de Datos que construye sistemas de punta a punta — desde dispositivos IoT embebidos y hardware impreso en 3D hasta dashboards web full-stack, pipelines de automatización con IA e inteligencia de negocios en tiempo real. Transformo desafíos complejos de ingeniería y datos en soluciones listas para producción.",
 
     // About
     introduction: "Introducción",
     overview: "Resumen.",
-    aboutDescription: "Experto en Agentes IA y Automatización con experiencia en ingeniería, desarrollando dashboards escalables con visualizaciones 3D y utilizando IA/ML para análisis de datos, automatización de tareas y resultados impactantes. Especializado en sistemas RAG y GraphRAG impulsados por LLM (LightRAG, Neo4j, Milvus, pgvector), embeddings vectoriales (OpenAI 1536-dim), construcción de grafos de conocimiento y pipelines de IA multi-agente. Experimentado con CUDA, modelos cerrados como GPT-4o, Claude y Gemini Vision, herramientas de código abierto como OCR, Ollama, Llama, LLMs como DeepSeek V3 y plataformas como HuggingFace. Competente en Docker, AWS (ECS, EC2, ECR, S3, Route 53, ALB, CloudFront, RDS, OAuth 2.0), TypeScript, JavaScript, React, Vue.js, Node.js, Three.js, SQL, Python (Pandas, NumPy, Matplotlib), Firecrawl y herramientas de visualización de datos como Power BI y Tableau. Colaborativo, adaptable y enfocado en crear soluciones escalables.",
+    aboutDescription: "Ingeniero multidisciplinario que combina desarrollo de software, ingeniería mecánica, sistemas IoT, análisis de datos y automatización con IA. Diseño y construyo aplicaciones web full-stack (React, Vue.js, Three.js, Node.js, TypeScript) con dashboards 3D interactivos, despliego infraestructura cloud en AWS (ECS, EC2, S3, CloudFront, RDS, Route 53) y contenedorizo todo con Docker. En hardware, desarrollo sistemas de telemetría IoT con ESP32, redes mesh LoRa y nodos de sensores solares — diseñando carcasas impresas en 3D en SolidWorks y programando firmware embebido en C/C++. Como analista de datos y BI, construyo dashboards en Power BI, Tableau y Looker Studio, y trabajo extensamente con SQL, Python (Pandas, NumPy, Matplotlib) y Excel para la toma de decisiones basada en datos. En IA, diseño pipelines multi-agente, sistemas RAG y GraphRAG (Neo4j, Milvus, pgvector, LightRAG), y utilizo modelos como GPT-4o, Claude, Gemini Vision, DeepSeek y LLMs de código abierto vía Ollama y HuggingFace. Colaborativo, adaptable y enfocado en generar impacto real y escalable.",
 
     // Experience
     workExperience: "Experiencia Laboral.",

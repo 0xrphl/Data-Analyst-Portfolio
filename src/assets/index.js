@@ -182,6 +182,15 @@ import esp32divSolidworksFront from "./esp32div-solidworks-front.png";
 import esp32divSolidworksInside from "./esp32div-solidworks-inside.png";
 import esp32divFlasherComplete from "./esp32div-flasher-complete.png";
 
+// Heat Transfer Simulation project assets
+import heatTransferFurnace from "./heat-transfer-furnace.png";
+import heatTransferSolidCube from "./heat-transfer-solid-cube.png";
+
+// IoT Vehicle Telemetry project assets
+import iotTelemetryDashboard3d from "./iot-telemetry-dashboard-3d.png";
+import iotTelemetryDashboard2d from "./iot-telemetry-dashboard-2d.png";
+import iotTelemetryCircuitDiagrams from "./iot-telemetry-circuit-diagrams.png";
+
 export {
 
 
@@ -365,6 +374,13 @@ export {
   esp32divSolidworksFront,
   esp32divSolidworksInside,
   esp32divFlasherComplete,
+  // Heat Transfer Simulation exports
+  heatTransferFurnace,
+  heatTransferSolidCube,
+  // IoT Vehicle Telemetry exports
+  iotTelemetryDashboard3d,
+  iotTelemetryDashboard2d,
+  iotTelemetryCircuitDiagrams,
 };
 
 

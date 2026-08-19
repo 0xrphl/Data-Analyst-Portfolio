@@ -5,73 +5,80 @@
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Segoe UI',Roboto,Arial,sans-serif;background:#0a0e17;color:#e0e0e0}
+body{font-family:'Segoe UI',Roboto,Arial,sans-serif;background:#000;color:#e0e0e0}
 a{color:#58a6ff}
-#top-nav{position:sticky;top:0;z-index:200;background:linear-gradient(135deg,#1a1f2e,#0d1117);border-bottom:1px solid #2d333b;display:flex;align-items:center;padding:10px 24px;gap:16px;flex-wrap:wrap}
+#top-nav{position:sticky;top:0;z-index:200;background:rgba(0,0,0,.85);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.06);display:flex;align-items:center;padding:10px 24px;gap:16px;flex-wrap:wrap}
 #top-nav h1{font-size:16px;color:#58a6ff;white-space:nowrap}
-.badge{background:#238636;color:#fff;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:600}
+.badge{background:rgba(35,134,54,.7);color:#fff;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:600}
+.lang-btn{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:#aaa;padding:5px 12px;border-radius:8px;cursor:pointer;font-size:12px;font-weight:600;transition:all .2s;backdrop-filter:blur(8px)}
+.lang-btn:hover{background:rgba(255,255,255,.1);color:#fff;border-color:rgba(88,166,255,.3)}
+.lang-btn.active{background:rgba(88,166,255,.15);border-color:rgba(88,166,255,.4);color:#58a6ff}
 .nav-tabs{display:flex;gap:4px;margin-left:auto}
-.nav-tabs button{background:0 0;border:1px solid #30363d;color:#8b949e;padding:6px 14px;border-radius:6px;cursor:pointer;font-size:12px;font-weight:600;transition:.2s}
-.nav-tabs button:hover{border-color:#58a6ff;color:#e0e0e0}
-.nav-tabs button.active{background:#21262d;border-color:#58a6ff;color:#58a6ff}
+.nav-tabs button{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);color:#777;padding:6px 14px;border-radius:8px;cursor:pointer;font-size:12px;font-weight:600;transition:all .2s;backdrop-filter:blur(8px)}
+.nav-tabs button:hover{border-color:rgba(88,166,255,.3);color:#ddd;background:rgba(255,255,255,.06)}
+.nav-tabs button.active{background:rgba(88,166,255,.1);border-color:rgba(88,166,255,.3);color:#58a6ff}
 .section{display:none}.section.active{display:block}
 .section-header{padding:24px 32px 12px}
 .section-header h2{font-size:22px;color:#58a6ff;margin-bottom:4px}
-.section-header p{color:#8b949e;font-size:13px}
+.section-header p{color:#555;font-size:13px}
 #diagram-container{width:100%;height:calc(100vh - 52px);overflow:hidden;cursor:grab}
 #zoom-controls{position:fixed;top:64px;right:16px;display:flex;flex-direction:column;gap:4px;z-index:150}
-#zoom-controls button{width:34px;height:34px;border:1px solid #30363d;background:rgba(22,27,34,.95);color:#e0e0e0;font-size:16px;border-radius:6px;cursor:pointer;display:flex;align-items:center;justify-content:center}
-#zoom-controls button:hover{background:#30363d;border-color:#58a6ff}
-#zoom-level{text-align:center;font-size:10px;color:#8b949e}
-#legend{position:fixed;bottom:5px;left:5px;background:rgba(22,27,34,.95);border:1px solid #30363d;border-radius:8px;padding:10px 14px;z-index:150;font-size:11px;max-width:300px}
-#legend h3{color:#58a6ff;font-size:12px;margin-bottom:6px;border-bottom:1px solid #21262d;padding-bottom:4px}
+#zoom-controls button{width:34px;height:34px;border:1px solid rgba(255,255,255,.08);background:rgba(0,0,0,.7);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);color:#aaa;font-size:16px;border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s}
+#zoom-controls button:hover{background:rgba(255,255,255,.06);border-color:rgba(88,166,255,.3);color:#fff}
+#zoom-level{text-align:center;font-size:10px;color:#555}
+#legend{position:fixed;bottom:5px;left:5px;background:rgba(0,0,0,.8);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:10px 14px;z-index:150;font-size:11px;max-width:300px}
+#legend h3{color:#58a6ff;font-size:12px;margin-bottom:6px;border-bottom:1px solid rgba(255,255,255,.06);padding-bottom:4px}
 .legend-item{display:flex;align-items:center;margin:3px 0}
 .legend-line{width:20px;height:2px;margin-right:8px;border-radius:1px}
 .legend-rect{width:12px;height:8px;margin-right:8px;border-radius:2px;opacity:.4;border:1px solid}
-#info-panel{position:fixed;bottom:5px;right:5px;background:rgba(22,27,34,.95);border:1px solid #30363d;border-radius:8px;padding:14px 18px;z-index:150;font-size:12px;max-width:350px;display:none}
+#info-panel{position:fixed;bottom:5px;right:5px;background:rgba(0,0,0,.8);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:14px 18px;z-index:150;font-size:12px;max-width:350px;display:none}
 #info-panel h4{color:#58a6ff;margin-bottom:4px}
-#info-panel p{color:#8b949e;line-height:1.4}
-#map-container{height:calc(100vh - 140px);margin:0 32px 24px;border-radius:12px;border:1px solid #30363d}
+#info-panel p{color:#666;line-height:1.4}
+#map-container{height:calc(100vh - 140px);margin:0 32px 24px;border-radius:12px;border:1px solid rgba(255,255,255,.08)}
 .tables-wrap{padding:0 32px 48px}
 .cost-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:32px}
 @media(max-width:900px){.cost-grid{grid-template-columns:1fr}}
-.card{background:#161b22;border:1px solid #30363d;border-radius:10px;overflow:hidden}
-.card-header{padding:12px 16px;font-size:14px;font-weight:600;border-bottom:1px solid #21262d}
-.card-header.red{background:linear-gradient(135deg,rgba(244,67,54,.15),transparent);color:#ef5350}
-.card-header.orange{background:linear-gradient(135deg,rgba(255,152,0,.15),transparent);color:#FFB74D}
-.card-header.green{background:linear-gradient(135deg,rgba(76,175,80,.15),transparent);color:#66BB6A}
-.card-header.blue{background:linear-gradient(135deg,rgba(33,150,243,.15),transparent);color:#42A5F5}
-.card-header.purple{background:linear-gradient(135deg,rgba(156,39,176,.15),transparent);color:#CE93D8}
-.card-header.cyan{background:linear-gradient(135deg,rgba(0,188,212,.15),transparent);color:#4DD0E1}
-.card-header.teal{background:linear-gradient(135deg,rgba(0,150,136,.15),transparent);color:#4DB6AC}
+.card{background:rgba(255,255,255,.02);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.06);border-radius:12px;overflow:hidden}
+.card-header{padding:12px 16px;font-size:14px;font-weight:600;border-bottom:1px solid rgba(255,255,255,.04)}
+.card-header.red{background:linear-gradient(135deg,rgba(244,67,54,.08),transparent);color:#ef5350}
+.card-header.orange{background:linear-gradient(135deg,rgba(255,152,0,.08),transparent);color:#FFB74D}
+.card-header.green{background:linear-gradient(135deg,rgba(76,175,80,.08),transparent);color:#66BB6A}
+.card-header.blue{background:linear-gradient(135deg,rgba(33,150,243,.08),transparent);color:#42A5F5}
+.card-header.purple{background:linear-gradient(135deg,rgba(156,39,176,.08),transparent);color:#CE93D8}
+.card-header.cyan{background:linear-gradient(135deg,rgba(0,188,212,.08),transparent);color:#4DD0E1}
+.card-header.teal{background:linear-gradient(135deg,rgba(0,150,136,.08),transparent);color:#4DB6AC}
 table{width:100%;border-collapse:collapse;font-size:12px}
-th{text-align:left;padding:8px 12px;color:#8b949e;border-bottom:1px solid #21262d;font-weight:600}
-td{padding:7px 12px;border-bottom:1px solid rgba(48,54,61,.5)}
-tr:hover td{background:rgba(88,166,255,.04)}
+th{text-align:left;padding:8px 12px;color:#555;border-bottom:1px solid rgba(255,255,255,.04);font-weight:600}
+td{padding:7px 12px;border-bottom:1px solid rgba(255,255,255,.03)}
+tr:hover td{background:rgba(255,255,255,.02)}
 .price{color:#66BB6A;font-weight:600;font-family:'Cascadia Code',monospace}
-.total-row td{font-weight:700;border-top:2px solid #30363d;color:#58a6ff;font-size:13px}
-.highlight{background:rgba(88,166,255,.08)!important}
+.total-row td{font-weight:700;border-top:2px solid rgba(255,255,255,.06);color:#58a6ff;font-size:13px}
+.highlight{background:rgba(88,166,255,.05)!important}
 .stats-row{display:flex;gap:16px;padding:0 32px 24px;flex-wrap:wrap}
-.stat-card{flex:1;min-width:140px;background:#161b22;border:1px solid #30363d;border-radius:10px;padding:16px;text-align:center}
+.stat-card{flex:1;min-width:140px;background:rgba(255,255,255,.02);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:16px;text-align:center}
 .stat-card .value{font-size:24px;font-weight:700}
-.stat-card .label{font-size:11px;color:#8b949e;margin-top:4px}
+.stat-card .label{font-size:11px;color:#555;margin-top:4px}
 .stat-card.red .value{color:#ef5350}.stat-card.orange .value{color:#FFB74D}
 .stat-card.green .value{color:#66BB6A}.stat-card.blue .value{color:#42A5F5}
 .stat-card.purple .value{color:#CE93D8}.stat-card.cyan .value{color:#4DD0E1}
-pre.code{background:#0d1117;padding:12px;border-radius:6px;overflow-x:auto;color:#e0e0e0;font-size:11px;font-family:'Cascadia Code',monospace}
+pre.code{background:rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.06);padding:12px;border-radius:8px;overflow-x:auto;color:#ccc;font-size:11px;font-family:'Cascadia Code',monospace}
 </style>
 </head>
 <body>
 <nav id="top-nav">
-<h1>⚡ IoT Vehicle Telemetry — Pereira, Risaralda</h1>
+<h1>⚡ <span data-i18n="navTitle">IoT Vehicle Telemetry — Pereira, Risaralda</span></h1>
 <span class="badge">v1.0</span>
+<div style="display:flex;gap:2px;margin-left:8px">
+<button class="lang-btn active" id="btn-lang-en" onclick="setLang('en')">🇺🇸 EN</button>
+<button class="lang-btn" id="btn-lang-es" onclick="setLang('es')">🇪🇸 ES</button>
+</div>
 <div class="nav-tabs">
-<button class="active" onclick="showTab('diagram',this)">🏗️ Architecture</button>
-<button onclick="showTab('map',this)">🗺️ LoRa Map</button>
-<button onclick="showTab('costs',this)">💰 Costs</button>
-<button onclick="showTab('specs',this)">⚡ Specs</button>
-<button onclick="showTab('roadmap',this)">🗓️ Roadmap</button>
-<button onclick="window.open('dashboard-3d.html','_blank')" style="background:#238636;border-color:#238636;color:#fff">🎮 3D Demo</button>
+<button class="active" onclick="showTab('diagram',this)" data-i18n="tabArch">🏗️ Architecture</button>
+<button onclick="showTab('map',this)" data-i18n="tabMap">🗺️ LoRa Map</button>
+<button onclick="showTab('costs',this)" data-i18n="tabCosts">💰 Costs</button>
+<button onclick="showTab('specs',this)" data-i18n="tabSpecs">⚡ Specs</button>
+<button onclick="showTab('roadmap',this)" data-i18n="tabRoadmap">🗓️ Roadmap</button>
+<button onclick="window.open('dashboard-3d.html','_blank')" style="background:rgba(35,134,54,.6);border-color:rgba(35,134,54,.4);color:#fff">🎮 3D Demo</button>
 </div>
 </nav>
 
@@ -812,6 +819,21 @@ ct.addEventListener('mousedown',function(e){if(e.button===0){ip=true;sX=e.client
 window.addEventListener('mousemove',function(e){if(ip){pX+=e.clientX-sX;pY+=e.clientY-sY;sX=e.clientX;sY=e.clientY;ut()}});
 window.addEventListener('mouseup',function(){ip=false;ct.style.cursor='grab'});ct.style.cursor='grab';
 });
+</script>
+<script>
+var I18N={
+en:{navTitle:'IoT Vehicle Telemetry — Pereira, Risaralda',tabArch:'🏗️ Architecture',tabMap:'🗺️ LoRa Map',tabCosts:'💰 Costs',tabSpecs:'⚡ Specs',tabRoadmap:'🗓️ Roadmap'},
+es:{navTitle:'Telemetría Vehicular IoT — Pereira, Risaralda',tabArch:'🏗️ Arquitectura',tabMap:'🗺️ Mapa LoRa',tabCosts:'💰 Costos',tabSpecs:'⚡ Especificaciones',tabRoadmap:'🗓️ Cronograma'}
+};
+var curLang=localStorage.getItem('iot-lang')||'en';
+function setLang(l){
+curLang=l;localStorage.setItem('iot-lang',l);
+document.getElementById('btn-lang-en').classList.toggle('active',l==='en');
+document.getElementById('btn-lang-es').classList.toggle('active',l==='es');
+var t=I18N[l];
+document.querySelectorAll('[data-i18n]').forEach(function(el){var k=el.getAttribute('data-i18n');if(t[k])el.textContent=t[k];});
+}
+setLang(curLang);
 </script>
 </body>
 </html>

@@ -32,10 +32,10 @@ Run in SQL Editor in order:
 
 ### 3. Edge Functions (Mercado Pago)
 ```bash
-supabase secrets set MP_ACCESS_TOKEN=APP_USR-xxx --project-ref ohidinrnomoyvzpighos
-supabase secrets set MP_CLIENT_SECRET=xxx --project-ref ohidinrnomoyvzpighos
-supabase functions deploy create-mp-preference --project-ref ohidinrnomoyvzpighos
-supabase functions deploy mp-webhook --project-ref ohidinrnomoyvzpighos
+supabase secrets set MP_ACCESS_TOKEN=APP_USR-xxx --project-ref <your-project-ref>
+supabase secrets set MP_CLIENT_SECRET=xxx --project-ref <your-project-ref>
+supabase functions deploy create-mp-preference --project-ref <your-project-ref>
+supabase functions deploy mp-webhook --project-ref <your-project-ref>
 ```
 
 ### 4. Product Assets
@@ -45,5 +45,5 @@ Upload compressed images/videos to `public/store/assets/products/` and `public/s
 Point `3dagoralab.com` DNS to Hostinger. Add as addon domain.
 
 ## Supabase Project
-- URL: `https://ohidinrnomoyvzpighos.supabase.co`
-- Anon key: `sb_publishable_jhCUR3cb7V9cBK3y3fYrng_zUPdGUsd`
+- URL: `<your-supabase-url>`
+- Anon key: `<your-publishable-key>`

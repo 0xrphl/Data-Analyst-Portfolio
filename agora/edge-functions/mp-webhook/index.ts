@@ -1,6 +1,6 @@
 // Supabase Edge Function: mp-webhook
 // Receives payment notifications from Mercado Pago
-// Deploy: supabase functions deploy mp-webhook --project-ref ohidinrnomoyvzpighos
+// Deploy: supabase functions deploy mp-webhook --project-ref <project-ref>
 
 import { serve } from 'https://deno.land/std@0.168.0/http/server.ts'
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'

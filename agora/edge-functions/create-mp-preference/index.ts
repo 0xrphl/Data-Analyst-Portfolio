@@ -1,6 +1,6 @@
 // Supabase Edge Function: create-mp-preference
-// Deploy: supabase functions deploy create-mp-preference --project-ref ohidinrnomoyvzpighos
-// Secrets: supabase secrets set MP_ACCESS_TOKEN=APP_USR-xxx --project-ref ohidinrnomoyvzpighos
+// Deploy: supabase functions deploy create-mp-preference --project-ref <project-ref>
+// Secrets: supabase secrets set MP_ACCESS_TOKEN=APP_USR-xxx --project-ref <project-ref>
 
 import { serve } from 'https://deno.land/std@0.168.0/http/server.ts'
 
@@ -33,7 +33,7 @@ serve(async (req) => {
       },
       auto_return: 'approved',
       external_reference: order_id,
-      notification_url: `https://ohidinrnomoyvzpighos.supabase.co/functions/v1/mp-webhook`,
+      notification_url: `${Deno.env.get('SUPABASE_URL')}/functions/v1/mp-webhook`,
     }
 
     const res = await fetch('https://api.mercadopago.com/checkout/preferences', {

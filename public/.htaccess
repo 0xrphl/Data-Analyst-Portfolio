@@ -1,7 +1,33 @@
 <IfModule mod_rewrite.c>
   RewriteEngine On
+
+  # Force HTTPS
+  RewriteCond %{HTTPS} off
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+
   RewriteBase /
+
+  # 3dagoralab.com: serve store.html (with OG meta tags) instead of index.html
+  RewriteCond %{HTTP_HOST} ^(www\.)?3dagoralab\.com$ [NC]
+  RewriteRule ^store/?$ /store.html [L]
+  RewriteCond %{HTTP_HOST} ^(www\.)?3dagoralab\.com$ [NC]
+  RewriteRule ^store/(login|catalog|category|product|cart|checkout|profile)(.*)$ /store.html [L]
+  RewriteCond %{HTTP_HOST} ^(www\.)?3dagoralab\.com$ [NC]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule . /store.html [L]
+
+  # Other domains: /store SPA routes go to index.html
+  RewriteRule ^store/?$ /index.html [L]
+  RewriteRule ^store/(login|catalog|category|product|cart|checkout|profile)(.*)$ /index.html [L]
+
+  # SPA routes under /college — rewrite to index.html UNLESS requesting a real file
+  # (the directory college/hydraulics-lab/cycle1/ exists for images, so !-d alone won't work)
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteRule ^college/(.*)$ /index.html [L]
+
   RewriteRule ^index\.html$ - [L]
+  RewriteRule ^store\.html$ - [L]
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteRule . /index.html [L]

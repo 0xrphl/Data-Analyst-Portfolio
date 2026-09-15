@@ -51,16 +51,16 @@ import UTP from "./company/UTP.png";
 import TCLO from "./company/TCLO.png";
 import carrent from "./carrent.gif";
 import ring from "./ring.gif";
-import budget from "./budget.png";
+import budget from "./Budget.jpg";
 import Linkedinlogo from "./Linkedinlogo.png";
 import X from "./X.png";
-import Cryptotracker from "./Cryptotracker.png";
+import Cryptotracker from "./Cryptotracker.jpg";
 import CRM from "./CRM.gif";
 import Calendar from "./Calendar.gif";
 import emaillogo from "./email.png";
-import recomendation from "./recomendation.png";
+import recomendation from "./recomendation.jpg";
 import quiroga from "./company/quiroga.png";
-import quiroga2 from "./company/quiroga2.png";
+import quiroga2 from "./company/quiroga2.jpg";
 import Scikit_image from "./tech/Scikit_image.png";
 import CUDA from "./tech/CUDA.png";
 import PyTorch from "./tech/PyTorch.svg";
@@ -113,46 +113,46 @@ import MicrochipPIC from "./tech/MicrochipPIC.webp";
 import LMStudio from "./tech/LMStudio.png";
 import ComfyUI from "./tech/ComfyUI.svg";
 import GLM from "./tech/GLM.png";
-import expensesDashboardMain from "./expenses-dashboard-main.png";
-import expensesDashboardScroll from "./expenses-dashboard-scroll.png";
-import expensesDashboardAdd from "./expenses-dashboard-add.png";
-import pdfDetectSimilarity from "./pdf-detect-similarity.png";
-import pdfDetectAccuracy from "./pdf-detect-accuracy.png";
-import pdfDetectRobustness from "./pdf-detect-robustness.png";
-import pdfDetectExactMatch from "./pdf-detect-exact-match.png";
-import pdfDetectNonMatch from "./pdf-detect-non-match.png";
-import mirofishHomepage from "./mirofish-homepage.png";
-import mirofishGraphBuild from "./mirofish-graph-build.png";
-import mirofishGraphFullscreen from "./mirofish-graph-fullscreen.png";
-import mirofishAgentPersonasGraph from "./mirofish-agent-personas-graph.png";
-import mirofishAgentPersonasDual from "./mirofish-agent-personas-dual.png";
-import mirofishSimulationSetup from "./mirofish-simulation-setup.png";
-import mirofishSimulationRunning from "./mirofish-simulation-running.png";
-import mirofishFinalReport from "./mirofish-final-report.png";
-import mirofishBanner from "./mirofish-banner.png";
+import expensesDashboardMain from "./expenses-dashboard-main.jpg";
+import expensesDashboardScroll from "./expenses-dashboard-scroll.jpg";
+import expensesDashboardAdd from "./expenses-dashboard-add.jpg";
+import pdfDetectSimilarity from "./pdf-detect-similarity.jpg";
+import pdfDetectAccuracy from "./pdf-detect-accuracy.jpg";
+import pdfDetectRobustness from "./pdf-detect-robustness.jpg";
+import pdfDetectExactMatch from "./pdf-detect-exact-match.jpg";
+import pdfDetectNonMatch from "./pdf-detect-non-match.jpg";
+import mirofishHomepage from "./mirofish-homepage.jpg";
+import mirofishGraphBuild from "./mirofish-graph-build.jpg";
+import mirofishGraphFullscreen from "./mirofish-graph-fullscreen.jpg";
+import mirofishAgentPersonasGraph from "./mirofish-agent-personas-graph.jpg";
+import mirofishAgentPersonasDual from "./mirofish-agent-personas-dual.jpg";
+import mirofishSimulationSetup from "./mirofish-simulation-setup.jpg";
+import mirofishSimulationRunning from "./mirofish-simulation-running.jpg";
+import mirofishFinalReport from "./mirofish-final-report.jpg";
+import mirofishBanner from "./mirofish-banner.jpg";
 import huggingfaceIcon from "./huggingface-icon.svg";
-import uscisRepoCover from "./uscis-repo-cover.png";
+import uscisRepoCover from "./uscis-repo-cover.jpg";
 import uscisBanner from "./uscis-banner.svg";
-import uscisAtlasClusters from "./uscis-atlas-clusters.png";
-import uscisAtlasOverview from "./uscis-atlas-overview.png";
-import uscisAtlasNeighbours from "./uscis-atlas-neighbours.png";
-import uscisAtlasZoom from "./uscis-atlas-zoom.png";
-import uscisGithubRepo from "./uscis-github-repo.png";
-import uscisHuggingfaceRepo from "./uscis-huggingface-repo.png";
+import uscisAtlasClusters from "./uscis-atlas-clusters.jpg";
+import uscisAtlasOverview from "./uscis-atlas-overview.jpg";
+import uscisAtlasNeighbours from "./uscis-atlas-neighbours.jpg";
+import uscisAtlasZoom from "./uscis-atlas-zoom.jpg";
+import uscisGithubRepo from "./uscis-github-repo.jpg";
+import uscisHuggingfaceRepo from "./uscis-huggingface-repo.jpg";
 import mediaAgentArchitecture from "./media-agent-architecture.svg";
-import mediaAgentDocMgmt from "./media-agent-document-management.png";
-import mediaAgentGraphFull from "./media-agent-graph-full.png";
-import mediaAgentGraphNode from "./media-agent-graph-node.png";
-import mediaAgentGraphDemo from "./media-agent-graph-demo.png";
-import mediaAgentQueryDemo from "./media-agent-query-demo.png";
+import mediaAgentDocMgmt from "./media-agent-document-management.jpg";
+import mediaAgentGraphFull from "./media-agent-graph-full.jpg";
+import mediaAgentGraphNode from "./media-agent-graph-node.jpg";
+import mediaAgentGraphDemo from "./media-agent-graph-demo.jpg";
+import mediaAgentQueryDemo from "./media-agent-query-demo.jpg";
 
 // Solar Mining Cluster project assets
-import solarProductAvalonQ from "./solar-mining/products/avalon-q.png";
+import solarProductAvalonQ from "./solar-mining/products/avalon-q.jpg";
 
-import solarProductBitaxe from "./solar-mining/products/bitaxe-gamma.png";
-import solarProductNerdqaxe from "./solar-mining/products/nerdqaxe-plus.png";
+import solarProductBitaxe from "./solar-mining/products/bitaxe-gamma.jpg";
+import solarProductNerdqaxe from "./solar-mining/products/nerdqaxe-plus.jpg";
 import solarProductOctaxe from "./solar-mining/products/octaxe.webp";
-import solarProductPanel from "./solar-mining/products/solar-panel.png";
+import solarProductPanel from "./solar-mining/products/solar-panel.jpg";
 import solarDiagramSystem from "./solar-mining/diagrams/system-architecture.svg";
 import solarDiagramEnergyFlow from "./solar-mining/diagrams/energy-flow.svg";
 import solarDiagramProfiles from "./solar-mining/diagrams/mining-profiles.svg";
@@ -163,33 +163,39 @@ import solarDiagramDecision from "./solar-mining/diagrams/decision-logic.svg";
 import solarDiagramCircuitDashboard from "./solar-mining/diagrams/circuit-diagram-dashboard.jpg";
 import solarDiagramHouseIsometricMiners from "./solar-mining/diagrams/house-isometric-miners.jpg";
 import solarDiagramHouseIsometricProject from "./solar-mining/diagrams/house-isometric-project.jpg";
-import solarDashboardAntpool from "./solar-mining/diagrams/antpool-iframe-dashboard.png";
-import solarDashboardMinerfleet from "./solar-mining/diagrams/minerfleet-threejs-dashboard.png";
-import solarDashboardThreejs from "./solar-mining/diagrams/threejs-render-solar-mining-dashboard.png";
-import solarDashboardFull from "./solar_dashboard_full.png";
-import solarDashboardZoom from "./solar_dashboard_zoom.png";
+import solarDashboardAntpool from "./solar-mining/diagrams/antpool-iframe-dashboard.jpg";
+import solarDashboardMinerfleet from "./solar-mining/diagrams/minerfleet-threejs-dashboard.jpg";
+import solarDashboardThreejs from "./solar-mining/diagrams/threejs-render-solar-mining-dashboard.jpg";
+import solarDashboardFull from "./solar_dashboard_full.jpg";
+import solarDashboardZoom from "./solar_dashboard_zoom.jpg";
 
 // ESP32-DIV V2 project assets
-import esp32divFrontIsometric from "./esp32div-front-isometric.jpeg";
-import esp32divFrontCloseup from "./esp32div-front-closeup.jpeg";
-import esp32divBackBatteriesOn from "./esp32div-back-batteries-on.jpeg";
-import esp32divBackVelcro from "./esp32div-back-velcro.jpeg";
-import esp32divBackVelcroNoflash from "./esp32div-back-velcro-noflash.jpeg";
-import esp32divRightSide from "./esp32div-right-side.jpeg";
-import esp32divBackButtons from "./esp32div-back-buttons.jpeg";
-import esp32divSolidworksIsometric from "./esp32div-solidworks-isometric.png";
-import esp32divSolidworksFront from "./esp32div-solidworks-front.png";
-import esp32divSolidworksInside from "./esp32div-solidworks-inside.png";
-import esp32divFlasherComplete from "./esp32div-flasher-complete.png";
+import esp32divFrontIsometric from "./esp32div-front-isometric.jpg";
+import esp32divFrontCloseup from "./esp32div-front-closeup.jpg";
+import esp32divBackBatteriesOn from "./esp32div-back-batteries-on.jpg";
+import esp32divBackVelcro from "./esp32div-back-velcro.jpg";
+import esp32divBackVelcroNoflash from "./esp32div-back-velcro-noflash.jpg";
+import esp32divRightSide from "./esp32div-right-side.jpg";
+import esp32divBackButtons from "./esp32div-back-buttons.jpg";
+import esp32divSolidworksIsometric from "./esp32div-solidworks-isometric.jpg";
+import esp32divSolidworksFront from "./esp32div-solidworks-front.jpg";
+import esp32divSolidworksInside from "./esp32div-solidworks-inside.jpg";
+import esp32divFlasherComplete from "./esp32div-flasher-complete.jpg";
 
 // Heat Transfer Simulation project assets
-import heatTransferFurnace from "./heat-transfer-furnace.png";
-import heatTransferSolidCube from "./heat-transfer-solid-cube.png";
+import heatTransferFurnace from "./heat-transfer-furnace.jpg";
+import heatTransferSolidCube from "./heat-transfer-solid-cube.jpg";
 
 // IoT Vehicle Telemetry project assets
-import iotTelemetryDashboard3d from "./iot-telemetry-dashboard-3d.png";
-import iotTelemetryDashboard2d from "./iot-telemetry-dashboard-2d.png";
-import iotTelemetryCircuitDiagrams from "./iot-telemetry-circuit-diagrams.png";
+import iotTelemetryDashboard3d from "./iot-telemetry-dashboard-3d.jpg";
+import iotTelemetryDashboard2d from "./iot-telemetry-dashboard-2d.jpg";
+import iotTelemetryCircuitDiagrams from "./iot-telemetry-circuit-diagrams.jpg";
+
+// 3D Agora Lab e-commerce project assets
+import agoraMain from "./projects/agora/agora_main.jpg";
+import agoraAccessories from "./projects/agora/agora_accessories.jpg";
+import agoraBeauty from "./projects/agora/agora_beauty.jpg";
+import agoraOauth from "./projects/agora/agora_oauth.png";
 
 export {
 
@@ -381,6 +387,11 @@ export {
   iotTelemetryDashboard3d,
   iotTelemetryDashboard2d,
   iotTelemetryCircuitDiagrams,
+  // 3D Agora Lab exports
+  agoraMain,
+  agoraAccessories,
+  agoraBeauty,
+  agoraOauth,
 };
 
 

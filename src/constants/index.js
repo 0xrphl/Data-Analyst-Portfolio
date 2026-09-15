@@ -169,6 +169,10 @@ import {
     iotTelemetryDashboard3d,
     iotTelemetryDashboard2d,
     iotTelemetryCircuitDiagrams,
+    agoraMain,
+    agoraAccessories,
+    agoraBeauty,
+    agoraOauth,
   } from "../assets";
 
 
@@ -1743,6 +1747,50 @@ import {
       source_code_link: "https://github.com/0xrphl/mirofish-neo4j-fork",
     },
     {
+      name: "3D Agora Lab — E-commerce Store",
+      description:
+        "Full-stack e-commerce SPA for 3D Agora Lab built with React, Vite, and Tailwind CSS. Features Google OAuth authentication via Supabase, product catalog with category filtering, shopping cart with real-time totals, Mercado Pago checkout integration, order history, and responsive mobile-first design. Hosted on Hostinger with custom DNS configuration.",
+      tags: [
+        {
+          name: "React",
+          color: "blue-text-gradient",
+        },
+        {
+          name: "Vite",
+          color: "purple-text-gradient",
+        },
+        {
+          name: "Supabase",
+          color: "green-text-gradient",
+        },
+        {
+          name: "Google OAuth",
+          color: "red-text-gradient",
+        },
+        {
+          name: "Mercado Pago",
+          color: "blue-text-gradient",
+        },
+        {
+          name: "Tailwind CSS",
+          color: "pink-text-gradient",
+        },
+        {
+          name: "Hostinger",
+          color: "purple-text-gradient",
+        },
+        {
+          name: "E-commerce",
+          color: "orange-text-gradient",
+        },
+      ],
+      image: [agoraMain, agoraAccessories, agoraBeauty, agoraOauth],
+      source_code_link: "https://github.com/0xrphl/Data-Analyst-Portfolio",
+      live_demo_link: "/store",
+      live_demo_label: "🛒 Visit Store",
+      live_demo_style: { background: 'linear-gradient(90deg, #6366F1 0%, #8B5CF6 50%, #A855F7 100%)' },
+    },
+    {
       name: "USCIS Knowledge Base",
 
 
@@ -1967,32 +2015,28 @@ import {
     {
       name: "Data Analyst Portfolio",
       description:
-        "Crafted with React-Three-Fiber and Tailwind CSS, presents an immersive display of my SQL, Python, Tableau, and Excel skills. Its interactive 3D elements and responsive design create a visually appealing platform to explore my diverse data analysis projects.",
+        "Crafted with React, Three.js (React-Three-Fiber), Vite, and Tailwind CSS, this portfolio features interactive 3D elements, multi-language support, and responsive design. Showcases full-stack web apps, AI/ML projects, IoT systems, e-commerce stores, and data analytics in an immersive experience.",
       tags: [
         {
           name: "React",
           color: "blue-text-gradient",
         },
         {
-          name: "ThreeJS",
+          name: "Three.js",
           color: "green-text-gradient",
+        },
+        {
+          name: "Vite",
+          color: "purple-text-gradient",
         },
         {
           name: "Tailwind CSS",
           color: "pink-text-gradient",
         },
         {
-          name: "HTML",
-          color: "orange-text-gradient",
-        },
-        {
-          name: "CSS",
-          color: "blue-text-gradient",
-        },
-        {
-          name: "JavaScript ",
+          name: "JavaScript",
           color: "yellow-text-gradient",
-        }
+        },
       ],
       image: carrent,
       source_code_link: "https://github.com/0xrphl/Data-Analyst-Portfolio",
@@ -2103,6 +2147,25 @@ import {
         ],
         image: [mirofishBanner, mirofishHomepage, mirofishGraphBuild, mirofishGraphFullscreen, mirofishAgentPersonasGraph, mirofishAgentPersonasDual, mirofishSimulationSetup, mirofishSimulationRunning, mirofishFinalReport],
         source_code_link: "https://github.com/0xrphl/mirofish-neo4j-fork",
+      },
+      {
+        name: "3D Agora Lab — Tienda E-commerce",
+        description: "Tienda e-commerce SPA full-stack para 3D Agora Lab construida con React, Vite y Tailwind CSS. Incluye autenticación Google OAuth vía Supabase, catálogo de productos con filtrado por categorías, carrito de compras con totales en tiempo real, integración de pago con Mercado Pago, historial de pedidos y diseño responsivo mobile-first. Alojada en Hostinger con configuración DNS personalizada.",
+        tags: [
+          { name: "React", color: "blue-text-gradient" },
+          { name: "Vite", color: "purple-text-gradient" },
+          { name: "Supabase", color: "green-text-gradient" },
+          { name: "Google OAuth", color: "red-text-gradient" },
+          { name: "Mercado Pago", color: "blue-text-gradient" },
+          { name: "Tailwind CSS", color: "pink-text-gradient" },
+          { name: "Hostinger", color: "purple-text-gradient" },
+          { name: "E-commerce", color: "orange-text-gradient" },
+        ],
+        image: [agoraMain, agoraAccessories, agoraBeauty, agoraOauth],
+        source_code_link: "https://github.com/0xrphl/Data-Analyst-Portfolio",
+        live_demo_link: "/store",
+        live_demo_label: "🛒 Visitar Tienda",
+        live_demo_style: { background: 'linear-gradient(90deg, #6366F1 0%, #8B5CF6 50%, #A855F7 100%)' },
       },
       {
         name: "Base de Conocimiento USCIS",
@@ -2236,13 +2299,13 @@ import {
       },
       {
         name: "Portafolio de Analista de Datos",
-        description: "Creado con React-Three-Fiber y Tailwind CSS, presenta una exhibición inmersiva de mis habilidades SQL, Python, Tableau y Excel. Su plataforma interactiva y diseño responsivo crea una plataforma visualmente atractiva para explorar mis diversos proyectos de análisis de datos.",
+        description: "Creado con React, Three.js (React-Three-Fiber), Vite y Tailwind CSS, este portafolio presenta elementos 3D interactivos, soporte multilenguaje y diseño responsivo. Muestra aplicaciones web full-stack, proyectos de IA/ML, sistemas IoT, tiendas e-commerce y analítica de datos en una experiencia inmersiva.",
         tags: [
-          { name: "react", color: "blue-text-gradient" },
-          { name: "ThreeJS", color: "green-text-gradient" },
-          { name: "tailwind", color: "pink-text-gradient" },
-          { name: "HTML", color: "orange-text-gradient" },
-          { name: "CSS", color: "blue-text-gradient" },
+          { name: "React", color: "blue-text-gradient" },
+          { name: "Three.js", color: "green-text-gradient" },
+          { name: "Vite", color: "purple-text-gradient" },
+          { name: "Tailwind CSS", color: "pink-text-gradient" },
+          { name: "JavaScript", color: "yellow-text-gradient" },
         ],
         image: carrent,
         source_code_link: "https://github.com/0xrphl/Data-Analyst-Portfolio",

@@ -180,13 +180,25 @@ const ProjectCard = ({
           </div>
 
           {live_demo_link && (
-            <Link
-              to={live_demo_link}
-              className='mt-4 inline-flex items-center justify-center gap-2 w-full py-2.5 rounded-xl font-semibold text-[13px] sm:text-[14px] text-white transition-all duration-300 hover:scale-[1.03] hover:shadow-lg active:scale-[0.98]'
-              style={live_demo_style || { background: 'linear-gradient(90deg, #FFA500 0%, #FF7A00 50%, #FFD700 100%)' }}
-            >
-              {live_demo_label || '⚡ Live 3D Dashboard'}
-            </Link>
+            live_demo_link.startsWith('http') ? (
+              <a
+                href={live_demo_link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className='mt-4 inline-flex items-center justify-center gap-2 w-full py-2.5 rounded-xl font-semibold text-[13px] sm:text-[14px] text-white transition-all duration-300 hover:scale-[1.03] hover:shadow-lg active:scale-[0.98]'
+                style={live_demo_style || { background: 'linear-gradient(90deg, #FFA500 0%, #FF7A00 50%, #FFD700 100%)' }}
+              >
+                {live_demo_label || '⚡ Live 3D Dashboard'}
+              </a>
+            ) : (
+              <Link
+                to={live_demo_link}
+                className='mt-4 inline-flex items-center justify-center gap-2 w-full py-2.5 rounded-xl font-semibold text-[13px] sm:text-[14px] text-white transition-all duration-300 hover:scale-[1.03] hover:shadow-lg active:scale-[0.98]'
+                style={live_demo_style || { background: 'linear-gradient(90deg, #FFA500 0%, #FF7A00 50%, #FFD700 100%)' }}
+              >
+                {live_demo_label || '⚡ Live 3D Dashboard'}
+              </Link>
+            )
           )}
 
           <div className='mt-4 flex flex-wrap gap-2'>

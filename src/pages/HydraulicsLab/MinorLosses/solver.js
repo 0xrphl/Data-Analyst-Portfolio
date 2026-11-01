@@ -5,7 +5,7 @@
 
 const g = 9.81
 
-const IMG = '/college/hydraulics-lab/cycle1/imgs/'
+const IMG = '/college/hydraulics-lab-assets/cycle1/imgs/'
 
 export const FITTINGS = {
   '90° elbow (standard)':   { K: 0.90, color: '#e91e63', img: IMG + '90-elbow-standard.png' },

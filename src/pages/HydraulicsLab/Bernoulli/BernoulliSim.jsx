@@ -1,6 +1,7 @@
 import React, { useMemo, useState, useCallback, useEffect } from 'react'
 import { useControls, folder } from 'leva'
 import BernoulliScene from './BernoulliScene.jsx'
+import PitotTooltip from './PitotTooltip.jsx'
 import DerivationPanel from '../DerivationPanel.jsx'
 import DataTable from '../DataTable.jsx'
 import ColorLegend from '../ColorLegend.jsx'
@@ -8,6 +9,7 @@ import { getDerivation } from './derivation.js'
 import {
   venturiGeometryFromAreas,
   solveBernoulli,
+  solvePitotAtPosition,
   computeVenturiTheoreticalFlow,
   FLUIDS,
   DEFAULT_AREAS_MM2,
@@ -188,6 +190,17 @@ export default function BernoulliSim() {
     colorMode, showIso, isoLevels, particleCount,
   } = controls
 
+  const [pitotCustomXNorm, setPitotCustomXNorm] = useState(null)
+  const [cutawayMode, setCutawayMode] = useState(true)
+  const [showStreamlines, setShowStreamlines] = useState(true)
+  const [tooltipHoverData, setTooltipHoverData] = useState(null)
+  const [tooltipPinned, setTooltipPinned] = useState(false)
+  const [tooltipPos, setTooltipPos] = useState({ x: 350, y: 150 })
+
+  useEffect(() => {
+    setPitotCustomXNorm(null)
+  }, [pitotSection])
+
   const parsedPitot = parseInt(pitotSection.replace('S', ''), 10)
   const pitotTapIdx = Number.isNaN(parsedPitot) ? 3 : parsedPitot
   const areas_mm2 = useMemo(() => [A0, A1, A2, A3, A4, A5, A6], [A0, A1, A2, A3, A4, A5, A6])
@@ -213,11 +226,64 @@ export default function BernoulliSim() {
     [Q_m3s, taps, rho, mu, alpha, h0_mm, pitotTapIdx, useLosses],
   )
 
+  const activeXNorm = useMemo(() => {
+    if (pitotCustomXNorm != null) return pitotCustomXNorm
+    return tapResults[pitotTapIdx]?.xNorm ?? 0.56
+  }, [pitotCustomXNorm, tapResults, pitotTapIdx])
+
+  const tapPitot = useMemo(
+    () =>
+      solvePitotAtPosition({
+        xNorm: activeXNorm,
+        tapResults,
+        Q: Q_m3s,
+        rho,
+        mu,
+        alpha,
+        Ltotal,
+      }) || tapResults[pitotTapIdx] || tapResults[3] || {},
+    [activeXNorm, tapResults, Q_m3s, rho, mu, alpha, Ltotal, pitotTapIdx],
+  )
+
+  const effectivePitotIdx = tapPitot.index ?? pitotTapIdx
+
+  const tapResultsForScene = useMemo(
+    () =>
+      tapResults.map((t, i) => ({
+        ...t,
+        isPitotLocation: i === effectivePitotIdx,
+      })),
+    [tapResults, effectivePitotIdx],
+  )
+
+  const handleSelectPosition = useCallback((xNorm) => {
+    setPitotCustomXNorm(Math.max(0.0, Math.min(1.0, xNorm)))
+  }, [])
+
+  const handlePitotHover = useCallback((data, pos) => {
+    setTooltipHoverData(data)
+    if (!tooltipPinned && pos) {
+      setTooltipPos(pos)
+    }
+  }, [tooltipPinned])
+
+  const handlePitotLeave = useCallback(() => {
+    if (!tooltipPinned) {
+      setTooltipHoverData(null)
+    }
+  }, [tooltipPinned])
+
+  const handlePitotClick = useCallback((data, pos) => {
+    if (pos) setTooltipPos(pos)
+    setTooltipHoverData(data)
+    setTooltipPinned(prev => !prev)
+  }, [])
+
   const venturiData = useMemo(() => {
     const t0 = tapResults[0]
-    const tp = tapResults[pitotTapIdx] || tapResults[3]
+    const tp = tapPitot || tapResults[pitotTapIdx] || tapResults[3]
     return computeVenturiTheoreticalFlow(t0, tp, Q_m3s)
-  }, [tapResults, pitotTapIdx, Q_m3s])
+  }, [tapResults, tapPitot, pitotTapIdx, Q_m3s])
 
   const sections = useMemo(() => {
     return getDerivation({
@@ -225,10 +291,10 @@ export default function BernoulliSim() {
       Q: Q_m3s,
       rho,
       alpha,
-      pitotTapIndex: pitotTapIdx,
+      pitotTapIndex: effectivePitotIdx,
       venturiData,
     })
-  }, [tapResults, Q_m3s, rho, alpha, pitotTapIdx, venturiData])
+  }, [tapResults, Q_m3s, rho, alpha, effectivePitotIdx, venturiData])
 
   const [measRows, setMeasRows] = useState(() =>
     Array.from({ length: 7 }, (_, i) => ({
@@ -275,7 +341,6 @@ export default function BernoulliSim() {
 
   const tap0 = tapResults[0] || {}
   const tap1 = tapResults[1] || {}
-  const tapPitot = tapResults[pitotTapIdx] || tapResults[3] || {}
   return (
     <div style={S.app}>
       {/* Botón flotante compacto para abrir/cerrar barra lateral */}
@@ -327,9 +392,104 @@ export default function BernoulliSim() {
                 })()}
 
                 <div style={S.sep} />
-                <div style={S.hudTitle}>
-                  <span>💡</span>
-                  <span>Sonda Pitot ({pitotSection})</span>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 4 }}>
+                  <div style={S.hudTitle}>
+                    <span>💡</span>
+                    <span>Sonda Pitot ({tapPitot.name || pitotSection})</span>
+                  </div>
+                  <button
+                    onClick={() => {
+                      setTooltipHoverData(tapPitot)
+                      setTooltipPinned(prev => !prev)
+                    }}
+                    style={{
+                      background: tooltipPinned ? '#ff9100' : 'rgba(255,145,0,0.16)',
+                      color: tooltipPinned ? '#0b0d1a' : '#ffb74d',
+                      border: '1px solid #ff9100',
+                      borderRadius: 5,
+                      padding: '2px 7px',
+                      fontSize: 10.5,
+                      fontWeight: 800,
+                      cursor: 'pointer',
+                    }}
+                  >
+                    {tooltipPinned ? '📌 Tooltip Activo' : '🔍 Ver Punta Pitot'}
+                  </button>
+                </div>
+
+                <div style={{ display: 'flex', gap: 5, marginBottom: 6 }}>
+                  <button
+                    onClick={() => setCutawayMode(prev => !prev)}
+                    style={{
+                      flex: 1,
+                      padding: '4px 6px',
+                      fontSize: 10.5,
+                      fontWeight: 700,
+                      borderRadius: 5,
+                      cursor: 'pointer',
+                      border: cutawayMode ? '1px solid #00e5ff' : '1px solid #334155',
+                      background: cutawayMode ? 'rgba(0,229,255,0.16)' : 'rgba(15,23,42,0.8)',
+                      color: cutawayMode ? '#84ffff' : '#94a3b8',
+                    }}
+                  >
+                    {cutawayMode ? '✂️ Tubería 1/2 (Modo Pitot)' : '🔵 Tubería Completa'}
+                  </button>
+                  <button
+                    onClick={() => setShowStreamlines(prev => !prev)}
+                    style={{
+                      padding: '4px 7px',
+                      fontSize: 10.5,
+                      fontWeight: 700,
+                      borderRadius: 5,
+                      cursor: 'pointer',
+                      border: showStreamlines ? '1px solid #00e676' : '1px solid #334155',
+                      background: showStreamlines ? 'rgba(0,230,118,0.14)' : 'rgba(15,23,42,0.8)',
+                      color: showStreamlines ? '#69f0ae' : '#94a3b8',
+                    }}
+                    title="Mostrar/ocultar líneas de corriente alrededor de la punta Pitot"
+                  >
+                    🌊 Corrientes
+                  </button>
+                </div>
+
+                <div style={{ background: 'rgba(15,23,42,0.75)', border: '1px solid #1e293b', borderRadius: 6, padding: '5px 8px', marginBottom: 6 }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 10.5, color: '#94a3b8', marginBottom: 2 }}>
+                    <span>Posición axial Pitot (o clic en tubo 3D)</span>
+                    <span style={{ color: '#00e676', fontWeight: 700 }}>{((activeXNorm || 0) * Ltotal * 1000).toFixed(0)} mm</span>
+                  </div>
+                  <input
+                    type="range"
+                    min={0.02}
+                    max={0.98}
+                    step={0.005}
+                    value={activeXNorm}
+                    onChange={(e) => setPitotCustomXNorm(parseFloat(e.target.value))}
+                    style={{ width: '100%', accentColor: '#00e676', cursor: 'pointer', height: 5 }}
+                  />
+                  <div style={{ display: 'flex', justifyContent: 'space-between', gap: 3, marginTop: 4 }}>
+                    {tapResults.map((t) => {
+                      const isSel = Math.abs(activeXNorm - t.xNorm) < 0.01
+                      return (
+                        <button
+                          key={t.name}
+                          onClick={() => setPitotCustomXNorm(t.xNorm)}
+                          style={{
+                            flex: 1,
+                            padding: '2px 0',
+                            fontSize: 10,
+                            fontWeight: 700,
+                            borderRadius: 4,
+                            cursor: 'pointer',
+                            border: isSel ? '1px solid #00e676' : '1px solid #26324d',
+                            background: isSel ? 'rgba(0,230,118,0.22)' : 'rgba(11,13,26,0.9)',
+                            color: isSel ? '#00e676' : '#9aa2c0',
+                          }}
+                        >
+                          {t.name}
+                        </button>
+                      )
+                    })}
+                  </div>
                 </div>
                 <div>hTotal** (Estancamiento) = <span style={S.green}>{(tapPitot.stagnationHead_mm || 0).toFixed(1)} mm</span></div>
                 <div>h estático (Pared) = <span style={S.val}>{(tapPitot.pressureHead_mm || 0).toFixed(1)} mm</span></div>
@@ -357,13 +517,31 @@ export default function BernoulliSim() {
 
         {/* Escena 3D WebGL */}
         <BernoulliScene
-          tapResults={tapResults}
+          tapResults={tapResultsForScene}
           Ltotal={Ltotal}
           colorMode={colorMode}
           showIso={showIso}
           isoLevels={isoLevels}
           particleCount={particleCount}
-          pitotTapIdx={pitotTapIdx}
+          pitotTapIdx={effectivePitotIdx}
+          pitotData={tapPitot}
+          cutawayMode={cutawayMode}
+          showStreamlines={showStreamlines}
+          onPitotHover={handlePitotHover}
+          onPitotLeave={handlePitotLeave}
+          onPitotClick={handlePitotClick}
+          onSelectPosition={handleSelectPosition}
+        />
+
+        {/* Tooltip SOTA de la Punta Encogida y Presión de Estancamiento */}
+        <PitotTooltip
+          pitotData={tooltipPinned ? tapPitot : (tooltipHoverData ? tapPitot : null)}
+          mousePos={tooltipPos}
+          pinned={tooltipPinned}
+          onClose={() => {
+            setTooltipPinned(false)
+            setTooltipHoverData(null)
+          }}
         />
 
         {/* Leyenda de colores */}

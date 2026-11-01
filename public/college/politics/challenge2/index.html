@@ -1,0 +1,1615 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Radiografía Constitucional | Sentencia T-375 de 2025 — UTP Reto 2</title>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            amethyst: { DEFAULT: '#A855F7', light: '#D8B4FE', dark: '#7E22CE', glow: 'rgba(168, 85, 247, 0.55)' },
+            emerald: { DEFAULT: '#10B981', light: '#6EE7B7', dark: '#047857', glow: 'rgba(16, 185, 129, 0.55)' },
+            cyan: { DEFAULT: '#06B6D4', light: '#67E8F9', dark: '#0E7490' },
+            gold: { DEFAULT: '#F59E0B', light: '#FDE68A', dark: '#B45309' }
+          }
+        }
+      }
+    }
+  </script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    body { font-family: 'Inter', sans-serif; background-color: #030712; color: #F8FAFC; overflow: hidden; user-select: none; }
+    .serif-title { font-family: 'Cinzel', serif; }
+    .mono-num { font-family: 'JetBrains Mono', monospace; }
+    ::-webkit-scrollbar { width: 5px; height: 5px; }
+    ::-webkit-scrollbar-track { background: rgba(3, 7, 18, 0.5); }
+    ::-webkit-scrollbar-thumb { background: rgba(16, 185, 129, 0.4); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #10B981; }
+
+    .slide-panel { display: none; opacity: 0; transform: translateY(14px) scale(0.99); transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1); background: transparent !important; }
+    .slide-panel.active { display: flex; opacity: 1; transform: translateY(0) scale(1); }
+    .stage-transparent { background: transparent !important; border: none !important; box-shadow: none !important; }
+    .glass-ultra { background: rgba(3, 7, 18, 0.55); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid rgba(16, 185, 129, 0.25); box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.65); }
+    .glass-box { background: rgba(8, 15, 30, 0.5); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(168, 85, 247, 0.25); }
+    .glass-top { background: rgba(3, 7, 18, 0.78); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid rgba(16, 185, 129, 0.3); }
+
+    .slide-panel h1, .slide-panel h2, .slide-panel h3, .slide-panel h4,
+    .slide-panel p, .slide-panel blockquote, .slide-panel li, .slide-panel td,
+    .slide-panel th, .slide-panel strong, .slide-panel b, .slide-panel em, .slide-panel div {
+      color: #FFFFFF; -webkit-text-fill-color: #FFFFFF; -webkit-text-stroke: 1.15px #000000; paint-order: stroke fill; text-shadow: 0 2px 6px #000000, 0 0 14px #000000, 0 0 26px rgba(0, 0, 0, 0.95);
+    }
+    .slide-panel span:not(.emoji-icon):not(.no-stroke) { -webkit-text-stroke: 0.95px #000000; paint-order: stroke fill; text-shadow: 0 2px 4px #000000, 0 0 10px #000000; }
+    .slide-panel h1, .slide-panel h2 { -webkit-text-stroke: 1.85px #000000; text-shadow: 0 3px 8px #000000, 0 0 16px #000000, 0 0 32px #000000, 0 0 50px rgba(0, 0, 0, 0.95); }
+    .slide-panel h3, .slide-panel h4 { -webkit-text-stroke: 1.35px #000000; }
+
+    .slide-panel .text-emerald-300, .slide-panel .text-emerald-400, .slide-panel .glow-emerald-text {
+      color: #34D399 !important; -webkit-text-fill-color: #34D399 !important; -webkit-text-stroke: 1.25px #000000; text-shadow: 0 0 14px rgba(16, 185, 129, 0.85), 0 2px 6px #000000;
+    }
+    .slide-panel .text-purple-300, .slide-panel .text-purple-400, .slide-panel .text-amethyst-300, .slide-panel .glow-purple-text {
+      color: #C084FC !important; -webkit-text-fill-color: #C084FC !important; -webkit-text-stroke: 1.25px #000000; text-shadow: 0 0 14px rgba(168, 85, 247, 0.85), 0 2px 6px #000000;
+    }
+    .slide-panel .text-cyan-300, .slide-panel .text-cyan-400 {
+      color: #38BDF8 !important; -webkit-text-fill-color: #38BDF8 !important; -webkit-text-stroke: 1.25px #000000; text-shadow: 0 0 14px rgba(6, 182, 212, 0.85), 0 2px 6px #000000;
+    }
+    .slide-panel .text-slate-100, .slide-panel .text-slate-200, .slide-panel .text-slate-300, .slide-panel .text-white { color: #FFFFFF !important; -webkit-text-fill-color: #FFFFFF !important; }
+    .slide-panel svg, .slide-panel canvas, .slide-panel .emoji-icon, .slide-panel .no-stroke { -webkit-text-stroke: 0 !important; -webkit-text-fill-color: initial !important; }
+    .text-readable { text-shadow: 0 2px 10px rgba(0, 0, 0, 0.95), 0 0 20px rgba(0, 0, 0, 0.8); }
+    .glow-emerald-text { text-shadow: 0 0 16px rgba(16, 185, 129, 0.7), 0 2px 8px rgba(0,0,0,0.9); }
+    .glow-purple-text { text-shadow: 0 0 16px rgba(168, 85, 247, 0.7), 0 2px 8px rgba(0,0,0,0.9); }
+
+    /* Free 3D Mode Transitions */
+    .deck-container-transition { transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1); }
+    body.mode-free3d-active #presentation-main-container { display: none !important; opacity: 0; pointer-events: none; }
+    body.mode-free3d-active #scene-vignette { pointer-events: none !important; }
+    body.mode-free3d-active #canvas-container { z-index: 25 !important; pointer-events: auto !important; }
+    body.mode-free3d-active #canvas-container canvas { pointer-events: auto !important; touch-action: none; }
+    body.mode-free3d-active #free3d-hud { display: flex !important; opacity: 1 !important; transform: translate(-50%, 0) !important; }
+  </style>
+</head>
+<body class="relative w-screen h-screen overflow-hidden bg-[#030712]">
+
+
+  <!-- THREE.JS FULLSCREEN 3D BACKGROUND (PATIO MEMORIAL) -->
+  <div id="canvas-container" class="fixed inset-0 z-0 pointer-events-auto cursor-grab active:cursor-grabbing"></div>
+  <div id="scene-vignette" class="fixed inset-0 z-[1] bg-gradient-to-t from-[#030712]/75 via-transparent to-[#030712]/45 pointer-events-none"></div>
+
+  <!-- TOP EXECUTIVE HUD (EMERALD & AMETHYST) -->
+  <header class="relative z-30 w-full glass-top px-4 sm:px-6 py-2.5 flex items-center justify-between gap-4">
+    <div class="flex items-center space-x-3">
+      <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 via-teal-500 to-purple-600 flex items-center justify-center font-bold text-white text-xl shadow-lg border border-emerald-400/50">
+        🕊️
+      </div>
+      <div>
+        <div class="flex items-center space-x-2">
+          <span class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 text-readable">UTP • CÁTEDRA CONSTITUCIÓN POLÍTICA</span>
+          <span class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-purple-500/20 text-purple-300 border border-purple-500/40 text-readable">RETO 2 (25%)</span>
+        </div>
+        <h1 class="serif-title text-sm sm:text-base lg:text-lg font-bold text-white tracking-wide text-readable">
+          PATIO MEMORIAL: <span class="text-emerald-300 glow-emerald-text">«CUANDO LA MEMORIA INCOMODA» (T-375/2025)</span>
+        </h1>
+      </div>
+    </div>
+
+    <!-- Center Mode Switcher & Progress -->
+    <div class="flex items-center space-x-2 sm:space-x-3">
+      <!-- DUAL MODE SWITCH BUTTONS -->
+      <div class="flex items-center p-0.5 bg-black/70 rounded-xl border border-emerald-500/40 shadow-inner">
+        <button id="btn-mode-slides" onclick="setAppMode('slides')" class="px-2.5 sm:px-3 py-1 rounded-lg text-xs font-bold transition flex items-center space-x-1.5 bg-emerald-500 text-slate-950 shadow-md">
+          <span>📑</span>
+          <span>Diapositivas</span>
+        </button>
+        <button id="btn-mode-free3d" onclick="setAppMode('free3d')" class="px-2.5 sm:px-3 py-1 rounded-lg text-xs font-bold text-slate-300 hover:text-white transition flex items-center space-x-1.5 hover:bg-purple-500/25">
+          <span class="animate-pulse">🏛️</span>
+          <span>Templo de la Memoria y la Justicia</span>
+        </button>
+      </div>
+
+      <div class="hidden md:flex flex-col items-center w-36 lg:w-48">
+        <div class="flex justify-between w-full text-[10px] text-slate-300 mb-0.5 text-readable font-medium">
+          <span id="nav-slide-title" class="truncate font-semibold text-emerald-300">01. Memoria Incomoda</span>
+          <span id="nav-slide-num" class="mono-num ml-1 font-bold bg-emerald-500/20 text-emerald-300 px-1.5 py-0.2 rounded border border-emerald-500/40">01 / 09</span>
+        </div>
+        <div class="w-full h-1.5 bg-black/60 rounded-full overflow-hidden border border-emerald-500/30">
+          <div id="nav-progress-bar" class="h-full bg-gradient-to-r from-emerald-500 via-teal-400 to-purple-500 transition-all duration-300 w-[11.1%] shadow-[0_0_12px_#10B981]"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Actions -->
+    <div class="flex items-center space-x-2 sm:space-x-3">
+      <button onclick="toggleFullScreen()" class="p-2 rounded-xl bg-black/40 hover:bg-black/70 text-slate-200 border border-emerald-500/30 text-xs transition shadow-md" title="Pantalla Completa (F11)">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-5h-4m4 0v4m0 0l-5-5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/></svg>
+      </button>
+
+      <a href="https://docs.google.com/document/d/11elmnux03rMoMKqZgL-9Z6KzU2FkQj-7/edit?usp=sharing&ouid=102220368577968794134&rtpof=true&sd=true" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 text-slate-950 text-xs font-black transition shadow-lg border border-emerald-300/50" title="Abrir Radiografía Completa / Dossier en Google Docs">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+        <span class="hidden sm:inline">Dossier Word (.DOCX)</span>
+        <span class="sm:hidden">DOCX</span>
+      </a>
+
+      <a href="/college/politics/challenge1" class="p-2 text-slate-300 hover:text-white rounded-xl bg-black/40 hover:bg-black/70 border border-purple-500/30 transition shadow-md" title="Ir al Reto 1">
+        <span class="text-xs font-bold text-purple-300">R1</span>
+      </a>
+
+      <a href="/" class="p-2 text-slate-300 hover:text-white rounded-xl bg-black/40 hover:bg-black/70 border border-white/20 transition shadow-md" title="Volver al Portafolio">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </a>
+    </div>
+  </header>
+
+  <!-- PRESENTATION CONTAINER -->
+  <div id="presentation-main-container" class="relative z-20 flex-1 flex w-full h-[calc(100vh-58px)] overflow-hidden pointer-events-none p-3 sm:p-4 gap-4 deck-container-transition">
+
+    <!-- LEFT SIDEBAR: SLIDE DECK DOCK -->
+    <aside class="w-56 sm:w-64 h-full glass-ultra rounded-2xl flex flex-col pointer-events-auto shadow-2xl overflow-hidden flex-shrink-0">
+      <div class="p-3 border-b border-emerald-500/20 flex items-center justify-between bg-black/40">
+        <div class="flex items-center space-x-2">
+          <span class="text-sm">🌸</span>
+          <span class="text-xs font-bold uppercase tracking-wider text-emerald-300 text-readable">Diapositivas</span>
+        </div>
+        <span class="text-[10px] font-mono bg-purple-500/25 text-purple-200 px-2 py-0.5 rounded font-bold border border-purple-500/40">9 Hitos</span>
+      </div>
+
+      <div class="flex-1 overflow-y-auto p-2 space-y-1.5 scrollbar-thin" id="deck-items-container">
+      </div>
+
+      <div class="p-2.5 border-t border-emerald-500/20 bg-black/50 text-[10px] text-slate-300 flex items-center justify-between text-readable">
+        <span>Navega con flechas</span>
+        <div class="flex space-x-1">
+          <kbd class="px-1.5 py-0.5 bg-black/70 rounded text-slate-200 font-mono text-[10px] border border-emerald-500/30">←</kbd>
+          <kbd class="px-1.5 py-0.5 bg-black/70 rounded text-slate-200 font-mono text-[10px] border border-emerald-500/30">→</kbd>
+        </div>
+      </div>
+    </aside>
+
+    <!-- CENTER STAGE -->
+    <section class="flex-1 h-full flex flex-col pointer-events-auto min-w-0">
+      <div class="flex-1 stage-transparent p-3 sm:p-6 flex flex-col justify-center items-center overflow-y-auto relative w-full">
+
+        <!-- SLIDE 0: FORMULACIÓN DEL CASO -->
+        <div id="slide-0" class="slide-panel active flex-col justify-center items-center my-auto w-full max-w-5xl mx-auto space-y-6 text-center">
+          <div class="space-y-4 max-w-4xl mx-auto">
+            <div class="flex items-center justify-center space-x-3">
+              <span class="text-xs uppercase font-mono px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/50 font-bold tracking-wider">DIAPOSITIVA 01 • RADIOGRAFÍA CONSTITUCIONAL</span>
+              <span class="text-xs text-slate-200 font-semibold">Universidad Tecnológica de Pereira • Reto 2</span>
+            </div>
+            <h2 class="serif-title text-3xl sm:text-4xl lg:text-5xl font-black text-white leading-tight">
+              «Cuando la memoria incomoda»: <span class="text-emerald-300 glow-emerald-text">Sentencia T-375 de 2025</span>
+            </h2>
+            <div class="p-5 sm:p-6 text-base sm:text-lg lg:text-xl text-slate-100 font-medium leading-relaxed italic border-y-2 border-purple-500/80 my-3 max-w-3xl mx-auto">
+              "En una democracia fundada en la dignidad humana y la paz, la memoria histórica de las víctimas no es un estorbo que pueda ser arrojado a la basura. Es la columna ética que sostiene la Constitución contra el olvido y la tiranía."
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2 w-full text-center">
+            <div class="p-3.5 border border-emerald-500/30 rounded-2xl bg-emerald-950/20">
+              <div class="emoji-icon text-3xl mb-2 text-emerald-400">🕊️</div>
+              <h4 class="text-sm font-bold text-white uppercase tracking-wide">1. Dignidad Humana</h4>
+              <p class="text-xs text-slate-200 mt-1.5 leading-relaxed">Prohibición de cosificación y respeto al dolor ajeno. El duelo público de MAFAPO es un derecho inalienable.</p>
+            </div>
+            <div class="p-3.5 border border-purple-500/30 rounded-2xl bg-purple-950/20">
+              <div class="emoji-icon text-3xl mb-2 text-purple-400">⚖️</div>
+              <h4 class="text-sm font-bold text-white uppercase tracking-wide">2. Límite a la Autoridad</h4>
+              <p class="text-xs text-slate-200 mt-1.5 leading-relaxed">Principio de legalidad (Arts. 6 y 121 C.P.). La investidura congresal no ampara vías de hecho ni violencia simbólica.</p>
+            </div>
+            <div class="p-3.5 border border-cyan-500/30 rounded-2xl bg-emerald-950/20">
+              <div class="emoji-icon text-3xl mb-2 text-cyan-400">🌸</div>
+              <h4 class="text-sm font-bold text-white uppercase tracking-wide">3. Arte y Verdad</h4>
+              <p class="text-xs text-slate-200 mt-1.5 leading-relaxed">Las expresiones artísticas de las víctimas como vehículos legítimos de verdad extrajudicial en justicia transicional.</p>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-center space-x-3 pt-2">
+            <button onclick="goToSlide(1)" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 text-slate-950 font-black text-xs transition shadow-lg border border-emerald-300">
+              Explorar Radiografía del Caso →
+            </button>
+            <button onclick="setAppMode('free3d')" class="px-5 py-2.5 rounded-xl bg-black/70 hover:bg-black/90 text-purple-300 font-bold text-xs transition border border-purple-500/40 flex items-center space-x-2">
+              <span class="animate-pulse">🏛️</span>
+              <span>Templo de la Memoria y la Justicia</span>
+            </button>
+          </div>
+        </div>
+    
+        <!-- SLIDE 1: HECHOS DEL CASO CON FOTOS DOCUMENTALES -->
+        <div id="slide-1" class="slide-panel flex-col justify-center items-center my-auto w-full max-w-5xl mx-auto space-y-4 text-center">
+          <div class="space-y-2">
+            <div class="flex items-center justify-center space-x-3">
+              <span class="text-xs uppercase font-mono px-3 py-1 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/50 font-bold">DIAPOSITIVA 02 • RADIOGRAFÍA FÁCTICA</span>
+              <span class="text-xs text-slate-200 font-semibold">Patio Rafael Núñez • Congreso de la República (Nov 2024)</span>
+            </div>
+            <h2 class="serif-title text-2xl sm:text-3xl font-black text-white">
+              El Agravio Simbólico: <span class="text-purple-300 glow-purple-text">«Mujeres con las botas bien puestas»</span>
+            </h2>
+            <p class="text-xs sm:text-sm text-slate-200 leading-relaxed max-w-3xl mx-auto">
+              La Asociación de Madres de Falsos Positivos (<strong class="text-emerald-300">MAFAPO</strong>) y la Fundación Rinconesarte instalaron decenas de botas intervenidas artísticamente en memoria de las 6.402 víctimas de ejecuciones extrajudiciales (Auto 033/2021 de la JEP).
+            </p>
+          </div>
+
+          <!-- DOCUMENTARY PHOTO (LARGE) + NATIVE INTERACTIVE TIMELINE CHART -->
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-3.5 w-full items-stretch text-left">
+            <!-- Left: Large High-Impact MAFAPO Photo Card -->
+            <div class="lg:col-span-5 flex flex-col justify-between relative group rounded-2xl overflow-hidden border-2 border-purple-500/50 bg-black/90 shadow-2xl p-1">
+              <div class="relative w-full h-64 sm:h-72 lg:h-full min-h-[280px] rounded-xl overflow-hidden cursor-pointer" onclick="openLightbox('./fig3_exposicion_botas_mafapo.jpg', 'Exposición Artística MAFAPO: «Mujeres con las botas bien puestas» — Patio Rafael Núñez del Congreso de la República')">
+                <img src="./fig3_exposicion_botas_mafapo.jpg" alt="Exposición MAFAPO en el Congreso" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-95 group-hover:opacity-100" />
+                <div class="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent"></div>
+                <div class="absolute top-2.5 left-2.5 flex items-center space-x-1.5 px-2.5 py-1 rounded-full bg-black/80 border border-purple-400/50 backdrop-blur-md">
+                  <span class="w-2 h-2 rounded-full bg-purple-400 animate-ping"></span>
+                  <span class="text-[10px] font-mono text-purple-200 font-bold tracking-wider uppercase">Evidencia Fotográfica</span>
+                </div>
+                <div class="absolute bottom-0 inset-x-0 p-3 space-y-1">
+                  <p class="text-xs sm:text-sm font-bold text-white leading-tight">Muestra Artística MAFAPO en el Capitolio</p>
+                  <p class="text-[11px] text-slate-300 leading-snug">Botas intervenidas en homenaje a las 6.402 víctimas de ejecuciones extrajudiciales.</p>
+                  <div class="flex items-center justify-between pt-1">
+                    <span class="text-[10px] font-semibold text-emerald-300 flex items-center space-x-1">
+                      <span>🔍</span><span>Clic para ampliar imagen HD</span>
+                    </span>
+                    <span class="text-[9px] font-mono text-purple-300 bg-purple-950/80 px-2 py-0.5 rounded border border-purple-500/40">Auto 033 JEP</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: Interactive Judicial Timeline Diagram (Chart) -->
+            <div class="lg:col-span-7 flex flex-col justify-between p-3.5 rounded-2xl border-2 border-emerald-500/40 bg-slate-950/80 backdrop-blur-md shadow-2xl space-y-2">
+              <div class="flex items-center justify-between border-b border-emerald-500/30 pb-1.5">
+                <div class="flex items-center space-x-2">
+                  <span class="text-emerald-400 text-sm">⚖️</span>
+                  <span class="text-[11px] font-bold uppercase tracking-wider text-emerald-300 font-mono">Cronología Procesal T-375/2025</span>
+                </div>
+                <span class="text-[9px] text-slate-300 bg-emerald-950/70 border border-emerald-500/30 px-2 py-0.5 rounded-full">Diagrama de Hitos</span>
+              </div>
+              <div class="relative pl-4 space-y-1.5 border-l-2 border-emerald-500/40 my-1">
+                <!-- Step 1 -->
+                <div class="relative group cursor-pointer transition hover:translate-x-1">
+                  <span class="absolute -left-[23px] top-1 w-3 h-3 rounded-full bg-red-500 border-2 border-black ring-2 ring-red-500/50 shadow-md"></span>
+                  <div class="flex items-center justify-between">
+                    <span class="text-[10px] font-mono font-bold text-red-300">06 Nov 2024 • Patio Núñez</span>
+                    <span class="text-[8.5px] font-semibold bg-red-950/80 text-red-300 px-1.5 py-0.2 rounded border border-red-500/40">Vía de Hecho</span>
+                  </div>
+                  <p class="text-[11px] font-bold text-white group-hover:text-red-300 transition">Sustracción forzosa de 6 botas y desecho en vertedero</p>
+                  <p class="text-[10px] text-slate-300 leading-snug">El congresista retiró y arrojó las obras al basurero, publicando videos estigmatizantes en redes.</p>
+                </div>
+                <!-- Step 2 -->
+                <div class="relative group cursor-pointer transition hover:translate-x-1">
+                  <span class="absolute -left-[23px] top-1 w-3 h-3 rounded-full bg-amber-400 border-2 border-black ring-2 ring-amber-400/50 shadow-md"></span>
+                  <div class="flex items-center justify-between">
+                    <span class="text-[10px] font-mono font-bold text-amber-300">Nov 2024 • Vía Constitucional</span>
+                    <span class="text-[8.5px] font-semibold bg-amber-950/80 text-amber-300 px-1.5 py-0.2 rounded border border-amber-500/40">Acción de Tutela</span>
+                  </div>
+                  <p class="text-[11px] font-bold text-white group-hover:text-amber-300 transition">MAFAPO & Rinconesarte invocan protección</p>
+                  <p class="text-[10px] text-slate-300 leading-snug">Amparo por vulneración a dignidad humana, memoria histórica y no discriminación.</p>
+                </div>
+                <!-- Step 3 -->
+                <div class="relative group cursor-pointer transition hover:translate-x-1">
+                  <span class="absolute -left-[23px] top-1 w-3 h-3 rounded-full bg-slate-400 border-2 border-black ring-2 ring-slate-400/50 shadow-md"></span>
+                  <div class="flex items-center justify-between">
+                    <span class="text-[10px] font-mono font-bold text-slate-300">03 Dic 2024 • Instancia</span>
+                    <span class="text-[8.5px] font-semibold bg-slate-900 text-slate-300 px-1.5 py-0.2 rounded border border-slate-600/40">Fallo Negativo</span>
+                  </div>
+                  <p class="text-[11px] font-bold text-white group-hover:text-slate-200 transition">Juzgados niegan amparo por inmunidad</p>
+                  <p class="text-[10px] text-slate-300 leading-snug">Argumentaron erróneamente que las vías de hecho estaban cubiertas por fuero congresal.</p>
+                </div>
+                <!-- Step 4 -->
+                <div class="relative group cursor-pointer transition hover:translate-x-1">
+                  <span class="absolute -left-[23px] top-1 w-3 h-3 rounded-full bg-cyan-400 border-2 border-black ring-2 ring-cyan-400/50 shadow-md"></span>
+                  <div class="flex items-center justify-between">
+                    <span class="text-[10px] font-mono font-bold text-cyan-300">Ene–Feb 2025 • Corte Constitucional</span>
+                    <span class="text-[8.5px] font-semibold bg-cyan-950/80 text-cyan-300 px-1.5 py-0.2 rounded border border-cyan-500/40">Exp. T-10.809.821</span>
+                  </div>
+                  <p class="text-[11px] font-bold text-white group-hover:text-cyan-300 transition">Selección e insistencia para fallo de fondo</p>
+                  <p class="text-[10px] text-slate-300 leading-snug">Sala de Selección No. 1 asume el expediente bajo ponencia de la M.P. Paola Meneses.</p>
+                </div>
+                <!-- Step 5 -->
+                <div class="relative group cursor-pointer transition hover:translate-x-1">
+                  <span class="absolute -left-[23px] top-1 w-3 h-3 rounded-full bg-emerald-400 border-2 border-black ring-2 ring-emerald-400/50 shadow-md"></span>
+                  <div class="flex items-center justify-between">
+                    <span class="text-[10px] font-mono font-bold text-emerald-300">2025 • Sala Séptima de Revisión</span>
+                    <span class="text-[8.5px] font-semibold bg-emerald-950/80 text-emerald-300 px-1.5 py-0.2 rounded border border-emerald-500/40">Sentencia T-375/25</span>
+                  </div>
+                  <p class="text-[11px] font-bold text-white group-hover:text-emerald-300 transition">Revocatoria total & Amparo a la memoria</p>
+                  <p class="text-[10px] text-slate-300 leading-snug">La Corte fija doctrina: el arte memorial es verdad extrajudicial inviolable ante el poder.</p>
+                </div>
+                <!-- Step 6 -->
+                <div class="relative group cursor-pointer transition hover:translate-x-1">
+                  <span class="absolute -left-[23px] top-1 w-3 h-3 rounded-full bg-purple-400 border-2 border-black ring-2 ring-purple-400/50 shadow-md"></span>
+                  <div class="flex items-center justify-between">
+                    <span class="text-[10px] font-mono font-bold text-purple-300">2025–2026 • Fase de Cumplimiento</span>
+                    <span class="text-[8.5px] font-semibold bg-purple-950/80 text-purple-300 px-1.5 py-0.2 rounded border border-purple-500/40">Reparación Integral</span>
+                  </div>
+                  <p class="text-[11px] font-bold text-white group-hover:text-purple-300 transition">Órdenes de restitución, disculpa y desagravio</p>
+                  <p class="text-[10px] text-slate-300 leading-snug">Devolución de botas (10 d), disculpa en redes (6 m), mesa de diálogo y desagravio formal.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs sm:text-sm max-w-4xl mx-auto text-left">
+            <div class="p-3 border border-purple-500/30 rounded-xl bg-purple-950/20">
+              <span class="font-bold text-purple-300 text-xs block mb-0.5">Vía de Hecho en el Capitolio:</span>
+              <p class="text-slate-200 leading-relaxed text-[11px]">El Representante retiró por la fuerza 6 botas de caucho de las víctimas, las metió en bolsas negras de basura y las arrojó al vertedero.</p>
+            </div>
+            <div class="p-3 border border-emerald-500/30 rounded-xl bg-emerald-950/20">
+              <span class="font-bold text-emerald-300 text-xs block mb-0.5">Difusión y Hostigamiento en Redes:</span>
+              <p class="text-slate-200 leading-relaxed text-[11px]">Grabó y transmitió el acto en redes sociales afirmando que las botas «pertenecen al basurero», acusando a las víctimas de cobrar dinero ilícito.</p>
+            </div>
+          </div>
+
+          <div class="p-3.5 border-y border-emerald-500/40 text-xs sm:text-sm text-emerald-200 italic max-w-3xl mx-auto">
+            «El acto analizado reproduce patrones de intolerancia y exclusión incompatibles con un orden constitucional fundado en la dignidad humana». — Sala Séptima de Revisión.
+          </div>
+        </div>
+    
+        <!-- SLIDE 2: DIGNIDAD HUMANA -->
+        <div id="slide-2" class="slide-panel flex-col justify-center items-center my-auto w-full max-w-4xl mx-auto space-y-5 text-center">
+          <div class="space-y-3">
+            <div class="flex items-center justify-center space-x-3">
+              <span class="text-xs uppercase font-mono px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/50 font-bold">DIAPOSITIVA 03 • DOGMÁTICA CONSTITUCIONAL</span>
+              <span class="text-xs text-slate-200 font-semibold">Artículo 1 C.P. & Sentencia T-881 de 2002</span>
+            </div>
+            <h2 class="serif-title text-2xl sm:text-3xl lg:text-4xl font-black text-white">
+              Principio de Dignidad Humana: <span class="text-emerald-300 glow-emerald-text">Vivir sin Humillaciones</span>
+            </h2>
+            <p class="text-sm sm:text-base text-slate-200 leading-relaxed max-w-2xl mx-auto">
+              La dignidad humana es norma fundante y derecho subjetivo. Arrojar las botas memoriales al basurero violó la prohibición constitucional de cosificación del dolor.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 text-xs sm:text-sm max-w-4xl mx-auto text-center">
+            <div class="p-3 border border-emerald-500/30 rounded-xl bg-emerald-950/20">
+              <span class="font-bold text-emerald-300 block mb-1">1. No Cosificación</span>
+              <p class="text-slate-200 leading-relaxed">Tratar el recuerdo fúnebre como basura degrada a la propia persona a la condición de desecho material descartable.</p>
+            </div>
+            <div class="p-3 border border-purple-500/30 rounded-xl bg-purple-950/20">
+              <span class="font-bold text-purple-300 block mb-1">2. Dolor y Duelo</span>
+              <p class="text-slate-200 leading-relaxed">El sufrimiento filial de las víctimas goza de protección constitucional absoluta frente a burlas o estigmatizaciones.</p>
+            </div>
+            <div class="p-3 border border-cyan-500/30 rounded-xl bg-cyan-950/20">
+              <span class="font-bold text-cyan-300 block mb-1">3. Memoria Viva</span>
+              <p class="text-slate-200 leading-relaxed">La memoria activa es la prolongación moral de la dignidad de las víctimas; silenciarla es cometer una segunda muerte simbólica.</p>
+            </div>
+          </div>
+
+          <div class="p-3 text-xs sm:text-sm text-slate-200 border-t border-emerald-500/30 pt-3">
+            <strong class="text-emerald-400">Tesis de la Corte:</strong> La dignidad impide someter a las víctimas al escarnio público por parte de autoridades del Estado.
+          </div>
+        </div>
+    
+        <!-- SLIDE 3: PRINCIPIO DE LEGALIDAD & PALACIO DE JUSTICIA -->
+        <div id="slide-3" class="slide-panel flex-col justify-center items-center my-auto w-full max-w-5xl mx-auto space-y-4 text-center">
+          <div class="space-y-2">
+            <div class="flex items-center justify-center space-x-3">
+              <span class="text-xs uppercase font-mono px-3 py-1 rounded-full bg-purple-500/25 text-purple-300 border border-purple-500/50 font-bold">DIAPOSITIVA 04 • LÍMITES AL PODER PÚBLICO</span>
+              <span class="text-xs text-slate-200 font-semibold">Artículos 6, 121, 123 y 185 C.P.</span>
+            </div>
+            <h2 class="serif-title text-2xl sm:text-3xl font-black text-white">
+              Principio de Legalidad y <span class="text-purple-300 glow-purple-text">Deberes Especiales de Autoridad</span>
+            </h2>
+            <p class="text-xs sm:text-sm text-slate-200 leading-relaxed max-w-3xl mx-auto">
+              Los servidores públicos solo pueden hacer lo que la Constitución y la ley les autoriza expresamente. La investidura congresal no concede patente de corso para ejercer vías de hecho.
+            </p>
+          </div>
+
+          <!-- COMPARATIVE EVIDENCE CARD -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full max-w-4xl mx-auto">
+            <div class="relative group rounded-xl overflow-hidden border border-purple-500/40 bg-black/80 shadow-lg cursor-pointer text-left p-3 flex flex-col justify-between" onclick="openLightbox('./fig7_palacio_justicia_colombia.jpg', 'Palacio de Justicia de Colombia — Sede de la Corte Constitucional amparando los derechos fundamentales')">
+              <div class="flex items-center space-x-3 mb-2">
+                <img src="./fig7_palacio_justicia_colombia.jpg" alt="Palacio de Justicia" class="w-24 h-16 object-cover rounded-lg border border-purple-400/40" />
+                <div>
+                  <span class="text-[10px] font-mono text-purple-300 font-bold">CONTROL JUDICIAL</span>
+                  <h4 class="text-xs font-bold text-white">Corte Constitucional</h4>
+                  <p class="text-[10px] text-slate-300">Sala Séptima de Revisión de Tutelas</p>
+                </div>
+              </div>
+              <p class="text-[11px] text-slate-200 leading-relaxed">
+                Reiteró que la <strong>inviolabilidad parlamentaria (Art. 185 C.P.)</strong> solo protege opiniones y votos en debate legislativo, jamás actos materiales de despojo ni agresiones a ciudadanos.
+              </p>
+            </div>
+
+            <div class="relative group rounded-xl overflow-hidden border border-emerald-500/40 bg-black/80 shadow-lg text-left p-3 flex flex-col justify-between">
+              <div>
+                <span class="text-[10px] font-mono text-emerald-300 font-bold">LÍMITES CONSTITUCIONALES</span>
+                <h4 class="text-xs font-bold text-white mb-1">Poder-Deber Comunicativo</h4>
+                <p class="text-[11px] text-slate-200 leading-relaxed">
+                  Los funcionarios tienen un deber cualificado de veracidad y neutralidad. Utilizar redes sociales masivas para denigrar a víctimas vulnera el debido proceso y la ética estatal.
+                </p>
+              </div>
+              <div class="p-2 bg-emerald-950/40 rounded-lg border border-emerald-500/30 text-[10px] text-emerald-300 mt-2">
+                Art. 121 C.P.: «Ninguna autoridad del Estado podrá ejercer funciones distintas de las que le atribuyen la Constitución y la ley.»
+              </div>
+            </div>
+          </div>
+
+          <div class="p-2.5 text-xs text-slate-200 border-t border-purple-500/30 max-w-2xl mx-auto">
+            <strong class="text-purple-300">Conclusión:</strong> El retiro forzoso de las botas fue una manifiesta vía de hecho y usurpación de funciones administrativas.
+          </div>
+        </div>
+    
+        <!-- SLIDE 4: VALOR Y DERECHO A LA PAZ -->
+        <div id="slide-4" class="slide-panel flex-col justify-center items-center my-auto w-full max-w-4xl mx-auto space-y-5 text-center">
+          <div class="space-y-3">
+            <div class="flex items-center justify-center space-x-3">
+              <span class="text-xs uppercase font-mono px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/50 font-bold">DIAPOSITIVA 05 • JUSTICIA TRANSICIONAL</span>
+              <span class="text-xs text-slate-200 font-semibold">Artículo 22 C.P. & Johan Galtung</span>
+            </div>
+            <h2 class="serif-title text-2xl sm:text-3xl lg:text-4xl font-black text-white">
+              El Derecho a la Paz y la <span class="text-emerald-300 glow-emerald-text">Violencia Simbólica</span>
+            </h2>
+            <p class="text-sm sm:text-base text-slate-200 leading-relaxed max-w-2xl mx-auto">
+              La paz en Colombia no es solo ausencia de disparos; es paz positiva basada en verdad y reconciliación. La Corte declara que las expresiones artísticas son verdad extrajudicial.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 text-xs sm:text-sm max-w-3xl mx-auto text-left sm:text-center">
+            <div class="p-3.5 border border-purple-500/30 rounded-xl bg-purple-950/20">
+              <span class="font-bold text-purple-300 text-sm block mb-1">Violencia Simbólica (Bourdieu / Galtung):</span>
+              <p class="text-slate-200 leading-relaxed">No requiere armas de fuego: descalificar, estigmatizar y tirar el recuerdo a la basura perpetúa la violencia cultural contra las víctimas.</p>
+            </div>
+            <div class="p-3.5 border border-emerald-500/30 rounded-xl bg-emerald-950/20">
+              <span class="font-bold text-emerald-300 text-sm block mb-1">Arte como Verdad Extrajudicial:</span>
+              <p class="text-slate-200 leading-relaxed">Las botas intervenidas de MAFAPO son testimonio legítimo de la sociedad civil. Destruirlas atenta contra el derecho a la verdad y la no repetición.</p>
+            </div>
+          </div>
+
+          <div class="p-3 text-xs sm:text-sm text-slate-200 border-t border-emerald-500/30 pt-3">
+            <strong class="text-emerald-400">Dimensión Colectiva de la Paz:</strong> Preservar la memoria histórica protege a toda la sociedad de recaer en crímenes de Estado.
+          </div>
+        </div>
+    
+        <!-- SLIDE 5: LIBERTAD DE EXPRESIÓN Y SUS LÍMITES -->
+        <div id="slide-5" class="slide-panel flex-col justify-center items-center my-auto w-full max-w-4xl mx-auto space-y-5 text-center">
+          <div class="space-y-3">
+            <div class="flex items-center justify-center space-x-3">
+              <span class="text-xs uppercase font-mono px-3 py-1 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/50 font-bold">DIAPOSITIVA 06 • PONDERACIÓN CONSTITUCIONAL</span>
+              <span class="text-xs text-slate-200 font-semibold">Artículo 20 C.P. & CADH Art. 13</span>
+            </div>
+            <h2 class="serif-title text-2xl sm:text-3xl lg:text-4xl font-black text-white">
+              Libertad de Expresión vs. <span class="text-purple-300 glow-purple-text">Revictimización y Odio</span>
+            </h2>
+            <p class="text-sm sm:text-base text-slate-200 leading-relaxed max-w-2xl mx-auto">
+              La libertad de expresión no es absoluta. La Corte distingue con precisión quirúrgica el debate democrático vigoroso frente al hostigamiento revictimizante.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 text-xs sm:text-sm max-w-3xl mx-auto text-left sm:text-center">
+            <div class="p-3.5 border border-emerald-500/30 rounded-xl bg-emerald-950/20">
+              <span class="font-bold text-emerald-300 text-sm block mb-1">Crítica Política Legítima:</span>
+              <p class="text-slate-200 leading-relaxed">Cuestionar funcionarios, partidos o políticas de Estado. Admite lenguaje cáustico e impopular.</p>
+            </div>
+            <div class="p-3.5 border border-purple-500/30 rounded-xl bg-purple-950/20">
+              <span class="font-bold text-purple-300 text-sm block mb-1">Revictimización y Discurso de Odio:</span>
+              <p class="text-slate-200 leading-relaxed">Burlarse del dolor, deslegitimar a madres de víctimas de ejecuciones extrajudiciales e imputar delitos sin pruebas. Prohibido por la Constitución.</p>
+            </div>
+          </div>
+
+          <div class="p-3 text-xs sm:text-sm text-slate-200 border-t border-purple-500/40 pt-3">
+            <strong class="text-purple-400">Regla de Oro:</strong> La libertad de expresión termina donde inicia la dignidad inalienable de las víctimas y la verdad histórica.
+          </div>
+        </div>
+    
+        <!-- SLIDE 6: ÓRDENES DE REPARACIÓN CON INFOGRAFÍA -->
+        <div id="slide-6" class="slide-panel flex-col justify-center items-center my-auto w-full max-w-5xl mx-auto space-y-3 text-center">
+          <div class="space-y-1.5">
+            <div class="flex items-center justify-center space-x-3">
+              <span class="text-xs uppercase font-mono px-3 py-1 rounded-full bg-emerald-500/25 text-emerald-300 border border-emerald-500/50 font-bold">DIAPOSITIVA 07 • DECISIÓN JUDICIAL VINCULANTE</span>
+              <span class="text-xs text-slate-200 font-semibold">Sala Séptima de Revisión • Corte Constitucional</span>
+            </div>
+            <h2 class="serif-title text-2xl sm:text-3xl font-black text-white">
+              Las Órdenes de Reparación Integral: <span class="text-emerald-300 glow-emerald-text">Restitución y Perdón</span>
+            </h2>
+            <p class="text-xs text-slate-200 leading-relaxed max-w-2xl mx-auto">
+              La Corte revocó las decisiones de instancia y concedió el amparo constitucional pleno con 4 mandatos restaurativos concretos:
+            </p>
+          </div>
+
+          <!-- INFOGRAPHIC OFICIAL EVIDENCE BOX -->
+          <div class="relative group rounded-xl overflow-hidden border-2 border-emerald-400/60 bg-black/85 shadow-2xl max-w-2xl mx-auto cursor-pointer p-2 hover:border-emerald-300 transition" onclick="openLightbox('./fig5_ordenes_t375_infografia.png', 'Infografía Oficial: Las 4 Órdenes Reparadoras de la Sentencia T-375 de 2025')">
+            <img src="./fig5_ordenes_t375_infografia.png" alt="Órdenes Reparadoras Infografía" class="w-full max-h-44 object-contain rounded-lg" />
+            <div class="mt-1 flex items-center justify-center space-x-2 text-[11px] text-emerald-300 font-bold">
+              <span>🔍 Clic para examinar infografía judicial en alta resolución</span>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 text-xs max-w-5xl mx-auto text-left">
+            <div class="p-2.5 border border-emerald-500/30 rounded-xl bg-black/60">
+              <span class="font-bold text-emerald-300 text-xs block mb-0.5">1. Devolución (10 días):</span>
+              <p class="text-slate-200 text-[10px] leading-relaxed">Entregar las 6 botas sustraídas a MAFAPO o a la Fundación Rinconesarte Internacional.</p>
+            </div>
+            <div class="p-2.5 border border-purple-500/30 rounded-xl bg-black/60">
+              <span class="font-bold text-purple-300 text-xs block mb-0.5">2. Mesa de Concertación:</span>
+              <p class="text-slate-200 text-[10px] leading-relaxed">Con Defensoría, OACP y Procuraduría para concertar la restitución si no se recuperan los ejemplares.</p>
+            </div>
+            <div class="p-2.5 border border-purple-500/30 rounded-xl bg-black/60">
+              <span class="font-bold text-purple-300 text-xs block mb-0.5">3. Disculpa Pública (6 m):</span>
+              <p class="text-slate-200 text-[10px] leading-relaxed">Video de retractación reconociendo la legitimidad de MAFAPO, anclado durante 6 meses en sus redes.</p>
+            </div>
+            <div class="p-2.5 border border-emerald-500/30 rounded-xl bg-black/60">
+              <span class="font-bold text-emerald-300 text-xs block mb-0.5">4. Desagravio en Congreso:</span>
+              <p class="text-slate-200 text-[10px] leading-relaxed">Reinstalación de la muestra en el Patio Rafael Núñez con disculpas presenciales transmitidas por canales institucionales.</p>
+            </div>
+          </div>
+        </div>
+    
+        <!-- SLIDE 7: MATRIZ DOCTRINAL Y GRÁFICOS -->
+        <div id="slide-7" class="slide-panel flex-col justify-center items-center my-auto w-full max-w-5xl mx-auto space-y-4 text-center">
+          <div class="space-y-2 max-w-3xl mx-auto">
+            <div class="flex items-center justify-center space-x-3">
+              <span class="text-xs uppercase font-mono px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/50 font-bold">DIAPOSITIVA 08 • SÍNTESIS FORENSE</span>
+              <span class="text-xs text-slate-200 font-semibold">Tribunal Académico UTP</span>
+            </div>
+            <h2 class="serif-title text-xl sm:text-2xl lg:text-3xl font-black text-white">
+              Matriz Analítica & <span class="text-emerald-300 glow-emerald-text">Radiografía de Principios</span>
+            </h2>
+          </div>
+
+          <!-- Charts Grid -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl mx-auto">
+            <div class="p-3 border border-emerald-500/30 rounded-xl bg-black/40 flex flex-col justify-between">
+              <div class="flex items-center justify-between mb-1">
+                <span class="text-xs font-bold text-emerald-200">Tensión de Principios Constitucionales</span>
+                <span class="text-xs text-emerald-300 font-bold bg-emerald-500/25 px-2 py-0.5 rounded border border-emerald-500/40">Radar T-375</span>
+              </div>
+              <div class="h-36 sm:h-40 w-full"><canvas id="chart-radar-principios"></canvas></div>
+              <span class="text-[10px] text-slate-300 mt-1">Dignidad, Paz, Legalidad, Memoria vs. Vía de Hecho.</span>
+            </div>
+
+            <div class="p-3 border border-purple-500/30 rounded-xl bg-black/40 flex flex-col justify-between">
+              <div class="flex items-center justify-between mb-1">
+                <span class="text-xs font-bold text-purple-200">Macrocaso 03 JEP (Falsos Positivos)</span>
+                <span class="text-xs text-purple-300 font-bold bg-purple-500/25 px-2 py-0.5 rounded border border-purple-500/40">6.402 Víctimas</span>
+              </div>
+              <div class="h-36 sm:h-40 w-full"><canvas id="chart-jep-victimas"></canvas></div>
+              <span class="text-[10px] text-slate-300 mt-1">Auto 033/2021 JEP: Verdad judicial consolidada.</span>
+            </div>
+          </div>
+
+          <!-- Radiografía Diagram Expandable Link -->
+          <div class="p-2.5 border border-emerald-500/40 rounded-xl bg-black/75 flex items-center justify-between cursor-pointer group max-w-4xl w-full hover:border-emerald-300 transition" onclick="openLightbox('./fig1_radiografia_constitucional.png', 'Diagrama Estructural: Radiografía Constitucional de la Sentencia T-375 de 2025')">
+            <div class="flex items-center space-x-3 text-left">
+              <img src="./fig1_radiografia_constitucional.png" alt="Radiografía" class="w-16 h-10 object-cover rounded border border-emerald-400/40 group-hover:scale-105 transition" />
+              <div>
+                <h5 class="text-xs font-bold text-white group-hover:text-emerald-300 transition">Ver Diagrama Estructural: Radiografía Constitucional T-375</h5>
+                <p class="text-[10px] text-slate-300">Ponderación dogmática entre Art. 1 (Dignidad), Art. 6 (Legalidad), Art. 22 (Paz) y Art. 185 (Límites).</p>
+              </div>
+            </div>
+            <span class="text-xs text-emerald-400 font-bold font-mono">🔍 Ampliar Esquema →</span>
+          </div>
+
+          <div class="p-3 border-y-2 border-emerald-500/80 max-w-4xl mx-auto text-xs text-slate-100">
+            <strong class="text-emerald-400 block mb-0.5">VEREDICTO CONSTITUCIONAL:</strong>
+            "El dolor de las víctimas no es objeto negociable de la política partidista. La supremacía constitucional impone que la memoria histórica sea protegida como bien público sagrado de la República."
+          </div>
+        </div>
+    
+        <!-- SLIDE 8: DOSSIER Y BIBLIOGRAFÍA -->
+        <div id="slide-8" class="slide-panel flex-col justify-center items-center my-auto w-full max-w-3xl mx-auto space-y-5 text-center">
+          <div class="space-y-3">
+            <div class="flex items-center justify-center space-x-3">
+              <span class="text-xs uppercase font-mono px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/50 font-bold">DIAPOSITIVA 09 • ACERVO DOCUMENTAL FORMAL</span>
+              <span class="text-xs text-slate-200 font-semibold">Entrega Formal Reto 2 (25%)</span>
+            </div>
+            <h2 class="serif-title text-2xl sm:text-3xl lg:text-4xl font-black text-white">
+              Dossier Académico y <span class="text-emerald-300 glow-emerald-text">Bibliografía APA 7</span>
+            </h2>
+            <div class="p-3 border-y border-purple-500/40 text-xs sm:text-sm text-purple-200 italic max-w-2xl mx-auto">
+              «La Sentencia T-375 de 2025 demuestra que una democracia auténtica no se mide por la estridencia de sus gobernantes, sino por su capacidad ética de amparar la memoria de las víctimas ante la arbitrariedad del poder. Cuando el Estado protege las expresiones artísticas del dolor frente a la violencia simbólica, ratifica que la paz no es sumisión ni silencio, sino un pacto ciudadano indisoluble donde la dignidad humana y la memoria histórica constituyen la última frontera de justicia contra el olvido y la tiranía.»
+            </div>
+          </div>
+
+          <!-- Document Download & Online View Box -->
+          <div class="p-4 sm:p-5 border-2 border-emerald-400/50 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4 w-full bg-black/75 shadow-xl">
+            <div class="flex items-center space-x-3 text-left">
+              <div class="emoji-icon text-3xl">📄</div>
+              <div>
+                <h4 class="text-sm font-bold text-white">Dossier_Radiografia_Constitucional_Sentencia_T375.docx</h4>
+                <p class="text-[11px] text-slate-300 mt-0.5">1.83 MB • Normas APA 7.ª edición • 9 Capítulos • Tablas y Anexos Fotográficos</p>
+                <div class="flex items-center space-x-2 mt-1">
+                  <span class="text-[10px] font-mono text-emerald-300 bg-emerald-950 px-2 py-0.5 rounded border border-emerald-500/30">27 Citas APA 7</span>
+                  <span class="text-[10px] font-mono text-purple-300 bg-purple-950 px-2 py-0.5 rounded border border-purple-500/30">Auto 033 JEP</span>
+                </div>
+              </div>
+            </div>
+            <div class="flex flex-col sm:flex-row items-center gap-2">
+              <a href="https://docs.google.com/document/d/11elmnux03rMoMKqZgL-9Z6KzU2FkQj-7/edit?usp=sharing&ouid=102220368577968794134&rtpof=true&sd=true" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 text-slate-950 font-black text-xs transition shadow-xl whitespace-nowrap border border-emerald-300 flex items-center justify-center space-x-1.5" title="Abrir Radiografía Completa / Dossier en Google Docs">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                <span>Abrir Dossier Completo (.DOCX)</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Bibliography Scroll -->
+          <div class="p-3 border border-emerald-500/30 rounded-xl text-xs text-slate-200 space-y-1 overflow-y-auto max-h-36 leading-relaxed text-left w-full bg-black/40">
+            <span class="font-bold text-emerald-400 block uppercase mb-1">Fuentes Primarias APA 7:</span>
+            <p>• <strong>Corte Constitucional. (2025).</strong> Sentencia T-375 de 2025 (M.P. Paola Andrea Meneses Mosquera). Caso MAFAPO vs. Polo Polo.</p>
+            <p>• <strong>Corte Constitucional. (2002).</strong> Sentencia T-881 de 2002 (M.P. Eduardo Montealegre). Dignidad humana.</p>
+            <p>• <strong>Corte Constitucional. (1995).</strong> Sentencia C-225 de 1995 (M.P. Alejandro Martínez Caballero). Protocolo II y Paz.</p>
+            <p>• <strong>JEP. (2021).</strong> Auto 033 de 2021. Macrocaso 03: 6.402 ejecuciones extrajudiciales en Colombia.</p>
+            <p>• <strong>Galtung, J. (1990).</strong> Cultural violence. Journal of Peace Research, 27(3), 291-305.</p>
+            <p>• <strong>Bourdieu, P. (2000).</strong> La dominación masculina y la violencia simbólica. Editorial Anagrama.</p>
+          </div>
+        </div>
+    
+      </div>
+
+      <!-- BOTTOM PRESENTATION CONTROLS (EMERALD / AMETHYST) -->
+      <div class="mt-3 py-2.5 px-5 glass-ultra rounded-2xl flex items-center justify-between gap-4 text-xs sm:text-sm">
+        <button onclick="prevSlide()" id="btn-prev" class="px-4 py-2 rounded-xl bg-black/40 hover:bg-black/70 text-slate-200 font-bold transition flex items-center space-x-2 border border-emerald-500/30 disabled:opacity-30 disabled:cursor-not-allowed shadow-md text-readable">
+          <span>←</span>
+          <span class="hidden sm:inline">Diapositiva Anterior</span>
+        </button>
+
+        <div id="slide-dots" class="flex items-center space-x-2"></div>
+
+        <button onclick="nextSlide()" id="btn-next" class="px-5 py-2 rounded-xl bg-gradient-to-r from-emerald-500 via-teal-500 to-emerald-600 hover:from-emerald-400 text-slate-950 font-black transition flex items-center space-x-2 shadow-lg border border-emerald-300">
+          <span class="hidden sm:inline">Siguiente Diapositiva</span>
+          <span>→</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- RIGHT SIDEBAR: FORENSIC EVIDENCE INSPECTOR -->
+    <aside class="w-60 sm:w-72 h-full glass-ultra rounded-2xl flex flex-col pointer-events-auto shadow-2xl overflow-hidden flex-shrink-0">
+      <div class="p-3 border-b border-emerald-500/20 flex items-center justify-between bg-black/40">
+        <div class="flex items-center space-x-2">
+          <span class="text-sm">🔍</span>
+          <span class="text-xs font-bold uppercase tracking-wider text-emerald-300 text-readable">Prueba Constitucional</span>
+        </div>
+        <span id="right-evidence-badge" class="text-[10px] font-bold px-2 py-0.5 rounded bg-purple-500/25 text-purple-200 border border-purple-500/40">Fallo Vinculante</span>
+      </div>
+
+      <div class="flex-1 overflow-y-auto p-3.5 flex flex-col justify-between space-y-4 scrollbar-thin">
+        <div class="space-y-2.5">
+          <div class="flex items-center justify-between text-[11px] text-slate-300 text-readable">
+            <span id="right-evidence-source">Corte Constitucional</span>
+            <span id="right-evidence-year" class="font-mono text-emerald-300 font-bold">2025</span>
+          </div>
+
+          <h3 id="right-evidence-title" class="serif-title text-sm font-bold text-white leading-snug text-readable">
+            Sentencia T-375 de 2025 (Sala Séptima)
+          </h3>
+
+          <p id="right-evidence-desc" class="text-xs text-slate-200 leading-relaxed text-readable">
+            M.P. Paola Andrea Meneses Mosquera. Amparo a la dignidad, verdad, paz y memoria frente a vías de hecho parlamentarias.
+          </p>
+
+          <div id="right-evidence-quote" class="p-3 rounded-xl glass-box border-l-2 border-emerald-400 text-xs text-emerald-100 italic leading-relaxed text-readable">
+            "Estas botas no pertenecen a la basura; son vehículos legítimos de memoria y verdad extrajudicial."
+          </div>
+        </div>
+
+        <!-- 3D Balance Live Status & Controls -->
+        <div class="pt-3 border-t border-emerald-500/20 space-y-2">
+          <div class="flex items-center justify-between text-[10px] text-readable">
+            <span class="text-slate-300 font-bold uppercase tracking-wider">Estado Balanza 3D:</span>
+            <span id="right-balance-status" class="font-mono text-emerald-300 font-bold text-[10px]">EQUILIBRIO CONSTITUCIONAL</span>
+          </div>
+
+          <div class="grid grid-cols-2 gap-1.5 text-[10px]">
+            <button onclick="tiltBalance('left')" class="p-2 rounded-xl bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-200 border border-emerald-500/40 font-semibold transition text-readable">
+              ⚖️ + Poder Público
+            </button>
+            <button onclick="tiltBalance('right')" class="p-2 rounded-xl bg-purple-500/20 hover:bg-purple-500/30 text-purple-200 border border-purple-500/40 font-semibold transition text-readable">
+              🕊️ + Dignidad Víctimas
+            </button>
+          </div>
+          <button onclick="resetBalance()" class="w-full p-2 rounded-xl bg-black/40 hover:bg-black/70 text-slate-200 text-[10px] transition border border-emerald-500/30 text-readable">
+            🔄 Restablecer Balanza 3D
+          </button>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- FLOATING HUD FOR FREE 3D MODE -->
+  <div id="free3d-hud" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 hidden flex-col items-center gap-2.5 opacity-0 transition-all duration-300 pointer-events-auto">
+    <!-- Camera Viewpoint Bar -->
+    <div class="flex items-center flex-wrap justify-center gap-1.5 sm:gap-2 p-1.5 bg-black/90 backdrop-blur-md rounded-2xl border border-emerald-500/50 shadow-2xl">
+      <button onclick="focusWaypoint('boots')" class="px-3 py-1.5 rounded-xl bg-purple-950/70 hover:bg-purple-800/80 text-purple-200 text-xs font-bold transition border border-purple-500/50 shadow-sm flex items-center space-x-1.5">
+        <span>👢</span>
+        <span>Botas MAFAPO</span>
+      </button>
+      <button onclick="focusWaypoint('judge')" class="px-3 py-1.5 rounded-xl bg-black/60 hover:bg-emerald-500/20 text-emerald-300 text-xs font-bold transition border border-emerald-500/30 flex items-center space-x-1.5">
+        <span>👨‍⚖️</span>
+        <span>Juez Constitucional</span>
+      </button>
+      <button onclick="focusWaypoint('mothers')" class="px-3 py-1.5 rounded-xl bg-black/60 hover:bg-purple-500/20 text-purple-300 text-xs font-bold transition border border-purple-500/30 flex items-center space-x-1.5">
+        <span>🕊️</span>
+        <span>Madres de Soacha</span>
+      </button>
+      <button onclick="focusWaypoint('flags')" class="px-3 py-1.5 rounded-xl bg-black/60 hover:bg-amber-500/20 text-amber-300 text-xs font-bold transition border border-amber-500/30 flex items-center space-x-1.5">
+        <span>🇨🇴</span>
+        <span>Banderas Nacionales</span>
+      </button>
+      <button onclick="focusWaypoint('balance')" class="px-3 py-1.5 rounded-xl bg-black/60 hover:bg-emerald-500/20 text-emerald-300 text-xs font-bold transition border border-emerald-500/30 flex items-center space-x-1.5">
+        <span>⚖️</span>
+        <span>Balanza Central</span>
+      </button>
+      <button onclick="focusWaypoint('panoramic')" class="px-3 py-1.5 rounded-xl bg-black/60 hover:bg-slate-700 text-slate-200 text-xs font-bold transition border border-slate-600 flex items-center space-x-1.5">
+        <span>🔄</span>
+        <span>Panorámica</span>
+      </button>
+
+      <div class="hidden sm:block h-5 w-px bg-slate-700 mx-1"></div>
+
+      <button onclick="setAppMode('slides')" class="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 text-slate-950 font-black text-xs transition shadow-lg border border-emerald-300 flex items-center space-x-1.5">
+        <span>📑</span>
+        <span>Volver a Diapositivas</span>
+      </button>
+    </div>
+
+    <!-- Instructions Pill -->
+    <div class="px-4 py-1 rounded-full bg-black/85 backdrop-blur border border-emerald-500/30 text-[11px] text-slate-300 shadow">
+      🏛️ <strong class="text-emerald-300">Templo de la Memoria y la Justicia:</strong> Arrastra para orbitar • Rueda para zoom • Clic derecho para desplazar
+    </div>
+  </div>
+
+  <!-- LIGHTBOX MODAL -->
+  <div id="lightbox-modal" class="fixed inset-0 z-50 bg-black/95 backdrop-blur-md hidden flex-col items-center justify-center p-4">
+    <button onclick="closeLightbox()" class="absolute top-5 right-5 p-2 rounded-full bg-white/10 hover:bg-white/25 text-white transition text-lg w-10 h-10 flex items-center justify-center border border-white/20 shadow-xl">
+      ✕
+    </button>
+    <div class="max-w-5xl max-h-[85vh] flex flex-col items-center">
+      <img id="lightbox-img" src="" alt="Ampliación" class="max-w-full max-h-[75vh] object-contain rounded-xl border border-emerald-500/50 shadow-2xl" />
+      <p id="lightbox-caption" class="mt-3 text-center text-xs sm:text-sm font-semibold text-emerald-200 max-w-2xl"></p>
+    </div>
+  </div>
+
+  <script>
+    const SLIDES_EVIDENCE = [
+      { source: "Reto 2 UTP", year: "2025", title: "Cuando la Memoria Incomoda", desc: "La T-375/2025 ampara la memoria de MAFAPO como condición ética de no repetición.", quote: "El dolor de las víctimas es fundamento de la República.", badge: "Tesis Constitucional", tilt: -0.15 },
+      { source: "Expediente T-10.809.821", year: "Nov 2024", title: "Hechos en el Congreso", desc: "Sustracción de 6 botas memoriales de MAFAPO arrojadas al basurero y difundidas en redes.", quote: "Estas botas tienen que ir a donde pertenecen: al canasto de la basura.", badge: "Vía de Hecho", tilt: 0.22 },
+      { source: "Art. 1 C.P. & T-881/02", year: "2002-25", title: "Dignidad Humana", desc: "Vivir sin humillaciones. Tratar un símbolo memorial como desecho es cosificación prohibida.", quote: "Degradar el símbolo a basura degrada a la persona misma.", badge: "Dignidad Humana", tilt: -0.28 },
+      { source: "Arts. 6, 121 y 185 C.P.", year: "1991-25", title: "Principio de Legalidad", desc: "La investidura legislativa no concede patente de corso para ejercer vías de hecho sobre bienes ajenos.", quote: "El servidor público solo puede hacer lo expresamente atribuido.", badge: "Límites al Poder", tilt: 0.20 },
+      { source: "Art. 22 C.P. & J. Galtung", year: "2025", title: "Paz y Violencia Simbólica", desc: "El arte de MAFAPO es vehículo de verdad extrajudicial reconocido por la Corte.", quote: "Destruir el arte es violencia simbólica que sabotea la paz.", badge: "Verdad Extrajudicial", tilt: -0.25 },
+      { source: "Art. 20 C.P. & CADH", year: "2025", title: "Límites a la Expresión", desc: "La crítica política protege el debate público; pero la revictimización y el hostigamiento están proscritos.", quote: "La libertad termina donde inicia la dignidad de la víctima.", badge: "No Revictimización", tilt: 0.18 },
+      { source: "Sala Séptima de Revisión", year: "2025", title: "Órdenes de Reparación", desc: "Devolución de botas (10 días), mesa de concertación, disculpas públicas (6 meses) y desagravio.", quote: "Reprogramar la muestra en el Congreso con desagravio solemne.", badge: "Fallo Reparador", tilt: -0.20 },
+      { source: "Matriz Forense UTP", year: "2026", title: "Radiografía de Principios", desc: "Comparativo doctrinal entre la arbitrariedad del funcionario y los estándares de la Carta.", quote: "La supremacía constitucional blinda la memoria.", badge: "Matriz Doctrinal", tilt: 0.0 },
+      { source: "Dossier Oficial APA 7", year: "2026", title: "Acervo Monográfico", desc: "Monografía doctoral de 9 capítulos, tablas, figuras y 27 referencias formales (.DOCX).", quote: "Documento oficial y acervo probatorio formal.", badge: "Dossier Oficial", tilt: 0.0 }
+    ];
+
+    // Cinematic Waypoints for Three.js camera transitions (distancias optimizadas para no colisionar)
+    const CAMERA_WAYPOINTS = [
+      { pos: new THREE.Vector3(0, 3.2, 14.5), target: new THREE.Vector3(0, 1.2, 0) },   // 0: Vista panorámica general
+      { pos: new THREE.Vector3(0, 2.4, 9.2), target: new THREE.Vector3(0, -0.6, 0.6) },  // 1: Círculo de Botas MAFAPO y Memorial
+      { pos: new THREE.Vector3(4.8, 3.2, 7.8), target: new THREE.Vector3(2.4, 1.2, 0) },   // 2: Corazón de Amatista (Dignidad)
+      { pos: new THREE.Vector3(-4.8, 3.4, 7.8), target: new THREE.Vector3(-2.4, 1.2, 0) },  // 3: Libro Constitucional (Legalidad)
+      { pos: new THREE.Vector3(0, 7.0, 12.0), target: new THREE.Vector3(0, 0.5, 0) },      // 4: Monolitos de Paz
+      { pos: new THREE.Vector3(7.0, 3.5, 8.8), target: new THREE.Vector3(0, 1.6, 0) },     // 5: Libertad de Expresión
+      { pos: new THREE.Vector3(0, 3.4, 9.0), target: new THREE.Vector3(0, 1.8, -0.2) },    // 6: Balanza Reparadora
+      { pos: new THREE.Vector3(-5.8, 4.6, 12.5), target: new THREE.Vector3(0, 1.5, 0) },   // 7: Matriz Analítica
+      { pos: new THREE.Vector3(0, 4.8, 14.0), target: new THREE.Vector3(0, 1.5, 0) }      // 8: Dossier
+    ];
+
+    const DECK_ITEMS = [
+      ["01", "Memoria Incomoda", "MAFAPO en el banquillo"],
+      ["02", "Hechos del Caso", "Patio Rafael Núñez"],
+      ["03", "Dignidad Humana", "No cosificación y duelo"],
+      ["04", "Principio Legalidad", "Límites a congresistas"],
+      ["05", "Paz & Violencia Simbólica", "Arte como verdad"],
+      ["06", "Libertad Expresión", "Crítica vs Odio"],
+      ["07", "Órdenes Reparadoras", "Restitución y disculpas"],
+      ["08", "Matriz Doctrinal", "Radiografía comparada"],
+      ["09", "Dossier y Bibliografía", "Normas APA 7"]
+    ];
+
+    let currentSlide = 0;
+    const totalSlides = SLIDES_EVIDENCE.length;
+    let appMode = 'slides'; // 'slides' or 'free3d'
+    let cameraLerping = false;
+    let targetCamPos = new THREE.Vector3(0, 2.6, 11.5);
+    let targetCamTarget = new THREE.Vector3(0, 1.2, 0);
+
+    function renderDeckSidebar() {
+      const c = document.getElementById('deck-items-container');
+      if (!c) return;
+      c.innerHTML = '';
+      DECK_ITEMS.forEach(([num, title, sub], idx) => {
+        const btn = document.createElement('button');
+        btn.id = `deck-btn-${idx}`;
+        btn.onclick = () => goToSlide(idx);
+        btn.className = `deck-item ${idx === 0 ? 'active bg-emerald-500/25 border-emerald-400/60 shadow-[0_0_15px_rgba(16,185,129,0.3)]' : 'border-emerald-500/20 hover:bg-emerald-500/10'} w-full p-2.5 rounded-xl text-left transition flex items-start space-x-2.5 border backdrop-blur-sm`;
+        btn.innerHTML = `<span class="mono-num text-[11px] font-bold px-1.5 py-0.5 rounded ${idx === 0 ? 'bg-emerald-500/30 text-emerald-200 border-emerald-400/50' : 'bg-black/50 text-slate-300 border-emerald-500/20'} border">${num}</span><div class="flex-1 min-w-0"><h4 class="text-xs font-bold text-white truncate text-readable">${title}</h4><p class="text-[10px] text-slate-300 truncate text-readable">${sub}</p></div>`;
+        c.appendChild(btn);
+      });
+    }
+
+    function goToSlide(idx) {
+      if (idx < 0 || idx >= totalSlides) return;
+      currentSlide = idx;
+      document.querySelectorAll('.slide-panel').forEach((el, i) => el.classList.toggle('active', i === currentSlide));
+      document.querySelectorAll('.deck-item').forEach((el, i) => {
+        el.classList.toggle('active', i === currentSlide);
+        el.classList.toggle('bg-emerald-500/25', i === currentSlide);
+        el.classList.toggle('border-emerald-400/60', i === currentSlide);
+        el.classList.toggle('border-emerald-500/20', i !== currentSlide);
+      });
+      const ev = SLIDES_EVIDENCE[currentSlide];
+      document.getElementById('nav-slide-title').textContent = `${String(currentSlide + 1).padStart(2, '0')}. ${ev.title}`;
+      document.getElementById('nav-slide-num').textContent = `${String(currentSlide + 1).padStart(2, '0')} / ${String(totalSlides).padStart(2, '0')}`;
+      document.getElementById('nav-progress-bar').style.width = `${((currentSlide + 1) / totalSlides) * 100}%`;
+      document.getElementById('right-evidence-badge').textContent = ev.badge;
+      document.getElementById('right-evidence-source').textContent = ev.source;
+      document.getElementById('right-evidence-year').textContent = ev.year;
+      document.getElementById('right-evidence-title').textContent = ev.title;
+      document.getElementById('right-evidence-desc').textContent = ev.desc;
+      document.getElementById('right-evidence-quote').textContent = `"${ev.quote}"`;
+      document.getElementById('btn-prev').disabled = currentSlide === 0;
+      document.getElementById('btn-next').disabled = currentSlide === totalSlides - 1;
+      updateDots();
+      if (window.setTargetTilt) window.setTargetTilt(ev.tilt);
+      if (currentSlide === 7 && !window.presChartsLoaded) initPresCharts();
+
+      // Lerp camera to slide waypoint
+      if (CAMERA_WAYPOINTS[currentSlide]) {
+        targetCamPos.copy(CAMERA_WAYPOINTS[currentSlide].pos);
+        targetCamTarget.copy(CAMERA_WAYPOINTS[currentSlide].target);
+        cameraLerping = true;
+      }
+    }
+
+    function nextSlide() { if (currentSlide < totalSlides - 1) goToSlide(currentSlide + 1); }
+    function prevSlide() { if (currentSlide > 0) goToSlide(currentSlide - 1); }
+
+    function updateDots() {
+      const c = document.getElementById('slide-dots');
+      if (!c) return;
+      c.innerHTML = '';
+      for (let i = 0; i < totalSlides; i++) {
+        const dot = document.createElement('button');
+        dot.className = `h-2 rounded-full transition-all duration-300 ${i === currentSlide ? 'w-6 bg-emerald-400 shadow-[0_0_8px_#10B981]' : 'w-2 bg-white/20 hover:bg-white/40'}`;
+        dot.onclick = () => goToSlide(i);
+        c.appendChild(dot);
+      }
+    }
+
+    // MODE SWITCHER: 'slides' vs 'free3d'
+    function setAppMode(mode) {
+      appMode = mode;
+      const body = document.body;
+      const canvasContainer = document.getElementById('canvas-container');
+      const btnSlides = document.getElementById('btn-mode-slides');
+      const btnFree3d = document.getElementById('btn-mode-free3d');
+
+      if (mode === 'free3d') {
+        body.classList.add('mode-free3d-active');
+        canvasContainer.classList.add('interactive');
+        if (btnFree3d) btnFree3d.className = "px-2.5 sm:px-3 py-1 rounded-lg text-xs font-bold transition flex items-center space-x-1.5 bg-purple-500 text-slate-950 shadow-md";
+        if (btnSlides) btnSlides.className = "px-2.5 sm:px-3 py-1 rounded-lg text-xs font-bold text-slate-300 hover:text-white transition flex items-center space-x-1.5 hover:bg-emerald-500/20";
+        if (window.threeControls) {
+          window.threeControls.autoRotate = false;
+          window.threeControls.enabled = true;
+          window.threeControls.enableZoom = true;
+          window.threeControls.enablePan = true;
+          window.threeControls.enableRotate = true;
+        }
+        cameraLerping = false;
+      } else {
+        body.classList.remove('mode-free3d-active');
+        canvasContainer.classList.remove('interactive');
+        if (btnSlides) btnSlides.className = "px-2.5 sm:px-3 py-1 rounded-lg text-xs font-bold transition flex items-center space-x-1.5 bg-emerald-500 text-slate-950 shadow-md";
+        if (btnFree3d) btnFree3d.className = "px-2.5 sm:px-3 py-1 rounded-lg text-xs font-bold text-slate-300 hover:text-white transition flex items-center space-x-1.5 hover:bg-purple-500/25";
+        if (window.threeControls) {
+          window.threeControls.autoRotate = true;
+          window.threeControls.enabled = true;
+          window.threeControls.enableZoom = true;
+        }
+        goToSlide(currentSlide);
+      }
+    }
+
+    function focusWaypoint(name) {
+      cameraLerping = true;
+      if (name === 'balance') {
+        targetCamPos.set(0, 3.4, 9.0);
+        targetCamTarget.set(0, 1.8, -0.2);
+      } else if (name === 'boots') {
+        targetCamPos.set(0, 2.4, 9.2);
+        targetCamTarget.set(0, -0.6, 0.6);
+      } else if (name === 'judge') {
+        targetCamPos.set(4.5, 1.8, 4.2);
+        targetCamTarget.set(4.5, -0.5, -2.4);
+      } else if (name === 'mothers') {
+        targetCamPos.set(-4.5, 1.8, 4.2);
+        targetCamTarget.set(-4.5, -0.5, -2.4);
+      } else if (name === 'flags') {
+        targetCamPos.set(0, 2.6, 11.5);
+        targetCamTarget.set(0, 1.5, -2.0);
+      } else if (name === 'monoliths') {
+        targetCamPos.set(0, 7.0, 12.0);
+        targetCamTarget.set(0, 0.5, 0);
+      } else if (name === 'panoramic') {
+        targetCamPos.set(0, 3.5, 14.5);
+        targetCamTarget.set(0, 1.0, 0);
+      }
+    }
+
+    // LIGHTBOX FUNCTIONS
+    function openLightbox(src, caption) {
+      const modal = document.getElementById('lightbox-modal');
+      const img = document.getElementById('lightbox-img');
+      const cap = document.getElementById('lightbox-caption');
+      if (!modal || !img) return;
+      img.src = src;
+      if (cap) cap.textContent = caption || '';
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeLightbox() {
+      const modal = document.getElementById('lightbox-modal');
+      if (!modal) return;
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeLightbox();
+      if (appMode === 'slides') {
+        if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); nextSlide(); }
+        else if (e.key === 'ArrowLeft') { e.preventDefault(); prevSlide(); }
+      }
+    });
+
+    function toggleFullScreen() {
+      if (!document.fullscreenElement) document.documentElement.requestFullscreen().catch(() => {});
+      else if (document.exitFullscreen) document.exitFullscreen();
+    }
+
+    window.presChartsLoaded = false;
+    function initPresCharts() {
+      window.presChartsLoaded = true;
+      const ctx1 = document.getElementById('chart-radar-principios');
+      if (ctx1) {
+        new Chart(ctx1, {
+          type: 'radar',
+          data: {
+            labels: ['Dignidad Humana', 'Legalidad', 'Paz Positiva', 'Libertad Expresión', 'Memoria Colectiva'],
+            datasets: [
+              { label: 'Protección Corte (T-375)', data: [5, 4.8, 5, 3.2, 5], borderColor: '#10B981', backgroundColor: 'rgba(16,185,129,0.3)', borderWidth: 2 },
+              { label: 'Vía de Hecho / Agresión', data: [4.5, 4.8, 4.2, 4.9, 5], borderColor: '#C084FC', backgroundColor: 'rgba(192,132,252,0.25)', borderWidth: 2, borderDash: [4,4] }
+            ]
+          },
+          options: {
+            responsive: true, maintainAspectRatio: false,
+            scales: { r: { angleLines: { color: 'rgba(16,185,129,0.15)' }, grid: { color: 'rgba(16,185,129,0.15)' }, pointLabels: { color: '#E2E8F0', font: { size: 9, weight: 'bold' } }, ticks: { display: false } } },
+            plugins: { legend: { labels: { color: '#F1F5F9', font: { size: 9 } } } }
+          }
+        });
+      }
+      const ctx2 = document.getElementById('chart-jep-victimas');
+      if (ctx2) {
+        new Chart(ctx2, {
+          type: 'bar',
+          data: {
+            labels: ['Antioquia', 'Casanare', 'Cesar', 'N. Santander', 'Huila', 'Meta'],
+            datasets: [{ data: [1613, 303, 273, 222, 179, 150], backgroundColor: ['#047857', '#059669', '#10B981', '#34D399', '#7E22CE', '#A855F7'], borderRadius: 4 }]
+          },
+          options: {
+            indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: { y: { grid: { display: false }, ticks: { color: '#E2E8F0', font: { size: 9, weight: 'bold' } } }, x: { grid: { color: 'rgba(16,185,129,0.1)' }, ticks: { color: '#E2E8F0', font: { size: 9 } } } }
+          }
+        });
+      }
+    }
+
+    let scene, camera, renderer, beamGroup, leftPlate, rightPlate;
+    let bootsGroup, monolithsGroup, particlesField, flagMeshes = [];
+    let targetTilt = -0.15, currentTilt = 0;
+
+    function initThree() {
+      const container = document.getElementById('canvas-container');
+      if (!container) return;
+      scene = new THREE.Scene();
+      scene.fog = new THREE.FogExp2(0x030712, 0.024);
+      camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
+      camera.position.set(0, 3.2, 14.5);
+
+      renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.domElement.style.touchAction = 'none';
+      renderer.domElement.style.outline = 'none';
+      container.appendChild(renderer.domElement);
+
+      const controls = new THREE.OrbitControls(camera, renderer.domElement);
+      controls.enableDamping = true;
+      controls.dampingFactor = 0.06;
+      controls.maxPolarAngle = Math.PI - 0.05;
+      controls.minPolarAngle = 0.05;
+      controls.minDistance = 2.5;
+      controls.maxDistance = 42.0;
+      controls.zoomSpeed = 1.25;
+      controls.rotateSpeed = 0.85;
+      controls.panSpeed = 0.85;
+      controls.enableZoom = true;
+      controls.enableRotate = true;
+      controls.enablePan = true;
+      controls.autoRotate = true;
+      controls.autoRotateSpeed = 0.32;
+
+      // Desactivar inmediatamente la interpolación guiada cuando el usuario interactúe con el mouse o teclado táctil
+      controls.addEventListener('start', () => { cameraLerping = false; });
+      renderer.domElement.addEventListener('wheel', () => { cameraLerping = false; }, { passive: true });
+      renderer.domElement.addEventListener('pointerdown', () => { cameraLerping = false; });
+      window.threeControls = controls;
+
+      // Lights: Emerald, Amethyst, Cyan
+      scene.add(new THREE.AmbientLight(0xffffff, 0.55));
+      const emeraldDir = new THREE.DirectionalLight(0x10B981, 1.8);
+      emeraldDir.position.set(6, 14, 8); scene.add(emeraldDir);
+      const purplePoint = new THREE.PointLight(0xA855F7, 3.8, 18);
+      purplePoint.position.set(-6, 3, 3); scene.add(purplePoint);
+      const cyanPoint = new THREE.PointLight(0x06B6D4, 3.2, 16);
+      cyanPoint.position.set(6, 3, 3); scene.add(cyanPoint);
+
+      // 1. PATIO MEMORIAL STONE PLAZA (CONCENTRIC JADE & AMETHYST)
+      const floorCanvas = document.createElement('canvas');
+      floorCanvas.width = 512; floorCanvas.height = 512;
+      const fCtx = floorCanvas.getContext('2d');
+      fCtx.fillStyle = '#060B14'; fCtx.fillRect(0, 0, 512, 512);
+      fCtx.strokeStyle = 'rgba(16, 185, 129, 0.35)'; fCtx.lineWidth = 3;
+      for (let r = 40; r < 250; r += 45) {
+        fCtx.beginPath(); fCtx.arc(256, 256, r, 0, Math.PI * 2); fCtx.stroke();
+      }
+      fCtx.strokeStyle = 'rgba(168, 85, 247, 0.2)'; fCtx.lineWidth = 1.5;
+      for (let a = 0; a < Math.PI * 2; a += Math.PI / 8) {
+        fCtx.beginPath();
+        fCtx.moveTo(256 + Math.cos(a)*40, 256 + Math.sin(a)*40);
+        fCtx.lineTo(256 + Math.cos(a)*240, 256 + Math.sin(a)*240);
+        fCtx.stroke();
+      }
+      const floorTexture = new THREE.CanvasTexture(floorCanvas);
+      floorTexture.wrapS = THREE.RepeatWrapping; floorTexture.wrapT = THREE.RepeatWrapping;
+      floorTexture.repeat.set(3, 3);
+      const floorMesh = new THREE.Mesh(new THREE.PlaneGeometry(26, 26), new THREE.MeshStandardMaterial({ map: floorTexture, roughness: 0.35, metalness: 0.5 }));
+      floorMesh.rotation.x = -Math.PI / 2; floorMesh.position.y = -2.2; scene.add(floorMesh);
+
+      // 2. FOUR CRYSTAL MONOLITHS (TRUTH, JUSTICE, REPARATION, NON-REPETITION)
+      monolithsGroup = new THREE.Group();
+      const monoCoords = [[-7, -1], [7, -1], [-4.5, -4], [4.5, -4]];
+      const monoColors = [0x10B981, 0xA855F7, 0x06B6D4, 0xF59E0B];
+      monoCoords.forEach(([mx, mz], i) => {
+        const mCol = monoColors[i];
+        const mGeo = new THREE.CylinderGeometry(0.35, 0.45, 6.8, 6);
+        const mMat = new THREE.MeshStandardMaterial({ color: mCol, emissive: mCol, emissiveIntensity: 0.45, transparent: true, opacity: 0.75, roughness: 0.1, metalness: 0.8 });
+        const mMesh = new THREE.Mesh(mGeo, mMat);
+        mMesh.position.set(mx, 1.2, mz);
+        const bRing = new THREE.Mesh(new THREE.CylinderGeometry(0.7, 0.8, 0.4, 16), new THREE.MeshStandardMaterial({ color: 0x0A1220, metalness: 0.8 }));
+        bRing.position.set(mx, -2.0, mz);
+        monolithsGroup.add(mMesh); monolithsGroup.add(bRing);
+      });
+      scene.add(monolithsGroup);
+
+      // 3. MAFAPO ART INSTALLATION: REALISTIC BOOTS WITH BOUQUETS (NATURAL FOOT & SOLE)
+      function createRealisticBoot(bodyColorHex = 0x111620, accentColorHex = 0x10B981, flowerColorHex = 0xEF4444, scale = 1) {
+        const boot = new THREE.Group();
+        const rubberMat = new THREE.MeshStandardMaterial({ color: bodyColorHex, roughness: 0.55, metalness: 0.22 });
+        const soleMat = new THREE.MeshStandardMaterial({ color: 0x05080E, roughness: 0.9, metalness: 0.1 });
+        const accentMat = new THREE.MeshStandardMaterial({ color: accentColorHex, emissive: accentColorHex, emissiveIntensity: 0.45, roughness: 0.35 });
+
+        // 1. HORIZONTAL SOLID SOLE & HEEL
+        // Suela completa continua y perfectamente horizontal en la base
+        const mainSole = new THREE.Mesh(new THREE.BoxGeometry(0.32, 0.07, 0.68), soleMat);
+        mainSole.position.set(0, 0.035, 0.12);
+        boot.add(mainSole);
+
+        // Tacón trasero reforzado (base firme)
+        const heel = new THREE.Mesh(new THREE.BoxGeometry(0.32, 0.08, 0.26), soleMat);
+        heel.position.set(0, 0.075, -0.09);
+        boot.add(heel);
+
+        // Puntera de suela delantera con bisel sutil hacia arriba
+        const frontSoleTip = new THREE.Mesh(new THREE.CylinderGeometry(0.16, 0.16, 0.07, 16, 1, false, 0, Math.PI), soleMat);
+        frontSoleTip.position.set(0, 0.035, 0.46);
+        frontSoleTip.rotation.y = -Math.PI / 2;
+        boot.add(frontSoleTip);
+
+        // 2. HORIZONTAL FOOT & ANATOMICAL VAMP (SIN CILINDROS TRUNCADOS INCLINADOS)
+        // Base horizontal del empeine que cubre todo el pie
+        const footBase = new THREE.Mesh(new THREE.BoxGeometry(0.30, 0.16, 0.54), rubberMat);
+        footBase.position.set(0, 0.12, 0.18);
+        boot.add(footBase);
+
+        // Puntera redondeada (Toe Cap) orgánica que remata el frente
+        const toeCap = new THREE.Mesh(new THREE.SphereGeometry(0.155, 18, 14, 0, Math.PI * 2, 0, Math.PI * 0.55), rubberMat);
+        toeCap.position.set(0, 0.11, 0.42);
+        boot.add(toeCap);
+
+        // Transición suave empeine-caña (vamp bridge) sin caras expuestas
+        const bridge = new THREE.Mesh(new THREE.CylinderGeometry(0.145, 0.16, 0.22, 18), rubberMat);
+        bridge.position.set(0, 0.22, 0.04);
+        bridge.rotation.x = 0.14;
+        boot.add(bridge);
+
+        // 3. Boot Shaft (caña erguida con leve caída natural)
+        const shaft = new THREE.Mesh(new THREE.CylinderGeometry(0.16, 0.145, 0.72, 20), rubberMat);
+        shaft.position.set(0, 0.54, -0.02);
+        boot.add(shaft);
+
+        // 4. Hand-painted Collar & Decorative Band
+        const collar = new THREE.Mesh(new THREE.TorusGeometry(0.165, 0.024, 10, 20), accentMat);
+        collar.rotation.x = Math.PI / 2;
+        collar.position.set(0, 0.90, -0.02);
+        boot.add(collar);
+
+        const midBand = new THREE.Mesh(new THREE.CylinderGeometry(0.155, 0.155, 0.09, 20), accentMat);
+        midBand.position.set(0, 0.54, -0.02);
+        boot.add(midBand);
+
+        // 5. Flower Bouquet
+        const bouquet = new THREE.Group();
+        bouquet.position.set(0, 0.88, -0.02);
+        const stemMat = new THREE.MeshStandardMaterial({ color: 0x15803D, roughness: 0.6 });
+        const bloomMat = new THREE.MeshStandardMaterial({ color: flowerColorHex, emissive: flowerColorHex, emissiveIntensity: 0.6, roughness: 0.3 });
+        const flowerOffsets = [
+          [-0.05, 0.16, 0.04],
+          [0.06, 0.22, -0.03],
+          [-0.02, 0.28, 0.02],
+          [0.07, 0.14, 0.05],
+          [-0.06, 0.24, -0.04]
+        ];
+        flowerOffsets.forEach(([fx, fy, fz], fi) => {
+          const stem = new THREE.Mesh(new THREE.CylinderGeometry(0.012, 0.012, fy, 6), stemMat);
+          stem.position.set(fx * 0.5, fy * 0.5, fz * 0.5);
+          stem.rotation.z = fx * 1.4;
+          bouquet.add(stem);
+          const blossom = new THREE.Mesh(new THREE.DodecahedronGeometry(0.065 + (fi % 2) * 0.015, 1), bloomMat);
+          blossom.position.set(fx, fy, fz);
+          bouquet.add(blossom);
+        });
+        boot.add(bouquet);
+
+        if (scale !== 1) boot.scale.set(scale, scale, scale);
+        return boot;
+      }
+
+      // Central Rotating Ring of 6 MAFAPO Boots
+      bootsGroup = new THREE.Group();
+      bootsGroup.position.set(0, -1.8, 1.1);
+
+      // Elevated Memorial Base for the 6 boots
+      const bootsPedestal = new THREE.Mesh(
+        new THREE.CylinderGeometry(2.1, 2.3, 0.22, 32),
+        new THREE.MeshStandardMaterial({ color: 0x060E18, metalness: 0.8, roughness: 0.3 })
+      );
+      bootsPedestal.position.y = -0.11;
+      bootsGroup.add(bootsPedestal);
+
+      const jadeRingPed = new THREE.Mesh(
+        new THREE.TorusGeometry(2.12, 0.05, 16, 32),
+        new THREE.MeshStandardMaterial({ color: 0x10B981, emissive: 0x059669, emissiveIntensity: 0.7 })
+      );
+      jadeRingPed.rotation.x = Math.PI / 2;
+      jadeRingPed.position.y = 0.01;
+      bootsGroup.add(jadeRingPed);
+
+      const bootStyles = [
+        { body: 0x111827, accent: 0x10B981, flower: 0xEF4444 }, // Emerald trim & Red Rose
+        { body: 0x312E81, accent: 0xA855F7, flower: 0xF59E0B }, // Purple trim & Yellow Orchid
+        { body: 0x0F172A, accent: 0x06B6D4, flower: 0xEC4899 }, // Cyan trim & Pink Blossom
+        { body: 0x1E1B4B, accent: 0xF59E0B, flower: 0xFFFFFF }, // Amber trim & White Lily
+        { body: 0x064E3B, accent: 0x34D399, flower: 0x8B5CF6 }, // Forest green & Violet Rose
+        { body: 0x18181B, accent: 0xEC4899, flower: 0x10B981 }  // Black trim & Emerald Lily
+      ];
+
+      for (let b = 0; b < 6; b++) {
+        const angle = (b / 6) * Math.PI * 2;
+        const rad = 1.65;
+        const bStyle = bootStyles[b];
+        const sBoot = createRealisticBoot(bStyle.body, bStyle.accent, bStyle.flower, 1.05);
+        sBoot.position.set(Math.cos(angle) * rad, 0, Math.sin(angle) * rad);
+        sBoot.rotation.y = angle + Math.PI / 2;
+        bootsGroup.add(sBoot);
+      }
+      scene.add(bootsGroup);
+      // 3B. MONTAÑAS DE BOTAS (MEMORIAL MOUNDS OF 6.402 VICTIMS)
+      function createBootMound(cx, cz, count = 14) {
+        const mound = new THREE.Group();
+        mound.position.set(cx, -2.15, cz);
+
+        // Stone Base
+        const plinth = new THREE.Mesh(
+          new THREE.CylinderGeometry(1.6, 1.8, 0.16, 24),
+          new THREE.MeshStandardMaterial({ color: 0x070E1A, roughness: 0.8, metalness: 0.3 })
+        );
+        plinth.position.y = 0.08;
+        mound.add(plinth);
+
+        const ring = new THREE.Mesh(
+          new THREE.TorusGeometry(1.62, 0.04, 12, 32),
+          new THREE.MeshStandardMaterial({ color: 0xA855F7, emissive: 0x7E22CE, emissiveIntensity: 0.6 })
+        );
+        ring.rotation.x = Math.PI / 2;
+        ring.position.y = 0.16;
+        mound.add(ring);
+
+        const mColors = [0x111827, 0x1F2937, 0x064E3B, 0x4C1D95, 0x78350F, 0x0F172A];
+        const mAccents = [0x10B981, 0xA855F7, 0xF59E0B, 0x06B6D4, 0xEF4444, 0xEC4899];
+        const mFlowers = [0xEF4444, 0xFCD34D, 0x818CF8, 0x34D399, 0xF472B6, 0xFFFFFF];
+
+        for (let i = 0; i < count; i++) {
+          const angle = (i / count) * Math.PI * 2 + (i * 0.3);
+          const rad = (i < count / 2) ? (0.35 + (i % 3) * 0.22) : (0.75 + (i % 4) * 0.18);
+          const bMesh = createRealisticBoot(
+            mColors[i % mColors.length],
+            mAccents[i % mAccents.length],
+            mFlowers[i % mFlowers.length],
+            0.75 + (i % 3) * 0.1
+          );
+          bMesh.position.set(Math.cos(angle) * rad, 0.1 + (i % 3) * 0.1, Math.sin(angle) * rad);
+          bMesh.rotation.y = angle + (i % 2 === 0 ? 0.8 : -0.6);
+          bMesh.rotation.z = (i % 4 - 2) * 0.18;
+          bMesh.rotation.x = (i % 3 - 1) * 0.16;
+          mound.add(bMesh);
+        }
+
+        // Memorial Candles around Mound
+        for (let c = 0; c < 5; c++) {
+          const ca = (c / 5) * Math.PI * 2;
+          const candle = new THREE.Mesh(
+            new THREE.CylinderGeometry(0.035, 0.035, 0.2, 10),
+            new THREE.MeshStandardMaterial({ color: 0xFDE047, emissive: 0xF59E0B, emissiveIntensity: 0.95 })
+          );
+          candle.position.set(Math.cos(ca) * 1.45, 0.22, Math.sin(ca) * 1.45);
+          mound.add(candle);
+        }
+        return mound;
+      }
+      scene.add(createBootMound(-4.3, 0.9, 14));
+      scene.add(createBootMound(4.3, 0.9, 14));
+
+      // 3C. MONUMENTAL COLOMBIAN WAVING FLAGS
+      function createColombianFlag(x, z) {
+        const flagGroup = new THREE.Group();
+        flagGroup.position.set(x, -2.2, z);
+
+        const mastBase = new THREE.Mesh(
+          new THREE.CylinderGeometry(0.3, 0.4, 0.45, 16),
+          new THREE.MeshStandardMaterial({ color: 0x090D16, metalness: 0.85, roughness: 0.25 })
+        );
+        mastBase.position.y = 0.22;
+        flagGroup.add(mastBase);
+
+        const mast = new THREE.Mesh(
+          new THREE.CylinderGeometry(0.05, 0.08, 7.2, 16),
+          new THREE.MeshStandardMaterial({ color: 0xD4AF37, metalness: 0.95, roughness: 0.15 })
+        );
+        mast.position.y = 3.6;
+        flagGroup.add(mast);
+
+        const spear = new THREE.Mesh(
+          new THREE.ConeGeometry(0.12, 0.35, 12),
+          new THREE.MeshStandardMaterial({ color: 0xF59E0B, emissive: 0xD97706, emissiveIntensity: 0.6, metalness: 0.9 })
+        );
+        spear.position.y = 7.35;
+        flagGroup.add(spear);
+
+        // Tricolor Fabric (Yellow 50%, Blue 25%, Red 25%)
+        const fCanvas = document.createElement('canvas');
+        fCanvas.width = 512; fCanvas.height = 320;
+        const fctx = fCanvas.getContext('2d');
+        fctx.fillStyle = '#FCD116'; fctx.fillRect(0, 0, 512, 160); // Yellow
+        fctx.fillStyle = '#003893'; fctx.fillRect(0, 160, 512, 80); // Blue
+        fctx.fillStyle = '#CE1126'; fctx.fillRect(0, 240, 512, 80); // Red
+
+        const flagTex = new THREE.CanvasTexture(fCanvas);
+        const flagGeo = new THREE.PlaneGeometry(2.5, 1.55, 16, 8);
+        const flagMat = new THREE.MeshStandardMaterial({ map: flagTex, side: THREE.DoubleSide, roughness: 0.5, metalness: 0.1 });
+        const flagMesh = new THREE.Mesh(flagGeo, flagMat);
+        flagMesh.position.set(1.25, 6.2, 0);
+        flagGroup.add(flagMesh);
+        flagMeshes.push(flagMesh);
+
+        return flagGroup;
+      }
+      scene.add(createColombianFlag(-7.2, -0.6));
+      scene.add(createColombianFlag(7.2, -0.6));
+
+
+      // 3D. MONUMENTAL STATUE OF CONSTITUTIONAL JUDGE (CORTE CONSTITUCIONAL)
+      function createJudgeStatue(x, z) {
+        const g = new THREE.Group();
+        g.position.set(x, -2.2, z);
+        g.rotation.y = -Math.PI / 3.5;
+
+        // Black Granite Pedestal
+        const plinth = new THREE.Mesh(
+          new THREE.BoxGeometry(1.6, 0.6, 1.6),
+          new THREE.MeshStandardMaterial({ color: 0x0A0F1D, metalness: 0.8, roughness: 0.25 })
+        );
+        plinth.position.y = 0.3;
+        g.add(plinth);
+
+        const goldRing = new THREE.Mesh(
+          new THREE.BoxGeometry(1.64, 0.08, 1.64),
+          new THREE.MeshStandardMaterial({ color: 0x10B981, emissive: 0x059669, emissiveIntensity: 0.6, metalness: 0.8 })
+        );
+        goldRing.position.y = 0.6;
+        g.add(goldRing);
+
+        const robeMat = new THREE.MeshStandardMaterial({ color: 0x080C14, roughness: 0.75 });
+        const stoleMat = new THREE.MeshStandardMaterial({ color: 0x10B981, emissive: 0x047857, emissiveIntensity: 0.5, roughness: 0.4 });
+        const goldMat = new THREE.MeshStandardMaterial({ color: 0xF59E0B, metalness: 0.9, roughness: 0.2 });
+
+        // Toga
+        const lowerRobe = new THREE.Mesh(new THREE.ConeGeometry(0.55, 1.8, 16), robeMat);
+        lowerRobe.position.y = 1.5;
+        g.add(lowerRobe);
+
+        const torso = new THREE.Mesh(new THREE.CylinderGeometry(0.35, 0.45, 1.0, 16), robeMat);
+        torso.position.y = 2.6;
+        g.add(torso);
+
+        // Emerald Judicial Stole
+        const stole = new THREE.Mesh(new THREE.BoxGeometry(0.25, 0.95, 0.52), stoleMat);
+        stole.position.set(0, 2.6, 0.05);
+        g.add(stole);
+
+        // Head
+        const head = new THREE.Mesh(new THREE.SphereGeometry(0.22, 16, 16), new THREE.MeshStandardMaterial({ color: 0xD1D5DB, roughness: 0.5 }));
+        head.position.y = 3.3;
+        g.add(head);
+
+        // Constitution Book (1991)
+        const leftArm = new THREE.Mesh(new THREE.CylinderGeometry(0.09, 0.11, 0.65, 10), robeMat);
+        leftArm.position.set(-0.45, 2.5, 0.2);
+        leftArm.rotation.x = Math.PI / 4;
+        g.add(leftArm);
+
+        const book = new THREE.Mesh(new THREE.BoxGeometry(0.32, 0.44, 0.12), goldMat);
+        book.position.set(-0.55, 2.5, 0.45);
+        book.rotation.y = 0.25;
+        g.add(book);
+
+        // Gavel of Justice
+        const rightArm = new THREE.Mesh(new THREE.CylinderGeometry(0.09, 0.11, 0.7, 10), robeMat);
+        rightArm.position.set(0.48, 2.55, 0.25);
+        rightArm.rotation.z = -Math.PI / 4;
+        rightArm.rotation.x = Math.PI / 6;
+        g.add(rightArm);
+
+        const gavelHandle = new THREE.Mesh(new THREE.CylinderGeometry(0.03, 0.03, 0.35, 8), goldMat);
+        gavelHandle.position.set(0.72, 2.8, 0.45);
+        gavelHandle.rotation.x = Math.PI / 2;
+        g.add(gavelHandle);
+
+        const gavelHead = new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.08, 0.18, 12), goldMat);
+        gavelHead.position.set(0.72, 2.8, 0.6);
+        gavelHead.rotation.z = Math.PI / 2;
+        g.add(gavelHead);
+
+        return g;
+      }
+      scene.add(createJudgeStatue(4.5, -2.4));
+      // 3E. MEMORIAL SCULPTURE OF MADRES DE SOACHA (MAFAPO)
+      function createMothersSculpture(x, z) {
+        const g = new THREE.Group();
+        g.position.set(x, -2.2, z);
+        g.rotation.y = Math.PI / 3.5;
+
+        // Black Granite Pedestal
+        const plinth = new THREE.Mesh(
+          new THREE.BoxGeometry(1.6, 0.6, 1.6),
+          new THREE.MeshStandardMaterial({ color: 0x0A0F1D, metalness: 0.8, roughness: 0.25 })
+        );
+        plinth.position.y = 0.3;
+        g.add(plinth);
+
+        const purpleTrim = new THREE.Mesh(
+          new THREE.BoxGeometry(1.64, 0.08, 1.64),
+          new THREE.MeshStandardMaterial({ color: 0xA855F7, emissive: 0x7E22CE, emissiveIntensity: 0.6, metalness: 0.8 })
+        );
+        purpleTrim.position.y = 0.6;
+        g.add(purpleTrim);
+
+        const dressMat = new THREE.MeshStandardMaterial({ color: 0x0E1322, roughness: 0.8 });
+        const scarfMat = new THREE.MeshStandardMaterial({ color: 0xF8FAFC, roughness: 0.35, emissive: 0xFFFFFF, emissiveIntensity: 0.25 });
+
+        // Mother 1: Holding framed portrait of victim
+        const m1 = new THREE.Group();
+        m1.position.set(-0.35, 0.6, 0);
+
+        const m1Body = new THREE.Mesh(new THREE.ConeGeometry(0.42, 1.8, 16), dressMat);
+        m1Body.position.y = 0.9;
+        m1.add(m1Body);
+
+        const m1Head = new THREE.Mesh(new THREE.SphereGeometry(0.18, 16, 16), dressMat);
+        m1Head.position.y = 1.9;
+        m1.add(m1Head);
+
+        const scarf1 = new THREE.Mesh(new THREE.SphereGeometry(0.21, 16, 16, 0, Math.PI * 2, 0, Math.PI * 0.65), scarfMat);
+        scarf1.position.y = 1.95;
+        m1.add(scarf1);
+
+        const frame = new THREE.Mesh(
+          new THREE.BoxGeometry(0.35, 0.42, 0.06),
+          new THREE.MeshStandardMaterial({ color: 0xD4AF37, metalness: 0.8, roughness: 0.2 })
+        );
+        frame.position.set(0, 1.45, 0.35);
+        m1.add(frame);
+
+        const photo = new THREE.Mesh(
+          new THREE.PlaneGeometry(0.28, 0.34),
+          new THREE.MeshStandardMaterial({ color: 0xE2E8F0, roughness: 0.9 })
+        );
+        photo.position.set(0, 1.45, 0.39);
+        m1.add(photo);
+        g.add(m1);
+
+        // Mother 2: Extending a white lily of peace towards the memorial
+        const m2 = new THREE.Group();
+        m2.position.set(0.35, 0.6, 0.1);
+
+        const m2Body = new THREE.Mesh(new THREE.ConeGeometry(0.42, 1.75, 16), dressMat);
+        m2Body.position.y = 0.88;
+        m2.add(m2Body);
+
+        const m2Head = new THREE.Mesh(new THREE.SphereGeometry(0.18, 16, 16), dressMat);
+        m2Head.position.y = 1.85;
+        m2.add(m2Head);
+
+        const scarf2 = new THREE.Mesh(new THREE.SphereGeometry(0.21, 16, 16, 0, Math.PI * 2, 0, Math.PI * 0.65), scarfMat);
+        scarf2.position.y = 1.9;
+        m2.add(scarf2);
+
+        const lilyStem = new THREE.Mesh(
+          new THREE.CylinderGeometry(0.015, 0.015, 0.45, 8),
+          new THREE.MeshStandardMaterial({ color: 0x16A34A })
+        );
+        lilyStem.position.set(0.18, 1.4, 0.45);
+        lilyStem.rotation.x = Math.PI / 3;
+        m2.add(lilyStem);
+
+        const lilyBlossom = new THREE.Mesh(
+          new THREE.ConeGeometry(0.08, 0.16, 8),
+          new THREE.MeshStandardMaterial({ color: 0xFFFFFF, emissive: 0xFFFFFF, emissiveIntensity: 0.7 })
+        );
+        lilyBlossom.position.set(0.18, 1.55, 0.62);
+        lilyBlossom.rotation.x = -Math.PI / 4;
+        m2.add(lilyBlossom);
+        g.add(m2);
+
+        // Memorial candlelight tribute at base
+        for (let k = 0; k < 4; k++) {
+          const candle = new THREE.Mesh(
+            new THREE.CylinderGeometry(0.035, 0.035, 0.18, 8),
+            new THREE.MeshStandardMaterial({ color: 0xFDE047, emissive: 0xF59E0B, emissiveIntensity: 0.95 })
+          );
+          candle.position.set(-0.5 + k * 0.35, 0.7, 0.65);
+          g.add(candle);
+        }
+        return g;
+      }
+      scene.add(createMothersSculpture(-4.5, -2.4));
+
+
+      // 4. CENTRAL MEMORIAL PEDESTAL & BALANZA CONSTITUCIONAL
+      const base = new THREE.Mesh(new THREE.CylinderGeometry(2.2, 2.5, 0.35, 32), new THREE.MeshStandardMaterial({ color: 0x070E1A, roughness: 0.25, metalness: 0.85 }));
+      base.position.set(0, -2.05, -0.6); scene.add(base);
+      const jadeRing = new THREE.Mesh(new THREE.TorusGeometry(2.1, 0.06, 16, 32), new THREE.MeshStandardMaterial({ color: 0x10B981, emissive: 0x10B981, emissiveIntensity: 0.5 }));
+      jadeRing.rotation.x = Math.PI / 2; jadeRing.position.set(0, -1.86, -0.6); scene.add(jadeRing);
+
+      // Slender background pillar behind the boots
+      const pillar = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.18, 4.8, 20), new THREE.MeshStandardMaterial({ color: 0x1A2536, metalness: 0.9, roughness: 0.2 }));
+      pillar.position.set(0, 0.35, -0.6); scene.add(pillar);
+      const fulcrum = new THREE.Mesh(new THREE.SphereGeometry(0.32, 24, 24), new THREE.MeshStandardMaterial({ color: 0x10B981, emissive: 0x059669, emissiveIntensity: 0.6, metalness: 0.9 }));
+      fulcrum.position.set(0, 2.75, -0.6); scene.add(fulcrum);
+
+      // Tilting Beam Group
+      beamGroup = new THREE.Group(); beamGroup.position.set(0, 2.75, -0.6);
+      const beam = new THREE.Mesh(new THREE.BoxGeometry(7.6, 0.16, 0.16), new THREE.MeshStandardMaterial({ color: 0x10B981, metalness: 0.95 }));
+      beamGroup.add(beam);
+
+      leftPlate = createPlate(0x10B981, -3.5, "left"); beamGroup.add(leftPlate);
+      rightPlate = createPlate(0xA855F7, 3.5, "right"); beamGroup.add(rightPlate);
+      scene.add(beamGroup);
+
+      // 5. MEMORIAL PARTICLES / FIREFLIES
+      const count = 240; const positions = new Float32Array(count * 3);
+      for (let i = 0; i < count * 3; i++) positions[i] = (Math.random() - 0.5) * 22;
+      const starsGeo = new THREE.BufferGeometry();
+      starsGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+      particlesField = new THREE.Points(starsGeo, new THREE.PointsMaterial({ size: 0.07, color: 0x34D399, transparent: true, opacity: 0.65 }));
+      scene.add(particlesField);
+
+      function animate() {
+        requestAnimationFrame(animate);
+        currentTilt += (targetTilt - currentTilt) * 0.045;
+        beamGroup.rotation.z = currentTilt;
+        leftPlate.rotation.z = -currentTilt;
+        rightPlate.rotation.z = -currentTilt;
+        bootsGroup.rotation.y += 0.003;
+        monolithsGroup.rotation.y += 0.001;
+        particlesField.rotation.y += 0.0006;
+
+        // Undulating Colombian flags wave animation
+        const flagTime = performance.now() * 0.0035;
+        flagMeshes.forEach(fMesh => {
+          const pAttr = fMesh.geometry.attributes.position;
+          for (let pi = 0; pi < pAttr.count; pi++) {
+            const px = pAttr.getX(pi);
+            const wave = Math.sin(flagTime * 3.2 + px * 2.8) * 0.14 * (Math.max(0, px) / 2.5);
+            pAttr.setZ(pi, wave);
+          }
+          pAttr.needsUpdate = true;
+        });
+
+        // Smooth camera waypoint interpolation
+        if (cameraLerping) {
+          camera.position.lerp(targetCamPos, 0.045);
+          controls.target.lerp(targetCamTarget, 0.045);
+          if (camera.position.distanceTo(targetCamPos) < 0.04 && controls.target.distanceTo(targetCamTarget) < 0.04) {
+            cameraLerping = false;
+          }
+        }
+
+        controls.update();
+        renderer.render(scene, camera);
+      }
+      animate();
+
+      window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+    }
+
+    function createPlate(colorHex, xOffset, type) {
+      const g = new THREE.Group(); g.position.set(xOffset, -0.05, 0);
+      const cableMat = new THREE.LineBasicMaterial({ color: 0x6EE7B7 });
+      const pts = [new THREE.Vector3(0, 0, 0), new THREE.Vector3(-0.8, -2, 0), new THREE.Vector3(0, 0, 0), new THREE.Vector3(0.8, -2, 0)];
+      g.add(new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints(pts), cableMat));
+      const dish = new THREE.Mesh(new THREE.CylinderGeometry(0.95, 0.75, 0.1, 24), new THREE.MeshStandardMaterial({ color: 0x0E1726, metalness: 0.8, roughness: 0.25 }));
+      dish.position.y = -2.05; g.add(dish);
+      if (type === "left") {
+        // Book of Constitution in Gold & Emerald
+        const book = new THREE.Mesh(new THREE.BoxGeometry(0.65, 0.15, 0.5), new THREE.MeshStandardMaterial({ color: 0x10B981, emissive: 0x047857, emissiveIntensity: 0.5, metalness: 0.9 }));
+        book.position.y = -1.9; g.add(book);
+      } else {
+        // Amethyst Crystal Heart & Flame of Dignity
+        const crystal = new THREE.Mesh(new THREE.OctahedronGeometry(0.45, 0), new THREE.MeshStandardMaterial({ color: 0xA855F7, emissive: 0x7E22CE, emissiveIntensity: 0.85 }));
+        crystal.position.y = -1.65; g.add(crystal);
+      }
+      return g;
+    }
+
+    window.setTargetTilt = function(val) {
+      targetTilt = val;
+      const hud = document.getElementById('right-balance-status');
+      if (!hud) return;
+      if (val > 0.05) hud.textContent = "+ PODER PÚBLICO";
+      else if (val < -0.05) hud.textContent = "+ DIGNIDAD VÍCTIMAS";
+      else hud.textContent = "EQUILIBRIO CONSTITUCIONAL";
+    };
+
+    function tiltBalance(dir) {
+      if (dir === 'left') window.setTargetTilt(0.24);
+      else window.setTargetTilt(-0.32);
+    }
+    function resetBalance() {
+      const ev = SLIDES_EVIDENCE[currentSlide];
+      window.setTargetTilt(ev.tilt);
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      renderDeckSidebar();
+      initThree();
+      goToSlide(0);
+    });
+  </script>
+</body>
+</html>

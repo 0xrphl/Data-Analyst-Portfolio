@@ -1,0 +1,1277 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tribunal Constitucional | ¿La Violencia terminó o cambió de rostro? — UTP Reto 1</title>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            gold: { DEFAULT: '#D4AF37', light: '#F6E8B6', dark: '#997F24', glow: 'rgba(212, 175, 55, 0.5)' },
+            crimson: { DEFAULT: '#E53E3E', light: '#FC8181', dark: '#9B2C2C', deep: '#4A1212' }
+          }
+        }
+      }
+    }
+  </script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #04070d;
+      color: #F1F5F9;
+      overflow: hidden;
+      user-select: none;
+    }
+    .serif-title { font-family: 'Cinzel', serif; }
+    .mono-num { font-family: 'JetBrains Mono', monospace; }
+    
+    ::-webkit-scrollbar { width: 5px; height: 5px; }
+    ::-webkit-scrollbar-track { background: rgba(5, 8, 15, 0.4); }
+    ::-webkit-scrollbar-thumb { background: rgba(212, 175, 55, 0.35); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #D4AF37; }
+
+    /* Widescreen PowerPoint Slide Transitions & Centering */
+    .slide-panel {
+      display: none;
+      opacity: 0;
+      transform: translateY(14px) scale(0.99);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      background: transparent !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+    }
+    .slide-panel.active {
+      display: flex;
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    /* FULL TRANSPARENCY STAGE - NO BACKGROUND */
+    .stage-transparent {
+      background: transparent !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+      border: none !important;
+      box-shadow: none !important;
+    }
+    .slide-panel .glass-box {
+      background: transparent !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+    }
+
+    /* ULTRA TRANSPARENT GLASS (for HUD header and sidebar) */
+    .glass-ultra {
+      background: rgba(6, 10, 20, 0.32);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.45);
+    }
+    .glass-box {
+      background: rgba(10, 15, 28, 0.38);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.10);
+    }
+    .glass-top {
+      background: rgba(5, 8, 16, 0.55);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+    }
+
+    /* TYPOGRAPHY OVER 3D: White fill with black border (stroke) and deep shadow */
+    .slide-panel h1,
+    .slide-panel h2,
+    .slide-panel h3,
+    .slide-panel h4,
+    .slide-panel p,
+    .slide-panel blockquote,
+    .slide-panel li,
+    .slide-panel td,
+    .slide-panel th,
+    .slide-panel strong,
+    .slide-panel b,
+    .slide-panel em,
+    .slide-panel i,
+    .slide-panel div {
+      color: #FFFFFF;
+      -webkit-text-fill-color: #FFFFFF;
+      -webkit-text-stroke: 1.15px #000000;
+      paint-order: stroke fill;
+      text-shadow: 0 2px 5px #000000, 0 0 12px #000000, 0 0 24px rgba(0, 0, 0, 0.95);
+    }
+
+    .slide-panel span:not(.emoji-icon):not(.no-stroke) {
+      -webkit-text-stroke: 0.95px #000000;
+      paint-order: stroke fill;
+      text-shadow: 0 2px 4px #000000, 0 0 10px #000000;
+    }
+
+    .slide-panel h1,
+    .slide-panel h2 {
+      -webkit-text-stroke: 1.85px #000000;
+      text-shadow: 0 3px 8px #000000, 0 0 16px #000000, 0 0 32px #000000, 0 0 50px rgba(0, 0, 0, 0.95);
+    }
+
+    .slide-panel h3,
+    .slide-panel h4 {
+      -webkit-text-stroke: 1.35px #000000;
+    }
+
+    /* Amber / Gold Text with Crisp Black Outline */
+    .slide-panel .text-amber-300,
+    .slide-panel .text-amber-400,
+    .slide-panel .text-amber-500,
+    .slide-panel .text-yellow-400,
+    .slide-panel .glow-gold-text {
+      color: #FCD34D !important;
+      -webkit-text-fill-color: #FCD34D !important;
+      -webkit-text-stroke: 1.25px #000000;
+      text-shadow: 0 0 14px rgba(212, 175, 55, 0.85), 0 2px 6px #000000, 0 0 16px #000000;
+    }
+
+    /* Red / Crimson Text with Crisp Black Outline */
+    .slide-panel .text-red-300,
+    .slide-panel .text-red-400,
+    .slide-panel .text-red-500,
+    .slide-panel .glow-crimson-text {
+      color: #F87171 !important;
+      -webkit-text-fill-color: #F87171 !important;
+      -webkit-text-stroke: 1.25px #000000;
+      text-shadow: 0 0 14px rgba(239, 68, 68, 0.85), 0 2px 6px #000000, 0 0 16px #000000;
+    }
+
+    /* Neutral text overrides */
+    .slide-panel .text-slate-100,
+    .slide-panel .text-slate-200,
+    .slide-panel .text-slate-300,
+    .slide-panel .text-white {
+      color: #FFFFFF !important;
+      -webkit-text-fill-color: #FFFFFF !important;
+    }
+
+    /* Prevent text-stroke distortions on SVG icons, charts, emojis */
+    .slide-panel svg,
+    .slide-panel canvas,
+    .slide-panel .emoji-icon,
+    .slide-panel .no-stroke {
+      -webkit-text-stroke: 0 !important;
+      -webkit-text-fill-color: initial !important;
+    }
+
+    /* Text readability shadow over 3D space */
+    .text-readable {
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.95), 0 0 20px rgba(0, 0, 0, 0.8);
+    }
+    .glow-gold-text {
+      text-shadow: 0 0 16px rgba(212, 175, 55, 0.6), 0 2px 8px rgba(0,0,0,0.9);
+    }
+    .glow-crimson-text {
+      text-shadow: 0 0 16px rgba(229, 62, 62, 0.6), 0 2px 8px rgba(0,0,0,0.9);
+    }
+  </style>
+</head>
+<body class="relative w-screen h-screen overflow-hidden bg-[#04070d]">
+
+  <!-- THREE.JS FULLSCREEN 3D BACKGROUND (RICH MASONIC TEMPLE OF JUSTICE) -->
+  <div id="canvas-container" class="fixed inset-0 z-0 pointer-events-auto cursor-grab active:cursor-grabbing"></div>
+  <div class="fixed inset-0 z-[1] bg-gradient-to-t from-[#04070d]/60 via-transparent to-[#04070d]/30 pointer-events-none"></div>
+
+  <!-- TOP EXECUTIVE HUD -->
+  <header class="relative z-30 w-full glass-top px-4 sm:px-6 py-2.5 flex items-center justify-between gap-4">
+    <div class="flex items-center space-x-3">
+      <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 to-red-600 flex items-center justify-center font-bold text-black text-xl shadow-lg border border-amber-400/40">
+        ⚖️
+      </div>
+      <div>
+        <div class="flex items-center space-x-2">
+          <span class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/40 text-readable">UTP • CÁTEDRA CONSTITUCIÓN POLÍTICA</span>
+          <span class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-red-500/20 text-red-300 border border-red-500/40 text-readable">RETO 1 (25%)</span>
+        </div>
+        <h1 class="serif-title text-sm sm:text-base lg:text-lg font-bold text-white tracking-wide text-readable">
+          TRIBUNAL ACADÉMICO: <span class="text-amber-400 glow-gold-text">¿LA VIOLENCIA TERMINÓ O CAMBIÓ DE ROSTRO?</span>
+        </h1>
+      </div>
+    </div>
+
+    <!-- Center Progress Pill -->
+    <div class="hidden md:flex flex-col items-center flex-1 max-w-lg mx-4">
+      <div class="flex items-center justify-between w-full text-xs mb-1 px-1">
+        <span id="nav-slide-title" class="font-semibold text-slate-100 truncate max-w-[320px] text-readable">01. Acusación Central del Tribunal</span>
+        <span id="nav-slide-num" class="mono-num text-amber-300 font-bold text-xs bg-black/60 px-2 py-0.5 rounded border border-amber-500/40">01 / 09</span>
+      </div>
+      <div class="w-full h-2 bg-black/50 rounded-full overflow-hidden border border-white/20">
+        <div id="nav-progress-bar" class="h-full bg-gradient-to-r from-amber-500 via-amber-400 to-red-500 transition-all duration-300 w-[11.1%] shadow-[0_0_12px_#D4AF37]"></div>
+      </div>
+    </div>
+
+    <!-- Right Actions -->
+    <div class="flex items-center space-x-2 sm:space-x-3">
+      <button onclick="toggleFullScreen()" class="p-2 rounded-xl bg-black/40 hover:bg-black/60 text-slate-200 border border-white/20 text-xs transition shadow-md" title="Pantalla Completa (F11)">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-5h-4m4 0v4m0 0l-5-5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/></svg>
+      </button>
+
+      <a href="https://docs.google.com/document/d/1emqD1v26xeqMOUtWDI1nGGXNgZgpq8Aq/edit?usp=sharing&ouid=102220368577968794134&rtpof=true&sd=true" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-black transition shadow-lg border border-amber-300/50">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+        <span class="hidden sm:inline">Dossier Word (.DOCX)</span>
+        <span class="sm:hidden">DOCX</span>
+      </a>
+
+      <a href="/college/politics/challenge2" class="p-2 text-slate-300 hover:text-white rounded-xl bg-black/40 hover:bg-black/60 border border-white/20 transition shadow-md" title="Ir al Reto 2 (Memoria)">
+        <span class="text-xs font-bold text-amber-300">R2</span>
+      </a>
+
+
+      <a href="/" class="p-2 text-slate-300 hover:text-white rounded-xl bg-black/40 hover:bg-black/60 border border-white/20 transition shadow-md" title="Volver al Portafolio">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </a>
+    </div>
+  </header>
+
+  <!-- PRESENTATION CONTAINER (OVER 3D CANVAS) -->
+  <div class="relative z-20 flex-1 flex w-full h-[calc(100vh-58px)] overflow-hidden pointer-events-none p-3 sm:p-4 gap-4">
+
+    <!-- LEFT SIDEBAR: SLIDE DECK DOCK (ULTRA TRANSPARENT) -->
+    <aside class="w-56 sm:w-64 h-full glass-ultra rounded-2xl flex flex-col pointer-events-auto shadow-2xl overflow-hidden flex-shrink-0">
+      <div class="p-3 border-b border-white/10 flex items-center justify-between bg-black/30">
+        <div class="flex items-center space-x-2">
+          <span class="text-sm">📑</span>
+          <span class="text-xs font-bold uppercase tracking-wider text-slate-100 text-readable">Diapositivas</span>
+        </div>
+        <span class="text-[10px] font-mono bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded font-bold border border-amber-500/30">9 Hitos</span>
+      </div>
+
+      <div class="flex-1 overflow-y-auto p-2 space-y-1.5 scrollbar-thin">
+        
+        <button onclick="goToSlide(0)" id="deck-btn-0" class="deck-item active bg-amber-500/25 border-amber-400/60 shadow-[0_0_15px_rgba(212,175,55,0.25)] w-full p-2.5 rounded-xl text-left transition flex items-start space-x-2.5 border backdrop-blur-sm">
+          <span class="mono-num text-[11px] font-bold px-1.5 py-0.5 rounded bg-amber-500/30 text-amber-200 border border-amber-400/50">01</span>
+          <div class="flex-1 min-w-0">
+            <h4 class="text-xs font-bold text-white truncate text-readable">Acusación Central</h4>
+            <p class="text-[10px] text-slate-300 truncate text-readable">Metamorfosis del poder oligárquico</p>
+          </div>
+        </button>
+        <button onclick="goToSlide(1)" id="deck-btn-1" class="deck-item border-white/10 hover:bg-white/10 w-full p-2.5 rounded-xl text-left transition flex items-start space-x-2.5 border backdrop-blur-sm">
+          <span class="mono-num text-[11px] font-bold px-1.5 py-0.5 rounded bg-black/40 text-slate-300 border border-white/15">02</span>
+          <div class="flex-1 min-w-0">
+            <h4 class="text-xs font-bold text-white truncate text-readable">Advertencia Bolivariana</h4>
+            <p class="text-[10px] text-slate-300 truncate text-readable">Decreto de Estado (8 Nov 1828)</p>
+          </div>
+        </button>
+        <button onclick="goToSlide(2)" id="deck-btn-2" class="deck-item border-white/10 hover:bg-white/10 w-full p-2.5 rounded-xl text-left transition flex items-start space-x-2.5 border backdrop-blur-sm">
+          <span class="mono-num text-[11px] font-bold px-1.5 py-0.5 rounded bg-black/40 text-slate-300 border border-white/15">03</span>
+          <div class="flex-1 min-w-0">
+            <h4 class="text-xs font-bold text-white truncate text-readable">Supremo Consejo 1833</h4>
+            <p class="text-[10px] text-slate-300 truncate text-readable">Carnicelli: 30+ Presidentes</p>
+          </div>
+        </button>
+        <button onclick="goToSlide(3)" id="deck-btn-3" class="deck-item border-white/10 hover:bg-white/10 w-full p-2.5 rounded-xl text-left transition flex items-start space-x-2.5 border backdrop-blur-sm">
+          <span class="mono-num text-[11px] font-bold px-1.5 py-0.5 rounded bg-black/40 text-slate-300 border border-white/15">04</span>
+          <div class="flex-1 min-w-0">
+            <h4 class="text-xs font-bold text-white truncate text-readable">La Violencia & Currie</h4>
+            <p class="text-[10px] text-slate-300 truncate text-readable">Basilisco y Despojo del BM</p>
+          </div>
+        </button>
+        <button onclick="goToSlide(4)" id="deck-btn-4" class="deck-item border-white/10 hover:bg-white/10 w-full p-2.5 rounded-xl text-left transition flex items-start space-x-2.5 border backdrop-blur-sm">
+          <span class="mono-num text-[11px] font-bold px-1.5 py-0.5 rounded bg-black/40 text-slate-300 border border-white/15">05</span>
+          <div class="flex-1 min-w-0">
+            <h4 class="text-xs font-bold text-white truncate text-readable">Frente Nacional & CIA</h4>
+            <p class="text-[10px] text-slate-300 truncate text-readable">Pactos Sitges 50/50 e Informe</p>
+          </div>
+        </button>
+        <button onclick="goToSlide(5)" id="deck-btn-5" class="deck-item border-white/10 hover:bg-white/10 w-full p-2.5 rounded-xl text-left transition flex items-start space-x-2.5 border backdrop-blur-sm">
+          <span class="mono-num text-[11px] font-bold px-1.5 py-0.5 rounded bg-black/40 text-slate-300 border border-white/15">06</span>
+          <div class="flex-1 min-w-0">
+            <h4 class="text-xs font-bold text-white truncate text-readable">Constitución 91 & Jinetes</h4>
+            <p class="text-[10px] text-slate-300 truncate text-readable">Tutela vs. Apertura Neoliberal</p>
+          </div>
+        </button>
+        <button onclick="goToSlide(6)" id="deck-btn-6" class="deck-item border-white/10 hover:bg-white/10 w-full p-2.5 rounded-xl text-left transition flex items-start space-x-2.5 border backdrop-blur-sm">
+          <span class="mono-num text-[11px] font-bold px-1.5 py-0.5 rounded bg-black/40 text-slate-300 border border-white/15">07</span>
+          <div class="flex-1 min-w-0">
+            <h4 class="text-xs font-bold text-white truncate text-readable">Noticia: Drones & Kfir</h4>
+            <p class="text-[10px] text-slate-300 truncate text-readable">Cauca (INDEPAZ) vs IAI Israel</p>
+          </div>
+        </button>
+        <button onclick="goToSlide(7)" id="deck-btn-7" class="deck-item border-white/10 hover:bg-white/10 w-full p-2.5 rounded-xl text-left transition flex items-start space-x-2.5 border backdrop-blur-sm">
+          <span class="mono-num text-[11px] font-bold px-1.5 py-0.5 rounded bg-black/40 text-slate-300 border border-white/15">08</span>
+          <div class="flex-1 min-w-0">
+            <h4 class="text-xs font-bold text-white truncate text-readable">Matriz Analítica & Fallo</h4>
+            <p class="text-[10px] text-slate-300 truncate text-readable">Veredicto Inapelable del Tribunal</p>
+          </div>
+        </button>
+        <button onclick="goToSlide(8)" id="deck-btn-8" class="deck-item border-white/10 hover:bg-white/10 w-full p-2.5 rounded-xl text-left transition flex items-start space-x-2.5 border backdrop-blur-sm">
+          <span class="mono-num text-[11px] font-bold px-1.5 py-0.5 rounded bg-black/40 text-slate-300 border border-white/15">09</span>
+          <div class="flex-1 min-w-0">
+            <h4 class="text-xs font-bold text-white truncate text-readable">Dossier Oficial</h4>
+            <p class="text-[10px] text-slate-300 truncate text-readable">12 Capítulos y Bibliografía APA 7</p>
+          </div>
+        </button>
+      </div>
+
+      <div class="p-2.5 border-t border-white/10 bg-black/40 text-[10px] text-slate-300 flex items-center justify-between text-readable">
+        <span>Navega con flechas</span>
+        <div class="flex space-x-1">
+          <kbd class="px-1.5 py-0.5 bg-black/60 rounded text-slate-200 font-mono text-[10px] border border-white/20">←</kbd>
+          <kbd class="px-1.5 py-0.5 bg-black/60 rounded text-slate-200 font-mono text-[10px] border border-white/20">→</kbd>
+        </div>
+      </div>
+    </aside>
+
+    <!-- CENTER STAGE: POWERPOINT PRESENTATION SCREEN (FULL TRANSPARENCY - NO BG) -->
+    <section class="flex-1 h-full flex flex-col pointer-events-auto min-w-0">
+      <div class="flex-1 stage-transparent p-3 sm:p-6 flex flex-col justify-center items-center overflow-y-auto relative w-full">
+
+        <!-- SLIDE 1: ACUSACIÓN CENTRAL -->
+        <div id="slide-0" class="slide-panel active flex-col justify-center items-center my-auto w-full max-w-5xl mx-auto space-y-6 text-center">
+          <div class="space-y-4 max-w-4xl mx-auto">
+            <div class="flex items-center justify-center space-x-3">
+              <span class="text-xs uppercase font-mono px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/50 font-bold tracking-wider">DIAPOSITIVA 01 • FORMULACIÓN DEL CASO</span>
+              <span class="text-xs text-slate-200 font-semibold">Universidad Tecnológica de Pereira • Reto 1</span>
+            </div>
+            <h2 class="serif-title text-3xl sm:text-4xl lg:text-5xl font-black text-white leading-tight">
+              ¿La Violencia terminó o <span class="text-amber-400 glow-gold-text">cambió de rostro?</span>
+            </h2>
+            <div class="p-5 sm:p-6 text-base sm:text-lg lg:text-xl text-slate-100 font-medium leading-relaxed italic border-y-2 border-red-500/80 my-3 max-w-3xl mx-auto">
+              "En Colombia, la violencia nunca concluyó. Lo que nuestra historia registra es una metódica metamorfosis funcional del conflicto: las élites pactaron la impunidad en las cúpulas mientras administraban la guerra para garantizar el despojo agrario de las bases populares."
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2 w-full text-center">
+            <div class="p-3">
+              <div class="emoji-icon text-3xl mb-2 text-amber-400">📐</div>
+              <h4 class="text-sm font-bold text-white uppercase tracking-wide">1. Redes Herméticas</h4>
+              <p class="text-xs text-slate-200 mt-1.5 leading-relaxed">El Supremo Consejo de 1833 y la fraternidad de logia que blindó a los jerarcas bipartidistas (Carnicelli y Arrieta-López).</p>
+            </div>
+            <div class="p-3">
+              <div class="emoji-icon text-3xl mb-2 text-red-400">🌾</div>
+              <h4 class="text-sm font-bold text-white uppercase tracking-wide">2. Despojo Agrario</h4>
+              <p class="text-xs text-slate-200 mt-1.5 leading-relaxed">El 'Basilisco' y la Misión Currie del Banco Mundial (1949): despoblar el campo para abaratar la mano de obra fabril.</p>
+            </div>
+            <div class="p-3">
+              <div class="emoji-icon text-3xl mb-2 text-amber-300">⚖️</div>
+              <h4 class="text-sm font-bold text-white uppercase tracking-wide">3. Paradoja del 91</h4>
+              <p class="text-xs text-slate-200 mt-1.5 leading-relaxed">Tutela garantista cohabitando con apertura neoliberal salvaje, paramilitarismo de los Castaño y drones en el Cauca.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- SLIDE 2: DECRETO BOLÍVAR 1828 -->
+        <div id="slide-1" class="slide-panel flex-col justify-center items-center my-auto w-full max-w-4xl mx-auto space-y-5 text-center">
+          <div class="space-y-3">
+            <div class="flex items-center justify-center space-x-3">
+              <span class="text-xs uppercase font-mono px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/50 font-bold">DIAPOSITIVA 02 • ARCHIVO PRIMARIO DE ESTADO</span>
+              <span class="text-xs text-slate-200 font-semibold">Bogotá • 8 de Noviembre de 1828</span>
+            </div>
+            <h2 class="serif-title text-2xl sm:text-3xl lg:text-4xl font-black text-white">
+              La Advertencia Bolivariana: <span class="text-amber-400 glow-gold-text">Proscripción de Sociedades Secretas</span>
+            </h2>
+            <p class="text-sm sm:text-base text-slate-200 leading-relaxed max-w-2xl mx-auto">
+              Tras el magnicidio frustrado de la <strong class="text-white">Noche Septembrina</strong> fraguado en las logias santanderistas, Simón Bolívar comprendió que las cofradías secretas suplantaban la soberanía de la ley por la complicidad corporativa clandestina.
+            </p>
+          </div>
+
+          <div class="p-5 sm:p-6 border-y-2 border-amber-500/60 text-xs sm:text-sm lg:text-base leading-relaxed text-amber-100 font-serif italic max-w-3xl mx-auto">
+            <span class="text-amber-400 font-bold uppercase tracking-wider block text-xs font-sans mb-2 not-italic glow-gold-text">Cita Textual del Decreto Presidencial (Archivo O'Leary, Tomo XXVI, f. 61):</span>
+            "Habiendo acreditado la experiencia tanto en Colombia como en otras naciones, que las sociedades secretas sirven especialmente para preparar los trastornos políticos, turbando la tranquilidad pública y el orden establecido; que ocultando ellas todas sus operaciones con el velo del misterio, hacen presumir fundadamente que no son buenas, ni útiles a la sociedad, y por lo mismo excitan las sospechas y la alarma... Decreta: Artículo 1.° Se prohíben en Colombia todas las asociaciones o confraternidades secretas..."
+          </div>
+
+          <div class="p-3 text-xs sm:text-sm text-slate-200 flex flex-wrap items-center justify-center gap-3">
+            <span><strong class="text-amber-400">Efecto Histórico:</strong> Bolívar murió en 1830; en 1833 la oligarquía reconstituyó las logias mediante el Supremo Consejo.</span>
+            <span class="font-mono text-red-400 font-bold bg-red-500/20 px-2 py-0.5 rounded border border-red-500/40">Pacto Restaurado</span>
+          </div>
+        </div>
+
+        <!-- SLIDE 3: SUPREMO CONSEJO 1833 -->
+        <div id="slide-2" class="slide-panel flex-col justify-center items-center my-auto w-full max-w-4xl mx-auto space-y-5 text-center">
+          <div class="space-y-3">
+            <div class="flex items-center justify-center space-x-3">
+              <span class="text-xs uppercase font-mono px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/50 font-bold">DIAPOSITIVA 03 • COHESIÓN OLIGÁRQUICA</span>
+              <span class="text-xs text-slate-200 font-semibold">Cartagena de Indias • 19 de Junio de 1833</span>
+            </div>
+            <h2 class="serif-title text-2xl sm:text-3xl lg:text-4xl font-black text-white">
+              El Supremo Consejo de 1833: <span class="text-amber-400 glow-gold-text">Fraternidad en Cúpulas, Sangre en el Campo</span>
+            </h2>
+            <p class="text-sm sm:text-base text-slate-200 leading-relaxed max-w-2xl mx-auto">
+              El coronel José María Vesga instituye el <strong>Supremo Consejo Neo-Granadino del Grado 33</strong>. Américo Carnicelli y Milton Arrieta-López documentaron cómo la élite articuló el Estado nacional a través de logias que unían a conservadores y liberales.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 text-xs sm:text-sm max-w-3xl mx-auto text-left sm:text-center">
+            <div class="p-3">
+              <span class="font-bold text-amber-300 text-sm block mb-1">Américo Carnicelli (1975):</span>
+              <p class="text-slate-200 leading-relaxed">Más de 30 presidentes de Colombia, jerarcas constituyentes y comandantes militares compartieron juramentos masónicos secretos.</p>
+            </div>
+            <div class="p-3">
+              <span class="font-bold text-red-400 text-sm block mb-1">Hermetismo vs. Pueblo:</span>
+              <p class="text-slate-200 leading-relaxed">Mientras los caudillos firmaban pactos en tenidas masónicas nocturnas, enviaban a campesinos descalzos a degollarse en las guerras civiles del siglo XIX.</p>
+            </div>
+          </div>
+
+          <div class="p-3 text-xs sm:text-sm text-slate-200 max-w-2xl mx-auto border-t border-amber-500/30 pt-3">
+            <strong class="text-amber-400">Veredicto Histórico:</strong> La fraternidad hermética funcionó como el primer mecanismo de conciliación de intereses de clase por encima de la ley.
+          </div>
+        </div>
+
+        <!-- SLIDE 4: LA VIOLENCIA & CURRIE -->
+        <div id="slide-3" class="slide-panel flex-col justify-center items-center my-auto w-full max-w-4xl mx-auto space-y-5 text-center">
+          <div class="space-y-3">
+            <div class="flex items-center justify-center space-x-3">
+              <span class="text-xs uppercase font-mono px-3 py-1 rounded-full bg-red-500/20 text-red-300 border border-red-500/50 font-bold">DIAPOSITIVA 04 • CONTRARREFORMA AGRARIA CRIMINAL</span>
+              <span class="text-xs text-slate-200 font-semibold">1946 – 1958</span>
+            </div>
+            <h2 class="serif-title text-2xl sm:text-3xl lg:text-4xl font-black text-white">
+              'La Violencia' Bipartidista: <span class="text-red-400 glow-crimson-text">El Basilisco y la Misión Currie</span>
+            </h2>
+            <p class="text-sm sm:text-base text-slate-200 leading-relaxed max-w-2xl mx-auto">
+              Antonio Caballero analiza cómo Laureano Gómez justificó el exterminio de comunidades liberales bajo la metáfora del <strong>'Basilisco'</strong>: un monstruo con pies de confusión, estómago oligárquico, brazos masónicos y cabeza comunista.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 text-xs sm:text-sm max-w-3xl mx-auto text-left sm:text-center">
+            <div class="p-3">
+              <span class="font-bold text-amber-300 text-sm block mb-1">Misión Lauchlin Currie / Banco Mundial (1949):</span>
+              <p class="text-slate-200 leading-relaxed">Dictaminó que la agricultura campesina era un estorbo capitalista. Para industrializar se debía vaciar el campo y arrojar al campesino como mano de obra barata a las fábricas.</p>
+            </div>
+            <div class="p-3">
+              <span class="font-bold text-red-400 text-sm block mb-1">Cóndores y Pájaros (Gardeazábal / Norden):</span>
+              <p class="text-slate-200 leading-relaxed">León María Lozano y los chulavitas impusieron el terror del corte de corbata con el aval del púlpito y la policía, forzando la compra de fincas a precio vil.</p>
+            </div>
+          </div>
+
+          <div class="p-3 text-xs sm:text-sm text-slate-200 flex flex-wrap items-center justify-center gap-3 border-t border-amber-500/30 pt-3">
+            <div>Saldo: <strong class="text-red-400 text-base">300.000+ asesinatos</strong> y <strong class="text-amber-300">2 millones de desplazados</strong>.</div>
+            <span class="text-amber-300 font-bold bg-amber-500/20 px-3 py-1 rounded-full border border-amber-500/40">Despojo Planificado</span>
+          </div>
+        </div>
+
+        <!-- SLIDE 5: FRENTE NACIONAL & CIA -->
+        <div id="slide-4" class="slide-panel flex-col justify-center items-center my-auto w-full max-w-4xl mx-auto space-y-5 text-center">
+          <div class="space-y-3">
+            <div class="flex items-center justify-center space-x-3">
+              <span class="text-xs uppercase font-mono px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/50 font-bold">DIAPOSITIVA 05 • EL CARTEL BIPARTIDISTA</span>
+              <span class="text-xs text-slate-200 font-semibold">1958 – 1974</span>
+            </div>
+            <h2 class="serif-title text-2xl sm:text-3xl lg:text-4xl font-black text-white">
+              El Frente Nacional: <span class="text-amber-400 glow-gold-text">Monopolio del 50/50 y el Informe CIA (1985)</span>
+            </h2>
+            <p class="text-sm sm:text-base text-slate-200 leading-relaxed max-w-2xl mx-auto">
+              En España, Alberto Lleras Camargo y Laureano Gómez firmaron los <strong>Pactos de Benidorm y Sitges</strong>, alternando la Presidencia y repartiendo el 50% de la burocracia. Lo vendido como 'la paz' fue la clausura democrática nacional.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 text-xs sm:text-sm max-w-3xl mx-auto text-left sm:text-center">
+            <div class="p-3">
+              <span class="font-bold text-amber-300 text-sm block mb-1">Informe Desclasificado CIA (Nov 1985):</span>
+              <p class="text-slate-200 leading-relaxed">La CIA (Doc. RDP87T00289R) analizó cómo el bipartidismo mantenía una fachada democrática mientras blindaba el régimen contrainsurgente y subordinaba la soberanía a Washington.</p>
+            </div>
+            <div class="p-3">
+              <span class="font-bold text-red-400 text-sm block mb-1">Génesis del Conflicto Insurgente:</span>
+              <p class="text-slate-200 leading-relaxed">La proscripción de la oposición empujó a la resistencia campesina hacia las armas: FARC (1964), ELN (1964), EPL (1967) y el M-19 (1974 tras el robo electoral a la ANAPO).</p>
+            </div>
+          </div>
+
+          <div class="p-3 text-xs sm:text-sm text-slate-200 max-w-2xl mx-auto border-t border-amber-500/30 pt-3">
+            <strong class="text-amber-400">Tesis Forense:</strong> Las élites crearon un cartel institucional que congeló la política durante 16 años, incubando las cuatro guerrillas que azotaron a Colombia en las décadas posteriores.
+          </div>
+        </div>
+
+        <!-- SLIDE 6: CONSTITUCIÓN 91 & JINETES -->
+        <div id="slide-5" class="slide-panel flex-col justify-center items-center my-auto w-full max-w-4xl mx-auto space-y-5 text-center">
+          <div class="space-y-3">
+            <div class="flex items-center justify-center space-x-3">
+              <span class="text-xs uppercase font-mono px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/50 font-bold">DIAPOSITIVA 06 • PARADOJA CONSTITUCIONAL</span>
+              <span class="text-xs text-slate-200 font-semibold">4 de Julio de 1991</span>
+            </div>
+            <h2 class="serif-title text-2xl sm:text-3xl lg:text-4xl font-black text-white">
+              La Constitución de 1991 y <span class="text-amber-400 glow-gold-text">'Los Jinetes del Apocalipsis'</span>
+            </h2>
+            <p class="text-sm sm:text-base text-slate-200 leading-relaxed max-w-2xl mx-auto">
+              Antonio Caballero (Capítulo 13) expone la contradicción ontológica de fin de siglo: mientras la Asamblea promulgaba el <strong>Estado Social de Derecho</strong> y la Tutela, el gobierno de César Gaviria imponía la <strong>apertura neoliberal salvaje</strong>.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 text-xs sm:text-sm max-w-3xl mx-auto text-left sm:text-center">
+            <div class="p-3">
+              <span class="font-bold text-amber-300 text-sm block mb-1">Desmantelamiento Productivo del Agro:</span>
+              <p class="text-slate-200 leading-relaxed">Se liquidó el IDEMA y se eliminaron aranceles de protección. Colombia dejó de ser autosuficiente y el campesino arruinado halló refugio en los cultivos ilícitos de coca y amapola.</p>
+            </div>
+            <div class="p-3">
+              <span class="font-bold text-red-400 text-sm block mb-1">Los Cuatro Jinetes de Caballero:</span>
+              <p class="text-slate-200 leading-relaxed">El narcotráfico comprando presidencias (Proceso 8.000); los hermanos Castaño expandiendo el paramilitarismo de las AUC; la narcopolítica; y la tutela de EE.UU. ("con el gringo ahí").</p>
+            </div>
+          </div>
+
+          <div class="p-3 text-xs sm:text-sm text-slate-200 max-w-2xl mx-auto border-t border-red-500/40 pt-3">
+            <strong class="text-red-400">La Ironía del Estado de Derecho:</strong> La Constitución más garantista del continente convivió con el exterminio de la Unión Patriótica y el despojo de más de 5 millones de hectáreas de tierra rural.
+          </div>
+        </div>
+
+        <!-- SLIDE 7: CASO NOTICIOSO CONTEMPORÁNEO (2024-2026) -->
+        <div id="slide-6" class="slide-panel flex-col justify-center items-center my-auto w-full max-w-5xl mx-auto space-y-4 text-center">
+          <div class="space-y-2 max-w-3xl mx-auto">
+            <div class="flex items-center justify-center space-x-3">
+              <span class="text-xs uppercase font-mono px-3 py-1 rounded-full bg-red-500/20 text-red-300 border border-red-500/50 font-bold">DIAPOSITIVA 07 • HECHO NOTICIOSO 2024-2026</span>
+              <span class="text-xs text-slate-200 font-semibold">Observatorio de DD.HH. INDEPAZ & Auditorías de Defensa</span>
+            </div>
+            <h2 class="serif-title text-xl sm:text-2xl lg:text-3xl font-black text-white">
+              Ofensiva de Drones en el Cauca vs. <span class="text-red-400 glow-crimson-text">Contratos Cazas Kfir con Israel</span>
+            </h2>
+            <p class="text-xs sm:text-sm text-slate-200 leading-relaxed">
+              <strong class="text-white">Caso Noticioso Real (2024–2026):</strong> En El Plateado, Cañón del Micay y Jamundí, el Estado Mayor Central (EMC de 'Iván Mordisco' con los frentes Carlos Patiño y Dagoberto Ramos), enfrentado a la Segunda Marquetalia, al Frente 57 Yair Bermúdez, al ELN y al Clan del Golfo / EGC, libra una guerra tecnificada mediante <strong>drones artillados con explosivos C4</strong> sobre caseríos y cabildos, quebrando el cese al fuego y forzando la 'Operación Perseo'.
+            </p>
+          </div>
+
+          <!-- Charts Grid (Transparent, No bg) -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl mx-auto">
+            <div class="p-3 border border-white/20 rounded-xl flex flex-col justify-between">
+              <div class="flex items-center justify-between mb-1">
+                <span class="text-xs font-bold text-slate-100">Asesinatos de Líderes (2020–Sept 2026)</span>
+                <span class="text-xs text-red-300 font-bold bg-red-500/25 px-2 py-0.5 rounded border border-red-500/40">468 en 2024-26</span>
+              </div>
+              <div class="h-32 sm:h-36 w-full">
+                <canvas id="chart-pres-anual"></canvas>
+              </div>
+              <span class="text-[10px] text-slate-300 mt-1">173 (2024) + 187 (2025) + 108 (2026*). Fuente oficial: INDEPAZ.</span>
+            </div>
+
+            <div class="p-3 border border-white/20 rounded-xl flex flex-col justify-between">
+              <div class="flex items-center justify-between mb-1">
+                <span class="text-xs font-bold text-slate-100">Concentración Territorial Crítica</span>
+                <span class="text-xs text-amber-300 font-bold bg-amber-500/25 px-2 py-0.5 rounded border border-amber-500/40">Cauca Epicentro (118)</span>
+              </div>
+              <div class="h-32 sm:h-36 w-full">
+                <canvas id="chart-pres-deps"></canvas>
+              </div>
+              <span class="text-[10px] text-slate-300 mt-1">Corredores de narcotráfico: Cañón del Micay, Jamundí, Catatumbo.</span>
+            </div>
+          </div>
+
+          <!-- Fact Callout -->
+          <div class="p-3.5 border-y-2 border-red-500/60 max-w-4xl mx-auto text-xs sm:text-sm text-slate-100 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
+            <div>
+              <strong class="text-amber-300 block text-xs sm:text-sm mb-0.5 glow-gold-text">La Cortina de Humo Geopolítica Documentada:</strong>
+              <span class="text-xs sm:text-sm text-slate-200">Pese a la ruptura diplomática pública con Israel en mayo de 2024 por el genocidio sionista en Gaza, el Ministerio de Defensa y la FAC mantienen en ejecución <strong>contratos por $32.748 millones de pesos ($8.2M USD)</strong> con la estatal israelí <strong>Israel Aerospace Industries (IAI)</strong> para la flota Kfir con vigencia hasta <strong>julio de 2026</strong>, junto a licencias de fusiles Galil (IWI) y sistemas de ciberinteligencia.</span>
+            </div>
+            <span class="px-2.5 py-1 rounded bg-red-500/30 text-red-200 text-xs font-bold border border-red-400/40 whitespace-nowrap">Doble Rasero</span>
+          </div>
+        </div>
+
+        <!-- SLIDE 8: MATRIZ ANALÍTICA & FALLO -->
+        <div id="slide-7" class="slide-panel flex-col justify-center items-center my-auto w-full max-w-5xl mx-auto space-y-4 text-center">
+          <div class="space-y-2 max-w-3xl mx-auto">
+            <div class="flex items-center justify-center space-x-3">
+              <span class="text-xs uppercase font-mono px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/50 font-bold">DIAPOSITIVA 08 • SÍNTESIS FORENSE</span>
+              <span class="text-xs text-slate-200 font-semibold">Tribunal Académico UTP</span>
+            </div>
+            <h2 class="serif-title text-xl sm:text-2xl lg:text-3xl font-black text-white">
+              Matriz Analítica y <span class="text-red-400 glow-crimson-text">Veredicto Inapelable del Tribunal</span>
+            </h2>
+          </div>
+
+          <!-- Comparative Matrix Table (Transparent with crisp borders) -->
+          <div class="overflow-x-auto w-full max-w-4xl mx-auto text-xs sm:text-sm border border-white/20 rounded-xl">
+            <table class="w-full text-left">
+              <thead>
+                <tr class="border-b border-white/20 text-slate-100 font-bold text-xs sm:text-sm bg-black/20">
+                  <th class="p-2.5">Ciclo Histórico</th>
+                  <th class="p-2.5">Discurso Hegemónico Oficial</th>
+                  <th class="p-2.5">Práctica Material de las Cúpulas</th>
+                  <th class="p-2.5">Costo Social en Sangre</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-white/15 text-xs sm:text-sm text-slate-100">
+                <tr>
+                  <td class="p-2.5 font-bold text-amber-300">1828–1902</td>
+                  <td class="p-2.5">Honor de partido y defensa de la fe católica.</td>
+                  <td class="p-2.5">Hermandad en logias masónicas e impunidad de generales.</td>
+                  <td class="p-2.5">Levas forzadas de peones campesinos analfabetos.</td>
+                </tr>
+                <tr>
+                  <td class="p-2.5 font-bold text-red-400">1946–1958</td>
+                  <td class="p-2.5">Guerra santa contra el 'Basilisco'.</td>
+                  <td class="p-2.5">Pájaros, chulavitas y Misión Currie del Banco Mundial.</td>
+                  <td class="p-2.5">300.000 muertos y 2M desterrados para vaciar el agro.</td>
+                </tr>
+                <tr>
+                  <td class="p-2.5 font-bold text-amber-300">1958–1990</td>
+                  <td class="p-2.5">'Milagro de la Paz' Frente Nacional.</td>
+                  <td class="p-2.5">Cartel del 50/50, exclusión de la oposición y tutela CIA.</td>
+                  <td class="p-2.5">Asfixia cívica y surgimiento de FARC, ELN, EPL, M-19.</td>
+                </tr>
+                <tr>
+                  <td class="p-2.5 font-bold text-red-400">1991–2026</td>
+                  <td class="p-2.5">Estado Social de Derecho y 'Paz Total'.</td>
+                  <td class="p-2.5">Apertura neoliberal, contratos Kfir y doble moral diplomática.</td>
+                  <td class="p-2.5">468 líderes asesinados (2024–26); terror con drones.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Verdict Callout -->
+          <div class="p-4 sm:p-5 border-y-2 border-red-500/80 space-y-2 text-xs sm:text-sm max-w-3xl mx-auto">
+            <span class="text-xs uppercase font-mono font-bold text-red-400 block tracking-widest glow-crimson-text">FALLO CONDENATORIO DEL TRIBUNAL ACADÉMICO:</span>
+            <p class="text-slate-100 font-semibold leading-relaxed">
+              "La Violencia política en Colombia <strong>NO TERMINÓ</strong>; mudó sistemáticamente de ropaje táctico, jurídico y mediático para preservar el monopolio de tierras y la hegemonía de clase. Superar el conflicto exige desmantelar el pacto de impunidad oligárquico y democratizar materialmente el territorio."
+            </p>
+          </div>
+        </div>
+
+        <!-- SLIDE 9: DOSSIER COMPLETO & DESCARGAS -->
+        <div id="slide-8" class="slide-panel flex-col justify-center items-center my-auto w-full max-w-3xl mx-auto space-y-6 text-center">
+          <div class="space-y-3">
+            <div class="flex items-center justify-center space-x-3">
+              <span class="text-xs uppercase font-mono px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/50 font-bold">DIAPOSITIVA 09 • ACERVO DOCUMENTAL COMPLETO</span>
+              <span class="text-xs text-slate-200 font-semibold">Entrega Formal Reto 1 (25%)</span>
+            </div>
+            <h2 class="serif-title text-2xl sm:text-3xl lg:text-4xl font-black text-white">
+              Dossier Académico y <span class="text-amber-400 glow-gold-text">Aparato Crítico APA 7</span>
+            </h2>
+            <p class="text-sm sm:text-base text-slate-200 leading-relaxed max-w-2xl mx-auto">
+              Monografía formal de 12 capítulos analíticos, fundamentada en más de 25 fuentes primarias y secundarias (Decreto Bolívar 1828, Carnicelli, Arrieta-López, De Gandía, Caballero, Informes INDEPAZ 2024–2026).
+            </p>
+          </div>
+
+          <!-- Document Download Box (Transparent, no bg) -->
+          <div class="p-5 sm:p-6 border-2 border-amber-400/40 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-5 w-full">
+            <div class="flex items-center space-x-4 text-left">
+              <div class="emoji-icon text-4xl">
+                📄
+              </div>
+              <div>
+                <h4 class="text-sm sm:text-base font-bold text-white">Dossier_Analitico_Colombia_en_Juicio_Constitucional.docx</h4>
+                <p class="text-xs text-slate-200 mt-1">374 KB • Normas APA 7.ª edición • 8 Ejes de Evaluación Desarrollados • Tablas y Gráficos Nativos</p>
+              </div>
+            </div>
+            <a href="https://docs.google.com/document/d/1emqD1v26xeqMOUtWDI1nGGXNgZgpq8Aq/edit?usp=sharing&ouid=102220368577968794134&rtpof=true&sd=true" target="_blank" rel="noopener noreferrer" class="px-5 py-3 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-black text-xs sm:text-sm transition shadow-xl whitespace-nowrap flex items-center space-x-2 border border-amber-300">
+              <svg class="w-4 h-4 text-slate-950 no-stroke" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+              <span>Abrir / Descargar Monografía Word</span>
+            </a>
+          </div>
+
+          <!-- Bibliography Scroll -->
+          <div class="p-4 border border-white/20 rounded-xl text-xs text-slate-200 space-y-1.5 overflow-y-auto max-h-40 leading-relaxed text-left w-full">
+            <span class="font-bold text-slate-100 block text-xs uppercase text-amber-400 mb-1 glow-gold-text">Bibliografía Rigurosa en APA 7.ª Edición:</span>
+            <p>• <strong>Álvarez Gardeazábal, G. (1971).</strong> <em>Cóndores no entierran todos los días</em>. Editorial Destino.</p>
+            <p>• <strong>Arrieta-López, M. (2016).</strong> La masonería en Colombia (siglos XVIII-XIX)... <em>Revista Perseitas</em>, 4(2), 242-269.</p>
+            <p>• <strong>Bolívar, S. (1828, 8 de noviembre).</strong> <em>Decreto de prohibición de las sociedades secretas en Colombia</em>. Archivo O'Leary, Tomo XXVI, f. 61.</p>
+            <p>• <strong>Caballero, A. (2018).</strong> <em>Historia de Colombia y sus oligarquías</em>. Capítulos 11 y 13. Biblioteca Nacional de Colombia.</p>
+            <p>• <strong>Carnicelli, A. (1975).</strong> <em>Historia de la masonería colombiana: 1833-1940</em> (Tomos I y II). Artes Gráficas.</p>
+            <p>• <strong>Central Intelligence Agency - CIA. (1985).</strong> <em>Latin America Review</em> (Doc. RDP87T00289R). Directorate of Intelligence.</p>
+            <p>• <strong>Currie, L. / BIRF. (1950).</strong> <em>Bases de un programa de fomento para Colombia: Misión Currie</em>. Banco de la República.</p>
+            <p>• <strong>De Gandía, E. (1940).</strong> <em>Las sociedades secretas y la independencia de América</em>. Editorial Claridad.</p>
+            <p>• <strong>INDEPAZ. (2024-2026).</strong> <em>Observatorio de DD.HH., dinámicas con drones en el Cauca y líderes asesinados (468 víctimas)</em>.</p>
+            <p>• <strong>MinDefensa & FAC / Israel Aerospace Industries - IAI. (2023-2026).</strong> <em>Contratos de sostenimiento de flota Kfir por $32.748 millones COP vigentes a julio de 2026</em>. SECOP II.</p>
+            <p>• <strong>Indumil & Israel Weapon Industries - IWI. (2024).</strong> <em>Convenio de coproducción de fusiles Galil ACE</em>. MinDefensa.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- BOTTOM PRESENTATION CONTROLS (ULTRA TRANSPARENT) -->
+      <div class="mt-3 py-2.5 px-5 glass-ultra rounded-2xl flex items-center justify-between gap-4 text-xs sm:text-sm">
+        <!-- Prev Button -->
+        <button onclick="prevSlide()" id="btn-prev" class="px-4 py-2 rounded-xl bg-black/40 hover:bg-black/70 text-slate-200 font-bold transition flex items-center space-x-2 border border-white/20 disabled:opacity-30 disabled:cursor-not-allowed shadow-md text-readable">
+          <span>←</span>
+          <span class="hidden sm:inline">Diapositiva Anterior</span>
+        </button>
+
+        <!-- Slide Indicators Dots -->
+        <div id="slide-dots" class="flex items-center space-x-2">
+          <!-- Populated by JS -->
+        </div>
+
+        <!-- Next Button -->
+        <button onclick="nextSlide()" id="btn-next" class="px-5 py-2 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-black transition flex items-center space-x-2 shadow-lg border border-amber-300">
+          <span class="hidden sm:inline">Siguiente Diapositiva</span>
+          <span>→</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- RIGHT SIDEBAR: FORENSIC EVIDENCE INSPECTOR (ULTRA TRANSPARENT) -->
+    <aside class="w-60 sm:w-72 h-full glass-ultra rounded-2xl flex flex-col pointer-events-auto shadow-2xl overflow-hidden flex-shrink-0">
+      <!-- Header -->
+      <div class="p-3 border-b border-white/10 flex items-center justify-between bg-black/30">
+        <div class="flex items-center space-x-2">
+          <span class="text-sm">🔍</span>
+          <span class="text-xs font-bold uppercase tracking-wider text-slate-100 text-readable">Prueba Forense</span>
+        </div>
+        <span id="right-evidence-badge" class="text-[10px] font-bold px-2 py-0.5 rounded bg-red-500/25 text-red-200 border border-red-500/40">Prueba de Cargo</span>
+      </div>
+
+      <!-- Evidence Card Body -->
+      <div class="flex-1 overflow-y-auto p-3.5 flex flex-col justify-between space-y-4 scrollbar-thin">
+        <div class="space-y-2.5">
+          <div class="flex items-center justify-between text-[11px] text-slate-300 text-readable">
+            <span id="right-evidence-source">Archivo de Estado</span>
+            <span id="right-evidence-year" class="font-mono text-amber-300 font-bold">1828</span>
+          </div>
+
+          <h3 id="right-evidence-title" class="serif-title text-sm font-bold text-white leading-snug text-readable">
+            Decreto del 8 de Noviembre de 1828 (Simón Bolívar)
+          </h3>
+
+          <p id="right-evidence-desc" class="text-xs text-slate-200 leading-relaxed text-readable">
+            Expedido tras la Conspiración Septembrina. Bolívar concluyó que las sociedades secretas perturbaban la soberanía y preparaban trastornos de orden público.
+          </p>
+
+          <div id="right-evidence-quote" class="p-3 rounded-xl glass-box border-l-2 border-amber-400 text-xs text-amber-100 italic leading-relaxed text-readable">
+            "Hacen presumir fundadamente que no son buenas, ni útiles a la sociedad..."
+          </div>
+        </div>
+
+        <!-- 3D Balance Live Status & Controls -->
+        <div class="pt-3 border-t border-white/10 space-y-2">
+          <div class="flex items-center justify-between text-[10px] text-readable">
+            <span class="text-slate-300 font-bold uppercase tracking-wider">Estado 3D Balanza:</span>
+            <span id="right-balance-status" class="font-mono text-amber-300 font-bold text-[10px]">INCLINACIÓN CRÍTICA</span>
+          </div>
+
+          <div class="grid grid-cols-2 gap-1.5 text-[10px]">
+            <button onclick="tiltBalance('left')" class="p-2 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 text-amber-200 border border-amber-500/40 font-semibold transition text-readable">
+              ⚖️ + Poder Élite
+            </button>
+            <button onclick="tiltBalance('right')" class="p-2 rounded-xl bg-red-500/20 hover:bg-red-500/30 text-red-200 border border-red-500/40 font-semibold transition text-readable">
+              🩸 + Costo Social
+            </button>
+          </div>
+          <button onclick="resetBalance()" class="w-full p-2 rounded-xl bg-black/40 hover:bg-black/70 text-slate-200 text-[10px] transition border border-white/20 text-readable">
+            🔄 Centrar Balanza 3D
+          </button>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- SCRIPTS & INTERACTION ENGINE -->
+  <script>
+    const SLIDES_EVIDENCE = [
+      {
+        source: "Tesis General del Tribunal",
+        year: "1828–2026",
+        title: "Metamorfosis Funcional de la Violencia",
+        desc: "La violencia en Colombia no ha sido una anomalía externa, sino el mecanismo estructural para concentrar la tierra y asegurar la hegemonía de clase.",
+        quote: "No hubo refundación pacífica; hubo mudanza metódica de nomenclatura bélica.",
+        badge: "Tesis Acusatoria",
+        tilt: -0.15
+      },
+      {
+        source: "Archivo O'Leary (Tomo XXVI)",
+        year: "1828",
+        title: "Decreto de Simón Bolívar (8 Nov 1828)",
+        desc: "Expedido tras la Noche Septembrina. Bolívar proscribe las logias santanderistas por perturbar la república bajo el velo del misterio.",
+        quote: "Hacen presumir fundadamente que no son buenas, ni útiles a la sociedad...",
+        badge: "Prueba de Cargo",
+        tilt: 0.18
+      },
+      {
+        source: "Carnicelli & Arrieta-López",
+        year: "1833",
+        title: "Supremo Consejo Neo-Granadino Grado 33",
+        desc: "Fundado en Cartagena. Más de 30 presidentes y altos jerarcas eclesiásticos se juraron fraternidad mientras lanzaban peones a 9 guerras civiles.",
+        quote: "Fraternidad de iniciados en la cúspide; carne de cañón en el campo.",
+        badge: "Pacto de Cúpulas",
+        tilt: 0.22
+      },
+      {
+        source: "Gardeazábal / Currie / Caballero",
+        year: "1949–1958",
+        title: "Los Cóndores, el Basilisco y Misión Currie",
+        desc: "León María Lozano ('El Cóndor') y los chulavitas impusieron el corte de corbata, mientras la Misión Currie del Banco Mundial ordenaba vaciar el campo: 300.000 muertos y 2M desterrados.",
+        quote: "Despoblar el minifundio para abaratar mano de obra fabril y concentrar latifundios.",
+        badge: "Despojo Planificado",
+        tilt: -0.28
+      },
+      {
+        source: "Pacto Sitges / CIA Declassified",
+        year: "1958",
+        title: "Frente Nacional (50/50) e Informe CIA",
+        desc: "Reparto milimétrico del poder que clausuró la democracia institucional, forzando la emergencia de FARC, ELN, EPL y M-19 (CIA Doc. RDP87T00289R).",
+        quote: "La paz de los de arriba fue la asfixia total de los de abajo.",
+        badge: "Cartel Bipartidista",
+        tilt: 0.20
+      },
+      {
+        source: "Caballero (Capítulo 13)",
+        year: "1991",
+        title: "Constitución 91 y Jinetes del Apocalipsis",
+        desc: "La Tutela coexistió con la apertura neoliberal de Gaviria, la ruina agraria, el paramilitarismo de los Castaño y el Proceso 8.000 ('con el gringo ahí').",
+        quote: "Bienvenidos al futuro del libre mercado y las fosas comunes.",
+        badge: "Paradoja Neoliberal",
+        tilt: -0.22
+      },
+      {
+        source: "Observatorio INDEPAZ & MinDefensa",
+        year: "2024–2026",
+        title: "Drones en Cauca vs. Contratos Kfir Israel",
+        desc: "468 líderes asesinados (INDEPAZ). Guerra con drones del EMC ('Iván Mordisco'), Segunda Marquetalia y Frente 57 en El Plateado y Jamundí, contrastados con $32.748 millones en contratos vigentes con la estatal israelí IAI hasta julio de 2026.",
+        quote: "Retórica antiimperialista externa como biombo para tapar negocios militares y el desangre real.",
+        badge: "Doble Moral Oligárquica",
+        tilt: -0.32
+      },
+      {
+        source: "Veredicto Constitucional",
+        year: "FALLO FINAL",
+        title: "Fallo Inapelable del Tribunal",
+        desc: "La Violencia NO terminó: cambió de rostro. La superación real exige desarticular las redes de impunidad y democratizar materialmente la propiedad agraria.",
+        quote: "La Constitución no puede seguir siendo un fetiche retórico de papel.",
+        badge: "Sentencia Condenatoria",
+        tilt: -0.25
+      },
+      {
+        source: "Dossier Monográfico Oficial",
+        year: "APA 7",
+        title: "Acervo Documental y Descarga (.DOCX)",
+        desc: "Monografía completa de 12 capítulos, 3 tablas comparativas, figuras de alta resolución y 25+ referencias bibliográficas formalmente compiladas.",
+        quote: "Documento oficial listo para sustentación académica formal.",
+        badge: "Dossier Oficial",
+        tilt: 0.0
+      }
+    ];
+
+    let currentSlide = 0;
+    const totalSlides = SLIDES_EVIDENCE.length;
+
+    function goToSlide(idx) {
+      if (idx < 0 || idx >= totalSlides) return;
+      currentSlide = idx;
+
+      document.querySelectorAll('.slide-panel').forEach((el, i) => {
+        el.classList.toggle('active', i === currentSlide);
+      });
+
+      document.querySelectorAll('.deck-item').forEach((el, i) => {
+        el.classList.toggle('active', i === currentSlide);
+        el.classList.toggle('bg-amber-500/25', i === currentSlide);
+        el.classList.toggle('border-amber-400/60', i === currentSlide);
+        el.classList.toggle('border-white/10', i !== currentSlide);
+      });
+
+      const ev = SLIDES_EVIDENCE[currentSlide];
+      document.getElementById('nav-slide-title').textContent = `${String(currentSlide + 1).padStart(2, '0')}. ${ev.title}`;
+      document.getElementById('nav-slide-num').textContent = `${String(currentSlide + 1).padStart(2, '0')} / ${String(totalSlides).padStart(2, '0')}`;
+      const progressPercent = ((currentSlide + 1) / totalSlides) * 100;
+      document.getElementById('nav-progress-bar').style.width = `${progressPercent}%`;
+
+      document.getElementById('right-evidence-badge').textContent = ev.badge;
+      document.getElementById('right-evidence-source').textContent = ev.source;
+      document.getElementById('right-evidence-year').textContent = ev.year;
+      document.getElementById('right-evidence-title').textContent = ev.title;
+      document.getElementById('right-evidence-desc').textContent = ev.desc;
+      document.getElementById('right-evidence-quote').textContent = `"${ev.quote}"`;
+
+      document.getElementById('btn-prev').disabled = currentSlide === 0;
+      document.getElementById('btn-next').disabled = currentSlide === totalSlides - 1;
+
+      updateDots();
+
+      if (window.setTargetTilt) {
+        window.setTargetTilt(ev.tilt);
+      }
+
+      if (currentSlide === 6 && !window.presChartsLoaded) {
+        initPresCharts();
+      }
+    }
+
+    function nextSlide() { if (currentSlide < totalSlides - 1) goToSlide(currentSlide + 1); }
+    function prevSlide() { if (currentSlide > 0) goToSlide(currentSlide - 1); }
+
+    function updateDots() {
+      const container = document.getElementById('slide-dots');
+      if (!container) return;
+      container.innerHTML = '';
+      for (let i = 0; i < totalSlides; i++) {
+        const dot = document.createElement('button');
+        dot.className = `h-2 rounded-full transition-all duration-300 ${i === currentSlide ? 'w-6 bg-amber-400' : 'w-2 bg-white/20 hover:bg-white/40'}`;
+        dot.onclick = () => goToSlide(i);
+        container.appendChild(dot);
+      }
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ') {
+        e.preventDefault();
+        nextSlide();
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        prevSlide();
+      }
+    });
+
+    function toggleFullScreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(() => {});
+      } else {
+        if (document.exitFullscreen) document.exitFullscreen();
+      }
+    }
+
+    window.presChartsLoaded = false;
+    function initPresCharts() {
+      window.presChartsLoaded = true;
+      const ctx1 = document.getElementById('chart-pres-anual');
+      if (ctx1) {
+        new Chart(ctx1, {
+          type: 'bar',
+          data: {
+            labels: ['2020', '2021', '2022', '2023', '2024', '2025', '2026*'],
+            datasets: [{ data: [182, 171, 189, 188, 173, 187, 108], backgroundColor: '#E53E3E', borderRadius: 4 }]
+          },
+          options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { grid: { display: false }, ticks: { color: '#E2E8F0', font: { size: 9, weight: 'bold' } } }, y: { grid: { color: 'rgba(255,255,255,0.1)' }, ticks: { color: '#E2E8F0', font: { size: 9 } } } } }
+        });
+      }
+      const ctx2 = document.getElementById('chart-pres-deps');
+      if (ctx2) {
+        new Chart(ctx2, {
+          type: 'bar',
+          data: {
+            labels: ['Cauca', 'Nariño', 'Antioquia', 'Valle', 'Putumayo'],
+            datasets: [{ data: [118, 54, 49, 44, 38], backgroundColor: ['#742A2A', '#9B2C2C', '#C53030', '#E53E3E', '#DD6B20'], borderRadius: 4 }]
+          },
+          options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { grid: { display: false }, ticks: { color: '#E2E8F0', font: { size: 9, weight: 'bold' } } }, x: { grid: { color: 'rgba(255,255,255,0.1)' }, ticks: { color: '#E2E8F0', font: { size: 9 } } } } }
+        });
+      }
+    }
+
+    // THREE.JS FULLSCREEN 3D MASONIC TEMPLE OF JUSTICE
+    let scene, camera, renderer, beamGroup, leftPlate, rightPlate;
+    let compassGroup, eyeGroup, leftRings, swordMesh;
+    let targetTilt = -0.15, currentTilt = 0;
+
+    function initThree() {
+      const container = document.getElementById('canvas-container');
+      if (!container) return;
+
+      scene = new THREE.Scene();
+      scene.fog = new THREE.FogExp2(0x04070d, 0.022);
+
+      camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
+      camera.position.set(0, 2.5, 11.5);
+
+      renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      container.appendChild(renderer.domElement);
+
+      const controls = new THREE.OrbitControls(camera, renderer.domElement);
+      controls.enableDamping = true;
+      controls.dampingFactor = 0.05;
+      controls.maxPolarAngle = Math.PI / 2 + 0.08;
+      controls.minDistance = 4;
+      controls.maxDistance = 22;
+      controls.autoRotate = true;
+      controls.autoRotateSpeed = 0.35;
+
+      // 1. LIGHTING
+      scene.add(new THREE.AmbientLight(0xffffff, 0.65));
+      const dirLight = new THREE.DirectionalLight(0xD4AF37, 1.8);
+      dirLight.position.set(8, 14, 8);
+      scene.add(dirLight);
+
+      const redLight = new THREE.PointLight(0xE53E3E, 3.5, 16);
+      redLight.position.set(5, 2.5, 2);
+      scene.add(redLight);
+
+      const goldLight = new THREE.PointLight(0xD4AF37, 3.5, 16);
+      goldLight.position.set(-5, 2.5, 2);
+      scene.add(goldLight);
+
+      // 2. CHECKERED MOSAIC TEMPLE FLOOR
+      const floorCanvas = document.createElement('canvas');
+      floorCanvas.width = 512;
+      floorCanvas.height = 512;
+      const fCtx = floorCanvas.getContext('2d');
+      for (let x = 0; x < 8; x++) {
+        for (let y = 0; y < 8; y++) {
+          fCtx.fillStyle = (x + y) % 2 === 0 ? '#182133' : '#04070e';
+          fCtx.fillRect(x * 64, y * 64, 64, 64);
+          fCtx.strokeStyle = 'rgba(212, 175, 55, 0.2)';
+          fCtx.strokeRect(x * 64, y * 64, 64, 64);
+        }
+      }
+      const floorTexture = new THREE.CanvasTexture(floorCanvas);
+      floorTexture.wrapS = THREE.RepeatWrapping;
+      floorTexture.wrapT = THREE.RepeatWrapping;
+      floorTexture.repeat.set(4, 4);
+
+      const floorMat = new THREE.MeshStandardMaterial({ map: floorTexture, roughness: 0.3, metalness: 0.6 });
+      const floorMesh = new THREE.Mesh(new THREE.PlaneGeometry(24, 24), floorMat);
+      floorMesh.rotation.x = -Math.PI / 2;
+      floorMesh.position.y = -2.2;
+      scene.add(floorMesh);
+
+      // 3. TWIN COLUMNS (BOAZ & JACHIN)
+      createColumn(-6.8, 0xD4AF37); // Left Column
+      createColumn(6.8, 0xE53E3E);  // Right Column
+
+      function createColumn(xPos, glowColor) {
+        const colGroup = new THREE.Group();
+        colGroup.position.set(xPos, 1.2, -2.5);
+
+        const marbleMat = new THREE.MeshStandardMaterial({ color: 0x1E2638, roughness: 0.35, metalness: 0.6 });
+        const goldBand = new THREE.MeshStandardMaterial({ color: 0xD4AF37, metalness: 0.9, roughness: 0.2 });
+
+        // Base
+        const cBase = new THREE.Mesh(new THREE.BoxGeometry(1.4, 0.5, 1.4), marbleMat);
+        cBase.position.y = -3.1;
+        colGroup.add(cBase);
+
+        // Shaft (Fluted Pillar)
+        const shaft = new THREE.Mesh(new THREE.CylinderGeometry(0.42, 0.48, 6.2, 24), marbleMat);
+        colGroup.add(shaft);
+
+        // Capital
+        const cap = new THREE.Mesh(new THREE.BoxGeometry(1.3, 0.45, 1.3), goldBand);
+        cap.position.y = 3.3;
+        colGroup.add(cap);
+
+        // Celestial Globe on top of column
+        const globe = new THREE.Mesh(
+          new THREE.SphereGeometry(0.55, 24, 24),
+          new THREE.MeshStandardMaterial({ color: glowColor, emissive: glowColor, emissiveIntensity: 0.5, metalness: 0.8 })
+        );
+        globe.position.y = 4.1;
+        colGroup.add(globe);
+
+        scene.add(colGroup);
+      }
+
+      // 4. MASONIC COMPASS & SQUARE (ESCUADRA Y COMPÁS 3D)
+      compassGroup = new THREE.Group();
+      compassGroup.position.set(0, 4.8, -3.5);
+      const goldBrass = new THREE.MeshStandardMaterial({ color: 0xD4AF37, metalness: 0.95, roughness: 0.15 });
+
+      const legGeo = new THREE.CylinderGeometry(0.06, 0.04, 2.3, 16);
+      const leg1 = new THREE.Mesh(legGeo, goldBrass);
+      leg1.rotation.z = Math.PI / 6.5;
+      leg1.position.set(-0.55, 0, 0);
+      compassGroup.add(leg1);
+
+      const leg2 = new THREE.Mesh(legGeo, goldBrass);
+      leg2.rotation.z = -Math.PI / 6.5;
+      leg2.position.set(0.55, 0, 0);
+      compassGroup.add(leg2);
+
+      const pivotSphere = new THREE.Mesh(new THREE.SphereGeometry(0.18, 16, 16), goldBrass);
+      pivotSphere.position.set(0, 1.05, 0);
+      compassGroup.add(pivotSphere);
+
+      // Square (Escuadra)
+      const sqBarGeo = new THREE.BoxGeometry(0.12, 1.5, 0.08);
+      const sq1 = new THREE.Mesh(sqBarGeo, goldBrass);
+      sq1.rotation.z = -Math.PI / 4;
+      sq1.position.set(-0.48, -0.42, 0.08);
+      compassGroup.add(sq1);
+
+      const sq2 = new THREE.Mesh(sqBarGeo, goldBrass);
+      sq2.rotation.z = Math.PI / 4;
+      sq2.position.set(0.48, -0.42, 0.08);
+      compassGroup.add(sq2);
+
+      // Central Golden Radiant Jewel
+      const jewel = new THREE.Mesh(
+        new THREE.IcosahedronGeometry(0.28, 0),
+        new THREE.MeshStandardMaterial({ color: 0xFFD700, emissive: 0xD4AF37, emissiveIntensity: 0.8, metalness: 0.9 })
+      );
+      jewel.position.set(0, 0.12, 0.12);
+      compassGroup.add(jewel);
+      scene.add(compassGroup);
+
+      // 5. EYE OF PROVIDENCE (OJO QUE TODO LO VE)
+      eyeGroup = new THREE.Group();
+      eyeGroup.position.set(0, 3.8, -4.8);
+      const pyr = new THREE.Mesh(
+        new THREE.ConeGeometry(1.8, 2.4, 4),
+        new THREE.MeshBasicMaterial({ color: 0xD4AF37, wireframe: true, transparent: true, opacity: 0.55 })
+      );
+      pyr.rotation.y = Math.PI / 4;
+      eyeGroup.add(pyr);
+
+      const eyeCore = new THREE.Mesh(
+        new THREE.SphereGeometry(0.3, 16, 16),
+        new THREE.MeshStandardMaterial({ color: 0xFFFFFF, emissive: 0xD4AF37, emissiveIntensity: 1 })
+      );
+      eyeCore.position.y = -0.15;
+      eyeGroup.add(eyeCore);
+      scene.add(eyeGroup);
+
+      // 6. SWORD OF JUSTICE (ESPADA DE LA LEY)
+      const swordBlade = new THREE.Mesh(
+        new THREE.BoxGeometry(0.12, 4.2, 0.03),
+        new THREE.MeshStandardMaterial({ color: 0xC0C0C0, metalness: 0.95, roughness: 0.1 })
+      );
+      swordBlade.position.set(0, 1.8, -1.8);
+      scene.add(swordBlade);
+      
+      const swordGuard = new THREE.Mesh(new THREE.BoxGeometry(1.2, 0.12, 0.12), goldBrass);
+      swordGuard.position.set(0, 3.6, -1.8);
+      scene.add(swordGuard);
+
+      // 7. CENTRAL BALANCE PEDESTAL & FULCRUM
+      const base = new THREE.Mesh(
+        new THREE.CylinderGeometry(2.4, 2.7, 0.5, 32),
+        new THREE.MeshStandardMaterial({ color: 0x0E131F, roughness: 0.25, metalness: 0.85 })
+      );
+      base.position.y = -2;
+      scene.add(base);
+
+      const pillar = new THREE.Mesh(new THREE.CylinderGeometry(0.2, 0.32, 4.8, 24), goldBrass);
+      pillar.position.y = 0.35;
+      scene.add(pillar);
+
+      const fulcrum = new THREE.Mesh(new THREE.SphereGeometry(0.38, 24, 24), goldBrass);
+      fulcrum.position.y = 2.75;
+      scene.add(fulcrum);
+
+      // Tilting Beam Group
+      beamGroup = new THREE.Group();
+      beamGroup.position.y = 2.75;
+      const beam = new THREE.Mesh(new THREE.BoxGeometry(7.6, 0.16, 0.16), goldBrass);
+      beamGroup.add(beam);
+
+      // Left Plate (Poder Oligárquico / Constitución)
+      leftPlate = createPlate(0xD4AF37, -3.5, "left");
+      beamGroup.add(leftPlate);
+
+      // Right Plate (Costo Social / Víctimas / Sangre)
+      rightPlate = createPlate(0xE53E3E, 3.5, "right");
+      beamGroup.add(rightPlate);
+
+      scene.add(beamGroup);
+
+      // Floating Dust Particles
+      const count = 220;
+      const positions = new Float32Array(count * 3);
+      for (let i = 0; i < count * 3; i++) positions[i] = (Math.random() - 0.5) * 20;
+      const starsGeo = new THREE.BufferGeometry();
+      starsGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+      const starField = new THREE.Points(
+        starsGeo,
+        new THREE.PointsMaterial({ size: 0.06, color: 0xD4AF37, transparent: true, opacity: 0.6 })
+      );
+      scene.add(starField);
+
+      function animate() {
+        requestAnimationFrame(animate);
+        currentTilt += (targetTilt - currentTilt) * 0.045;
+        beamGroup.rotation.z = currentTilt;
+        leftPlate.rotation.z = -currentTilt;
+        rightPlate.rotation.z = -currentTilt;
+
+        // Subtle slow rotation of Masonic symbols
+        compassGroup.rotation.y += 0.003;
+        eyeGroup.rotation.y += 0.002;
+        starField.rotation.y += 0.0006;
+
+        controls.update();
+        renderer.render(scene, camera);
+      }
+      animate();
+
+      window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+    }
+
+    function createPlate(colorHex, xOffset, type) {
+      const g = new THREE.Group();
+      g.position.set(xOffset, -0.05, 0);
+
+      const cableMat = new THREE.LineBasicMaterial({ color: 0x94A3B8 });
+      const pts = [new THREE.Vector3(0, 0, 0), new THREE.Vector3(-0.8, -2, 0), new THREE.Vector3(0, 0, 0), new THREE.Vector3(0.8, -2, 0)];
+      g.add(new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints(pts), cableMat));
+
+      const dish = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.95, 0.75, 0.1, 24),
+        new THREE.MeshStandardMaterial({ color: 0x1E2638, metalness: 0.75, roughness: 0.25 })
+      );
+      dish.position.y = -2.05;
+      g.add(dish);
+
+      if (type === "left") {
+        // Golden Book of the Law / Constitution & Ring
+        const book = new THREE.Mesh(
+          new THREE.BoxGeometry(0.65, 0.15, 0.5),
+          new THREE.MeshStandardMaterial({ color: 0xD4AF37, metalness: 0.9, roughness: 0.2 })
+        );
+        book.position.y = -1.9;
+        g.add(book);
+
+        const ring = new THREE.Mesh(
+          new THREE.TorusGeometry(0.5, 0.03, 16, 32),
+          new THREE.MeshStandardMaterial({ color: 0xFFD700, emissive: 0xD4AF37, emissiveIntensity: 0.6 })
+        );
+        ring.position.y = -1.6;
+        ring.rotation.x = Math.PI / 3;
+        g.add(ring);
+      } else {
+        // Red Ruby Crystals & Memorial Cross for victims
+        const crystal = new THREE.Mesh(
+          new THREE.OctahedronGeometry(0.45, 0),
+          new THREE.MeshStandardMaterial({ color: 0xE53E3E, emissive: 0x9B2C2C, emissiveIntensity: 0.65, metalness: 0.85 })
+        );
+        crystal.position.y = -1.65;
+        g.add(crystal);
+
+        const crossV = new THREE.Mesh(
+          new THREE.BoxGeometry(0.06, 0.5, 0.04),
+          new THREE.MeshStandardMaterial({ color: 0x8C1D1D })
+        );
+        crossV.position.set(0.3, -1.75, 0.2);
+        g.add(crossV);
+
+        const crossH = new THREE.Mesh(
+          new THREE.BoxGeometry(0.24, 0.06, 0.04),
+          new THREE.MeshStandardMaterial({ color: 0x8C1D1D })
+        );
+        crossH.position.set(0.3, -1.65, 0.2);
+        g.add(crossH);
+      }
+
+      return g;
+    }
+
+    window.setTargetTilt = function(val) {
+      targetTilt = val;
+      const hud = document.getElementById('right-balance-status');
+      if (!hud) return;
+      if (val > 0.05) hud.textContent = "+ PODER ÉLITE";
+      else if (val < -0.05) hud.textContent = "+ COSTO SOCIAL";
+      else hud.textContent = "EQUILIBRIO FORMAL";
+    };
+
+    function tiltBalance(dir) {
+      if (dir === 'left') window.setTargetTilt(0.24);
+      else window.setTargetTilt(-0.32);
+    }
+    function resetBalance() {
+      const ev = SLIDES_EVIDENCE[currentSlide];
+      window.setTargetTilt(ev.tilt);
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      initThree();
+      goToSlide(0);
+    });
+  </script>
+</body>
+</html>

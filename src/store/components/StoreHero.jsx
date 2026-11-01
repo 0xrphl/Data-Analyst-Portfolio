@@ -2,9 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { HERO_SLIDES } from '../constants';
+import { useProducts } from '../hooks/useProducts';
 
-const StoreHero = () => {
+const StoreHero = ({ totalCount: propTotalCount }) => {
   const [current, setCurrent] = useState(0);
+  const { products } = useProducts();
+  const totalCount = propTotalCount !== undefined ? propTotalCount : products.length;
 
   useEffect(() => {
     const timer = setInterval(() => setCurrent((p) => (p + 1) % HERO_SLIDES.length), 5000);
@@ -79,10 +82,10 @@ const StoreHero = () => {
             Explorar
           </Link>
           <Link
-            to="/store/category/accesorios"
+            to="/store/products"
             className="px-8 py-3 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-xl transition-all border border-white/20"
           >
-            Ver Todo
+            Ver Todo {totalCount > 0 ? `(${totalCount})` : ''}
           </Link>
         </div>
 

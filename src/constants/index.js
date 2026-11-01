@@ -173,6 +173,21 @@ import {
     agoraAccessories,
     agoraBeauty,
     agoraOauth,
+    hydraulicsBernoulli,
+    hydraulicsJetImpact,
+    hydraulicsMinorLosses,
+    hydraulicsPipeFriction,
+    parkerDashboard,
+    parkerSpacecraftModel,
+    parkerStreamers,
+    parkerSpcInstrument,
+    parkerWiresCrossSection,
+    parkerOrbitDeltaV,
+    parkerSunElevation,
+    parkerSolarAtmosphere,
+    ungrdDashboard,
+    ungrdNetflixDashboard,
+    ungrdBebidasDashboard,
   } from "../assets";
 
 
@@ -1641,6 +1656,49 @@ import {
   const projects = {
     en: [
     {
+      name: "Parker Solar Probe — 3D Mission & Thermodynamic Analysis Dashboard",
+      description:
+        "Comprehensive WebGL 3D engineering dashboard built with React, Three.js, React Three Fiber, and KaTeX simulating NASA's historic Parker Solar Probe mission at 8.86 solar radii and 192 km/s. Features a multi-layer split-in-half Sun (core to corona) with procedural plasma granulation and live CFD field switcher (Natural, kinetic temperature Inferno colormap, and 1/r² radiative flux vs. rarefied convective Knudsen flow Kn >> 10). Models high-fidelity spacecraft hardware: 11.4 cm Al₂O₃/C-C/Ultramet carbon foam TPS heat shield, quadricular Tungsten Solar Probe Cup (SPC), refractory Niobium C-103 coaxial wiring with monocrystalline sapphire sleeves, articulated solar array sweep inside the Umbra shadow with active H₂O cooling loops, and Keplerian orbital transfer model with 7 Venus gravity assists.",
+      tags: [
+        { name: "Three.js", color: "purple-text-gradient" },
+        { name: "WebGL", color: "blue-text-gradient" },
+        { name: "React Three Fiber", color: "cyan-text-gradient" },
+        { name: "CFD", color: "red-text-gradient" },
+        { name: "Heat Transfer", color: "orange-text-gradient" },
+        { name: "Thermodynamics", color: "pink-text-gradient" },
+        { name: "Orbital Mechanics", color: "green-text-gradient" },
+        { name: "KaTeX", color: "yellow-text-gradient" },
+        { name: "NASA", color: "blue-text-gradient" },
+      ],
+      image: [parkerDashboard, parkerSpacecraftModel, parkerStreamers, parkerSpcInstrument, parkerWiresCrossSection, parkerOrbitDeltaV, parkerSunElevation, parkerSolarAtmosphere],
+      source_code_link: "https://github.com/0xrphl/parker-solar-probe-mission-3D-dashboard-analysis",
+      live_demo_link: "https://0xraphael.com/college/heat-transfer-traslation-paper-3d-dashboard",
+      live_demo_label: "☀️ Live 3D Mission Dashboard",
+      live_demo_style: { background: 'linear-gradient(90deg, #FF3D00 0%, #FF9100 50%, #FFD166 100%)' },
+    },
+    {
+      name: "3D Interactive Hydraulics Laboratory Simulation — Cycle 1",
+      description:
+        "Comprehensive WebGL fluid mechanics digital twin built with Three.js, React Three Fiber, and KaTeX. Simulates 4 complete laboratory benches: (1) Bernoulli's Theorem & Venturi Tube with real-time hydraulic (HGL) and energy (EGL) gradient lines, plus movable Pitot stagnation probe; (2) Jet Impact on Vanes with dynamic momentum conservation across flat (90°), curved (102°), and hemispherical (180°) vanes, calibrated counterweights, and auto-leveling; (3) Minor Losses across 13 pipe fittings and valves with K-factor calculations; and (4) Darcy-Weisbach Pipe Friction major loss solver with Colebrook-White friction factors. Features interactive particle dynamics, data logging tables, and rigorous theoretical derivation panels validated against experimental university telemetry.",
+      tags: [
+        { name: "Three.js", color: "purple-text-gradient" },
+        { name: "WebGL", color: "blue-text-gradient" },
+        { name: "React Three Fiber", color: "cyan-text-gradient" },
+        { name: "Fluid Mechanics", color: "blue-text-gradient" },
+        { name: "Hydraulics", color: "green-text-gradient" },
+        { name: "Bernoulli", color: "pink-text-gradient" },
+        { name: "KaTeX", color: "yellow-text-gradient" },
+        { name: "CFD", color: "red-text-gradient" },
+        { name: "Digital Twin", color: "orange-text-gradient" },
+        { name: "Physics Simulation", color: "gray-text-gradient" },
+      ],
+      image: [hydraulicsBernoulli, hydraulicsJetImpact, hydraulicsMinorLosses, hydraulicsPipeFriction],
+      source_code_link: "https://github.com/0xrphl/Data-Analyst-Portfolio",
+      live_demo_link: "https://0xraphael.com/college/hydraulics-lab/cycle1/",
+      live_demo_label: "🌊 Live 3D Simulation",
+      live_demo_style: { background: 'linear-gradient(90deg, #0288D1 0%, #00B0FF 50%, #00E676 100%)' },
+    },
+    {
       name: "CFD/FEM Thermal Simulation — Fourier Heat Transfer PDE Solver",
       description:
         "Interactive WebGL thermal simulation built with React Three Fiber solving the general Fourier heat transfer equation (∂T/∂t = κ∇²T + q) in real-time on a 3D grid. Features two modes: solid insulating cube with embedded heater and hollow furnace with configurable shell/cavity materials. Includes volumetric rendering with clip planes, contour bands, and color-mapped temperature fields. Full PDE derivation panel with LaTeX-rendered equations (KaTeX), Leva GUI controls for material properties, grid resolution (up to 40³), and visualization parameters. Converges to analytical steady-state with energy balance validation.",
@@ -1662,6 +1720,26 @@ import {
       live_demo_link: "/college/heat-transfer",
       live_demo_label: "🔥 Interactive Simulation",
       live_demo_style: { background: 'linear-gradient(90deg, #D32F2F 0%, #FF6F00 50%, #FFB300 100%)' },
+    },
+    {
+      name: "UNGRD Colombia 2025 & Multi-Dataset — SOTA 3D Analytics Nexus",
+      description:
+        "Interactive 3D WebGL analytics suite and multi-dataset nexus built with React 18, Three.js, and React Three Fiber. Unifies 4 synchronized spatial environments: (1) Colombia 2025 UNGRD disaster and emergency event spatialization with departmental breakdown; (2) Netflix 3D content landscape with catalog velocity (2005–2021), floating 3D extruded format donuts, and emissive genre horizons; (3) Online Retail 3D revenue skyscrapers across 540k+ transactions with Q4 holiday surges and international market horizons; and (4) Colombia FMCG beverage market regional voxel terrain across 5 geographic macro-regions. Backed by a high-performance Python data aggregation pipeline solving cross-industry Pearson correlations (r = 0.72) and multi-dataset discretionary consumer spending patterns at 60 FPS.",
+      tags: [
+        { name: "Three.js", color: "purple-text-gradient" },
+        { name: "WebGL", color: "blue-text-gradient" },
+        { name: "React Three Fiber", color: "cyan-text-gradient" },
+        { name: "Data Engineering", color: "orange-text-gradient" },
+        { name: "Python", color: "yellow-text-gradient" },
+        { name: "Data Analytics", color: "green-text-gradient" },
+        { name: "Interactive 3D", color: "pink-text-gradient" },
+        { name: "UNGRD", color: "red-text-gradient" },
+      ],
+      image: [ungrdDashboard, ungrdNetflixDashboard, ungrdBebidasDashboard],
+      source_code_link: "https://github.com/0xrphl/Data-Analyst-Portfolio",
+      live_demo_link: "https://0xraphael.com/college/data-eng-ungrd",
+      live_demo_label: "📊 Live 3D Analytics Nexus",
+      live_demo_style: { background: 'linear-gradient(90deg, #FF6B35 0%, #F7C59F 50%, #004E89 100%)' },
     },
     {
       name: "IoT Vehicle Telemetry — LoRa Mesh + 4G LTE Fleet Tracking",
@@ -1747,9 +1825,9 @@ import {
       source_code_link: "https://github.com/0xrphl/mirofish-neo4j-fork",
     },
     {
-      name: "3D Agora Lab — E-commerce Store",
+      name: "3D Agora Lab — E-commerce & Engineering Hub",
       description:
-        "Full-stack e-commerce SPA for 3D Agora Lab built with React, Vite, and Tailwind CSS. Features Google OAuth authentication via Supabase, product catalog with category filtering, shopping cart with real-time totals, Mercado Pago checkout integration, order history, and responsive mobile-first design. Hosted on Hostinger with custom DNS configuration.",
+        "Full-stack e-commerce SPA and engineering portal for 3D Agora Lab (hosted at https://3dagoralab.com/ pointing to /store) built with React, Vite, and Tailwind CSS. Features Google OAuth via Supabase, catalog filtering, real-time cart, Mercado Pago payments, and order tracking. Includes the custom engineering landing page at https://3dagoralab.com/about for on-site client cards — offering custom 3D printing orders, high-precision 3D scanning, industrial reverse engineering (SolidWorks CAD standards), manufacturing estimates, and embedded systems/IoT hardware and software development.",
       tags: [
         {
           name: "React",
@@ -1780,14 +1858,18 @@ import {
           color: "purple-text-gradient",
         },
         {
-          name: "E-commerce",
+          name: "3D Printing & CAD",
           color: "orange-text-gradient",
+        },
+        {
+          name: "Embedded IoT",
+          color: "cyan-text-gradient",
         },
       ],
       image: [agoraMain, agoraAccessories, agoraBeauty, agoraOauth],
       source_code_link: "https://github.com/0xrphl/Data-Analyst-Portfolio",
-      live_demo_link: "/store",
-      live_demo_label: "🛒 Visit Store",
+      live_demo_link: "https://3dagoralab.com/store",
+      live_demo_label: "🛒 Visit 3D Agora Lab",
       live_demo_style: { background: 'linear-gradient(90deg, #6366F1 0%, #8B5CF6 50%, #A855F7 100%)' },
     },
     {
@@ -2044,6 +2126,49 @@ import {
     ],
     es: [
       {
+        name: "Parker Solar Probe — Dashboard 3D de Misión y Análisis Termodinámico",
+        description:
+          "Dashboard 3D interactivo WebGL de ingeniería aeroespacial desarrollado con React, Three.js, React Three Fiber y KaTeX que simula la histórica misión Parker Solar Probe de la NASA a 8.86 radios solares y 192 km/s. Cuenta con un Sol multicapa en corte transversal (desde el núcleo hasta la corona) con granulación procedural de plasma y conmutador CFD en vivo (plasma natural, escala cinética de temperatura con mapa Inferno y magnitud de flujo de calor 1/r² frente al flujo convectivo enrarecido en régimen de Knudsen Kn >> 10). Modela en alta fidelidad 3D el hardware de la nave: escudo térmico TPS de 11.4 cm en Al₂O₃/C-C/espuma de carbono Ultramet, Copa Sonda Solar (SPC) de Tungsteno, arnés coaxial refractario de Niobio C-103 con manguitos de zafiro monocristalino, alas solares articuladas en la sombra Umbra con refrigeración activa por H₂O y trayectoria Kepleriana con 7 asistencias gravitatorias en Venus.",
+        tags: [
+          { name: "Three.js", color: "purple-text-gradient" },
+          { name: "WebGL", color: "blue-text-gradient" },
+          { name: "React Three Fiber", color: "cyan-text-gradient" },
+          { name: "CFD", color: "red-text-gradient" },
+          { name: "Transferencia de Calor", color: "orange-text-gradient" },
+          { name: "Termodinámica", color: "pink-text-gradient" },
+          { name: "Mecánica Orbital", color: "green-text-gradient" },
+          { name: "KaTeX", color: "yellow-text-gradient" },
+          { name: "NASA", color: "blue-text-gradient" },
+        ],
+        image: [parkerDashboard, parkerSpacecraftModel, parkerStreamers, parkerSpcInstrument, parkerWiresCrossSection, parkerOrbitDeltaV, parkerSunElevation, parkerSolarAtmosphere],
+        source_code_link: "https://github.com/0xrphl/parker-solar-probe-mission-3D-dashboard-analysis",
+        live_demo_link: "https://0xraphael.com/college/heat-transfer-traslation-paper-3d-dashboard",
+        live_demo_label: "☀️ Dashboard 3D de Misión en Vivo",
+        live_demo_style: { background: 'linear-gradient(90deg, #FF3D00 0%, #FF9100 50%, #FFD166 100%)' },
+      },
+      {
+        name: "Simulador Interactivo 3D de Laboratorio de Hidráulica — Ciclo 1",
+        description:
+          "Gemelo digital de mecánica de fluidos WebGL desarrollado en Three.js, React Three Fiber y KaTeX. Modela 4 bancos de laboratorio: (1) Teorema de Bernoulli y Tubo Venturi con gradiente hidráulico (HGL) y línea de energía total (EGL), sonda Pitot móvil de estancamiento y cálculo de caudales; (2) Impacto de Chorro sobre Álabes con conservación de momentum lineal para álabes plano (90°), curvo (102°) y semiesférico (180°), contrapesos calibrados y autonivelación; (3) Pérdidas Menores en 13 accesorios y válvulas con coeficientes K; y (4) Fricción en Tuberías con solver Darcy-Weisbach y Colebrook-White. Incluye física de partículas en tiempo real, registro tabular de datos experimentales y paneles de derivación matemática analítica validados con datos del laboratorio de la UTP.",
+        tags: [
+          { name: "Three.js", color: "purple-text-gradient" },
+          { name: "WebGL", color: "blue-text-gradient" },
+          { name: "React Three Fiber", color: "cyan-text-gradient" },
+          { name: "Mecánica de Fluidos", color: "blue-text-gradient" },
+          { name: "Hidráulica", color: "green-text-gradient" },
+          { name: "Bernoulli", color: "pink-text-gradient" },
+          { name: "KaTeX", color: "yellow-text-gradient" },
+          { name: "CFD", color: "red-text-gradient" },
+          { name: "Gemelo Digital", color: "orange-text-gradient" },
+          { name: "Simulación Física", color: "gray-text-gradient" },
+        ],
+        image: [hydraulicsBernoulli, hydraulicsJetImpact, hydraulicsMinorLosses, hydraulicsPipeFriction],
+        source_code_link: "https://github.com/0xrphl/Data-Analyst-Portfolio",
+        live_demo_link: "https://0xraphael.com/college/hydraulics-lab/cycle1/",
+        live_demo_label: "🌊 Simulación Interactiva 3D",
+        live_demo_style: { background: 'linear-gradient(90deg, #0288D1 0%, #00B0FF 50%, #00E676 100%)' },
+      },
+      {
         name: "Simulación Térmica CFD/FEM — Solver de EDP de Transferencia de Calor de Fourier",
         description:
           "Simulación térmica interactiva WebGL construida con React Three Fiber que resuelve la ecuación general de transferencia de calor de Fourier (∂T/∂t = κ∇²T + q) en tiempo real sobre una malla 3D. Incluye dos modos: cubo sólido aislante con calentador embebido y horno hueco con materiales de carcasa/cavidad configurables. Renderizado volumétrico con planos de corte, bandas de contorno y campos de temperatura con mapa de colores. Panel completo de derivación de EDP con ecuaciones renderizadas en LaTeX (KaTeX), controles GUI Leva para propiedades de materiales, resolución de malla (hasta 40³) y parámetros de visualización. Converge al estado estacionario analítico con validación de balance energético.",
@@ -2065,6 +2190,26 @@ import {
         live_demo_link: "/college/heat-transfer",
         live_demo_label: "🔥 Simulación Interactiva",
         live_demo_style: { background: 'linear-gradient(90deg, #D32F2F 0%, #FF6F00 50%, #FFB300 100%)' },
+      },
+      {
+        name: "UNGRD Colombia 2025 y Multi-Dataset — Nexus Analítico 3D SOTA",
+        description:
+          "Suite analítica interactiva 3D WebGL y nexus multi-dataset desarrollada con React 18, Three.js y React Three Fiber. Integra 4 entornos espaciales interactivos sincronizados: (1) Espacialización de eventos de desastre y emergencias UNGRD Colombia 2025 con desglose departamental; (2) Paisaje de contenidos 3D de Netflix con velocidad de catálogo (2005-2021), dona 3D extruida interactiva de formatos y horizonte emisivo de géneros; (3) Rascacielos 3D de ingresos de retail en línea sobre más de 540,000 transacciones con picos de Q4 y horizontes internacionales; y (4) Topografía 3D de vóxeles del mercado colombiano de bebidas en 5 macro-regiones geográficas. Respaldado por un pipeline de agregación en Python que resuelve correlaciones de Pearson cruzadas (r = 0.72) y patrones de consumo a 60 FPS estables.",
+        tags: [
+          { name: "Three.js", color: "purple-text-gradient" },
+          { name: "WebGL", color: "blue-text-gradient" },
+          { name: "React Three Fiber", color: "cyan-text-gradient" },
+          { name: "Ingeniería de Datos", color: "orange-text-gradient" },
+          { name: "Python", color: "yellow-text-gradient" },
+          { name: "Analítica de Datos", color: "green-text-gradient" },
+          { name: "3D Interactivo", color: "pink-text-gradient" },
+          { name: "UNGRD", color: "red-text-gradient" },
+        ],
+        image: [ungrdDashboard, ungrdNetflixDashboard, ungrdBebidasDashboard],
+        source_code_link: "https://github.com/0xrphl/Data-Analyst-Portfolio",
+        live_demo_link: "https://0xraphael.com/college/data-eng-ungrd",
+        live_demo_label: "📊 Dashboard Analítico 3D en Vivo",
+        live_demo_style: { background: 'linear-gradient(90deg, #FF6B35 0%, #F7C59F 50%, #004E89 100%)' },
       },
       {
         name: "Telemetría Vehicular IoT — LoRa Mesh + 4G LTE para Flotas",
@@ -2149,8 +2294,9 @@ import {
         source_code_link: "https://github.com/0xrphl/mirofish-neo4j-fork",
       },
       {
-        name: "3D Agora Lab — Tienda E-commerce",
-        description: "Tienda e-commerce SPA full-stack para 3D Agora Lab construida con React, Vite y Tailwind CSS. Incluye autenticación Google OAuth vía Supabase, catálogo de productos con filtrado por categorías, carrito de compras con totales en tiempo real, integración de pago con Mercado Pago, historial de pedidos y diseño responsivo mobile-first. Alojada en Hostinger con configuración DNS personalizada.",
+        name: "3D Agora Lab — E-commerce & Centro de Ingeniería",
+        description:
+          "Tienda e-commerce SPA full-stack y portal de ingeniería para 3D Agora Lab (alojada en https://3dagoralab.com/ redirigiendo a /store) construida con React, Vite y Tailwind CSS. Incluye autenticación Google OAuth vía Supabase, catálogo con filtrado, carrito con totales en tiempo real, integración Mercado Pago y gestión de pedidos. Integra el portal https://3dagoralab.com/about para tarjetas físicas de presentación de clientes en sitio — ofreciendo pedidos personalizados de impresión 3D, escaneo 3D de alta precisión, ingeniería inversa con estándar industrial (CAD SolidWorks), cotizaciones y estimaciones técnicas, y desarrollo de hardware/software embebido e IoT.",
         tags: [
           { name: "React", color: "blue-text-gradient" },
           { name: "Vite", color: "purple-text-gradient" },
@@ -2159,12 +2305,13 @@ import {
           { name: "Mercado Pago", color: "blue-text-gradient" },
           { name: "Tailwind CSS", color: "pink-text-gradient" },
           { name: "Hostinger", color: "purple-text-gradient" },
-          { name: "E-commerce", color: "orange-text-gradient" },
+          { name: "Impresión 3D y CAD", color: "orange-text-gradient" },
+          { name: "Sistemas Embebidos", color: "cyan-text-gradient" },
         ],
         image: [agoraMain, agoraAccessories, agoraBeauty, agoraOauth],
         source_code_link: "https://github.com/0xrphl/Data-Analyst-Portfolio",
-        live_demo_link: "/store",
-        live_demo_label: "🛒 Visitar Tienda",
+        live_demo_link: "https://3dagoralab.com/store",
+        live_demo_label: "🛒 Visitar 3D Agora Lab",
         live_demo_style: { background: 'linear-gradient(90deg, #6366F1 0%, #8B5CF6 50%, #A855F7 100%)' },
       },
       {

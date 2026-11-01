@@ -150,6 +150,121 @@ export function solveBernoulli({
 }
 
 /**
+ * Calcula el estado hidráulico completo de la sonda Pitot en cualquier posición normalizada xNorm ∈ [0, 1]
+ */
+export function solvePitotAtPosition({
+  xNorm = 0.56,
+  tapResults = [],
+  Q = 0.0001667,
+  rho = 1000,
+  mu = 1.002e-3,
+  alpha = 1.0,
+  Ltotal = 0.45,
+}) {
+  if (!tapResults || tapResults.length === 0) {
+    return null
+  }
+  const clampedT = Math.max(0, Math.min(1, xNorm))
+
+  // Buscar si coincide exactamente o muy cerca con una toma S0..S6
+  let nearestTap = tapResults[0]
+  let minDist = Math.abs(clampedT - tapResults[0].xNorm)
+  for (let i = 1; i < tapResults.length; i++) {
+    const d = Math.abs(clampedT - tapResults[i].xNorm)
+    if (d < minDist) {
+      minDist = d
+      nearestTap = tapResults[i]
+    }
+  }
+
+  if (minDist < 0.008) {
+    return {
+      ...nearestTap,
+      xNorm: nearestTap.xNorm,
+      x: nearestTap.xNorm * Ltotal,
+      isExactSection: true,
+      sectionLabel: nearestTap.name,
+      nearestSectionName: nearestTap.name,
+      centerlineFactor: 1.1537,
+    }
+  }
+
+  // Interpolación suave entre las dos secciones adyacentes
+  let segIdx = 0
+  for (let j = 0; j < tapResults.length - 1; j++) {
+    if (clampedT >= tapResults[j].xNorm && clampedT <= tapResults[j + 1].xNorm) {
+      segIdx = j
+      break
+    }
+  }
+  const t0 = tapResults[segIdx]
+  const t1 = tapResults[Math.min(segIdx + 1, tapResults.length - 1)]
+  const span = Math.max(1e-9, t1.xNorm - t0.xNorm)
+  const frac = Math.max(0, Math.min(1, (clampedT - t0.xNorm) / span))
+  const s = frac * frac * (3 - 2 * frac)
+
+  const r = (t0.D / 2) + ((t1.D / 2) - (t0.D / 2)) * s
+  const D = r * 2
+  const A = Math.PI * r * r
+  const V = A > 0 ? Q / A : 0
+  const velocityHead = alpha * (V * V) / (2 * g)
+  const dynamicP = 0.5 * rho * V * V
+
+  const totalHead = t0.totalHead + (t1.totalHead - t0.totalHead) * s
+  const headLoss = t0.headLoss + (t1.headLoss - t0.headLoss) * s
+  const pressureHead = totalHead - velocityHead
+  const P = pressureHead * rho * g
+  const Re = (rho * V * D) / (mu || 1.002e-3)
+
+  const centerlineVelocityFactor = 1.1537
+  const Vpitot_real = V * centerlineVelocityFactor
+  const pitotDynamicHead_calc = (Vpitot_real * Vpitot_real) / (2 * g)
+  const stagnationHead = pressureHead + pitotDynamicHead_calc
+  const stagnationP = P + 0.5 * rho * Vpitot_real * Vpitot_real
+  const pitotDeltaH = stagnationHead - pressureHead
+  const Vpitot = Math.sqrt(Math.max(0, 2 * g * pitotDeltaH))
+  const Qpitot = A * Vpitot
+
+  return {
+    index: nearestTap.index,
+    id: `X_${(clampedT * 100).toFixed(0)}`,
+    name: `${t0.name}→${t1.name}`,
+    label: `${t0.name}–${t1.name} (${(clampedT * Ltotal * 1000).toFixed(0)} mm)`,
+    sectionLabel: `${t0.name}–${t1.name}`,
+    nearestSectionName: nearestTap.name,
+    isExactSection: false,
+    xNorm: clampedT,
+    x: clampedT * Ltotal,
+    A,
+    A_mm2: A * 1e6,
+    D,
+    D_mm: D * 1000,
+    V,
+    velocityHead,
+    velocityHead_mm: velocityHead * 1000,
+    pressureHead,
+    pressureHead_mm: pressureHead * 1000,
+    totalHead,
+    totalHead_mm: totalHead * 1000,
+    headLoss,
+    headLoss_mm: headLoss * 1000,
+    P,
+    dynamicP,
+    Re,
+    isPitotLocation: true,
+    stagnationHead,
+    stagnationHead_mm: stagnationHead * 1000,
+    stagnationP,
+    pitotDeltaH,
+    pitotDeltaH_mm: pitotDeltaH * 1000,
+    Vpitot,
+    Qpitot,
+    Qpitot_Ls: Qpitot * 1000,
+    centerlineFactor: centerlineVelocityFactor,
+  }
+}
+
+/**
  * Calcula el caudal teórico ideal y coeficiente de descarga Cd mediante Ecuación 3.17
  */
 export function computeVenturiTheoreticalFlow(tap0, tap3, Q_real) {

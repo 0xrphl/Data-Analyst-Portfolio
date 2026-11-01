@@ -1,13 +1,16 @@
 import React from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import ProductGrid from '../components/ProductGrid';
+import LampsSmartHeader from '../components/LampsSmartHeader';
 import { useProducts } from '../hooks/useProducts';
 import { STORE_CATEGORIES } from '../constants';
 
 const StoreCategory = () => {
   const { slug } = useParams();
-  const { products, loading } = useProducts(slug);
+  const navigate = useNavigate();
+  const isAll = !slug || slug === 'todos' || slug === 'all';
+  const { products, loading } = useProducts();
   const category = STORE_CATEGORIES.find((c) => c.slug === slug);
 
   return (
@@ -17,7 +20,7 @@ const StoreCategory = () => {
         <div className="flex items-center gap-2 text-sm text-gray-500">
           <Link to="/store" className="hover:text-white transition-colors">Inicio</Link>
           <span>/</span>
-          <span className="text-white">{category?.name || slug}</span>
+          <span className="text-white">{isAll ? 'Todos los Productos' : (category?.name || slug)}</span>
         </div>
       </div>
 
@@ -28,15 +31,35 @@ const StoreCategory = () => {
           animate={{ opacity: 1, y: 0 }}
           className="flex items-center gap-4"
         >
-          <span className="text-4xl">{category?.icon || '📦'}</span>
+          <span className="text-4xl">{isAll ? '🛍️' : (category?.icon || '📦')}</span>
           <div>
-            <h1 className="text-3xl font-bold text-white">{category?.name || slug}</h1>
-            <p className="text-gray-400 text-sm mt-1">{category?.description}</p>
+            <h1 className="text-3xl font-bold text-white">
+              {isAll ? 'Todos los Productos' : (category?.name || slug)}
+            </h1>
+            <p className="text-gray-400 text-sm mt-1">
+              {isAll
+                ? 'Explora toda nuestra gama de diseños y piezas 3D disponibles.'
+                : category?.description}
+            </p>
           </div>
         </motion.div>
+
+        {slug === 'lamparas' && <LampsSmartHeader />}
       </div>
 
-      <ProductGrid products={products} loading={loading} showFilter />
+      <ProductGrid
+        products={products}
+        loading={loading}
+        showFilter
+        currentCategorySlug={isAll ? 'all' : slug}
+        onCategorySelect={(newSlug) => {
+          if (newSlug === 'all') {
+            navigate('/store/products');
+          } else {
+            navigate(`/store/category/${newSlug}`);
+          }
+        }}
+      />
     </div>
   );
 };

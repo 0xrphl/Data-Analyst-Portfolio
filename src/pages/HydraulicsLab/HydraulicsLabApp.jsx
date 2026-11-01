@@ -3,12 +3,14 @@ import { Leva } from 'leva'
 
 const BernoulliSim = lazy(() => import('./Bernoulli/BernoulliSim.jsx'))
 const JetImpactSim = lazy(() => import('./JetImpact/JetImpactSim.jsx'))
+const HydrostaticsSim = lazy(() => import('./Hydrostatics/HydrostaticsSim.jsx'))
 const MinorLossesSim = lazy(() => import('./MinorLosses/MinorLossesSim.jsx'))
 const PipeFrictionSim = lazy(() => import('./PipeFriction/PipeFrictionSim.jsx'))
 
 const TABS = [
   { id: 'bernoulli',    label: '💧 Bernoulli',       icon: '💧' },
   { id: 'jet-impact',   label: '🚿 Jet Impact',      icon: '🚿' },
+  { id: 'hydrostatics', label: '⚖️ Hydrostatics',    icon: '⚖️' },
   { id: 'minor-losses', label: '⚙️ Minor Losses',    icon: '⚙️' },
   { id: 'pipe-friction',label: '🔧 Pipe Friction',   icon: '🔧' },
 ]
@@ -95,6 +97,7 @@ export default function HydraulicsLabApp() {
         <Suspense fallback={<div style={S.loading}>Loading simulation…</div>}>
           {tab === 'bernoulli' && <BernoulliSim />}
           {tab === 'jet-impact' && <JetImpactSim />}
+          {tab === 'hydrostatics' && <HydrostaticsSim />}
           {tab === 'minor-losses' && <MinorLossesSim />}
           {tab === 'pipe-friction' && <PipeFrictionSim />}
         </Suspense>

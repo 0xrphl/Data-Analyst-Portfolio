@@ -23,8 +23,14 @@ function renderInline(text) {
 
 const S = {
   panel: {
-    height: '100%', overflowY: 'auto', padding: '18px 20px',
-    fontSize: 13.5, lineHeight: 1.7, color: '#c8cfe8',
+    height: '100%',
+    overflowY: 'auto',
+    padding: '18px 20px',
+    fontSize: 13.5,
+    lineHeight: 1.7,
+    color: '#c8cfe8',
+    scrollbarWidth: 'thin',
+    scrollbarColor: '#2a3152 #0d1020',
   },
   h: {
     color: '#fff', fontSize: 15, margin: '22px 0 8px', fontWeight: 600,
@@ -34,10 +40,15 @@ const S = {
   eq: {
     display: 'block', textAlign: 'center', margin: '12px 0',
     overflowX: 'auto', padding: '6px 0',
+    scrollbarWidth: 'thin',
+    scrollbarColor: '#2a3152 #0d1020',
   },
   mainEq: {
     display: 'block', textAlign: 'center', margin: '16px 0', padding: '10px 8px',
-    background: '#11142a', border: '1px solid #2a3152', borderRadius: 8, overflowX: 'auto',
+    background: '#11142a', border: '1px solid #2a3152', borderRadius: 8,
+    overflowX: 'auto',
+    scrollbarWidth: 'thin',
+    scrollbarColor: '#2a3152 #0d1020',
   },
   p: { marginBottom: 6 },
   list: { paddingLeft: 18, marginBottom: 8 },
@@ -78,7 +89,7 @@ function DerivationSection({ section }) {
 
 export default function DerivationPanel({ sections }) {
   return (
-    <div style={S.panel}>
+    <div style={S.panel} className="jet-custom-scroll">
       {sections.map((sec, i) => (
         <DerivationSection key={i} section={sec} />
       ))}

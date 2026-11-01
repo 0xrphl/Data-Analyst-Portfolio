@@ -3,13 +3,19 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { formatCOP } from '../constants';
 
-const FALLBACK_IMG = '/store/assets/products/mossglow-lamp-1.jpg';
+const FALLBACK_IMG = '/store/assets/products/1/mossglow-lamp-1.jpg';
 
 const ProductCard = ({ product, index = 0 }) => {
   const [imgLoaded, setImgLoaded] = useState(false);
   const [imgError, setImgError] = useState(false);
   const mainImage = product.images?.[0] || FALLBACK_IMG;
   const displayImage = imgError ? FALLBACK_IMG : mainImage;
+
+  const isCustom =
+    product.category_id === 8 ||
+    (Array.isArray(product.category_ids) && product.category_ids.includes(8)) ||
+    product.tags?.some((t) => ['custom', 'cotizacion', 'personalizado', 'escala'].includes(t.toLowerCase())) ||
+    product.slug?.includes('hacemos-tu-perrito');
 
   return (
     <motion.div
@@ -48,8 +54,8 @@ const ProductCard = ({ product, index = 0 }) => {
 
           {/* Quick view badge */}
           <div className="absolute bottom-3 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
-            <span className="px-4 py-1.5 bg-white/90 text-black text-xs font-semibold rounded-full">
-              Ver Detalles
+            <span className="px-4 py-1.5 bg-white/90 text-black text-xs font-semibold rounded-full shadow">
+              {isCustom ? 'Ver & Cotizar' : 'Ver Detalles'}
             </span>
           </div>
 
@@ -74,11 +80,25 @@ const ProductCard = ({ product, index = 0 }) => {
             {product.name}
           </h3>
           {product.sale_title && (
-            <p className="text-gray-500 text-xs mb-2">{product.sale_title}</p>
+            <p className="text-gray-500 text-xs mb-2 line-clamp-1">{product.sale_title}</p>
           )}
-          <p className="text-violet-400 font-bold text-lg">
-            {formatCOP(product.price_cop)}
-          </p>
+          {isCustom ? (
+            <div className="flex items-center justify-between mt-1">
+              <div>
+                <span className="text-[10px] text-gray-400 block leading-none mb-0.5">Desde</span>
+                <p className="text-violet-400 font-bold text-base sm:text-lg">
+                  {formatCOP(product.price_cop)}
+                </p>
+              </div>
+              <span className="text-[11px] font-semibold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded-full flex items-center gap-1">
+                💬 Cotizar
+              </span>
+            </div>
+          ) : (
+            <p className="text-violet-400 font-bold text-lg">
+              {formatCOP(product.price_cop)}
+            </p>
+          )}
         </div>
       </Link>
     </motion.div>

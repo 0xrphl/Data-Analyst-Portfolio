@@ -1,5 +1,5 @@
 import React, { Suspense, lazy, useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import { CartProvider } from './context/CartContext';
 import StoreNavbar from './components/StoreNavbar';
@@ -10,8 +10,10 @@ import WhatsAppButton from './components/WhatsAppButton';
 const StoreLanding = lazy(() => import('./pages/StoreLanding'));
 const StoreCategory = lazy(() => import('./pages/StoreCategory'));
 const StoreProduct = lazy(() => import('./pages/StoreProduct'));
+const StoreProducts = lazy(() => import('./pages/StoreProducts'));
 const StoreCheckout = lazy(() => import('./pages/StoreCheckout'));
 const StoreProfile = lazy(() => import('./pages/StoreProfile'));
+const StoreAbout = lazy(() => import('./pages/StoreAbout'));
 const AuthModal = lazy(() => import('./components/AuthModal'));
 
 const Loading = () => (
@@ -19,6 +21,17 @@ const Loading = () => (
     <div className="w-8 h-8 border-2 border-violet-500 border-t-transparent rounded-full animate-spin" />
   </div>
 );
+
+// Resets window scroll position whenever the route/path changes
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  }, [pathname]);
+
+  return null;
+};
 
 const StoreApp = () => {
   useEffect(() => {
@@ -40,16 +53,21 @@ const StoreApp = () => {
   return (
     <AuthProvider>
       <CartProvider>
+        <ScrollToTop />
         <div className="min-h-screen bg-black">
           <StoreNavbar />
           <CartDrawer />
           <Suspense fallback={<Loading />}>
             <Routes>
               <Route index element={<StoreLanding />} />
+              <Route path="products" element={<StoreProducts />} />
+              <Route path="catalogo" element={<StoreProducts />} />
+              <Route path="all" element={<StoreProducts />} />
               <Route path="category/:slug" element={<StoreCategory />} />
               <Route path="product/:slug" element={<StoreProduct />} />
               <Route path="checkout" element={<StoreCheckout />} />
               <Route path="profile" element={<StoreProfile />} />
+              <Route path="about" element={<StoreAbout />} />
               <Route path="login" element={<AuthModal />} />
             </Routes>
           </Suspense>

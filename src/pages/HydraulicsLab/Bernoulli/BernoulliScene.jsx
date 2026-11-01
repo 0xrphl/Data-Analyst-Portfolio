@@ -1,4 +1,4 @@
-import React, { useRef, useMemo, useCallback } from 'react'
+import React, { useRef, useMemo, useState, useCallback } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { OrbitControls, Text, Billboard } from '@react-three/drei'
 import * as THREE from 'three'
@@ -9,36 +9,98 @@ import { getInterpolatedRadius } from './solver.js'
 const SC = 4.0
 const RAD_SC = 9.5
 
-function VenturiTube({ tapResults, Ltotal }) {
-  const geom = useMemo(() => {
-    const pts = []
-    const n = 120
+function VenturiTube({ tapResults, Ltotal, cutawayMode = true, onSelectPosition }) {
+  const { fullGeom, backHalfGeom, outerBackHalfGeom, topCutFaceGeom, botCutFaceGeom, cutEdgeTopGeom, cutEdgeBotGeom } = useMemo(() => {
+    const ptsInner = []
+    const ptsOuter = []
+    const n = 110
+    const wallThick = 0.0085
+    const topPositions = []
+    const botPositions = []
+    const topEdgePts = []
+    const botEdgePts = []
+
     for (let i = 0; i <= n; i++) {
       const t = i / n
-      const r = getInterpolatedRadius(t, tapResults) * RAD_SC
+      const rIn = Math.max(0.02, getInterpolatedRadius(t, tapResults) * RAD_SC)
+      const rOut = rIn + wallThick
       const y = (t - 0.5) * Ltotal * SC
-      pts.push(new THREE.Vector2(Math.max(0.02, r), y))
+      ptsInner.push(new THREE.Vector2(rIn, y))
+      ptsOuter.push(new THREE.Vector2(rOut, y))
+      topEdgePts.push(new THREE.Vector3(y, rIn, 0.001))
+      botEdgePts.push(new THREE.Vector3(y, -rIn, 0.001))
+
+      if (i < n) {
+        const tNext = (i + 1) / n
+        const rInNext = Math.max(0.02, getInterpolatedRadius(tNext, tapResults) * RAD_SC)
+        const rOutNext = rInNext + wallThick
+        const yNext = (tNext - 0.5) * Ltotal * SC
+        topPositions.push(y, rIn, 0, yNext, rInNext, 0, yNext, rOutNext, 0, y, rIn, 0, yNext, rOutNext, 0, y, rOut, 0)
+        botPositions.push(y, -rOut, 0, yNext, -rOutNext, 0, yNext, -rInNext, 0, y, -rOut, 0, yNext, -rInNext, 0, y, -rIn, 0)
+      }
     }
-    return new THREE.LatheGeometry(pts, 56)
+
+    const full = new THREE.LatheGeometry(ptsInner, 56)
+    const backInner = new THREE.LatheGeometry(ptsInner, 40, Math.PI / 2, Math.PI)
+    const backOuter = new THREE.LatheGeometry(ptsOuter, 40, Math.PI / 2, Math.PI)
+    const topFace = new THREE.BufferGeometry()
+    topFace.setAttribute('position', new THREE.Float32BufferAttribute(topPositions, 3))
+    topFace.computeVertexNormals()
+    const botFace = new THREE.BufferGeometry()
+    botFace.setAttribute('position', new THREE.Float32BufferAttribute(botPositions, 3))
+    botFace.computeVertexNormals()
+
+    return {
+      fullGeom: full,
+      backHalfGeom: backInner,
+      outerBackHalfGeom: backOuter,
+      topCutFaceGeom: topFace,
+      botCutFaceGeom: botFace,
+      cutEdgeTopGeom: new THREE.BufferGeometry().setFromPoints(topEdgePts),
+      cutEdgeBotGeom: new THREE.BufferGeometry().setFromPoints(botEdgePts),
+    }
   }, [tapResults, Ltotal])
 
+  const handleTubeClick = useCallback((e) => {
+    if (!onSelectPosition) return
+    e.stopPropagation()
+    const xNorm = Math.max(0.02, Math.min(0.98, e.point.x / (Ltotal * SC) + 0.5))
+    onSelectPosition(xNorm)
+  }, [onSelectPosition, Ltotal])
+
+  if (!cutawayMode) {
+    return (
+      <mesh geometry={fullGeom} rotation={[0, 0, -Math.PI / 2]} onClick={handleTubeClick}>
+        <meshPhysicalMaterial color="#80deea" transparent opacity={0.28} roughness={0.08} metalness={0.15} transmission={0.65} ior={1.333} side={THREE.DoubleSide} />
+      </mesh>
+    )
+  }
+
   return (
-    <mesh geometry={geom} rotation={[0, 0, -Math.PI / 2]}>
-      <meshPhysicalMaterial
-        color="#80deea"
-        transparent
-        opacity={0.28}
-        roughness={0.08}
-        metalness={0.15}
-        transmission={0.65}
-        ior={1.333}
-        side={THREE.DoubleSide}
-      />
-    </mesh>
+    <group>
+      <mesh geometry={backHalfGeom} rotation={[0, 0, -Math.PI / 2]} onClick={handleTubeClick}>
+        <meshPhysicalMaterial color="#4dd0e1" transparent opacity={0.34} roughness={0.1} metalness={0.18} side={THREE.DoubleSide} />
+      </mesh>
+      <mesh geometry={outerBackHalfGeom} rotation={[0, 0, -Math.PI / 2]}>
+        <meshPhysicalMaterial color="#26c6da" transparent opacity={0.18} roughness={0.15} metalness={0.2} side={THREE.BackSide} />
+      </mesh>
+      <mesh geometry={topCutFaceGeom} onClick={handleTubeClick}>
+        <meshStandardMaterial color="#00e5ff" emissive="#00838f" emissiveIntensity={0.55} transparent opacity={0.78} side={THREE.DoubleSide} />
+      </mesh>
+      <mesh geometry={botCutFaceGeom} onClick={handleTubeClick}>
+        <meshStandardMaterial color="#00e5ff" emissive="#00838f" emissiveIntensity={0.55} transparent opacity={0.78} side={THREE.DoubleSide} />
+      </mesh>
+      <line geometry={cutEdgeTopGeom}>
+        <lineBasicMaterial color="#84ffff" linewidth={2} />
+      </line>
+      <line geometry={cutEdgeBotGeom}>
+        <lineBasicMaterial color="#84ffff" linewidth={2} />
+      </line>
+    </group>
   )
 }
 
-function SectionRings({ tapResults, Ltotal }) {
+function SectionRings({ tapResults, Ltotal, cutawayMode = true, onSelectPosition }) {
   if (!tapResults) return null
   return tapResults.map((tap, i) => {
     const xPos = (tap.xNorm - 0.5) * Ltotal * SC
@@ -49,17 +111,26 @@ function SectionRings({ tapResults, Ltotal }) {
 
     return (
       <group key={tap.id || i} position={[xPos, 0, 0]}>
-        <mesh rotation={[0, Math.PI / 2, 0]}>
-          <torusGeometry args={[r, 0.012, 14, 48]} />
+        <mesh
+          rotation={cutawayMode ? [0, Math.PI / 2, Math.PI / 2] : [0, Math.PI / 2, 0]}
+          onClick={(e) => {
+            if (onSelectPosition) {
+              e.stopPropagation()
+              onSelectPosition(tap.xNorm, tap.name)
+            }
+          }}
+          onPointerOver={() => { document.body.style.cursor = 'pointer' }}
+          onPointerOut={() => { document.body.style.cursor = 'auto' }}
+        >
+          <torusGeometry args={[r, 0.011, 14, 48, cutawayMode ? Math.PI : Math.PI * 2]} />
           <meshStandardMaterial
             color={ringColor}
             emissive={ringColor}
-            emissiveIntensity={0.6}
+            emissiveIntensity={isPitot ? 0.85 : 0.55}
             transparent
-            opacity={0.9}
+            opacity={0.92}
           />
         </mesh>
-        {/* Etiquetas de sección situadas limpiamente debajo del tubo para evitar interferir con piezómetros */}
         <Billboard position={[0, -(r + 0.075), 0]}>
           <Text fontSize={0.062} color={ringColor} fontWeight={700} anchorY="top">
             {tap.name || ('S' + i)}
@@ -74,6 +145,57 @@ function SectionRings({ tapResults, Ltotal }) {
       </group>
     )
   })
+}
+
+function PitotStreamlines3D({ tipX, stemX, pipeR, probeBodyR, show = true }) {
+  const { centralLine, deflectedLines } = useMemo(() => {
+    const startX = tipX - 0.16
+    const endX = stemX + 0.07
+
+    const cPts = [
+      new THREE.Vector3(startX, 0, 0),
+      new THREE.Vector3(tipX - 0.05, 0, 0),
+      new THREE.Vector3(tipX - 0.006, 0, 0),
+    ]
+    const central = new THREE.BufferGeometry().setFromPoints(cPts)
+
+    const offsets = [-0.62, -0.34, 0.34, 0.62]
+    const defLines = offsets.map((frac) => {
+      const sign = frac >= 0 ? 1 : -1
+      const yFar = frac * pipeR * 0.82
+      const minClearance = probeBodyR * 1.65 + Math.abs(frac) * (pipeR - probeBodyR * 1.5) * 0.58
+      const yDeflect = sign * Math.min(pipeR * 0.88, Math.max(Math.abs(yFar) * 1.18, minClearance))
+
+      const curve = new THREE.CatmullRomCurve3([
+        new THREE.Vector3(startX, yFar, 0),
+        new THREE.Vector3(tipX - 0.055, yFar * 1.03, 0),
+        new THREE.Vector3(tipX - 0.008, yDeflect * 0.86, 0),
+        new THREE.Vector3(tipX + 0.045, yDeflect, 0),
+        new THREE.Vector3(stemX - 0.015, yDeflect, 0),
+        new THREE.Vector3(endX, yDeflect * 0.94, 0),
+      ])
+      return new THREE.BufferGeometry().setFromPoints(curve.getPoints(42))
+    })
+
+    return { centralLine: central, deflectedLines: defLines }
+  }, [tipX, stemX, pipeR, probeBodyR])
+
+  if (!show) return null
+
+  return (
+    <group>
+      {/* Línea central de impacto que se frena en el punto de estancamiento (V -> 0) */}
+      <line geometry={centralLine}>
+        <lineBasicMaterial color="#ff9100" linewidth={2} />
+      </line>
+      {/* Líneas de corriente que se abren alrededor de la punta encogida */}
+      {deflectedLines.map((geom, idx) => (
+        <line key={idx} geometry={geom}>
+          <lineBasicMaterial color={idx === 1 || idx === 2 ? '#00e5ff' : '#38bdf8'} transparent opacity={0.85} />
+        </line>
+      ))}
+    </group>
+  )
 }
 
 function Piezometers({ tapResults, Ltotal }) {
@@ -112,47 +234,195 @@ function Piezometers({ tapResults, Ltotal }) {
   })
 }
 
-function PitotProbeAssembly({ tapResults, pitotIdx, Ltotal }) {
-  if (!tapResults || pitotIdx < 0 || pitotIdx >= tapResults.length) return null
-  const tap = tapResults[pitotIdx]
-  const xPos = (tap.xNorm - 0.5) * Ltotal * SC
-  const pipeR = (tap.D / 2) * RAD_SC
+function PitotProbeAssembly({
+  tapResults,
+  pitotIdx,
+  pitotData,
+  Ltotal,
+  showStreamlines = true,
+  onPitotHover,
+  onPitotLeave,
+  onPitotClick,
+}) {
+  const [hovered, setHovered] = useState(false)
+  const stagGlowRef = useRef()
+  const stagRingRef = useRef()
+
+  const tap = pitotData || (tapResults && tapResults[pitotIdx])
+  const xNorm = tap ? tap.xNorm : 0.56
+  const xPos = (xNorm - 0.5) * Ltotal * SC
+  const pipeR = tap ? (tap.D / 2) * RAD_SC : 0.055
 
   const maxPH = 0.260
   const tubeH = 1.35
-  const stagH = Math.min(tubeH * 0.98, Math.max(0.04, (tap.stagnationHead / maxPH) * tubeH))
-  const staticH = Math.min(tubeH * 0.98, Math.max(0.04, (tap.pressureHead / maxPH) * tubeH))
+  const stagH = tap ? Math.min(tubeH * 0.98, Math.max(0.04, (tap.stagnationHead / maxPH) * tubeH)) : 0.5
+  const staticH = tap ? Math.min(tubeH * 0.98, Math.max(0.04, (tap.pressureHead / maxPH) * tubeH)) : 0.35
   const deltaHScene = Math.max(0.02, stagH - staticH)
 
-  const stemR = 0.008
-  const probeR = 0.0065
-  const probeLen = 0.18
-  const stemHeight = pipeR + 0.14
+  const probeBodyR = Math.min(0.0095, pipeR * 0.24)
+  const tipR = probeBodyR * 0.42
+  const stemR = probeBodyR * 0.92
+  const probeLen = Math.min(0.19, Math.max(0.11, Ltotal * SC * 0.095))
+  const taperLen = probeLen * 0.38
+  const bodyLen = probeLen - taperLen
+  const stemExtra = 0.14
+  const manifoldY = pipeR + stemExtra
   const tubeR = 0.015
-  const tubeSpacing = 0.075
+  const tubeSpacing = 0.078
+
+  const taperedNozzleGeom = useMemo(() => {
+    const pts = []
+    const steps = 24
+    for (let i = 0; i <= steps; i++) {
+      const f = i / steps
+      const ease = f * f * (3 - 2 * f)
+      const r = tipR + (probeBodyR - tipR) * ease
+      const y = (f - 0.5) * taperLen
+      pts.push(new THREE.Vector2(r, y))
+    }
+    return new THREE.LatheGeometry(pts, 28)
+  }, [tipR, probeBodyR, taperLen])
+
+  useFrame(({ clock }) => {
+    const t = clock.getElapsedTime()
+    if (stagGlowRef.current) {
+      const pulse = 1 + 0.14 * Math.sin(t * 5.2)
+      stagGlowRef.current.scale.set(pulse, pulse, pulse)
+    }
+    if (stagRingRef.current) {
+      const s = 1 + 0.22 * ((t * 1.6) % 1)
+      stagRingRef.current.scale.set(s, s, s)
+    }
+  })
+
+  const emitHover = useCallback((e) => {
+    e.stopPropagation()
+    setHovered(true)
+    document.body.style.cursor = 'pointer'
+    if (onPitotHover && tap) {
+      const cx = e?.nativeEvent?.clientX ?? e?.clientX ?? 0
+      const cy = e?.nativeEvent?.clientY ?? e?.clientY ?? 0
+      onPitotHover(tap, { x: cx, y: cy })
+    }
+  }, [onPitotHover, tap])
+
+  const emitOut = useCallback((e) => {
+    e.stopPropagation()
+    setHovered(false)
+    document.body.style.cursor = 'auto'
+    if (onPitotLeave) onPitotLeave()
+  }, [onPitotLeave])
+
+  const emitClick = useCallback((e) => {
+    e.stopPropagation()
+    if (onPitotClick && tap) {
+      const cx = e?.nativeEvent?.clientX ?? e?.clientX ?? 0
+      const cy = e?.nativeEvent?.clientY ?? e?.clientY ?? 0
+      onPitotClick(tap, { x: cx, y: cy })
+    }
+  }, [onPitotClick, tap])
+
+  if (!tap) return null
 
   return (
-    <group position={[xPos, 0, 0.04]}>
+    <group position={[xPos, 0, 0]}>
+      <PitotStreamlines3D tipX={-probeLen} stemX={0} pipeR={pipeR} probeBodyR={probeBodyR} show={showStreamlines} />
       <group position={[0, 0, 0]}>
-        <mesh position={[0, (pipeR + stemHeight) / 2, 0]}>
-          <cylinderGeometry args={[stemR, stemR, pipeR + stemHeight, 12]} />
-          <meshStandardMaterial color="#d4af37" metalness={0.85} roughness={0.2} />
+        <mesh position={[0, manifoldY / 2, 0]} onPointerOver={emitHover} onPointerMove={emitHover} onPointerOut={emitOut} onClick={emitClick}>
+          <cylinderGeometry args={[stemR, stemR, manifoldY, 18]} />
+          <meshStandardMaterial color="#cbd5e1" metalness={0.88} roughness={0.18} />
+        </mesh>
+        <mesh position={[0, pipeR + 0.008, 0]}>
+          <cylinderGeometry args={[stemR * 2.1, stemR * 2.3, 0.022, 6]} />
+          <meshStandardMaterial color="#d4af37" metalness={0.9} roughness={0.18} />
+        </mesh>
+        <mesh position={[0, pipeR, 0]} rotation={[Math.PI / 2, 0, 0]}>
+          <torusGeometry args={[stemR * 1.65, 0.003, 10, 24]} />
+          <meshStandardMaterial color="#1e293b" roughness={0.6} />
         </mesh>
         <mesh position={[0, 0, 0]}>
-          <sphereGeometry args={[stemR * 1.5, 12, 12]} />
-          <meshStandardMaterial color="#d4af37" metalness={0.85} roughness={0.2} />
+          <sphereGeometry args={[probeBodyR * 1.18, 18, 18]} />
+          <meshStandardMaterial color="#cbd5e1" metalness={0.88} roughness={0.18} />
         </mesh>
-        <mesh position={[-probeLen / 2, 0, 0]} rotation={[0, 0, Math.PI / 2]}>
-          <cylinderGeometry args={[probeR, probeR, probeLen, 12]} />
-          <meshStandardMaterial color="#d4af37" metalness={0.85} roughness={0.2} />
+        <mesh position={[-bodyLen / 2, 0, 0]} rotation={[0, 0, Math.PI / 2]} onPointerOver={emitHover} onPointerMove={emitHover} onPointerOut={emitOut} onClick={emitClick}>
+          <cylinderGeometry args={[probeBodyR, probeBodyR, bodyLen, 20]} />
+          <meshStandardMaterial color="#cbd5e1" metalness={0.88} roughness={0.18} />
         </mesh>
-        <mesh position={[-probeLen, 0, 0]} rotation={[0, 0, Math.PI / 2]}>
-          <coneGeometry args={[probeR * 1.3, 0.025, 12]} />
-          <meshStandardMaterial color="#ffb300" metalness={0.9} roughness={0.1} />
+        {[-bodyLen * 0.45, -bodyLen * 0.72].map((ox, k) => (
+          <mesh key={k} position={[ox, 0, 0]} rotation={[0, Math.PI / 2, 0]}>
+            <torusGeometry args={[probeBodyR * 1.02, 0.0014, 8, 24]} />
+            <meshStandardMaterial color="#00e5ff" emissive="#00b0ff" emissiveIntensity={0.8} />
+          </mesh>
+        ))}
+        <mesh
+          geometry={taperedNozzleGeom}
+          position={[-bodyLen - taperLen / 2, 0, 0]}
+          rotation={[0, 0, -Math.PI / 2]}
+          onPointerOver={emitHover}
+          onPointerMove={emitHover}
+          onPointerOut={emitOut}
+          onClick={emitClick}
+        >
+          <meshStandardMaterial
+            color={hovered ? '#ffe082' : '#eab308'}
+            emissive={hovered ? '#ff9100' : '#b45309'}
+            emissiveIntensity={hovered ? 0.65 : 0.25}
+            metalness={0.92}
+            roughness={0.12}
+          />
         </mesh>
+        <mesh position={[-probeLen, 0, 0]} rotation={[0, Math.PI / 2, 0]}>
+          <torusGeometry args={[tipR * 0.92, tipR * 0.22, 12, 28]} />
+          <meshStandardMaterial color="#ffd54f" emissive="#ff9100" emissiveIntensity={0.6} metalness={0.95} roughness={0.1} />
+        </mesh>
+        <mesh position={[-probeLen - 0.0006, 0, 0]} rotation={[0, -Math.PI / 2, 0]}>
+          <circleGeometry args={[tipR * 0.76, 20]} />
+          <meshBasicMaterial color="#05070f" side={THREE.DoubleSide} />
+        </mesh>
+        <mesh position={[-probeLen / 2, 0, probeBodyR * 0.35]} rotation={[0, 0, Math.PI / 2]}>
+          <cylinderGeometry args={[tipR * 0.38, tipR * 0.38, probeLen, 10]} />
+          <meshStandardMaterial color="#ff6d00" emissive="#ff6d00" emissiveIntensity={0.85} />
+        </mesh>
+        <mesh position={[0, manifoldY / 2, stemR * 0.35]}>
+          <cylinderGeometry args={[tipR * 0.38, tipR * 0.38, manifoldY, 10]} />
+          <meshStandardMaterial color="#ff6d00" emissive="#ff6d00" emissiveIntensity={0.85} />
+        </mesh>
+        <group position={[-probeLen - 0.005, 0, 0]}>
+          <mesh ref={stagGlowRef}>
+            <sphereGeometry args={[tipR * 2.4, 20, 20]} />
+            <meshStandardMaterial
+              color="#ff9100"
+              emissive="#ff6d00"
+              emissiveIntensity={hovered ? 1.4 : 0.95}
+              transparent
+              opacity={hovered ? 0.68 : 0.46}
+            />
+          </mesh>
+          <mesh ref={stagRingRef} rotation={[0, Math.PI / 2, 0]}>
+            <torusGeometry args={[tipR * 2.1, 0.0016, 10, 28]} />
+            <meshBasicMaterial color="#ffd180" transparent opacity={0.75} />
+          </mesh>
+          <mesh onPointerOver={emitHover} onPointerMove={emitHover} onPointerOut={emitOut} onClick={emitClick}>
+            <sphereGeometry args={[Math.max(0.032, pipeR * 0.55), 16, 16]} />
+            <meshBasicMaterial visible={false} />
+          </mesh>
+        </group>
+        <Billboard position={[-probeLen - 0.015, Math.min(pipeR * 0.68, probeBodyR * 4.2), 0.02]}>
+          <Text fontSize={hovered ? 0.029 : 0.024} color={hovered ? '#ffffff' : '#ffd180'} fontWeight={800} anchorX="center" anchorY="bottom">
+            {hovered ? '🔍 Punta Pitot (Clic = Fijar Tooltip)' : 'P₀ Estancamiento'}
+          </Text>
+        </Billboard>
       </group>
-
-      <group position={[0, pipeR + stemHeight, 0]}>
+      {/* Puente colector que conecta el vástago del Pitot con la columna de estancamiento */}
+      <mesh position={[-tubeSpacing / 4, manifoldY, 0]} rotation={[0, 0, Math.PI / 2]}>
+        <cylinderGeometry args={[stemR * 0.95, stemR * 0.95, tubeSpacing / 2 + 0.01, 14]} />
+        <meshStandardMaterial color="#d4af37" metalness={0.88} roughness={0.2} />
+      </mesh>
+      <mesh position={[tubeSpacing / 2, (pipeR + manifoldY) / 2, 0]}>
+        <cylinderGeometry args={[stemR * 0.78, stemR * 0.78, manifoldY - pipeR, 14]} />
+        <meshPhysicalMaterial color="#4fc3f7" transparent opacity={0.55} />
+      </mesh>
+      <group position={[0, pipeR + stemExtra, 0]}>
         {/* Columna de Estancamiento (Naranja) */}
         <group position={[-tubeSpacing / 2, 0, 0]}>
           <mesh position={[0, tubeH / 2, 0]}>
@@ -311,6 +581,13 @@ export default function BernoulliScene({
   isoLevels = 6,
   particleCount = 600,
   pitotTapIdx = 3,
+  pitotData = null,
+  cutawayMode = true,
+  showStreamlines = true,
+  onPitotHover,
+  onPitotLeave,
+  onPitotClick,
+  onSelectPosition,
 }) {
   const camDist = Math.max(1.8, Ltotal * SC * 0.95)
 
@@ -348,6 +625,12 @@ export default function BernoulliScene({
     }
   }, [tapResults])
 
+  const activePitot = pitotData || (tapResults && tapResults[pitotTapIdx])
+  const pitotXNorm = activePitot ? activePitot.xNorm : 0.56
+  const pitotWorldX = (pitotXNorm - 0.5) * Ltotal * SC
+  const pitotProbeLen = Math.min(0.19, Math.max(0.11, Ltotal * SC * 0.095))
+  const pitotTipX = pitotWorldX - pitotProbeLen
+
   const initFn = useCallback(() => {
     const arr = []
     for (let i = 0; i < particleCount; i++) {
@@ -364,18 +647,40 @@ export default function BernoulliScene({
     const p = data[i]
     const { V } = interpAt(p.tNorm)
     const profileFactor = 1.25 * (1 - 0.35 * Math.pow(p.rFrac, 2))
-    const speed = Math.min(V * profileFactor * 0.16, 3.2)
+    let speed = Math.min(V * profileFactor * 0.16, 3.2)
+    const px = (p.tNorm - 0.5) * Ltotal * SC
+    if (px > pitotTipX - 0.05 && px < pitotTipX + 0.01 && p.rFrac < 0.28) {
+      speed *= 0.42
+    }
     p.tNorm += speed * dt
     if (p.tNorm > 1) {
       p.tNorm -= 1
       p.angle = Math.random() * Math.PI * 2
     }
-  }, [interpAt])
+  }, [interpAt, Ltotal, pitotTipX])
 
   const getStateFn = useCallback((p) => {
     const { V, P } = interpAt(p.tNorm)
     const rPipe = getInterpolatedRadius(p.tNorm, tapResults) * RAD_SC
     const r = p.rFrac * rPipe
+    const x = (p.tNorm - 0.5) * Ltotal * SC
+
+    let y = Math.cos(p.angle) * r
+    let z = Math.sin(p.angle) * r
+    if (cutawayMode && z > 0) z = -z * 0.92
+
+    if (x >= pitotTipX - 0.025 && x <= pitotWorldX + 0.015) {
+      const probeRAtX = x < pitotTipX + pitotProbeLen * 0.38
+        ? 0.0045 + ((x - pitotTipX) / Math.max(0.01, pitotProbeLen * 0.38)) * 0.0065
+        : 0.011
+      const minClearance = probeRAtX * 1.45
+      const radialDist = Math.sqrt(y * y + z * z)
+      if (radialDist < minClearance) {
+        const pushScale = minClearance / Math.max(radialDist, 0.0008)
+        y *= pushScale
+        z *= pushScale
+      }
+    }
 
     let value = V / Vmax
     if (colorMode === 'Presión' || colorMode === 'Pressure' || colorMode === 'Presion') {
@@ -386,14 +691,8 @@ export default function BernoulliScene({
       value = hv / Math.max(maxHv, 1e-9)
     }
 
-    return {
-      x: (p.tNorm - 0.5) * Ltotal * SC,
-      y: Math.cos(p.angle) * r,
-      z: Math.sin(p.angle) * r,
-      size: 0.015 + (V / Vmax) * 0.020,
-      value,
-    }
-  }, [interpAt, tapResults, Ltotal, Vmax, Pmin, Pmax, colorMode])
+    return { x, y, z, size: 0.014 + (V / Vmax) * 0.018, value }
+  }, [interpAt, tapResults, Ltotal, Vmax, Pmin, Pmax, colorMode, cutawayMode, pitotTipX, pitotWorldX, pitotProbeLen])
 
   const isoPositions = useMemo(() => {
     if (!tapResults) return []
@@ -405,18 +704,27 @@ export default function BernoulliScene({
 
   return (
     <Canvas camera={{ position: [0, camDist * 0.52, camDist], fov: 46 }} style={{ background: '#03040d' }}>
-      <ambientLight intensity={0.65} />
-      <directionalLight position={[5, 9, 6]} intensity={0.9} />
-      <pointLight position={[-3, 4, 3]} intensity={0.5} color="#80deea" />
-      <pointLight position={[3, 2, -2]} intensity={0.3} color="#ff9800" />
+      <ambientLight intensity={0.68} />
+      <directionalLight position={[5, 9, 6]} intensity={0.95} />
+      <pointLight position={[-3, 4, 3]} intensity={0.55} color="#80deea" />
+      <pointLight position={[3, 2, -2]} intensity={0.35} color="#ff9800" />
 
-      <VenturiTube tapResults={tapResults} Ltotal={Ltotal} />
+      <VenturiTube tapResults={tapResults} Ltotal={Ltotal} cutawayMode={cutawayMode} onSelectPosition={onSelectPosition} />
       <RainbowParticles count={particleCount} initFn={initFn} advanceFn={advanceFn} getState={getStateFn} />
       {showIso && <IsoRings positions={isoPositions} levels={isoLevels} isLaminar={false} />}
-      <SectionRings tapResults={tapResults} Ltotal={Ltotal} />
+      <SectionRings tapResults={tapResults} Ltotal={Ltotal} cutawayMode={cutawayMode} onSelectPosition={onSelectPosition} />
       <Piezometers tapResults={tapResults} Ltotal={Ltotal} />
       <GradeLines tapResults={tapResults} Ltotal={Ltotal} />
-      <PitotProbeAssembly tapResults={tapResults} pitotIdx={pitotTapIdx} Ltotal={Ltotal} />
+      <PitotProbeAssembly
+        tapResults={tapResults}
+        pitotIdx={pitotTapIdx}
+        pitotData={pitotData}
+        Ltotal={Ltotal}
+        showStreamlines={showStreamlines}
+        onPitotHover={onPitotHover}
+        onPitotLeave={onPitotLeave}
+        onPitotClick={onPitotClick}
+      />
       <FlowArrow Ltotal={Ltotal} />
 
       <gridHelper args={[Ltotal * SC * 1.6, 28, '#1e293b', '#0f172a']} position={[0, -0.42, 0]} />

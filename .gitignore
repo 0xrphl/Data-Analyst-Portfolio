@@ -9,5 +9,8 @@ esp32/
 ESP32_COMMANDS_POLLING_SNIPPET.md
 supabase/
 3d print content/
-
+repos_out_embedded_in/*
+!repos_out_embedded_in/Codigo_Fuente_Simuladores/
+repos_out_embedded_in/Codigo_Fuente_Simuladores/node_modules/
+repos_out_embedded_in/Codigo_Fuente_Simuladores/dist/
 

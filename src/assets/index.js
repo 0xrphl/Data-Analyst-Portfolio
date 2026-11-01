@@ -197,6 +197,27 @@ import agoraAccessories from "./projects/agora/agora_accessories.jpg";
 import agoraBeauty from "./projects/agora/agora_beauty.jpg";
 import agoraOauth from "./projects/agora/agora_oauth.png";
 
+// Hydraulics Lab Simulation project assets
+import hydraulicsBernoulli from "./projects/hydraulics/bernoulli_sim.webp";
+import hydraulicsJetImpact from "./projects/hydraulics/jet_impact_sim.webp";
+import hydraulicsMinorLosses from "./projects/hydraulics/minor_losses_sim.webp";
+import hydraulicsPipeFriction from "./projects/hydraulics/pipe_friction_sim.webp";
+
+// Parker Solar Probe 3D Dashboard project assets
+import parkerDashboard from "./projects/parker-solar-probe/parker_dashboard.webp";
+import parkerSpacecraftModel from "./projects/parker-solar-probe/parker_spacecraft_model.webp";
+import parkerStreamers from "./projects/parker-solar-probe/parker_streamers.webp";
+import parkerSpcInstrument from "./projects/parker-solar-probe/parker_spc_instrument.webp";
+import parkerWiresCrossSection from "./projects/parker-solar-probe/parker_wires_cross_section.webp";
+import parkerOrbitDeltaV from "./projects/parker-solar-probe/parker_orbit_deltav.webp";
+import parkerSunElevation from "./projects/parker-solar-probe/parker_sun_elevation.webp";
+import parkerSolarAtmosphere from "./projects/parker-solar-probe/parker_solar_atmosphere.webp";
+
+// UNGRD & Multi-Dataset 3D Analytics project assets
+import ungrdDashboard from "./projects/data-eng-ungrd/ungrd_dashboard.webp";
+import ungrdNetflixDashboard from "./projects/data-eng-ungrd/netflix_3d_dashboard.webp";
+import ungrdBebidasDashboard from "./projects/data-eng-ungrd/bebidas_colombia_dashboard.webp";
+
 export {
 
 
@@ -392,6 +413,24 @@ export {
   agoraAccessories,
   agoraBeauty,
   agoraOauth,
+  // Hydraulics Lab exports
+  hydraulicsBernoulli,
+  hydraulicsJetImpact,
+  hydraulicsMinorLosses,
+  hydraulicsPipeFriction,
+  // Parker Solar Probe exports
+  parkerDashboard,
+  parkerSpacecraftModel,
+  parkerStreamers,
+  parkerSpcInstrument,
+  parkerWiresCrossSection,
+  parkerOrbitDeltaV,
+  parkerSunElevation,
+  parkerSolarAtmosphere,
+  // UNGRD & Multi-Dataset exports
+  ungrdDashboard,
+  ungrdNetflixDashboard,
+  ungrdBebidasDashboard,
 };
 
 

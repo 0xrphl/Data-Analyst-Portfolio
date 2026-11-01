@@ -1,0 +1,102 @@
+================================================================================
+GUION TECNICO Y NARRATIVO PARA VIDEO-PRESENTACION / SUSTENTACION
+ASIGNATURA: CONSTITUCION POLITICA — RETO 2 (MOMENTO 1 - EVALUACION 25%)
+UNIVERSIDAD TECNOLOGICA DE PEREIRA (UTP)
+TEMA: RADIOGRAFIA CONSTITUCIONAL DE LA SENTENCIA T-375 DE 2025
+«CUANDO LA MEMORIA INCOMODA: PRINCIPIOS, VALORES Y JUSTICIA TRANSICIONAL»
+DURACION ESTIMADA: 4 MINUTOS Y 45 SEGUNDOS (APROX. 680 PALABRAS — 140 WPM)
+ROL DEL EXPOSITOR: ANALISTA CONSTITUCIONAL E INVESTIGADOR DE JUSTICIA TRANSICIONAL
+================================================================================
+
+[CONSEJOS DE PRODUCCION Y MONTAJE VISUAL]
+* ESCENOGRAFIA: Fondo sobrio o proyeccion de la plataforma interactiva 3D con el Memorial Constitucional de MAFAPO (https://0xraphael.com/college/politics/challenge2).
+* VESTIMENTA Y TONO: Ropa formal, ademan sobrio y contundente. Voz pedagogica, firme, empatica con los derechos de las victimas y rigurosa en citas dogmaticas.
+* APOYOS VISUALES: Alternar entre la camara fija y las 9 diapositivas del deck transparente sobre el fondo 3D.
+
+--------------------------------------------------------------------------------
+ACTO I: APERTURA Y PRESENTACION DEL CASO (0:00 - 0:45)
+[Tiempo: 45 segundos | Pacing: Solemne, analitico, de interpelacion etica]
+[CAMARA: Plano medio. Mirada firme y directa.]
+
+NARRADOR / ANALISTA:
+"Honorable docente y companeros de catedra:
+
+Asumo este estrado academico no para narrar una anecdota pasajera de redes sociales, sino para exponer una autentica radiografia constitucional sobre las tensiones mas desgarradoras de nuestra democracia.
+
+En noviembre de 2024, el Patio Rafael Nunez del Capitolio Nacional albergaba la exposicion artistica 'Mujeres con las botas bien puestas', una obra de memoria de las madres de MAFAPO y la Fundacion Rinconesarte en tributo a los 6.402 jovenes victimas de ejecuciones extrajudiciales. Ese recinto fue violentado: un representante a la Camara retiro por la fuerza las botas intervenidas, las arrojo a bolsas de basura y grabo un video afirmando que pertenecian al canasto de los desechos, mientras tildaba a las madres de actuar por compensaciones dinerarias ilicitas.
+
+Que estaba en juego aqui? No era una simple rina partidista; era una colision frontal entre la dignidad humana, el valor supremo de la paz y los limites insalvables de los servidores publicos en un Estado Social de Derecho."
+
+[INSERCION EN PANTALLA: Diapositiva 01 y 02 — Acusacion Central y Hechos del Caso.]
+
+--------------------------------------------------------------------------------
+ACTO II: DIGNIDAD HUMANA Y NO COSIFICACION (0:45 - 1:30)
+[Tiempo: 45 segundos | Pacing: Energico, riguroso, de defensa ontologica]
+[CAMARA: Primer plano.]
+
+NARRADOR / ANALISTA:
+"Examinemos el primer pilar: la dignidad humana, principio fundante de nuestra Carta del 91.
+
+La Corte Constitucional, en la Sentencia T-375 de 2025 bajo ponencia de la magistrada Paola Andrea Meneses Mosquera, reitera que la dignidad no es un concepto etereo: comprende la garantia inalienable de vivir sin humillaciones.
+
+Tratar las botas conmemorativas —simbolos sacrosantos del duelo filial de quienes perdieron a sus hijos bajo el engano de falsas promesas laborales para ser asesinados y reportados como bajas en combate— como simple basura representa un acto perverso de cosificacion. Despoja a la victima de su humanidad y pretende borrar la huella moral de su dolor. La Corte es tajante: en Colombia, el duelo de las victimas del conflicto armado goza de blindaje constitucional, y ningun dignatario tiene licencia para pisotear el sufrimiento humano."
+
+[INSERCION EN PANTALLA: Diapositiva 03 — Principio de Dignidad Humana y Respeto al Duelo.]
+
+--------------------------------------------------------------------------------
+ACTO III: PRINCIPIO DE LEGALIDAD Y LIMITES A LA INVESTIDURA (1:30 - 2:20)
+[Tiempo: 50 segundos | Pacing: Forense, juridico-administrativo]
+[CAMARA: Plano americano.]
+
+NARRADOR / ANALISTA:
+"El segundo eje es el principio de legalidad, consagrado en los articulos 6, 121 y 123 de la Constitucion.
+
+A diferencia del ciudadano de a pie, que puede hacer todo lo que la ley no prohiba, el servidor publico solo puede ejercer aquellas atribuciones que la Carta y las normas le otorgan taxativamente. El representante accionado alego el ejercicio del control politico y la inviolabilidad parlamentaria del articulo 185.
+
+La Corte pulverizo este argumento: la inviolabilidad ampara votos y opiniones estrictamente legislativas, jamas vias de hecho ni la incautacion arbitraria de bienes en recintos publicos autorizados por la administracion del Congreso. Un congresista no es un inspector de policia ni un recolector de aseo para decidir por cuenta propia que arte tiene derecho a existir. La Sala Septima determino que existio una grosera desviacion de poder y el incumplimiento de un deber cualificado: quienes ejercen autoridad estan obligados a verificar los hechos antes de emitir juicios lesivos contra ciudadanos desprotegidos."
+
+[INSERCION EN PANTALLA: Diapositiva 04 — Principio de Legalidad y Deber Cualificado de Veracidad.]
+
+--------------------------------------------------------------------------------
+ACTO IV: EL VALOR DE LA PAZ, LA VERDAD Y LA VIOLENCIA SIMBOLICA (2:20 - 3:10)
+[Tiempo: 50 segundos | Pacing: Conceptual, transicional, profundo]
+[CAMARA: Plano medio cerrado.]
+
+NARRADOR / ANALISTA:
+"Llegamos al nucleo de la justicia transicional: el derecho y valor fundamental de la paz consagrado en el Preambulo y el articulo 22 de la Carta.
+
+La paz no es el mero silencio de las armas en el campo; es una cultura de convivencia, reconciliacion y reparacion integral. Apoyandose en las tesis de Johan Galtung y Pierre Bourdieu, la Corte deconstruye el fenomeno de la violencia simbolica: aquella que no utiliza fusiles, pero destruye identidades, normaliza la estigmatizacion y propaga el negacionismo.
+
+Aqui la Corte formula una tesis revolucionaria: las manifestaciones artisticas son vehiculos legitimos de verdad extrajudicial. La verdad historica sobre los 6.402 casos documentados por la JEP no se confina a los estrados penales; vive en las intervenciones publicas y en el arte de la sociedad civil. Destruir ese arte es un atentado directo contra el orden transicional y contra el derecho colectivo a la no repeticion."
+
+[INSERCION EN PANTALLA: Diapositiva 05 — El Valor de la Paz y el Arte como Verdad Extrajudicial.]
+
+--------------------------------------------------------------------------------
+ACTO V: LIBERTAD DE EXPRESION VS. REVICTIMIZACION (3:10 - 4:00)
+[Tiempo: 50 segundos | Pacing: Incisivo, doctrinal, contrastante]
+[CAMARA: Primer plano.]
+
+NARRADOR / ANALISTA:
+"Es absoluta la libertad de expresion? Rotundamente NO.
+
+El sistema interamericano y nuestra jurisprudencia protegen el discurso vigoroso, caustico y chocante frente al Estado o figuras de poder; pero trazan una linea roja insalvable: la prohibicion del discurso de odio y la revictimizacion de poblaciones que han sufrido crimenes de lesa humanidad.
+
+La critica politica exige debatir ideas; atacar a madres que llevan quince anos buscando los restos de sus hijos ejecutados por la fuerza publica, deslegitimar su lucha y senalarlas falsamente de ser mercenarias pagadas, no es debate democratico: es violencia institucional. La libertad de expresion termina exactamente en el punto donde comienza la dignidad de la victima."
+
+[INSERCION EN PANTALLA: Diapositiva 06 y 07 — Limites a la Libertad de Expresion y Ordenes de Reparacion.]
+
+--------------------------------------------------------------------------------
+ACTO VI: ORDENES REPARADORAS Y REFLEXION FINAL (4:00 - 4:45)
+[Tiempo: 45 segundos | Pacing: Concluyente, solemne, de cierre categorico]
+[CAMARA: Plano estatico en encuadre solemne.]
+
+NARRADOR / ANALISTA:
+"Las ordenes dictadas por la Sala Septima son ejemplares: devolucion de las botas o instalacion de una mesa de concertacion con la Defensoria y el Alto Comisionado para la Paz; disculpas publicas grabadas que deben permanecer ancladas seis meses en sus redes sociales; y un acto solemne de desagravio transmitido por los canales oficiales del Congreso en la reprogramacion de la muestra artistica.
+
+Concluyo con la reflexion final de nuestra radiografia:
+'La Sentencia T-375 de 2025 demuestra que una democracia autentica no se mide por la estridencia de sus gobernantes, sino por su capacidad etica de amparar la memoria de las victimas ante la arbitrariedad del poder. Cuando el Estado protege las expresiones artisticas del dolor frente a la violencia simbolica, ratifica que la paz no es sumision ni silencio, sino un pacto ciudadano indisoluble donde la dignidad humana y la memoria historica constituyen la ultima frontera de justicia contra el olvido y la tirania.'
+
+Muchas gracias."
+
+[FUNDIDO A NEGRO. EN PANTALLA: Universidad Tecnologica de Pereira (UTP) • Constitucion Politica • Reto 2 • Plataforma interactiva y Dossier Oficial: https://0xraphael.com/college/politics/challenge2]
+================================================================================

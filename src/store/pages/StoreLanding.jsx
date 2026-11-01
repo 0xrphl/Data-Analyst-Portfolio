@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import StoreHero from '../components/StoreHero';
 import CategorySection from '../components/CategorySection';
 import ProductGrid from '../components/ProductGrid';
@@ -12,9 +13,20 @@ const StoreLanding = () => {
 
   return (
     <div>
-      <StoreHero />
+      <StoreHero totalCount={products.length} />
       <CategorySection />
-      <ProductGrid products={featured} loading={loading} title="Productos Destacados" />
+      <ProductGrid products={featured} loading={loading} title="Productos Destacados" showFilter={false} />
+
+      {/* Button to full catalog */}
+      <div className="text-center pb-8">
+        <Link
+          to="/store/products"
+          className="inline-flex items-center gap-2 px-8 py-3.5 bg-gradient-to-r from-violet-600 to-fuchsia-600 hover:from-violet-500 hover:to-fuchsia-500 text-white font-bold rounded-2xl shadow-xl shadow-violet-600/25 transition-all hover:scale-105"
+        >
+          <span>Ver Catálogo Completo {products.length > 0 ? `(${products.length} productos)` : ''}</span>
+          <span>→</span>
+        </Link>
+      </div>
 
       {/* Value propositions */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">

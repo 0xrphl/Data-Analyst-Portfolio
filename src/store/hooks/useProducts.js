@@ -1,12 +1,25 @@
 import { useState, useEffect, useCallback } from 'react';
 import { supabaseAgora } from '../../lib/supabaseAgora';
 
-export const useProducts = (categorySlug = null) => {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
+let cachedProducts = null;
+let cacheTime = 0;
+const CACHE_TTL = 60 * 1000; // 60 seconds
 
-  const fetchProducts = useCallback(async () => {
-    setLoading(true);
+export const useProducts = (categorySlug = null) => {
+  const [products, setProducts] = useState(cachedProducts || []);
+  const [loading, setLoading] = useState(!cachedProducts);
+
+  const fetchProducts = useCallback(async (force = false) => {
+    const isCacheValid = cachedProducts && (Date.now() - cacheTime < CACHE_TTL);
+
+    if (!force && isCacheValid && !categorySlug) {
+      setProducts(cachedProducts);
+      setLoading(false);
+      return;
+    }
+
+    if (!cachedProducts) setLoading(true);
+
     let query = supabaseAgora
       .from('products')
       .select('*, category:categories(*)')
@@ -19,18 +32,29 @@ export const useProducts = (categorySlug = null) => {
         .select('id')
         .eq('slug', categorySlug)
         .single();
-      if (cat) query = query.eq('category_id', cat.id);
+      if (cat) {
+        query = query.or(`category_id.eq.${cat.id},category_ids.cs.{${cat.id}}`);
+      }
     }
 
     const { data, error } = await query;
-    if (error) console.error('Error fetching products:', error);
-    setProducts(data || []);
+    if (error) {
+      console.error('Error fetching products:', error);
+    } else {
+      if (!categorySlug) {
+        cachedProducts = data || [];
+        cacheTime = Date.now();
+      }
+      setProducts(data || []);
+    }
     setLoading(false);
   }, [categorySlug]);
 
-  useEffect(() => { fetchProducts(); }, [fetchProducts]);
+  useEffect(() => {
+    fetchProducts();
+  }, [fetchProducts]);
 
-  return { products, loading, refetch: fetchProducts };
+  return { products, loading, refetch: () => fetchProducts(true) };
 };
 
 export const useProduct = (slug) => {
@@ -54,3 +78,4 @@ export const useProduct = (slug) => {
 
   return { product, loading };
 };
+

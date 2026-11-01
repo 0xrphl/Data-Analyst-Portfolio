@@ -1,5 +1,6 @@
 <IfModule mod_rewrite.c>
   RewriteEngine On
+  Options -Indexes
 
   # Force HTTPS
   RewriteCond %{HTTPS} off
@@ -9,9 +10,11 @@
 
   # 3dagoralab.com: serve store.html (with OG meta tags) instead of index.html
   RewriteCond %{HTTP_HOST} ^(www\.)?3dagoralab\.com$ [NC]
+  RewriteRule ^(about)?/?$ /store.html [L]
+  RewriteCond %{HTTP_HOST} ^(www\.)?3dagoralab\.com$ [NC]
   RewriteRule ^store/?$ /store.html [L]
   RewriteCond %{HTTP_HOST} ^(www\.)?3dagoralab\.com$ [NC]
-  RewriteRule ^store/(login|catalog|category|product|cart|checkout|profile)(.*)$ /store.html [L]
+  RewriteRule ^store/(login|catalog|category|product|cart|checkout|profile|about)(.*)$ /store.html [L]
   RewriteCond %{HTTP_HOST} ^(www\.)?3dagoralab\.com$ [NC]
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
@@ -19,11 +22,14 @@
 
   # Other domains: /store SPA routes go to index.html
   RewriteRule ^store/?$ /index.html [L]
-  RewriteRule ^store/(login|catalog|category|product|cart|checkout|profile)(.*)$ /index.html [L]
+  RewriteRule ^store/(login|catalog|category|product|cart|checkout|profile|about)(.*)$ /index.html [L]
 
-  # SPA routes under /college — rewrite to index.html UNLESS requesting a real file
-  # (the directory college/hydraulics-lab/cycle1/ exists for images, so !-d alone won't work)
-  RewriteCond %{REQUEST_FILENAME} !-f
+  # SPA routes under /college — rewrite to index.html UNLESS requesting a real file or directory with index.html
+  # Allow static files (.html, .docx, images, scripts, etc.) and standalone sub-apps to be served directly
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME}/index.html -f
+  RewriteRule ^college/(.*)$ - [L]
+  RewriteCond %{REQUEST_URI} !\.(html|docx|png|jpg|jpeg|gif|webp|svg|txt|pdf|css|js|json|csv|tsv|woff2?|map)$ [NC]
   RewriteRule ^college/(.*)$ /index.html [L]
 
   RewriteRule ^index\.html$ - [L]

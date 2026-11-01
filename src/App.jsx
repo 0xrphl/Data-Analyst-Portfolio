@@ -15,6 +15,12 @@ const HeatTransferSim = lazy(() => import('./pages/HeatTransfer/HeatTransferSim'
 const HydraulicsLabApp = lazy(() => import('./pages/HydraulicsLab/HydraulicsLabApp'));
 const IoTVehicleTelemetry = lazy(() => import('./pages/IoTVehicleTelemetry'));
 const StoreApp = lazy(() => import('./store/StoreApp'));
+const PoliticsChallenge1 = lazy(() => import('./pages/college/PoliticsChallenge1'));
+const PoliticsChallenge2 = lazy(() => import('./pages/college/PoliticsChallenge2'));
+const DataEngUngrd = lazy(() => import('./pages/college/DataEngUngrd'));
+const HeatTransferParker = lazy(() => import('./pages/college/HeatTransferParker'));
+
+
 
 // Import immediately needed components normally
 import { Hero, Navbar } from './components';
@@ -95,6 +101,40 @@ const App = () => {
               </Suspense>
             }
           />
+          <Route
+            path="/college/politics/challenge1"
+            element={
+              <Suspense fallback={<div className="min-h-screen bg-[#0A0D14] flex items-center justify-center text-amber-400 font-mono">Cargando Tribunal Forense...</div>}>
+                <PoliticsChallenge1 />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/college/politics/challenge2"
+            element={
+              <Suspense fallback={<div className="min-h-screen bg-[#0A0D14] flex items-center justify-center text-amber-400 font-mono">Cargando Radiografía Constitucional...</div>}>
+                <PoliticsChallenge2 />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/college/data-eng-ungrd"
+            element={
+              <Suspense fallback={<div className="min-h-screen bg-[#0a0c10] flex items-center justify-center text-[#ff6b35] font-mono">Cargando UNGRD Analytics...</div>}>
+                <DataEngUngrd />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/college/heat-transfer-traslation-paper-3d-dashboard"
+            element={
+              <Suspense fallback={<div className="min-h-screen bg-[#030712] flex items-center justify-center text-[#ff9100] font-mono">Cargando Parker Solar Probe Dashboard...</div>}>
+                <HeatTransferParker />
+              </Suspense>
+            }
+          />
+
+
 
           {/* ── 3D Agora Lab Store ── */}
           <Route

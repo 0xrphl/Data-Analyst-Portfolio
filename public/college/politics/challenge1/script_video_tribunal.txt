@@ -1,0 +1,112 @@
+================================================================================
+GUION TÉCNICO Y NARRATIVO PARA VIDEO-PRESENTACIÓN ANTE EL TRIBUNAL ACADÉMICO
+ASIGNATURA: CONSTITUCIÓN POLÍTICA — RETO 1 (MOMENTO 1 - EVALUACIÓN 25%)
+UNIVERSIDAD TECNOLÓGICA DE PEREIRA (UTP)
+TEMA DE INVESTIGACIÓN: ¿LA VIOLENCIA TERMINÓ O CAMBIÓ DE ROSTRO?
+DURACIÓN ESTIMADA: 4 MINUTOS Y 30 SEGUNDOS (APROX. 650 PALABRAS — CADENCIA: 140 WPM)
+ROL DEL EXPOSITOR: INVESTIGADOR FORENSE CONSTITUCIONAL E HISTÓRICO
+================================================================================
+
+[CONSEJOS DE PRODUCCIÓN Y MONTAJE VISUAL]
+• ESCENOGRAFÍA: Espacio sobrio, fondo oscuro o neutro con iluminación direccional tipo estrado judicial / tribunal.
+• ACTITUD Y POSTURA: Ropa formal. Mirada fija y segura al lente de la cámara. Voz firme, articulación nítida, pausas dramáticas en cifras y nombres propios.
+• APOYOS EN PANTALLA / DIAPOSITIVAS: Utilizar el portal 3D interactivo (Three.js) de fondo o proyectar las diapositivas correspondientes a cada acto.
+
+--------------------------------------------------------------------------------
+ACTO I: APERTURA Y FORMULACIÓN DE LA ACUSACIÓN (0:00 - 0:40)
+[Tiempo: 40 segundos | Pacing: Solemne, contundente]
+[CÁMARA: Plano medio cerrado. Mirada directa al lente.]
+
+NARRADOR / INVESTIGADOR:
+"Honorable Tribunal Académico:
+
+Comparezco ante este estrado no a repetir un catecismo escolar de fechas muertas, sino a formular una acusación fundamentada en los archivos primarios del Estado:
+
+En Colombia, la violencia nunca concluyó. Lo que nuestra historia registra no es la superación del conflicto, sino una metódica metamorfosis funcional: las élites pactaron la impunidad en las cúpulas, mientras administraban la guerra en la periferia para garantizar el despojo agrario y la concentración del poder.
+
+Desde la disolución de la Gran Colombia en 1828 hasta este año 2026, el pueblo raso ha colocado los muertos en las trochas, mientras las castas dirigentes sellaban alianzas a puerta cerrada y se blindaban tras constituciones de papel."
+
+[INSERCIÓN EN PANTALLA: Diapositiva 01 — Formulación del Caso y Cita Tesis Central.]
+
+--------------------------------------------------------------------------------
+ACTO II: EL PASADO DESDE BOLÍVAR Y EL PACTO DEL GRADO 33 (0:40 - 1:25)
+[Tiempo: 45 segundos | Pacing: Analítico, probatorio]
+[CÁMARA: Plano americano. El expositor muestra en mano o señala el Decreto de 1828.]
+
+NARRADOR / INVESTIGADOR:
+"Examinemos la primera prueba de cargo: el pasado republicano desde Simón Bolívar.
+
+El 8 de noviembre de 1828, tras sobrevivir milagrosamente al magnicidio de la Noche Septembrina fraguado en las logias santanderistas, Bolívar expidió un decreto categórico proscribiendo todas las sociedades secretas en Colombia. Comprendió con amarga lucidez que estas cofradías suplantaban la soberanía de las leyes mediante la complicidad clandestina.
+
+Pero Bolívar murió en 1830, y la respuesta oligárquica no tardó: en 1833, el coronel José María Vesga instituyó el Supremo Consejo Neo-Granadino del Grado 33. Los tratados de Américo Carnicelli y Milton Arrieta-López demuestran que más de treinta presidentes de la República, generales conservadores y liberales, e incluso obispos católicos, compartieron juramentos de logia.
+
+¿La consecuencia material? Mientras los caudillos se trataban de 'venerables hermanos' en tenidas secretas, enviaban a miles de peones campesinos analfabetos a degollarse en nueve sangrientas guerras civiles en el siglo XIX."
+
+[INSERCIÓN EN PANTALLA: Diapositiva 02 y 03 — Decreto de Bolívar 1828 y Supremo Consejo 1833.]
+
+--------------------------------------------------------------------------------
+ACTO III: LA ÉPOCA DE LOS CÓNDORES, EL BASILISCO Y LA MISIÓN CURRIE (1:25 - 2:15)
+[Tiempo: 50 segundos | Pacing: Enérgico, dramático, de denuncia]
+[CÁMARA: Primer plano. Tono severo y acusatorio.]
+
+NARRADOR / INVESTIGADOR:
+"Avanzado el siglo XX, la barbarie se tecnificó. Antonio Caballero documenta cómo Laureano Gómez justificó el exterminio de las bases liberales mediante el mito fanático del 'Basilisco'.
+
+En los pueblos del Valle, como retrató Gustavo Álvarez Gardeazábal en 'Cóndores no entierran todos los días', los 'pájaros' de León María Lozano y los 'chulavitas' sembraron el terror del corte de corbata bajo el amparo del púlpito y la policía partidista. 
+
+Pero no fue una locura irracional: fue un plan económico. La Misión Lauchlin Currie del Banco Mundial en 1949 dictaminó que la pequeña agricultura campesina era ineficiente y que había que vaciar el campo para abaratar la mano de obra urbana. ¿El saldo? Trescientos mil campesinos asesinados y más de dos millones de hectáreas despojadas.
+
+¿Y cómo resolvieron la masacre las élites? Alberto Lleras Camargo y Laureano Gómez viajaron a España y firmaron en 1957 los Pactos de Sitges: el Frente Nacional. Se repartieron la burocracia al 50/50 y, como revela el informe confidencial de la CIA de 1985, mantuvieron una fachada democrática mientras clausuraban la oposición, forzando a la resistencia rural a fundar las guerrillas de las FARC, el ELN, el EPL y el M-19."
+
+[INSERCIÓN EN PANTALLA: Diapositiva 04 y 05 — 'La Violencia', Cóndores, Misión Currie y Frente Nacional.]
+
+--------------------------------------------------------------------------------
+ACTO IV: LA PARADOJA DEL 91, LOS JINETES Y LA GUERRA TERRITORIAL ACTUAL (2:15 - 3:05)
+[Tiempo: 50 segundos | Pacing: Rápido, conectado a la actualidad territorial]
+[CÁMARA: Plano medio. Gestualidad firme.]
+
+NARRADOR / INVESTIGADOR:
+"Llegamos a la paradoja de 1991. La Asamblea promulgó la Carta de Derechos y la Tutela; pero en simultáneo, César Gaviria impuso la apertura neoliberal salvaje, liquidando el IDEMA y arruinando la economía campesina. Sobre esa tierra arrasada cabalgaron los jinetes apocalípticos de Caballero: el narcotráfico, el paramilitarismo de los hermanos Castaño y la narcopolítica.
+
+¿Terminó esa violencia hoy, en pleno 2026? Absolutamente NO; mudó de ropaje tecnológico.
+
+En el Cañón del Micay, en El Plateado y Jamundí, el Estado Mayor Central de las disidencias —el EMC de alias 'Iván Mordisco' con los frentes Carlos Patiño y Dagoberto Ramos—, junto a la Segunda Marquetalia, el Frente 57 Yair Bermúdez, el ELN y el Clan del Golfo, libran una guerra despiadada por el narcotráfico mediante drones comerciales artillados con explosivos lanzados contra caseríos, cabildos indígenas y escuelas rurales.
+
+El Observatorio de INDEPAZ lo confirma con cifras demoledoras: entre 2024 y septiembre de 2026 han sido asesinados 468 líderes sociales en Colombia, con el departamento del Cauca como epicentro indiscutible con 118 crímenes selectivos."
+
+[INSERCIÓN EN PANTALLA: Diapositiva 06 y 07 — Drones en Cauca, EMC y Estadísticas INDEPAZ 2024-2026.]
+
+--------------------------------------------------------------------------------
+ACTO V: LA CONEXIÓN CON LA POLÍTICA SIONISTA Y EL COMPLEJO MILITAR (3:05 - 3:55)
+[Tiempo: 50 segundos | Pacing: Revelador, riguroso, de desmontaje geopolítico]
+[CÁMARA: Acercamiento lento a primer plano. Tono incisivo.]
+
+NARRADOR / INVESTIGADOR:
+"¿Y cómo se relaciona esta carnicería territorial con las oligarquías y la política exterior hasta el día de hoy?
+
+Aquí emerge la hipocresía estructural del régimen:
+En los foros internacionales y en redes sociales, el poder central despliega una encendida retórica antiimperialista, rompiendo relaciones diplomáticas en mayo de 2024 con el Estado de Israel en protesta por el genocidio sionista en Gaza.
+
+Sin embargo, los contratos auditados de defensa demuestran la cruda realidad: el Ministerio de Defensa y la Fuerza Aérea mantienen vigentes y en plena ejecución contratos por más de 32.748 millones de pesos —más de 8.2 millones de dólares— con la compañía estatal israelí Israel Aerospace Industries (IAI) para el mantenimiento y soporte de los aviones caza Kfir hasta julio de 2026. A ello se suman las patentes de IWI para los fusiles Galil que utiliza la fuerza pública en las montañas.
+
+Esta es la clave del juicio: así como en 1833 las élites pactaban en logias y en los 50 en Sitges, hoy las cúpulas sostienen sus negocios con el complejo militar-industrial transnacional y sionista, utilizando la polarización geopolítica como un biombo mediático para desviar la mirada mientras las comunidades campesinas e indígenas siguen poniendo los muertos bajo las bombas de los drones."
+
+[INSERCIÓN EN PANTALLA: Diapositiva 07 — Contraste Contratos IAI Israel ($32.748M COP) vs. Ataques en Cauca.]
+
+--------------------------------------------------------------------------------
+ACTO VI: VEREDICTO FINAL DEL TRIBUNAL Y CIERRE (3:55 - 4:30)
+[Tiempo: 35 segundos | Pacing: Solemne, concluyente, de cierre impecable]
+[CÁMARA: Primer plano estático. Máxima gravedad y convicción.]
+
+NARRADOR / INVESTIGADOR:
+"Honorables evaluadores del Tribunal:
+
+El veredicto de esta investigación es inapelable:
+La Violencia en Colombia nunca concluyó; mutó metódicamente de ropaje para garantizar la acumulación de tierras y la impunidad de clase. Ayer vistió de 'pájaro' y chulavita; luego de Frente Nacional; más tarde de paramilitarismo; y hoy de guerra tecnificada con drones amparada en una doble moral diplomática.
+
+La Constitución no puede seguir siendo un fetiche retórico que se aplaude en las cátedras mientras se sepultan líderes sociales en las cordilleras. Construir una paz auténtica exige desmantelar el pacto histórico de impunidad oligárquica y devolverle la soberanía y la tierra a los territorios despojados.
+
+Muchas gracias."
+
+[FUNDIDO A NEGRO. EN PANTALLA: Créditos formales del estudiante, Universidad Tecnológica de Pereira (UTP), Cátedra de Constitución Política - Reto 1, y enlace al Dossier Académico APA 7.]
+================================================================================

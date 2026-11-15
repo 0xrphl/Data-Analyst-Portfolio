@@ -197,7 +197,10 @@ Features volumetric ray-marched rendering with clip planes, contour bands, color
 
 ## Version History
 
-- **V3.3** (August 2026) — Current version
+- **V3.4** (November 2026) — Current version
+  - Upgraded **Electric Delta-Kart IoT Telemetry (`LilyGO T-SIM7672G V1.1 ESP32-S3`)** with Quad-I2C + 1-Wire instrumentation: **TI INA226 / INA228 48V DC Traction Pack Monitor** (`GPIO 6 SDA / GPIO 7 SCL`, `V/A/W/Wh`), **Red 4-Pin Sensirion SHT31-DIS** (`GPIO 40/39`, `0x44` + CRC-8 + Magnus dew point), **Waterproof M12 DS18B20 1-Wire Probe(s)** (`GPIO 15` + `4.7kΩ` pull-up), **SIM7670G/7672G Multi-GNSS** active 28dBi LNA + UTP Pereira lock, **6-Sensor NVS/SD Calibration Suite**, **10-Subsystem Boot BIST**, concurrent `Kart-Cal-Lab` (`http://192.168.4.1/`) 30 Hz 3D Cube & Live Temp/Humidity oscilloscope dashboard, 8 downloadable datasheets, updated `1780×1130` `circuit_layout_full.{svg,png}`, and 16-image portfolio carousel.
+
+- **V3.3** (August 2026)
   - Added **CFD/FEM Thermal Simulation — Fourier Heat Transfer PDE Solver** at `/college/heat-transfer`
   - Interactive WebGL simulation solving the Fourier heat equation (∂T/∂t = κ∇²T + q) with React Three Fiber
   - Two modes: solid insulating cube and hollow furnace with configurable materials

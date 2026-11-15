@@ -8,12 +8,15 @@ export function getDerivation({
   taps,
   Q,
   rho,
+  mu = 1.002e-3,
+  fluidName = 'Agua Pura — 20 °C (ρ = 998.21 kg/m³)',
+  tempC = 20,
   alpha,
   pitotTapIndex = 3,
   venturiData,
 }) {
-  const tap0 = taps?.[0] || { A: 4.9087e-4, D_mm: 25.0, V: 0.34, pressureHead_mm: 240, totalHead_mm: 246 }
-  const tap1 = taps?.[1] || { A: 7.854e-5, D_mm: 10.0, V: 2.12, pressureHead_mm: 80, totalHead_mm: 235 }
+  const tap0 = taps?.[0] || { A: 4.9087e-4, D_mm: 25.0, V: 0.34, pressureHead_mm: 240, totalHead_mm: 246, Re: 8500 }
+  const tap1 = taps?.[1] || { A: 7.854e-5, D_mm: 10.0, V: 2.12, pressureHead_mm: 80, totalHead_mm: 235, Re: 21150 }
   const tapP = taps?.[pitotTapIndex] || taps?.[3] || { A: 9.887e-5, D_mm: 11.22, V: 1.68, pressureHead_mm: 130, stagnationHead_mm: 240 }
   const tap6 = taps?.[6] || taps?.[taps.length - 1] || { pressureHead_mm: 190, totalHead_mm: 196 }
 
@@ -21,21 +24,24 @@ export function getDerivation({
   const Q_Lmin = (Q * 60000).toFixed(2)
   const netDiffLoss = (tap0.totalHead_mm || 0) - (tap6.totalHead_mm || 0)
   const netDiffLossPct = tap0.totalHead_mm > 0 ? (netDiffLoss / tap0.totalHead_mm) * 100 : 0
+  const mu_mPas = (mu * 1000).toFixed(3)
+  const gamma_kNm3 = ((rho * 9.81) / 1000).toFixed(3)
+  const Re1 = Math.round(tap1.Re || 0)
 
   return [
     { type: 'heading', title: '💧 Demostración del Teorema de Bernoulli (Tubo Venturi y Sonda Pitot)' },
     {
-      title: '0 · Parámetros Experimentales del Banco Edibon FME-03',
-      content: 'Valores hidrodinámicos y geométricos de ensayo:',
+      title: '0 · Parámetros Experimentales y Termofísicos del Banco Edibon FME-03',
+      content: 'Valores hidrodinámicos, termofísicos de tabla y geométricos de ensayo:',
     },
     {
       type: 'list',
       items: [
         `Caudal de ensayo: $Q = ${Q_Ls}\\;\\mathrm{L/s} = ${Q_Lmin}\\;\\mathrm{L/min}$ ($Q = ${(Q).toExponential(4)}\\;\\mathrm{m^3/s}$)`,
-        `Fluido: Agua a 20 °C con $\\rho = ${rho.toFixed(0)}\\;\\mathrm{kg/m^3}$ y viscosidad $\\mu = 1.002 \\times 10^{-3}\\;\\mathrm{Pa\\cdot s}$`,
-        `Sección de entrada $S_0$: $A_0 = ${(tap0.A_mm2 || tap0.A * 1e6).toFixed(2)}\\;\\mathrm{mm^2}$ ($D_0 = ${tap0.D_mm.toFixed(2)}\\;\\mathrm{mm}$), $V_0 = ${tap0.V.toFixed(4)}\\;\\mathrm{m/s}$`,
-        `Garganta de máxima contracción $S_1$: $A_1 = ${(tap1.A_mm2 || tap1.A * 1e6).toFixed(2)}\\;\\mathrm{mm^2}$ ($D_1 = ${tap1.D_mm.toFixed(2)}\\;\\mathrm{mm}$), $V_1 = ${tap1.V.toFixed(4)}\\;\\mathrm{m/s}$`,
-        `Sección de medición con Sonda Pitot $S_{${pitotTapIndex}}$: $A = ${(tapP.A_mm2 || tapP.A * 1e6).toFixed(2)}\\;\\mathrm{mm^2}$, $V = ${tapP.V.toFixed(4)}\\;\\mathrm{m/s}$`,
+        `Fluido activo (${tempC} °C): ${fluidName.split('(')[0].trim()} con $\\rho(T) = ${rho.toFixed(2)}\\;\\mathrm{kg/m^3}$, $\\gamma = ${gamma_kNm3}\\;\\mathrm{kN/m^3}$ y $\\mu(T) = ${mu_mPas}\\;\\mathrm{mPa\\cdot s}$`,
+        `Sección de entrada $S_0$: $A_0 = ${(tap0.A_mm2 || tap0.A * 1e6).toFixed(2)}\\;\\mathrm{mm^2}$ ($D_0 = ${tap0.D_mm.toFixed(2)}\\;\\mathrm{mm}$), $V_0 = ${tap0.V.toFixed(4)}\\;\\mathrm{m/s}$, $h_0 = ${(tap0.pressureHead_mm || 0).toFixed(1)}\\;\\mathrm{mm}$`,
+        `Garganta de máxima contracción $S_1$: $A_1 = ${(tap1.A_mm2 || tap1.A * 1e6).toFixed(2)}\\;\\mathrm{mm^2}$ ($D_1 = ${tap1.D_mm.toFixed(2)}\\;\\mathrm{mm}$), $V_1 = ${tap1.V.toFixed(4)}\\;\\mathrm{m/s}$, $\\mathrm{Re}_1 = ${Re1.toLocaleString()}$`,
+        `Sección de medición con Sonda Pitot $S_{${pitotTapIndex}}$: $A = ${(tapP.A_mm2 || tapP.A * 1e6).toFixed(2)}\\;\\mathrm{mm^2}$ ($D = ${(tapP.D_mm || 0).toFixed(2)}\\;\\mathrm{mm}$), $h_{\\text{estático}} = ${(tapP.pressureHead_mm || 0).toFixed(1)}\\;\\mathrm{mm}$, $h_{\\text{Total}}^{**} = ${(tapP.stagnationHead_mm || 0).toFixed(1)}\\;\\mathrm{mm}$ (calcular $\\Delta h_{\\text{din}}$, $V_{\\text{Pitot}}$ y $Q_{\\text{Pitot}}$)`,
         `Factor de corrección de energía cinética (Coriolis): $\\alpha = ${alpha.toFixed(2)}$`,
       ],
     },

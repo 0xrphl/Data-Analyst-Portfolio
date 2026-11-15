@@ -198,9 +198,8 @@ function PitotStreamlines3D({ tipX, stemX, pipeR, probeBodyR, show = true }) {
   )
 }
 
-function Piezometers({ tapResults, Ltotal }) {
+function Piezometers({ tapResults, Ltotal, maxPH = 0.38, fluidColor = '#0288d1', meniscusColor = '#4fc3f7' }) {
   if (!tapResults) return null
-  const maxPH = 0.260
   const tubeH = 1.35
 
   return tapResults.map((tap, i) => {
@@ -217,15 +216,15 @@ function Piezometers({ tapResults, Ltotal }) {
         </mesh>
         <mesh position={[0, waterH / 2, 0]}>
           <cylinderGeometry args={[0.0135, 0.0135, waterH, 14]} />
-          <meshPhysicalMaterial color="#0288d1" emissive="#01579b" emissiveIntensity={0.3} transparent opacity={0.78} />
+          <meshPhysicalMaterial color={fluidColor} emissive={fluidColor} emissiveIntensity={0.32} transparent opacity={0.82} />
         </mesh>
         <mesh position={[0, waterH, 0]}>
           <cylinderGeometry args={[0.0138, 0.0138, 0.004, 14]} />
-          <meshStandardMaterial color="#4fc3f7" emissive="#29b6f6" emissiveIntensity={0.8} />
+          <meshStandardMaterial color={meniscusColor} emissive={meniscusColor} emissiveIntensity={0.85} />
         </mesh>
-        {/* Etiqueta centrada directamente sobre el menisco de agua */}
+        {/* Etiqueta centrada directamente sobre el menisco del fluido */}
         <Billboard position={[0, waterH + 0.045, 0]}>
-          <Text fontSize={0.034} color="#82cfff" anchorX="center" anchorY="bottom" fontWeight={600}>
+          <Text fontSize={0.034} color={meniscusColor} anchorX="center" anchorY="bottom" fontWeight={700}>
             {tap.pressureHead_mm.toFixed(1) + ' mm'}
           </Text>
         </Billboard>
@@ -239,6 +238,9 @@ function PitotProbeAssembly({
   pitotIdx,
   pitotData,
   Ltotal,
+  maxPH = 0.38,
+  fluidColor = '#0091ea',
+  meniscusColor = '#40c4ff',
   showStreamlines = true,
   onPitotHover,
   onPitotLeave,
@@ -253,7 +255,6 @@ function PitotProbeAssembly({
   const xPos = (xNorm - 0.5) * Ltotal * SC
   const pipeR = tap ? (tap.D / 2) * RAD_SC : 0.055
 
-  const maxPH = 0.260
   const tubeH = 1.35
   const stagH = tap ? Math.min(tubeH * 0.98, Math.max(0.04, (tap.stagnationHead / maxPH) * tubeH)) : 0.5
   const staticH = tap ? Math.min(tubeH * 0.98, Math.max(0.04, (tap.pressureHead / maxPH) * tubeH)) : 0.35
@@ -440,7 +441,7 @@ function PitotProbeAssembly({
           {/* Título anclado a la derecha hacia afuera para evitar solapamiento con la columna estática */}
           <Billboard position={[-0.025, tubeH + 0.055, 0]}>
             <Text fontSize={0.034} color="#ff9100" fontWeight={700} anchorX="right" anchorY="bottom">
-              {'hTotal** = ' + tap.stagnationHead_mm.toFixed(1) + ' mm'}
+              {'hTotal** (Pitot) = ' + tap.stagnationHead_mm.toFixed(1) + ' mm'}
             </Text>
             <Text fontSize={0.027} color="#ffcc80" anchorX="right" anchorY="top" position={[0, -0.012, 0]}>
               (Estancamiento)
@@ -448,7 +449,7 @@ function PitotProbeAssembly({
           </Billboard>
         </group>
 
-        {/* Columna de Presión Estática (Azul) */}
+        {/* Columna de Presión Estática (Color del Fluido) */}
         <group position={[tubeSpacing / 2, 0, 0]}>
           <mesh position={[0, tubeH / 2, 0]}>
             <cylinderGeometry args={[tubeR, tubeR, tubeH, 14]} />
@@ -456,31 +457,31 @@ function PitotProbeAssembly({
           </mesh>
           <mesh position={[0, staticH / 2, 0]}>
             <cylinderGeometry args={[tubeR * 0.88, tubeR * 0.88, staticH, 14]} />
-            <meshPhysicalMaterial color="#0091ea" emissive="#01579b" emissiveIntensity={0.3} transparent opacity={0.8} />
+            <meshPhysicalMaterial color={fluidColor} emissive={fluidColor} emissiveIntensity={0.32} transparent opacity={0.82} />
           </mesh>
           <mesh position={[0, staticH, 0]}>
             <cylinderGeometry args={[tubeR * 0.9, tubeR * 0.9, 0.004, 14]} />
-            <meshStandardMaterial color="#40c4ff" emissive="#00b0ff" emissiveIntensity={0.8} />
+            <meshStandardMaterial color={meniscusColor} emissive={meniscusColor} emissiveIntensity={0.85} />
           </mesh>
           {/* Título anclado a la izquierda hacia afuera para evitar solapamiento con la columna de estancamiento */}
           <Billboard position={[0.025, tubeH + 0.055, 0]}>
-            <Text fontSize={0.034} color="#40c4ff" fontWeight={700} anchorX="left" anchorY="bottom">
+            <Text fontSize={0.034} color={meniscusColor} fontWeight={700} anchorX="left" anchorY="bottom">
               {'h estático = ' + tap.pressureHead_mm.toFixed(1) + ' mm'}
             </Text>
             <Text fontSize={0.027} color="#80d8ff" anchorX="left" anchorY="top" position={[0, -0.012, 0]}>
-              (Pared {tap.name || 'S3'})
+              {'(Pared ' + (tap.name || 'S3') + ' · ∅' + (tap.D_mm || 0).toFixed(1) + ' mm)'}
             </Text>
           </Billboard>
         </group>
 
-        {/* Diferencial Δh din y velocidad en la sonda */}
+        {/* Propuesta pedagógica en 3D: incógnitas Δh din y V para que el estudiante calcule */}
         <group position={[tubeSpacing / 2 + 0.045, staticH + deltaHScene / 2, 0]}>
           <Billboard position={[0, 0, 0]}>
-            <Text fontSize={0.035} color="#00e676" fontWeight={800} anchorX="left" anchorY="bottom">
-              {'Δh din = ' + tap.pitotDeltaH_mm.toFixed(1) + ' mm'}
+            <Text fontSize={0.032} color="#00e676" fontWeight={800} anchorX="left" anchorY="bottom">
+              {'Δh din = ? mm  |  V Pitot = ? m/s'}
             </Text>
-            <Text fontSize={0.028} color="#b9f6ca" anchorX="left" anchorY="top" position={[0, -0.008, 0]}>
-              {'V Pitot = ' + tap.Vpitot.toFixed(3) + ' m/s'}
+            <Text fontSize={0.025} color="#b9f6ca" anchorX="left" anchorY="top" position={[0, -0.008, 0]}>
+              {'(Calcular con hTotal** y h estático)'}
             </Text>
           </Billboard>
         </group>
@@ -489,9 +490,8 @@ function PitotProbeAssembly({
   )
 }
 
-function GradeLines({ tapResults, Ltotal }) {
+function GradeLines({ tapResults, pitotData, Ltotal, maxH = 0.38 }) {
   if (!tapResults || tapResults.length < 2) return null
-  const maxH = 0.260
   const tubeH = 1.35
 
   const eglPts = tapResults.map(t => {
@@ -513,7 +513,7 @@ function GradeLines({ tapResults, Ltotal }) {
   const lastEGL = eglPts[eglPts.length - 1]
   const lastHGL = hglPts[hglPts.length - 1]
 
-  const pitotTap = tapResults.find(t => t.isPitotLocation) || tapResults[3]
+  const pitotTap = pitotData || tapResults.find(t => t.isPitotLocation) || tapResults[3]
   const pitotPipeR = pitotTap ? (pitotTap.D / 2) * RAD_SC : 0
   const pitotStagHScene = pitotTap ? Math.min(tubeH * 0.98, Math.max(0.04, (pitotTap.stagnationHead / maxH) * tubeH)) : 0
   const pitotMarkerPos = pitotTap
@@ -584,6 +584,8 @@ export default function BernoulliScene({
   pitotData = null,
   cutawayMode = true,
   showStreamlines = true,
+  fluidColor = '#0288d1',
+  meniscusColor = '#4fc3f7',
   onPitotHover,
   onPitotLeave,
   onPitotClick,
@@ -591,16 +593,25 @@ export default function BernoulliScene({
 }) {
   const camDist = Math.max(1.8, Ltotal * SC * 0.95)
 
-  const { Vmax, Pmin, Pmax } = useMemo(() => {
-    if (!tapResults || tapResults.length === 0) return { Vmax: 1.7, Pmin: 0, Pmax: 0.25 }
+  const { Vmax, Pmin, Pmax, maxHeadScale, isLaminarFlow } = useMemo(() => {
+    if (!tapResults || tapResults.length === 0) {
+      return { Vmax: 1.7, Pmin: 0, Pmax: 0.25, maxHeadScale: 0.36, isLaminarFlow: false }
+    }
     const vs = tapResults.map(t => t.V)
     const ps = tapResults.map(t => t.pressureHead)
+    const maxTotal = Math.max(
+      ...tapResults.map(t => Math.max(t.totalHead || 0, t.stagnationHead || 0, t.pressureHead || 0)),
+      pitotData?.stagnationHead || 0
+    )
+    const throatRe = tapResults[1]?.Re ?? 3000
     return {
       Vmax: Math.max(...vs, 0.1),
       Pmin: Math.min(...ps),
       Pmax: Math.max(...ps, 0.1),
+      maxHeadScale: Math.max(0.36, maxTotal * 1.08),
+      isLaminarFlow: throatRe < 2300,
     }
-  }, [tapResults])
+  }, [tapResults, pitotData])
 
   const interpAt = useCallback((tNorm) => {
     if (!tapResults || tapResults.length === 0) return { V: 0.3, P: 0.24, D: 0.025 }
@@ -711,15 +722,24 @@ export default function BernoulliScene({
 
       <VenturiTube tapResults={tapResults} Ltotal={Ltotal} cutawayMode={cutawayMode} onSelectPosition={onSelectPosition} />
       <RainbowParticles count={particleCount} initFn={initFn} advanceFn={advanceFn} getState={getStateFn} />
-      {showIso && <IsoRings positions={isoPositions} levels={isoLevels} isLaminar={false} />}
+      {showIso && <IsoRings positions={isoPositions} levels={isoLevels} isLaminar={isLaminarFlow} />}
       <SectionRings tapResults={tapResults} Ltotal={Ltotal} cutawayMode={cutawayMode} onSelectPosition={onSelectPosition} />
-      <Piezometers tapResults={tapResults} Ltotal={Ltotal} />
-      <GradeLines tapResults={tapResults} Ltotal={Ltotal} />
+      <Piezometers
+        tapResults={tapResults}
+        Ltotal={Ltotal}
+        maxPH={maxHeadScale}
+        fluidColor={fluidColor}
+        meniscusColor={meniscusColor}
+      />
+      <GradeLines tapResults={tapResults} pitotData={pitotData} Ltotal={Ltotal} maxH={maxHeadScale} />
       <PitotProbeAssembly
         tapResults={tapResults}
         pitotIdx={pitotTapIdx}
         pitotData={pitotData}
         Ltotal={Ltotal}
+        maxPH={maxHeadScale}
+        fluidColor={fluidColor}
+        meniscusColor={meniscusColor}
         showStreamlines={showStreamlines}
         onPitotHover={onPitotHover}
         onPitotLeave={onPitotLeave}

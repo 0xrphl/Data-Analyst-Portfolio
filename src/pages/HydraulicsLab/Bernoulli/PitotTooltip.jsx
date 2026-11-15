@@ -171,12 +171,8 @@ export default function PitotTooltip({ pitotData, mousePos, pinned = false, onCl
 
   const stag_mm = pitotData.stagnationHead_mm ?? 0
   const stat_mm = pitotData.pressureHead_mm ?? 0
-  const dh_mm = pitotData.pitotDeltaH_mm ?? 0
-  const vPitot = pitotData.Vpitot ?? 0
-  const vMean = pitotData.V ?? 0
   const stag_kPa = (pitotData.stagnationP ?? 0) / 1000
   const stat_kPa = (pitotData.P ?? 0) / 1000
-  const dp_Pa = Math.max(0, (pitotData.stagnationP ?? 0) - (pitotData.P ?? 0))
   const x_mm = (pitotData.x ?? 0) * 1000
 
   return (
@@ -251,10 +247,10 @@ export default function PitotTooltip({ pitotData, mousePos, pinned = false, onCl
             <circle cx="212" cy="55.5" r="2.2" fill="#00e5ff" />
             <circle cx="195" cy="84.5" r="2.2" fill="#00e5ff" />
             <circle cx="212" cy="84.5" r="2.2" fill="#00e5ff" />
-            <text x="20" y="64" fill="#ffb74d" fontSize="9.5" fontWeight="700">V = {vPitot.toFixed(2)} m/s</text>
+            <text x="20" y="64" fill="#ffb74d" fontSize="9.5" fontWeight="700">V = √(2g·Δh) (Calcular)</text>
             <text x="64" y="114" fill="#ff9100" fontSize="9.5" fontWeight="800">Punto Estancamiento (V = 0)</text>
             <line x1="122" y1="104" x2="130" y2="77" stroke="#ff9100" strokeWidth="1.2" />
-            <text x="172" y="74" fill="#fff" fontSize="9" fontWeight="700">Canal P₀ (hTotal**)</text>
+            <text x="172" y="74" fill="#fff" fontSize="9" fontWeight="700">Canal P₀ (hTotal** = {stag_mm.toFixed(1)} mm)</text>
           </svg>
         </div>
         <div style={TT.body}>
@@ -267,45 +263,41 @@ export default function PitotTooltip({ pitotData, mousePos, pinned = false, onCl
 
           <div style={TT.grid}>
             <div style={TT.metricBox('#ff9100')}>
-              <div style={TT.metricLabel}>Presión Estancamiento</div>
+              <div style={TT.metricLabel}>Altura Pitot hTotal**</div>
               <div style={TT.metricVal('#ff9100')}>{stag_mm.toFixed(1)} mm</div>
               <div style={TT.metricSub}>P₀ = {stag_kPa.toFixed(2)} kPa</div>
             </div>
 
             <div style={TT.metricBox('#38bdf8')}>
-              <div style={TT.metricLabel}>Presión Estática Pared</div>
+              <div style={TT.metricLabel}>Altura Estática Pared</div>
               <div style={TT.metricVal('#38bdf8')}>{stat_mm.toFixed(1)} mm</div>
               <div style={TT.metricSub}>P_est = {stat_kPa.toFixed(2)} kPa</div>
             </div>
 
             <div style={TT.metricBox('#00e676')}>
-              <div style={TT.metricLabel}>Cabeza Dinámica Δh_din</div>
-              <div style={TT.metricVal('#00e676')}>+{dh_mm.toFixed(1)} mm</div>
-              <div style={TT.metricSub}>ΔP_din = {dp_Pa.toFixed(0)} Pa</div>
+              <div style={TT.metricLabel}>1. Cabeza Dinámica Δh_din</div>
+              <div style={TT.metricVal('#00e676')}>? mm</div>
+              <div style={TT.metricSub}>Calcular: hTotal** − h_est</div>
             </div>
 
             <div style={TT.metricBox('#c084fc')}>
-              <div style={TT.metricLabel}>Velocidad en Punta</div>
-              <div style={TT.metricVal('#e9d5ff')}>{vPitot.toFixed(3)} m/s</div>
-              <div style={TT.metricSub}>V̄ media = {vMean.toFixed(3)} m/s</div>
+              <div style={TT.metricLabel}>2. Velocidad en Punta (V)</div>
+              <div style={TT.metricVal('#e9d5ff')}>? m/s</div>
+              <div style={TT.metricSub}>Calcular: √(2·g·Δh_din)</div>
             </div>
           </div>
 
           <div style={TT.row}>
-            <span>Geometría local en la punta</span>
+            <span>Geometría local en la punta (Dato)</span>
             <span style={TT.val}>
               ∅ {pitotData.D_mm?.toFixed(2)} mm · A = {pitotData.A_mm2?.toFixed(1)} mm²
             </span>
           </div>
           <div style={TT.row}>
-            <span>Caudal estimado por Pitot (A · V_Pitot)</span>
-            <span style={{ ...TT.val, color: '#00e676' }}>
-              {(pitotData.Qpitot_Ls ?? 0).toFixed(4)} L/s
+            <span>3. Caudal estimado por Pitot (Q = A · V_Pitot)</span>
+            <span style={{ ...TT.val, color: '#ffb74d' }}>
+              ? L/s (Calcular)
             </span>
-          </div>
-          <div style={TT.row}>
-            <span>Número de Reynolds local (Re)</span>
-            <span style={TT.val}>{Math.round(pitotData.Re ?? 0).toLocaleString()}</span>
           </div>
 
           <div style={TT.footerHint}>

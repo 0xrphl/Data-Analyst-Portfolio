@@ -190,6 +190,19 @@ import heatTransferSolidCube from "./heat-transfer-solid-cube.jpg";
 import iotTelemetryDashboard3d from "./iot-telemetry-dashboard-3d.jpg";
 import iotTelemetryDashboard2d from "./iot-telemetry-dashboard-2d.jpg";
 import iotTelemetryCircuitDiagrams from "./iot-telemetry-circuit-diagrams.jpg";
+import iotKartCircuitLayout from "./iot-kart-circuit-layout.png";
+import iotKartHardware1 from "./iot-kart-hardware-1.jpg";
+import iotKartHardware2 from "./iot-kart-hardware-2.jpg";
+import iotKartHardware3 from "./iot-kart-hardware-3.jpg";
+import iotKartSht31Module from "./projects/iot-kart/sht31_sensor_module.png";
+import iotKartDs18b20Probe from "./projects/iot-kart/ds18b20_waterproof_probe.png";
+import iotKartRtcCloseup from "./projects/iot-kart/ds3231_rtc_clock_closeup.png";
+import iotKartPartsStock from "./projects/iot-kart/parts_stock_infographic.jpg";
+import iotKartPetgSolidworks from "./projects/iot-kart/petg_tube_clamp_solidworks.png";
+import iotKartPetgSlicer from "./projects/iot-kart/petg_tube_clamp_slicer.png";
+import iotKartPetgPrinted from "./projects/iot-kart/petg_enclosure_printed.jpg";
+import iotKartChassisCad from "./projects/iot-kart/kart_chassis_cad_geometry.png";
+import iotKartChassisWorkshop from "./projects/iot-kart/kart_chassis_workshop.jpg";
 
 // 3D Agora Lab e-commerce project assets
 import agoraMain from "./projects/agora/agora_main.jpg";
@@ -408,6 +421,19 @@ export {
   iotTelemetryDashboard3d,
   iotTelemetryDashboard2d,
   iotTelemetryCircuitDiagrams,
+  iotKartCircuitLayout,
+  iotKartHardware1,
+  iotKartHardware2,
+  iotKartHardware3,
+  iotKartSht31Module,
+  iotKartDs18b20Probe,
+  iotKartRtcCloseup,
+  iotKartPartsStock,
+  iotKartPetgSolidworks,
+  iotKartPetgSlicer,
+  iotKartPetgPrinted,
+  iotKartChassisCad,
+  iotKartChassisWorkshop,
   // 3D Agora Lab exports
   agoraMain,
   agoraAccessories,

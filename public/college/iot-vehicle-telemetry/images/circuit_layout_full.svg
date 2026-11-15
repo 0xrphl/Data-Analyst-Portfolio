@@ -1,0 +1,402 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1780 1130" width="1780" height="1130" font-family="Consolas, 'Courier New', monospace">
+  <rect width="1780" height="1130" fill="#0b1120"/>
+
+  <!-- Title Banner -->
+  <rect x="18" y="16" width="1744" height="72" rx="12" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+  <text x="890" y="45" fill="#f8fafc" font-size="19.5" font-weight="bold" text-anchor="middle">LILYGO T-SIM7672G V1.1 + INA226/228 (48V DC) + DS18B20 + BMI160 + DS3231 + RED SHT31 + 32GB SD + 4G GNSS</text>
+  <text x="890" y="71" fill="#94a3b8" font-size="13.2" text-anchor="middle">SOTA Electric Delta-Kart Telemetry Node | ESP32-S3-WROOM-1 (MCN16R8) | Quad Isolated I2C + 1-Wire Multi-Sensor Architecture</text>
+
+  <!-- FAR LEFT BAY TOP: TI INA226 / INA228 48V DC BATTERY MONITOR (SDA=IO6, SCL=IO7, 3V3, GND) -->
+  <g>
+    <rect x="18" y="112" width="278" height="238" rx="14" fill="#172554" stroke="#38bdf8" stroke-width="3"/>
+    <text x="157" y="137" fill="#f8fafc" font-size="15" font-weight="bold" text-anchor="middle">INA226 / INA228 (48V DC)</text>
+    <text x="157" y="153" fill="#7dd3fc" font-size="9.5" text-anchor="middle">48V Traction Pack V, I, W &amp; Wh (0x40)</text>
+
+    <!-- High-Side / Low-Side 48V Shunt Info Box -->
+    <rect x="30" y="168" width="174" height="164" rx="6" fill="#090d16" stroke="#0284c7" stroke-width="1.5"/>
+    <text x="117" y="186" fill="#facc15" font-size="10" font-weight="bold" text-anchor="middle">48V DC TRACTION BUS</text>
+    <text x="117" y="204" fill="#e2e8f0" font-size="9.2" text-anchor="middle">VBUS + Shunt (IN+ / IN-)</text>
+    <text x="117" y="222" fill="#34d399" font-size="9" font-weight="bold" text-anchor="middle">INA228: 85V Direct 20-Bit</text>
+    <text x="117" y="239" fill="#fde047" font-size="8.8" text-anchor="middle">INA226: 36V (2:1 VBUS Div)</text>
+    <text x="117" y="257" fill="#38bdf8" font-size="9.2" font-weight="bold" text-anchor="middle">SDA -&gt; IO6 (Left Pin 6)</text>
+    <text x="117" y="274" fill="#2dd4bf" font-size="9.2" font-weight="bold" text-anchor="middle">SCL -&gt; IO7 (Left Pin 7)</text>
+    <text x="117" y="292" fill="#cbd5e1" font-size="8.8" text-anchor="middle">20 Hz Sampling + Wh/Ah</text>
+    <text x="117" y="310" fill="#fca5a5" font-size="8.8" font-weight="bold" text-anchor="middle">VCC -&gt; 3V3 (Left Pin 1)</text>
+    <text x="117" y="325" fill="#94a3b8" font-size="8.8" text-anchor="middle">Auto-Detects 226 vs 228</text>
+
+    <!-- 4 Ports on Right Side of INA226/228 Card -->
+    <g font-size="11.5" font-weight="bold" text-anchor="end">
+      <circle cx="276" cy="176" r="7" fill="#ef4444" stroke="#fca5a5" stroke-width="2"/><text x="262" y="180" fill="#fca5a5">VCC</text>
+      <circle cx="276" cy="208" r="7" fill="#475569" stroke="#f8fafc" stroke-width="2"/><text x="262" y="212" fill="#e2e8f0">GND</text>
+      <circle cx="276" cy="292" r="7" fill="#38bdf8" stroke="#bae6fd" stroke-width="2"/><text x="262" y="296" fill="#bae6fd">SDA</text>
+      <circle cx="276" cy="324" r="7" fill="#14b8a6" stroke="#99f6e4" stroke-width="2"/><text x="262" y="328" fill="#99f6e4">SCL</text>
+    </g>
+  </g>
+  <!-- FAR LEFT BAY MIDDLE: DS18B20 1-WIRE PROBE + 4.7k PULL-UP -->
+  <g>
+    <rect x="18" y="368" width="278" height="236" rx="14" fill="#1c1917" stroke="#f59e0b" stroke-width="3"/>
+    <text x="157" y="393" fill="#fef3c7" font-size="15" font-weight="bold" text-anchor="middle">DS18B20 1-WIRE PROBE</text>
+    <text x="157" y="409" fill="#fcd34d" font-size="9.4" text-anchor="middle">Controller T_ctrl (+ Optional Motor T_motor)</text>
+
+    <rect x="34" y="426" width="26" height="110" rx="11" fill="#cbd5e1" stroke="#f8fafc" stroke-width="2"/>
+    <rect x="38" y="508" width="18" height="32" rx="3" fill="#334155"/>
+    <text x="47" y="476" fill="#0f172a" font-size="8.5" font-weight="bold" text-anchor="middle" transform="rotate(-90 47 476)">INOX DS18B20</text>
+
+    <rect x="72" y="426" width="132" height="114" rx="6" fill="#090d16" stroke="#78350f" stroke-width="1.5"/>
+    <text x="138" y="445" fill="#fde047" font-size="9.8" font-weight="bold" text-anchor="middle">11-Bit (0.125°C)</text>
+    <text x="138" y="462" fill="#cbd5e1" font-size="9" text-anchor="middle">375ms Non-Blocking</text>
+    <text x="138" y="479" fill="#86efac" font-size="9" text-anchor="middle">Scratchpad CRC-8</text>
+    <text x="138" y="496" fill="#bae6fd" font-size="9" text-anchor="middle">1 or 2 Probes/Pin</text>
+    <text x="138" y="513" fill="#fca5a5" font-size="8.8" font-weight="bold" text-anchor="middle">4.7kΩ DATA-&gt;3V3!</text>
+    <text x="138" y="530" fill="#94a3b8" font-size="8.5" text-anchor="middle">Free: IO15, IO16, IO8</text>
+
+    <g font-size="11.5" font-weight="bold" text-anchor="end">
+      <circle cx="276" cy="434" r="7" fill="#ef4444" stroke="#fca5a5" stroke-width="2"/><text x="262" y="438" fill="#fca5a5">VDD</text>
+      <circle cx="276" cy="466" r="7" fill="#475569" stroke="#f8fafc" stroke-width="2"/><text x="262" y="470" fill="#e2e8f0">GND</text>
+      <circle cx="276" cy="568" r="7" fill="#f59e0b" stroke="#fde047" stroke-width="2"/><text x="262" y="572" fill="#fde047">DATA</text>
+    </g>
+    <text x="138" y="588" fill="#fde68a" font-size="9" font-weight="bold" text-anchor="middle">Primary DATA -&gt; IO15 (Pin 8)</text>
+
+    <!-- CLEAN NON-CROSSING LEFT HEADER WIRING (LilyGO Left Hdr at x = 340 + 72 = 412) -->
+    <path d="M 276 176 L 352 176 L 352 208 L 412 208" stroke="#ef4444" stroke-width="4" fill="none" stroke-linejoin="round"/>
+    <path d="M 276 434 L 352 434 L 352 208" stroke="#ef4444" stroke-width="4" fill="none" stroke-linejoin="round"/>
+    <circle cx="352" cy="208" r="5" fill="#ef4444"/>
+    <circle cx="352" cy="434" r="5" fill="#ef4444"/>
+
+    <path d="M 276 208 L 368 208 L 368 240 L 412 240" stroke="#94a3b8" stroke-width="4" fill="none" stroke-linejoin="round"/>
+    <path d="M 276 466 L 368 466 L 368 240" stroke="#94a3b8" stroke-width="4" fill="none" stroke-linejoin="round"/>
+    <circle cx="368" cy="240" r="5" fill="#94a3b8"/>
+
+    <path d="M 276 292 L 324 292 L 324 368 L 412 368" stroke="#38bdf8" stroke-width="4" fill="none" stroke-linejoin="round"/>
+    <path d="M 276 324 L 308 324 L 308 400 L 412 400" stroke="#14b8a6" stroke-width="4" fill="none" stroke-linejoin="round"/>
+
+    <path d="M 276 568 L 336 568 L 336 432 L 412 432" stroke="#f59e0b" stroke-width="4" fill="none" stroke-linejoin="round"/>
+    <line x1="352" y1="434" x2="352" y2="492" stroke="#ef4444" stroke-width="3"/>
+    <line x1="352" y1="546" x2="352" y2="568" stroke="#f59e0b" stroke-width="3"/>
+    <line x1="336" y1="568" x2="352" y2="568" stroke="#f59e0b" stroke-width="3.5"/>
+    <circle cx="336" cy="568" r="5" fill="#f59e0b"/>
+    <rect x="341" y="492" width="22" height="54" rx="4" fill="#78350f" stroke="#fde047" stroke-width="2"/>
+    <line x1="343" y1="505" x2="361" y2="505" stroke="#facc15" stroke-width="2.5"/>
+    <line x1="343" y1="517" x2="361" y2="517" stroke="#a855f7" stroke-width="2.5"/>
+    <line x1="343" y1="529" x2="361" y2="529" stroke="#ef4444" stroke-width="2.5"/>
+    <text x="335" y="586" fill="#fef08a" font-size="8.8" font-weight="bold" text-anchor="middle">4.7kΩ PULL-UP</text>
+    <!-- BOTTOM-LEFT CORNER: KART ENGINEER ARCHITECTURE NOTE (MOVED HERE - ZERO WIRE OVERLAP!) -->
+    <rect x="18" y="624" width="348" height="482" rx="12" fill="#0f172a" stroke="#38bdf8" stroke-width="2.2"/>
+    <text x="192" y="649" fill="#38bdf8" font-size="13" font-weight="bold" text-anchor="middle">KART ENGINEER ARCHITECTURE NOTE</text>
+    <line x1="32" y1="658" x2="352" y2="658" stroke="#1e293b" stroke-width="1.5"/>
+
+    <text x="32" y="679" fill="#f8fafc" font-size="10.8" font-weight="bold">1. Quad Isolated I2C + 1-Wire Topology:</text>
+    <text x="32" y="697" fill="#cbd5e1" font-size="9.6">ESP32-S3 has 2 HW I2C blocks; isolating additional</text>
+    <text x="32" y="711" fill="#cbd5e1" font-size="9.6">sensors on Open-Drain buses gives zero collision:</text>
+    <text x="32" y="732" fill="#86efac" font-size="10.2" font-weight="bold">• Wire0 (IO1/IO2): BMI160 IMU (0x68) @ 400kHz</text>
+    <text x="32" y="751" fill="#67e8f9" font-size="10.2" font-weight="bold">• Wire1 (IO42/IO41): DS3231 (0x68) + AT24C32</text>
+    <text x="32" y="770" fill="#f5d0fe" font-size="10.2" font-weight="bold">• Bus2 (IO40/IO39): Red SHT31 (0x44) + CRC-8</text>
+    <text x="32" y="789" fill="#7dd3fc" font-size="10.2" font-weight="bold">• Bus3 (IO6 SDA / IO7 SCL): INA226/228 (0x40)</text>
+    <text x="32" y="808" fill="#fde047" font-size="10.2" font-weight="bold">• 1-Wire (IO15 + 4.7kΩ-&gt;3V3): DS18B20 Probe(s)</text>
+
+    <line x1="32" y1="822" x2="352" y2="822" stroke="#1e293b" stroke-width="1.5"/>
+    <text x="32" y="842" fill="#fcd34d" font-size="10.8" font-weight="bold">2. Left Header Pin Allocation &amp; Rules:</text>
+    <text x="32" y="861" fill="#e2e8f0" font-size="9.8">• Pin 1 (3V3) &amp; Pin 2 (GND): Shared INA + DS18</text>
+    <text x="32" y="878" fill="#bae6fd" font-size="9.8">• Pin 6 (IO6) &amp; Pin 7 (IO7): INA226/228 SDA/SCL</text>
+    <text x="32" y="895" fill="#fef08a" font-size="9.8">• Pin 8 (IO15): Primary DS18B20 (+ Free IO16, 8)</text>
+    <text x="32" y="914" fill="#fca5a5" font-size="9.8" font-weight="bold">✗ Avoid IO4/5 (18650/Solar ADC Dividers)</text>
+    <text x="32" y="931" fill="#fca5a5" font-size="9.8" font-weight="bold">✗ Avoid IO46 (ESP32-S3 Boot Strapping Pin!)</text>
+
+    <line x1="32" y1="945" x2="352" y2="945" stroke="#1e293b" stroke-width="1.5"/>
+    <text x="32" y="965" fill="#34d399" font-size="10.8" font-weight="bold">3. 48V DC Safety &amp; Dual Network Access:</text>
+    <text x="32" y="984" fill="#cbd5e1" font-size="9.6">• INA228 (Die 0x2280): Direct up to 85V DC</text>
+    <text x="32" y="1001" fill="#cbd5e1" font-size="9.6">• INA226 (Die 0x2260): &lt;=36V or 2:1 VBUS Divider</text>
+    <text x="32" y="1020" fill="#fde047" font-size="9.6">• Wi-Fi STA: FamiliaSanchez. -&gt; utp (Supabase)</text>
+    <text x="32" y="1037" fill="#38bdf8" font-size="9.6">• Hotspot AP: Kart-Cal-Lab (http://192.168.4.1/)</text>
+    <text x="32" y="1056" fill="#94a3b8" font-size="9.4">• 10-Sensor Boot BIST + 6-Sensor NVS/SD Cal</text>
+    <text x="32" y="1073" fill="#94a3b8" font-size="9.4">• Preserves 100% of /logs &amp; /calibration CSVs</text>
+  </g>
+
+  <!-- MAIN BOARD + RIGHT-SIDE SENSORS SHIFTED CLEANLY +340px -->
+  <g transform="translate(340, 0)">
+  <!-- LEFT: LILYGO T-SIM7672G V1.1 BOARD -->
+  <g>
+    <rect x="45" y="112" width="430" height="940" rx="18" fill="#14171a" stroke="#475569" stroke-width="3"/>
+    <circle cx="80" cy="147" r="13" fill="#0f172a" stroke="#d97706" stroke-width="4"/>
+    <circle cx="440" cy="147" r="13" fill="#0f172a" stroke="#d97706" stroke-width="4"/>
+
+    <rect x="125" y="124" width="270" height="40" rx="5" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1"/>
+    <text x="260" y="150" fill="#0f172a" font-size="16" font-weight="bold" text-anchor="middle">SIM7670G/7672G 4G + GNSS</text>
+
+    <rect x="155" y="178" width="210" height="175" rx="5" fill="#94a3b8" stroke="#cbd5e1" stroke-width="2"/>
+    <rect x="165" y="188" width="190" height="155" fill="#64748b"/>
+    <text x="260" y="218" fill="#f8fafc" font-size="16" font-weight="bold" text-anchor="middle">ESPRESSIF</text>
+    <text x="260" y="242" fill="#e2e8f0" font-size="13" font-weight="bold" text-anchor="middle">ESP32-S3-WROOM-1</text>
+    <text x="260" y="266" fill="#cbd5e1" font-size="11" text-anchor="middle">Dual-Core 240MHz | Wi-Fi + BLE</text>
+    <text x="260" y="294" fill="#bae6fd" font-size="10.5" font-weight="bold" text-anchor="middle">Wi-Fi: FamiliaSanchez. / utp</text>
+    <text x="260" y="325" fill="#fef08a" font-size="11" font-weight="bold" text-anchor="middle">MCN16R8 (16MB / 8MB)</text>
+
+    <rect x="145" y="368" width="46" height="28" rx="4" fill="#475569" stroke="#94a3b8" stroke-width="1.5"/>
+    <circle cx="168" cy="382" r="7" fill="#1e293b"/>
+    <text x="202" y="387" fill="#f8fafc" font-size="12" font-weight="bold">RST</text>
+
+    <rect x="325" y="368" width="46" height="28" rx="4" fill="#475569" stroke="#94a3b8" stroke-width="1.5"/>
+    <circle cx="348" cy="382" r="7" fill="#1e293b"/>
+    <text x="282" y="387" fill="#f8fafc" font-size="12" font-weight="bold">BOOT</text>
+
+    <rect x="145" y="415" width="230" height="245" rx="10" fill="#0f172a" stroke="#22c55e" stroke-width="2.5" stroke-dasharray="6,3"/>
+    <text x="260" y="438" fill="#4ade80" font-size="13" font-weight="bold" text-anchor="middle">ONBOARD 18650 HOLDER</text>
+    <rect x="205" y="452" width="110" height="8" rx="2" fill="#facc15"/>
+    <rect x="180" y="460" width="160" height="170" rx="8" fill="#0284c7" stroke="#38bdf8" stroke-width="2"/>
+    <text x="260" y="490" fill="#ffffff" font-size="15" font-weight="bold" text-anchor="middle">+  3.7V / 4.2V  </text>
+    <text x="260" y="518" fill="#e0f2fe" font-size="14" font-weight="bold" text-anchor="middle">18650 LI-ION</text>
+    <text x="260" y="542" fill="#bae6fd" font-size="11" text-anchor="middle">ADC Divider -&gt; GPIO 4</text>
+    <text x="260" y="562" fill="#bae6fd" font-size="11" text-anchor="middle">Vbat = mV(IO4) * 2</text>
+    <text x="260" y="582" fill="#fef08a" font-size="11" font-weight="bold" text-anchor="middle">Display: V &amp; mV (No %)</text>
+    <text x="260" y="618" fill="#ffffff" font-size="15" font-weight="bold" text-anchor="middle">-  GND  -</text>
+    <text x="260" y="648" fill="#94a3b8" font-size="11" text-anchor="middle">Solar Input ADC -&gt; GPIO 5</text>
+
+    <rect x="145" y="675" width="110" height="92" rx="6" fill="#1e293b" stroke="#a855f7" stroke-width="2"/>
+    <text x="200" y="698" fill="#e9d5ff" font-size="12" font-weight="bold" text-anchor="middle">32GB MicroSD</text>
+    <text x="200" y="716" fill="#cbd5e1" font-size="10" text-anchor="middle">CS:13 MOSI:14</text>
+    <text x="200" y="732" fill="#cbd5e1" font-size="10" text-anchor="middle">SCK:21 MISO:47</text>
+    <text x="200" y="750" fill="#c084fc" font-size="10" font-weight="bold" text-anchor="middle">5Hz CSV + SHT31</text>
+
+    <rect x="265" y="675" width="110" height="92" rx="6" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+    <text x="320" y="698" fill="#bae6fd" font-size="12" font-weight="bold" text-anchor="middle">4G + GNSS</text>
+    <text x="320" y="716" fill="#cbd5e1" font-size="10" text-anchor="middle">TX:11 RX:10</text>
+    <text x="320" y="732" fill="#cbd5e1" font-size="10" text-anchor="middle">PWR:18 DTR:9</text>
+    <text x="320" y="750" fill="#38bdf8" font-size="10" font-weight="bold" text-anchor="middle">RST:17(H) LNA:4</text>
+
+    <rect x="145" y="782" width="230" height="58" rx="6" fill="#0f172a" stroke="#10b981" stroke-width="1.8"/>
+    <text x="260" y="803" fill="#34d399" font-size="11.5" font-weight="bold" text-anchor="middle">IPEX U.FL ACTIVE GNSS (28dBi)</text>
+    <text x="260" y="821" fill="#cbd5e1" font-size="10" text-anchor="middle">3.3V LNA Bias: AT+CGSETV=4,1</text>
+    <text x="260" y="835" fill="#94a3b8" font-size="9.5" text-anchor="middle">GPS + GLONASS + Galileo + BeiDou</text>
+
+    <text x="250" y="965" fill="#f8fafc" font-size="15" font-weight="bold" text-anchor="middle">T-SIM7672G V1.1</text>
+    <text x="250" y="985" fill="#94a3b8" font-size="13" font-weight="bold" text-anchor="middle">25-05-09</text>
+    <rect x="396" y="942" width="70" height="58" rx="6" fill="#94a3b8" stroke="#e2e8f0" stroke-width="2"/>
+    <text x="431" y="970" fill="#0f172a" font-size="11" font-weight="bold" text-anchor="middle">USB-C</text>
+    <text x="431" y="985" fill="#0f172a" font-size="10" text-anchor="middle">(ESP32)</text>
+    <!-- LEFT HEADER (16 Pins) - Highlight IO6/7 (INA22x) + IO15/16/8 (DS18 1-Wire) -->
+    <text x="58" y="185" fill="#64748b" font-size="11" font-weight="bold">LEFT HDR</text>
+    <rect x="56" y="353" width="76" height="62" rx="7" fill="none" stroke="#38bdf8" stroke-width="2"/>
+    <rect x="56" y="418" width="80" height="92" rx="7" fill="none" stroke="#f59e0b" stroke-width="2" stroke-dasharray="5,3"/>
+    <g fill="#1e293b" stroke="#94a3b8" stroke-width="2" font-size="10.2">
+      <circle cx="72" cy="208" r="8" fill="#ef4444" stroke="#fca5a5"/><text x="86" y="212" fill="#fca5a5" font-weight="bold" stroke="none">3V3</text>
+      <circle cx="72" cy="240" r="8" fill="#475569" stroke="#f8fafc"/><text x="86" y="244" fill="#f8fafc" font-weight="bold" stroke="none">GND</text>
+      <circle cx="72" cy="272" r="7"/><text x="86" y="276" fill="#94a3b8" stroke="none">RST</text>
+      <circle cx="72" cy="304" r="7" fill="#22c55e" stroke="#86efac"/><text x="86" y="308" fill="#4ade80" font-weight="bold" stroke="none">4 (BAT_ADC)</text>
+      <circle cx="72" cy="336" r="7" fill="#eab308" stroke="#fde047"/><text x="86" y="340" fill="#fde047" font-weight="bold" stroke="none">5 (SOLAR)</text>
+      <circle cx="72" cy="368" r="8" fill="#38bdf8" stroke="#bae6fd"/><text x="86" y="372" fill="#bae6fd" font-weight="bold" stroke="none">6 (SDA)</text>
+      <circle cx="72" cy="400" r="8" fill="#14b8a6" stroke="#99f6e4"/><text x="86" y="404" fill="#99f6e4" font-weight="bold" stroke="none">7 (SCL)</text>
+      <circle cx="72" cy="432" r="8" fill="#f59e0b" stroke="#fef08a"/><text x="86" y="436" fill="#fef08a" font-weight="bold" stroke="none">15 (DS18)</text>
+      <circle cx="72" cy="464" r="7" stroke="#fcd34d"/><text x="86" y="468" fill="#fde68a" stroke="none">16 (FREE)</text>
+      <circle cx="72" cy="496" r="7" stroke="#fcd34d"/><text x="86" y="500" fill="#fde68a" stroke="none">8 (FREE)</text>
+      <circle cx="72" cy="528" r="7" stroke="#ef4444"/><text x="86" y="532" fill="#fca5a5" stroke="none">46 (STRAP!)</text>
+      <circle cx="72" cy="560" r="7"/><text x="86" y="564" fill="#38bdf8" stroke="none">12 (LED)</text>
+      <circle cx="72" cy="592" r="7" fill="#a855f7" stroke="#d8b4fe"/><text x="86" y="596" fill="#d8b4fe" stroke="none">13 (SD_CS)</text>
+      <circle cx="72" cy="624" r="7" fill="#a855f7" stroke="#d8b4fe"/><text x="86" y="628" fill="#d8b4fe" stroke="none">14 (MOSI)</text>
+      <circle cx="72" cy="656" r="7" fill="#a855f7" stroke="#d8b4fe"/><text x="86" y="660" fill="#d8b4fe" stroke="none">21 (SCK)</text>
+      <circle cx="72" cy="688" r="7" fill="#ef4444" stroke="#fca5a5"/><text x="86" y="692" fill="#fca5a5" font-weight="bold" stroke="none">VBAT</text>
+    </g>
+
+    <!-- RIGHT HEADER (16 Pins) - Highlight Consecutive Pins 3..10 (3V3, GND, IO1, IO2, IO42, IO41, IO40, IO39) -->
+    <text x="392" y="185" fill="#64748b" font-size="11" font-weight="bold">RIGHT HDR</text>
+    <rect x="388" y="254" width="76" height="260" rx="8" fill="none" stroke="#38bdf8" stroke-width="2.5"/>
+    <g fill="#1e293b" stroke="#94a3b8" stroke-width="2" font-size="12" text-anchor="end">
+      <circle cx="448" cy="208" r="7"/><text x="424" y="212" fill="#94a3b8" stroke="none">TX</text>
+      <circle cx="448" cy="240" r="7"/><text x="424" y="244" fill="#94a3b8" stroke="none">RX</text>
+      <circle cx="448" cy="272" r="8" fill="#ef4444" stroke="#fca5a5"/><text x="422" y="276" fill="#fca5a5" font-weight="bold" stroke="none">3V3</text>
+      <circle cx="448" cy="304" r="8" fill="#475569" stroke="#f8fafc"/><text x="422" y="308" fill="#f8fafc" font-weight="bold" stroke="none">GND</text>
+      <circle cx="448" cy="336" r="8" fill="#22c55e" stroke="#86efac"/><text x="422" y="340" fill="#86efac" font-weight="bold" stroke="none">1</text>
+      <circle cx="448" cy="368" r="8" fill="#eab308" stroke="#fde047"/><text x="422" y="372" fill="#fde047" font-weight="bold" stroke="none">2</text>
+      <circle cx="448" cy="400" r="8" fill="#06b6d4" stroke="#67e8f9"/><text x="422" y="404" fill="#67e8f9" font-weight="bold" stroke="none">42</text>
+      <circle cx="448" cy="432" r="8" fill="#f97316" stroke="#fdba74"/><text x="422" y="436" fill="#fdba74" font-weight="bold" stroke="none">41</text>
+      <circle cx="448" cy="464" r="8" fill="#ec4899" stroke="#f9a8d4"/><text x="422" y="468" fill="#f9a8d4" font-weight="bold" stroke="none">40</text>
+      <circle cx="448" cy="496" r="8" fill="#84cc16" stroke="#d9f99d"/><text x="422" y="500" fill="#d9f99d" font-weight="bold" stroke="none">39</text>
+      <circle cx="448" cy="528" r="7"/><text x="424" y="532" fill="#94a3b8" stroke="none">38</text>
+      <circle cx="448" cy="560" r="7"/><text x="424" y="564" fill="#94a3b8" stroke="none">0</text>
+      <circle cx="448" cy="592" r="7"/><text x="424" y="596" fill="#94a3b8" stroke="none">48</text>
+      <circle cx="448" cy="624" r="7" fill="#a855f7" stroke="#d8b4fe"/><text x="424" y="628" fill="#d8b4fe" stroke="none">47</text>
+      <circle cx="448" cy="656" r="7"/><text x="424" y="660" fill="#94a3b8" stroke="none">GND</text>
+      <circle cx="448" cy="688" r="7"/><text x="424" y="692" fill="#94a3b8" stroke="none">VIN</text>
+    </g>
+  </g>
+  <!-- TOP RIGHT: PURPLE BOSCH BMI160 6-DOF IMU MODULE -->
+  <g>
+    <rect x="865" y="122" width="300" height="266" rx="14" fill="#581c87" stroke="#c084fc" stroke-width="3"/>
+    <circle cx="945" cy="158" r="13" fill="#0f172a" stroke="#eab308" stroke-width="3.5"/>
+    <text x="1038" y="154" fill="#f8fafc" font-size="18" font-weight="bold" text-anchor="middle">BMI160</text>
+    <text x="1038" y="173" fill="#e9d5ff" font-size="12" text-anchor="middle">6-DOF IMU (0x68)</text>
+
+    <rect x="985" y="218" width="44" height="44" rx="4" fill="#18181b" stroke="#52525b" stroke-width="1.5"/>
+    <circle cx="994" cy="227" r="2.5" fill="#f8fafc"/>
+    <text x="1007" y="245" fill="#f8fafc" font-size="9" font-weight="bold" text-anchor="middle">BMI</text>
+
+    <rect x="880" y="196" width="76" height="174" rx="6" fill="none" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="4,3"/>
+    <text x="918" y="189" fill="#fca5a5" font-size="9" font-weight="bold" text-anchor="middle">LEAVE OPEN</text>
+    <g fill="#3b0764" stroke="#a855f7" stroke-width="1.5" font-size="11">
+      <circle cx="896" cy="216" r="6"/><text x="909" y="220" fill="#d8b4fe" stroke="none">OCS</text>
+      <circle cx="896" cy="248" r="6"/><text x="909" y="252" fill="#d8b4fe" stroke="none">INT2</text>
+      <circle cx="896" cy="280" r="6"/><text x="909" y="284" fill="#d8b4fe" stroke="none">INT1</text>
+      <circle cx="896" cy="312" r="6"/><text x="909" y="316" fill="#d8b4fe" stroke="none">SCX</text>
+      <circle cx="896" cy="344" r="6"/><text x="909" y="348" fill="#d8b4fe" stroke="none">SDX</text>
+    </g>
+
+    <g font-size="12" font-weight="bold" text-anchor="end">
+      <circle cx="1140" cy="178" r="7" fill="#ef4444" stroke="#fca5a5" stroke-width="2"/><text x="1116" y="182" fill="#fca5a5">VIN</text>
+      <circle cx="1140" cy="208" r="7" fill="#3b0764" stroke="#a855f7" stroke-width="1.5"/><text x="1116" y="212" fill="#c084fc">3V3</text>
+      <circle cx="1140" cy="238" r="7" fill="#475569" stroke="#f8fafc" stroke-width="2"/><text x="1116" y="242" fill="#f8fafc">GND</text>
+      <circle cx="1140" cy="268" r="7" fill="#eab308" stroke="#fde047" stroke-width="2"/><text x="1116" y="272" fill="#fde047">SCL</text>
+      <circle cx="1140" cy="298" r="7" fill="#22c55e" stroke="#86efac" stroke-width="2"/><text x="1116" y="302" fill="#86efac">SDA</text>
+      <circle cx="1140" cy="328" r="7" fill="#ef4444" stroke="#fca5a5" stroke-width="2"/><text x="1116" y="332" fill="#fca5a5">CS</text>
+      <circle cx="1140" cy="358" r="7" fill="#475569" stroke="#f8fafc" stroke-width="2"/><text x="1116" y="362" fill="#f8fafc">SAO</text>
+    </g>
+  </g>
+
+  <!-- MIDDLE RIGHT: BLUE DS3231 + AT24C32 BATTERY RTC CLOCK MODULE -->
+  <g>
+    <rect x="865" y="406" width="300" height="200" rx="14" fill="#1e3a8a" stroke="#60a5fa" stroke-width="3"/>
+    <text x="1015" y="431" fill="#f8fafc" font-size="16.5" font-weight="bold" text-anchor="middle">DS3231 + AT24C32 RTC</text>
+    <text x="1015" y="448" fill="#93c5fd" font-size="10.5" text-anchor="middle">Precision TCXO Clock (0x68) + EEPROM (0x57)</text>
+
+    <circle cx="928" cy="522" r="38" fill="#cbd5e1" stroke="#f8fafc" stroke-width="3"/>
+    <circle cx="928" cy="522" r="30" fill="#94a3b8" stroke="#475569" stroke-width="1.5"/>
+    <text x="928" y="518" fill="#0f172a" font-size="11.5" font-weight="bold" text-anchor="middle">CR2032</text>
+    <text x="928" y="533" fill="#1e293b" font-size="9.5" font-weight="bold" text-anchor="middle">3V BACKUP</text>
+
+    <rect x="988" y="468" width="52" height="36" rx="3" fill="#0f172a" stroke="#475569" stroke-width="1.5"/>
+    <text x="1014" y="484" fill="#e2e8f0" font-size="9" font-weight="bold" text-anchor="middle">DS3231</text>
+    <text x="1014" y="497" fill="#38bdf8" font-size="8" text-anchor="middle">TEMP+RTC</text>
+
+    <rect x="988" y="556" width="52" height="28" rx="3" fill="#0f172a" stroke="#475569" stroke-width="1.5"/>
+    <text x="1014" y="574" fill="#fde047" font-size="9" font-weight="bold" text-anchor="middle">AT24C32</text>
+
+    <g font-size="12" font-weight="bold" text-anchor="end">
+      <circle cx="1140" cy="462" r="6" fill="#1e293b" stroke="#64748b" stroke-width="1.5"/><text x="1116" y="466" fill="#94a3b8">32K</text>
+      <circle cx="1140" cy="488" r="6" fill="#1e293b" stroke="#64748b" stroke-width="1.5"/><text x="1116" y="492" fill="#94a3b8">SQW</text>
+      <circle cx="1140" cy="514" r="7" fill="#f97316" stroke="#fdba74" stroke-width="2"/><text x="1116" y="518" fill="#fdba74">SCL</text>
+      <circle cx="1140" cy="540" r="7" fill="#06b6d4" stroke="#67e8f9" stroke-width="2"/><text x="1116" y="544" fill="#67e8f9">SDA</text>
+      <circle cx="1140" cy="566" r="7" fill="#ef4444" stroke="#fca5a5" stroke-width="2"/><text x="1116" y="570" fill="#fca5a5">VCC</text>
+      <circle cx="1140" cy="592" r="7" fill="#475569" stroke="#f8fafc" stroke-width="2"/><text x="1116" y="596" fill="#f8fafc">GND</text>
+    </g>
+  </g>
+  <!-- LOWER-MIDDLE RIGHT: RED 4-PIN SENSIRION SHT31 TEMP & HUMIDITY MODULE (GND, VCC, SCL, SDA) -->
+  <g>
+    <rect x="865" y="622" width="300" height="176" rx="14" fill="#69141e" stroke="#fb7185" stroke-width="3"/>
+    <circle cx="886" cy="644" r="9" fill="#0f172a" stroke="#cbd5e1" stroke-width="2.5"/>
+    <text x="1014" y="646" fill="#f8fafc" font-size="16" font-weight="bold" text-anchor="middle">SHT31 (RED 4-PIN)</text>
+    <text x="1014" y="664" fill="#fda4af" font-size="9.8" text-anchor="middle">Temp (±0.2°C) + %RH (±2%) [Fixed 0x44]</text>
+
+    <!-- CMOSens IC with White PTFE Membrane Filter Window -->
+    <rect x="892" y="688" width="58" height="58" rx="5" fill="#0f172a" stroke="#fb7185" stroke-width="1.8"/>
+    <circle cx="921" cy="712" r="14" fill="#f8fafc" stroke="#94a3b8" stroke-width="2"/>
+    <text x="921" y="739" fill="#fda4af" font-size="8.5" font-weight="bold" text-anchor="middle">SHT31</text>
+
+    <!-- Internal 0x44 & 10k Pullups Note Box -->
+    <rect x="962" y="686" width="114" height="66" rx="5" fill="#3b0810" stroke="#fb7185" stroke-width="1.2"/>
+    <text x="1019" y="703" fill="#fef08a" font-size="9" font-weight="bold" text-anchor="middle">ONLY 4 PINS USED</text>
+    <text x="1019" y="718" fill="#f9a8d4" font-size="9.5" font-weight="bold" text-anchor="middle">SDA -&gt; IO40</text>
+    <text x="1019" y="733" fill="#d9f99d" font-size="9.5" font-weight="bold" text-anchor="middle">SCL -&gt; IO39</text>
+    <text x="1019" y="746" fill="#cbd5e1" font-size="8" text-anchor="middle">ADR=0x44 Onboard PCB</text>
+
+    <!-- Exact 4-Port Header: GND, VCC, SCL, SDA -->
+    <g font-size="12" font-weight="bold" text-anchor="end">
+      <circle cx="1140" cy="676" r="7" fill="#475569" stroke="#f8fafc" stroke-width="2"/><text x="1116" y="680" fill="#f8fafc">GND</text>
+      <circle cx="1140" cy="708" r="7" fill="#ef4444" stroke="#fca5a5" stroke-width="2"/><text x="1116" y="712" fill="#fca5a5">VCC</text>
+      <circle cx="1140" cy="740" r="7" fill="#84cc16" stroke="#d9f99d" stroke-width="2"/><text x="1116" y="744" fill="#d9f99d">SCL</text>
+      <circle cx="1140" cy="772" r="7" fill="#e879f9" stroke="#f5d0fe" stroke-width="2"/><text x="1116" y="776" fill="#f5d0fe">SDA</text>
+    </g>
+  </g>
+
+  <!-- WIRING LINES: LILYGO RIGHT HEADER TO BMI160, DS3231 & RED 4-PIN SHT31 -->
+  <!-- Shared 3V3 Power Rail (Red) -> BMI160 VIN/CS, DS3231 VCC, SHT31 VCC -->
+  <path d="M 448 272 L 555 272 L 555 104 L 1338 104 L 1338 178 L 1140 178" stroke="#ef4444" stroke-width="4" fill="none" stroke-linejoin="round"/>
+  <path d="M 1338 178 L 1338 328 L 1140 328" stroke="#ef4444" stroke-width="3.5" stroke-dasharray="6,4" fill="none" stroke-linejoin="round"/>
+  <path d="M 1338 328 L 1338 566 L 1140 566" stroke="#ef4444" stroke-width="4" fill="none" stroke-linejoin="round"/>
+  <path d="M 1338 566 L 1338 708 L 1140 708" stroke="#ef4444" stroke-width="4" fill="none" stroke-linejoin="round"/>
+  <circle cx="1338" cy="178" r="5" fill="#ef4444"/>
+  <circle cx="1338" cy="328" r="5" fill="#ef4444"/>
+  <circle cx="1338" cy="566" r="5" fill="#ef4444"/>
+
+  <!-- Shared GND Ground Rail (Slate/Gray) -> BMI160 GND/SAO, DS3231 GND, SHT31 GND -->
+  <path d="M 448 304 L 582 304 L 582 113 L 1372 113 L 1372 238 L 1140 238" stroke="#94a3b8" stroke-width="4" fill="none" stroke-linejoin="round"/>
+  <path d="M 1372 238 L 1372 358 L 1140 358" stroke="#94a3b8" stroke-width="3.5" stroke-dasharray="6,4" fill="none" stroke-linejoin="round"/>
+  <path d="M 1372 358 L 1372 592 L 1140 592" stroke="#94a3b8" stroke-width="4" fill="none" stroke-linejoin="round"/>
+  <path d="M 1372 592 L 1372 676 L 1140 676" stroke="#94a3b8" stroke-width="4" fill="none" stroke-linejoin="round"/>
+  <circle cx="1372" cy="238" r="5" fill="#94a3b8"/>
+  <circle cx="1372" cy="358" r="5" fill="#94a3b8"/>
+  <circle cx="1372" cy="592" r="5" fill="#94a3b8"/>
+
+  <!-- Bus 0 (Wire0): IO1 (SDA Green) & IO2 (SCL Yellow) -> BMI160 -->
+  <path d="M 448 336 L 842 336 L 842 396 L 1192 396 L 1192 298 L 1140 298" stroke="#22c55e" stroke-width="4" fill="none" stroke-linejoin="round"/>
+  <path d="M 448 368 L 826 368 L 826 390 L 1216 390 L 1216 268 L 1140 268" stroke="#eab308" stroke-width="4" fill="none" stroke-linejoin="round"/>
+
+  <!-- Bus 1 (Wire1): IO42 (SDA Cyan) & IO41 (SCL Orange) -> DS3231 + AT24C32 -->
+  <path d="M 448 400 L 760 400 L 760 614 L 1242 614 L 1242 540 L 1140 540" stroke="#06b6d4" stroke-width="4" fill="none" stroke-linejoin="round"/>
+  <path d="M 448 432 L 735 432 L 735 608 L 1266 608 L 1266 514 L 1140 514" stroke="#f97316" stroke-width="4" fill="none" stroke-linejoin="round"/>
+
+  <!-- Bus 2 (Open-Drain I2C): IO40 (SDA Violet) & IO39 (SCL Lime) -> Red 4-Pin SHT31 -->
+  <path d="M 448 464 L 705 464 L 705 808 L 1290 808 L 1290 772 L 1140 772" stroke="#e879f9" stroke-width="4" fill="none" stroke-linejoin="round"/>
+  <path d="M 448 496 L 675 496 L 675 817 L 1314 817 L 1314 740 L 1140 740" stroke="#84cc16" stroke-width="4" fill="none" stroke-linejoin="round"/>
+  <!-- BOTTOM RIGHT: COMPLETE PINOUT & TELEMETRY SUMMARY TABLE (9 ROWS) -->
+  <rect x="495" y="832" width="915" height="274" rx="10" fill="#0f172a" stroke="#334155" stroke-width="2"/>
+  <text x="515" y="856" fill="#f8fafc" font-size="14.5" font-weight="bold">COMPLETE SOTA TELEMETRY &amp; HARDWARE PINOUT MATRIX</text>
+
+  <text x="515" y="878" fill="#38bdf8" font-size="11.5" font-weight="bold">WIRE / BUS</text>
+  <text x="640" y="878" fill="#38bdf8" font-size="11.5" font-weight="bold">LILYGO T-SIM7672G PIN</text>
+  <text x="870" y="878" fill="#38bdf8" font-size="11.5" font-weight="bold">TARGET MODULE PIN</text>
+  <text x="1142" y="878" fill="#38bdf8" font-size="11.5" font-weight="bold">TELEMETRY / FUNCTION</text>
+  <line x1="510" y1="886" x2="1395" y2="886" stroke="#334155" stroke-width="1.5"/>
+
+  <rect x="515" y="894" width="14" height="10" rx="2" fill="#ef4444"/>
+  <text x="536" y="904" fill="#fca5a5" font-size="11" font-weight="bold">RED (3V3)</text>
+  <text x="640" y="904" fill="#f8fafc" font-size="11">3V3 (Left Pin 1 &amp; Right Pin 3)</text>
+  <text x="870" y="904" fill="#f8fafc" font-size="11">INA22x | DS18 | BMI160 | DS3231 | SHT31</text>
+  <text x="1142" y="904" fill="#cbd5e1" font-size="11">3.3V Rail + 4.7kΩ DS18 Pull-Up</text>
+
+  <rect x="515" y="916" width="14" height="10" rx="2" fill="#94a3b8"/>
+  <text x="536" y="926" fill="#e2e8f0" font-size="11" font-weight="bold">BLACK (GND)</text>
+  <text x="640" y="926" fill="#f8fafc" font-size="11">GND (Left Pin 2 &amp; Right Pin 4)</text>
+  <text x="870" y="926" fill="#f8fafc" font-size="11">INA22x | DS18 | BMI160 | DS3231 | SHT31</text>
+  <text x="1142" y="926" fill="#cbd5e1" font-size="11">Common Ground (+ 48V B- Return)</text>
+
+  <rect x="515" y="938" width="14" height="10" rx="2" fill="#38bdf8"/>
+  <text x="536" y="948" fill="#7dd3fc" font-size="11" font-weight="bold">SKY / TEAL</text>
+  <text x="640" y="948" fill="#bae6fd" font-size="11">IO6 (Left Pin 6) &amp; IO7 (Pin 7)</text>
+  <text x="870" y="948" fill="#f8fafc" font-size="11">INA226 / INA228 SDA(6) &amp; SCL(7)</text>
+  <text x="1142" y="948" fill="#facc15" font-size="11" font-weight="bold">48V DC Battery V, Amps, Watts &amp; Wh</text>
+
+  <rect x="515" y="960" width="14" height="10" rx="2" fill="#22c55e"/>
+  <text x="536" y="970" fill="#86efac" font-size="11" font-weight="bold">GREEN / YEL</text>
+  <text x="640" y="970" fill="#f8fafc" font-size="11">IO1 (Pin 5) &amp; IO2 (Pin 6)</text>
+  <text x="870" y="970" fill="#f8fafc" font-size="11">BMI160 SDA &amp; SCL (Wire0)</text>
+  <text x="1142" y="970" fill="#cbd5e1" font-size="11">6-Axis Gyro/Accel + Die Temp (°C)</text>
+
+  <rect x="515" y="982" width="14" height="10" rx="2" fill="#06b6d4"/>
+  <text x="536" y="992" fill="#67e8f9" font-size="11" font-weight="bold">CYAN / ORG</text>
+  <text x="640" y="992" fill="#f8fafc" font-size="11">IO42 (Pin 7) &amp; IO41 (Pin 8)</text>
+  <text x="870" y="992" fill="#f8fafc" font-size="11">DS3231 SDA &amp; SCL (Wire1)</text>
+  <text x="1142" y="992" fill="#cbd5e1" font-size="11">Exact UTC Timestamp + RTC Temp + EEPROM</text>
+
+  <rect x="515" y="1004" width="14" height="10" rx="2" fill="#e879f9"/>
+  <text x="536" y="1014" fill="#f5d0fe" font-size="11" font-weight="bold">PINK / LIME</text>
+  <text x="640" y="1014" fill="#f8fafc" font-size="11">IO40 (Pin 9) &amp; IO39 (Pin 10)</text>
+  <text x="870" y="1014" fill="#f8fafc" font-size="11">Red 4-Pin SHT31 SDA(40) &amp; SCL(39)</text>
+  <text x="1142" y="1014" fill="#fda4af" font-size="11" font-weight="bold">Calibrated Temp (°C), %RH &amp; Dew Point</text>
+
+  <rect x="515" y="1026" width="14" height="10" rx="2" fill="#f59e0b"/>
+  <text x="536" y="1036" fill="#fde047" font-size="11" font-weight="bold">AMBER 1-WIRE</text>
+  <text x="640" y="1036" fill="#fef08a" font-size="11">IO15 (or Free IO16, IO8)</text>
+  <text x="870" y="1036" fill="#f8fafc" font-size="11">DS18B20 DATA (+ 4.7kΩ to 3V3)</text>
+  <text x="1142" y="1036" fill="#fde047" font-size="11" font-weight="bold">Controller T_ctrl &amp; Motor T_motor (°C)</text>
+
+  <rect x="515" y="1048" width="14" height="10" rx="2" fill="#a855f7"/>
+  <text x="536" y="1058" fill="#d8b4fe" font-size="11" font-weight="bold">ONBOARD SPI</text>
+  <text x="640" y="1058" fill="#f8fafc" font-size="11">CS:13 MOSI:14 SCK:21 MISO:47</text>
+  <text x="870" y="1058" fill="#f8fafc" font-size="11">32GB MicroSD Card Slot</text>
+  <text x="1142" y="1058" fill="#cbd5e1" font-size="11">5Hz Blackbox CSV + Calibration CSVs</text>
+
+  <rect x="515" y="1070" width="14" height="10" rx="2" fill="#0ea5e9"/>
+  <text x="536" y="1080" fill="#bae6fd" font-size="11" font-weight="bold">ADC &amp; MODEM</text>
+  <text x="640" y="1080" fill="#f8fafc" font-size="11">IO4 (Bat) | IO10/11/18/17(H)</text>
+  <text x="870" y="1080" fill="#f8fafc" font-size="11">18650 Holder &amp; SIM7670G/7672G</text>
+  <text x="1142" y="1080" fill="#cbd5e1" font-size="11">VBAT V/mV (No %) + Active GNSS + 4G LTE</text>
+  </g>
+</svg>

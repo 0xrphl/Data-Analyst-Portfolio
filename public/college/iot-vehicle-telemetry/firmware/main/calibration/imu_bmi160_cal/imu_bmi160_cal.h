@@ -15,8 +15,8 @@
 #define IMU_BMI160_CAL_H
 
 #include "../../config.h"
-#include "../../imu_bmi160/imu_bmi160.h"
-#include "../../sd_logger/sd_logger.h"
+#include "../../sensors/imu_bmi160.h"
+#include "../../sensors/sd_logger.h"
 #include <math.h>
 
 class ImuBmi160Calibrator {

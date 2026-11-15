@@ -6,7 +6,7 @@
 #define GPS_SIM7672_H
 
 #include "../config.h"
-#include "../rtc_ds3231/rtc_ds3231.h"
+#include "rtc_ds3231.h"
 
 #define SerialAT Serial1
 

@@ -19,8 +19,8 @@
   #define OUT Serial
 #endif
 
-#if __has_include("../main/secrets.h")
-  #include "../main/secrets.h"
+#if __has_include("../../../secrets.h")
+  #include "../../../secrets.h"
 #endif
 #ifndef WIFI_SSID
   #define WIFI_SSID "YOUR_PRIMARY_WIFI_SSID"

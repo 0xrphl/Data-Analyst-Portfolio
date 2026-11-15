@@ -43,19 +43,35 @@
   #define WIFI_PASS_FALLBACK    "YOUR_CAMPUS_WIFI_PASSWORD"
 #endif
 
-#define WIFI_AP_SSID            "Kart-Cal-Lab"
-#define WIFI_AP_PASS            "12345678"
+#ifndef WIFI_AP_SSID
+  #define WIFI_AP_SSID          "Kart-Cal-Lab"
+#endif
+#ifndef WIFI_AP_PASS
+  #define WIFI_AP_PASS          "12345678"
+#endif
 #define MDNS_HOSTNAME           "kart-telemetry"
 
 // Cellular 4G LTE APN (220 MB Data Plan)
-#define SIM_APN                 "internet.movistar.com.co"
-#define SIM_USER                ""
-#define SIM_PASS                ""
+#ifndef SIM_APN
+  #define SIM_APN               "internet.movistar.com.co"
+#endif
+#ifndef SIM_USER
+  #define SIM_USER              ""
+#endif
+#ifndef SIM_PASS
+  #define SIM_PASS              ""
+#endif
 
 // Supabase REST API Configuration (< 500 MB Free Tier Optimized)
-#define SUPABASE_URL            "https://tapjoxeplcyeohsnrmnl.supabase.co"
-#define SUPABASE_ANON_KEY       "sb_publishable_m6sJshs7hjbYHlE0lUGx9Q_ZM-wXn6e"
-#define DEVICE_ID               "KART_DELTA_01"
+#ifndef SUPABASE_URL
+  #define SUPABASE_URL          "https://tapjoxeplcyeohsnrmnl.supabase.co"
+#endif
+#ifndef SUPABASE_ANON_KEY
+  #define SUPABASE_ANON_KEY     "sb_publishable_m6sJshs7hjbYHlE0lUGx9Q_ZM-wXn6e"
+#endif
+#ifndef DEVICE_ID
+  #define DEVICE_ID             "KART_DELTA_01"
+#endif
 
 // ============================================================================
 // 3. Pin Definitions - LilyGO T-SIM7672G V1.1 (ESP32-S3-WROOM-1 MCN16R8)

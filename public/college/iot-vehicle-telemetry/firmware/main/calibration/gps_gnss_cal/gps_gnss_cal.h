@@ -15,8 +15,8 @@
 #define GPS_GNSS_CAL_H
 
 #include "../../config.h"
-#include "../../gps_sim7672/gps_sim7672.h"
-#include "../../sd_logger/sd_logger.h"
+#include "../../sensors/gps_sim7672.h"
+#include "../../sensors/sd_logger.h"
 #include <Preferences.h>
 #include <math.h>
 

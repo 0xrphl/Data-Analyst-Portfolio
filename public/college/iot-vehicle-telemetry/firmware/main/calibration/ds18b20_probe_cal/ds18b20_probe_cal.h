@@ -6,8 +6,8 @@
 #define DS18B20_PROBE_CAL_H
 
 #include "../../config.h"
-#include "../../temp_ds18b20/temp_ds18b20.h"
-#include "../../sd_logger/sd_logger.h"
+#include "../../sensors/temp_ds18b20.h"
+#include "../../sensors/sd_logger.h"
 #include <math.h>
 
 class Ds18b20ProbeCalibrator {

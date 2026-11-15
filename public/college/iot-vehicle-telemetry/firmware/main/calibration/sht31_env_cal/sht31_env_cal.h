@@ -19,8 +19,8 @@
 #define SHT31_ENV_CAL_H
 
 #include "../../config.h"
-#include "../../env_sht31/env_sht31.h"
-#include "../../sd_logger/sd_logger.h"
+#include "../../sensors/env_sht31.h"
+#include "../../sensors/sd_logger.h"
 
 class Sht31EnvCalibrator {
 public:

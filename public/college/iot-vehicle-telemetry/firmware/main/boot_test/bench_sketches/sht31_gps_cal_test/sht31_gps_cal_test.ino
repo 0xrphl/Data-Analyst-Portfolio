@@ -13,18 +13,18 @@
  *  - AT+<cmd>        : Forward any raw AT command directly to SIM767x modem
  */
 
-#include "../main/config.h"
-#include "../main/imu_bmi160/imu_bmi160.h"
-#include "../main/rtc_ds3231/rtc_ds3231.h"
-#include "../main/env_sht31/env_sht31.h"
-#include "../main/temp_ds18b20/temp_ds18b20.h"
-#include "../main/power_ina22x/power_ina22x.h"
-#include "../main/sd_logger/sd_logger.h"
-#include "../main/gps_sim7672/gps_sim7672.h"
-#include "../main/power_18650/power_18650.h"
-#include "../main/self_test/self_test.h"
-#include "../main/calibration/calibration_manager.h"
-#include "../main/telemetry_sync/telemetry_sync.h"
+#include "../../../config.h"
+#include "../../../sensors/imu_bmi160.h"
+#include "../../../sensors/rtc_ds3231.h"
+#include "../../../sensors/env_sht31.h"
+#include "../../../sensors/temp_ds18b20.h"
+#include "../../../sensors/power_ina22x.h"
+#include "../../../sensors/sd_logger.h"
+#include "../../../sensors/gps_sim7672.h"
+#include "../../../sensors/power_18650.h"
+#include "../../self_test.h"
+#include "../../../calibration/calibration_manager.h"
+#include "../../../local_dashboard/telemetry_sync.h"
 
 static KartTelemetry state;
 ImuBmi160          imu;

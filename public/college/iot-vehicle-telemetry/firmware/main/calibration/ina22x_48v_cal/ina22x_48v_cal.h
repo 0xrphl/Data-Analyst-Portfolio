@@ -7,8 +7,8 @@
 #define INA22X_48V_CAL_H
 
 #include "../../config.h"
-#include "../../power_ina22x/power_ina22x.h"
-#include "../../sd_logger/sd_logger.h"
+#include "../../sensors/power_ina22x.h"
+#include "../../sensors/sd_logger.h"
 
 class Ina22x48vCalibrator {
 public:

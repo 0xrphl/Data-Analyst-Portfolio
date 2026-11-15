@@ -16,8 +16,8 @@
 #define RTC_DS3231_CAL_H
 
 #include "../../config.h"
-#include "../../rtc_ds3231/rtc_ds3231.h"
-#include "../../sd_logger/sd_logger.h"
+#include "../../sensors/rtc_ds3231.h"
+#include "../../sensors/sd_logger.h"
 #include <time.h>
 #include <math.h>
 

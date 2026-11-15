@@ -16,11 +16,11 @@
  *  - FACTORY             : Restore factory INA22x calibration defaults
  */
 
-#include "../main/config.h"
-#include "../main/power_ina22x/power_ina22x.h"
-#include "../main/sd_logger/sd_logger.h"
-#include "../main/rtc_ds3231/rtc_ds3231.h"
-#include "../main/calibration/ina22x_48v_cal/ina22x_48v_cal.h"
+#include "../../../config.h"
+#include "../../../sensors/power_ina22x.h"
+#include "../../../sensors/sd_logger.h"
+#include "../../../sensors/rtc_ds3231.h"
+#include "../../../calibration/ina22x_48v_cal/ina22x_48v_cal.h"
 
 static KartTelemetry state;
 PowerIna22x         ina48v;

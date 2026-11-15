@@ -20,17 +20,17 @@
  */
 
 #include "config.h"
-#include "imu_bmi160/imu_bmi160.h"
-#include "rtc_ds3231/rtc_ds3231.h"
-#include "env_sht31/env_sht31.h"
-#include "temp_ds18b20/temp_ds18b20.h"
-#include "power_ina22x/power_ina22x.h"
-#include "gps_sim7672/gps_sim7672.h"
-#include "sd_logger/sd_logger.h"
-#include "power_18650/power_18650.h"
-#include "self_test/self_test.h"
+#include "sensors/imu_bmi160.h"
+#include "sensors/rtc_ds3231.h"
+#include "sensors/env_sht31.h"
+#include "sensors/temp_ds18b20.h"
+#include "sensors/power_ina22x.h"
+#include "sensors/gps_sim7672.h"
+#include "sensors/sd_logger.h"
+#include "sensors/power_18650.h"
+#include "boot_test/self_test.h"
 #include "calibration/calibration_manager.h"
-#include "telemetry_sync/telemetry_sync.h"
+#include "local_dashboard/telemetry_sync.h"
 
 static KartTelemetry state;
 
